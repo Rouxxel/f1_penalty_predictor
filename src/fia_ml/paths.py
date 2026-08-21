@@ -7,6 +7,7 @@ SRC_ROOT = PROJECT_ROOT / "src"
 DOCUMENTATION = PROJECT_ROOT / "documentation"
 SCHEMA_CSV = DOCUMENTATION / "f1_dataset_example.csv"
 DEFAULT_CONFIG = PROJECT_ROOT / "configs" / "data.yaml"
+REFERENCE_DIR = PROJECT_ROOT / "data" / "reference"
 
 
 def ensure_dir(path: Path) -> Path:

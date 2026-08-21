@@ -10,6 +10,7 @@ from typing import Any
 import pandas as pd
 
 from fia_ml.data.config import PipelineConfig
+from fia_ml.data.reference_data import load_reference
 from fia_ml.data.schema import SCHEMA_COLUMNS, empty_row
 from fia_ml.paths import ensure_dir
 from fia_ml.utils import secure_file_io as sio
@@ -19,14 +20,6 @@ def slugify_name(name: str) -> str:
     slug = name.lower().strip()
     slug = re.sub(r"[^a-z0-9]+", "_", slug)
     return slug.strip("_")
-
-
-def load_reference(cfg: PipelineConfig) -> dict[str, Any]:
-    ref_dir = cfg.path("reference")
-    return {
-        "circuits": sio.read_json(ref_dir / "circuits.json"),
-        "incident_types": sio.read_json(ref_dir / "incident_type_keywords.json"),
-    }
 
 
 def classify_incident_type(fact: str, offence: str, keywords: dict[str, list[str]]) -> str:

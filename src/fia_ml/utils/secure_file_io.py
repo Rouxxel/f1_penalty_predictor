@@ -79,6 +79,10 @@ _RAISE = object()
 _locks: dict[str, threading.Lock] = {}
 _locks_meta_lock = threading.Lock()  # guards the _locks dict itself
 
+#Resolved paths and directories that must never be written by pipeline code.
+_readonly_paths: set[Path] = set()
+_readonly_dirs: set[Path] = set()
+
 
 # --- EXCEPTIONS ---
 class FileStoreError(Exception):
@@ -91,6 +95,10 @@ class PathSecurityError(FileStoreError):
 
 class FileTooLargeError(FileStoreError):
     """Raised when a file exceeds the allowed read size."""
+
+
+class ReadOnlyPathError(FileStoreError):
+    """Raised when a write is attempted on a manually curated read-only path."""
 
 
 # --- CONFIG HELPERS ---
@@ -108,6 +116,30 @@ def set_allowed_root(root: Optional[PathLike]) -> None:
 def get_allowed_root() -> Optional[Path]:
     """Return the currently configured allowed root, or ``None`` if disabled."""
     return _allowed_root
+
+
+def register_readonly_paths(*paths: PathLike) -> None:
+    """Mark specific files as read-only for all write helpers."""
+    for path in paths:
+        _readonly_paths.add(Path(path).resolve())
+
+
+def register_readonly_dirs(*dirs: PathLike) -> None:
+    """Mark entire directories as read-only for all write helpers."""
+    for directory in dirs:
+        _readonly_dirs.add(Path(directory).resolve())
+
+
+def _assert_writable(path: Path) -> None:
+    if path in _readonly_paths:
+        raise ReadOnlyPathError(
+            f"Refusing to write '{path}': this file is manually curated reference data."
+        )
+    for directory in _readonly_dirs:
+        if path.is_relative_to(directory):
+            raise ReadOnlyPathError(
+                f"Refusing to write '{path}': files under '{directory}' are read-only."
+            )
 
 
 # --- INTERNAL HELPERS ---
@@ -214,6 +246,7 @@ def read_bytes(path: PathLike, *, max_bytes: Optional[int] = MAX_READ_BYTES) -> 
 def write_bytes(path: PathLike, data: bytes) -> None:
     """Atomically write raw *data* (bytes) to *path*, creating parents."""
     resolved = _resolve_path(path)
+    _assert_writable(resolved)
     with _get_lock(resolved):
         _atomic_write_unlocked(resolved, data)
 
