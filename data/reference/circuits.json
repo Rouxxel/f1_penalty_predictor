@@ -56,6 +56,17 @@
     "Mexican Grand Prix": "mexico_city",
     "United States Grand Prix": "austin",
     "Brazilian Grand Prix": "interlagos",
-    "Abu Dhabi Grand Prix": "abu_dhabi"
+    "Abu Dhabi Grand Prix": "abu_dhabi",
+    "Emilia-Romagna Grand Prix": "imola",
+    "Tuscan Grand Prix": "mugello",
+    "Eifel Grand Prix": "nurburgring",
+    "Portuguese Grand Prix": "portimao",
+    "Turkish Grand Prix": "istanbul",
+    "Sakhir Grand Prix": "sakhir_outer",
+    "Saudi Arabian Grand Prix": "jeddah",
+    "Miami Grand Prix": "miami",
+    "Dutch Grand Prix": "zandvoort",
+    "Qatar Grand Prix": "lusail",
+    "Las Vegas Grand Prix": "las_vegas"
   }
 }
