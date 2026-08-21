@@ -34,6 +34,11 @@ def test_should_include_infringement_with_doc_prefix(cfg):
     assert _should_include_pdf(title, cfg) is True
 
 
+def test_should_include_slugified_infringement_filename(cfg):
+    title = "2025_abu_dhabi_grand_prix_-_infringement_-_car_18_-_more_than_one_change_of_direction.pdf"
+    assert _should_include_pdf(title, cfg) is True
+
+
 def test_should_include_summons_anywhere_in_title(cfg):
     title = "2019 Monaco Grand Prix - Summons - Car 44 - Alleged impeding.pdf"
     assert _should_include_pdf(title, cfg) is True
