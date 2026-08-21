@@ -4,6 +4,7 @@
     "first_season": 1950,
     "total_laps": 53,
     "length.km": 5.793,
+    "event_name": "Italian Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 2, "6": 2, "7": 2, "8": 3,
       "9": 3, "10": 3, "11": 3
@@ -14,6 +15,7 @@
     "first_season": 1950,
     "total_laps": 78,
     "length.km": 3.337,
+    "event_name": "Monaco Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 2, "6": 2, "7": 2, "8": 2,
       "9": 1, "10": 2, "11": 2, "12": 2, "13": 3, "14": 3, "15": 3,
@@ -25,6 +27,7 @@
     "first_season": 1950,
     "total_laps": 52,
     "length.km": 5.891,
+    "event_name": "British Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 2, "7": 2, "8": 2,
       "9": 2, "10": 2, "11": 2, "12": 2, "13": 2, "14": 2, "15": 3,
@@ -36,6 +39,7 @@
     "first_season": 1950,
     "total_laps": 44,
     "length.km": 7.004,
+    "event_name": "Belgian Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 2, "6": 2, "7": 2, "8": 2,
       "9": 2, "10": 2, "11": 2, "12": 2, "13": 2, "14": 2, "15": 3,
@@ -47,6 +51,7 @@
     "first_season": 2009,
     "total_laps": 58,
     "length.km": 5.281,
+    "event_name": "Abu Dhabi Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 2, "6": 2, "7": 2, "8": 2,
       "9": 3, "10": 3, "11": 3, "12": 3, "13": 3, "14": 3, "15": 3,
@@ -58,6 +63,7 @@
     "first_season": "2012",
     "total_laps": 56,
     "length.km": 5.513,
+    "event_name": "United States Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 2, "8": 2,
       "9": 2, "10": 2, "11": 2, "12": 2, "13": 3, "14": 3, "15": 3,
@@ -69,6 +75,7 @@
     "first_season": "2004",
     "total_laps": 57,
     "length.km": 5.412,
+    "event_name": "Bahrain Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 2, "6": 2, "7": 2, "8": 2,
       "9": 2, "10": 2, "11": 2, "12": 2, "13": 3, "14": 3, "15": 3
@@ -79,6 +86,7 @@
     "first_season": "2016",
     "total_laps": 51,
     "length.km": 6.003,
+    "event_name": "Azerbaijan Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 2, "6": 2, "7": 2, "8": 2,
       "9": 2, "10": 2, "11": 2, "12": 2, "13": 2, "14": 2, "15": 2,
@@ -90,6 +98,7 @@
     "first_season": "1991",
     "total_laps": 66,
     "length.km": 4.657,
+    "event_name": "Spanish Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 2, "5": 2, "6": 2, "7": 2, "8": 2,
       "9": 2, "10": 3, "11": 3, "12": 3, "13": 3, "14": 3, "15": 3,
@@ -101,6 +110,7 @@
     "first_season": "1970",
     "total_laps": 67,
     "length.km": 4.574,
+    "event_name": "German Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 2, "6": 2, "7": 2, "8": 2,
       "9": 2, "10": 2, "11": 2, "12": 3, "13": 3, "14": 3, "15": 3,
@@ -112,6 +122,7 @@
     "first_season": "1986",
     "total_laps": 70,
     "length.km": 4.381,
+    "event_name": "Hungarian Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 2, "5": 2, "6": 2, "7": 2, "8": 2,
       "9": 2, "10": 2, "11": 2, "12": 3, "13": 3, "14": 3
@@ -122,6 +133,7 @@
     "first_season": "1980",
     "total_laps": 63,
     "length.km": 4.909,
+    "event_name": "Emilia-Romagna Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 2, "8": 2,
       "9": 2, "10": 2, "11": 2, "12": 2, "13": 2, "14": 3, "15": 3,
@@ -133,6 +145,7 @@
     "first_season": "1973",
     "total_laps": 71,
     "length.km": 4.309,
+    "event_name": "Brazilian Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 2, "5": 2, "6": 2, "7": 2, "8": 2,
       "9": 2, "10": 2, "11": 2, "12": 3, "13": 3, "14": 3, "15": 3
@@ -143,6 +156,7 @@
     "first_season": "2005",
     "total_laps": 58,
     "length.km": 5.338,
+    "event_name": "Turkish Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 2, "8": 2,
       "9": 2, "10": 2, "11": 3, "12": 3, "13": 3, "14": 3
@@ -153,6 +167,7 @@
     "first_season": "2021",
     "length.km": 6.174,
     "total_laps": 50,
+    "event_name": "Saudi Arabian Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 1, "8": 1,
       "9": 1, "10": 1, "11": 1, "12": 1, "13": 2, "14": 2, "15": 2,
@@ -165,6 +180,7 @@
     "first_season": "2023",
     "total_laps": 50,
     "length.km": 6.201,
+    "event_name": "Las Vegas Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 2, "7": 2, "8": 2,
       "9": 2, "10": 2, "11": 2, "12": 2, "13": 3, "14": 3, "15": 3,
@@ -176,6 +192,7 @@
     "first_season": "2021",
     "total_laps": 57,
     "length.km": 5.419,
+    "event_name": "Qatar Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 2, "7": 2, "8": 2,
       "9": 2, "10": 2, "11": 2, "12": 3, "13": 3, "14": 3, "15": 3,
@@ -187,6 +204,7 @@
     "first_season": "2008",
     "total_laps": 62,
     "length.km": 4.927,
+    "event_name": "Singapore Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 2, "8": 2,
       "9": 2, "10": 2, "11": 2, "12": 2, "13": 2, "14": 3, "15": 3,
@@ -199,6 +217,7 @@
     "first_season": "1996",
     "total_laps": 58,
     "length.km": 5.303,
+    "event_name": "Australian Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 2, "7": 2, "8": 2,
       "9": 3, "10": 3, "11": 3, "12": 3, "13": 3, "14": 3
@@ -209,6 +228,7 @@
     "first_season": "1963",
     "total_laps": 71,
     "length.km": 4.304,
+    "event_name": "Mexican Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 2, "5": 2, "6": 2, "7": 2, "8": 2,
       "9": 2, "10": 2, "11": 2, "12": 3, "13": 3, "14": 3, "15": 3,
@@ -220,6 +240,7 @@
     "first_season": "2022",
     "total_laps": 57,
     "length.km": 5.412,
+    "event_name": "Miami Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 1, "8": 1,
       "9": 2, "10": 2, "11": 2, "12": 2, "13": 2, "14": 2, "15": 2,
@@ -231,6 +252,7 @@
     "first_season": "1978",
     "total_laps": 70,
     "length.km": 4.361,
+    "event_name": "Canadian Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 2, "7": 2, "8": 2,
       "9": 2, "10": 3, "11": 3, "12": 3, "13": 3, "14": 3
@@ -241,6 +263,7 @@
     "first_season": "2020",
     "length.km": 5.245,
     "total_laps": 59,
+    "event_name": "Tuscan Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 2, "7": 2, "8": 2,
       "9": 2, "10": 2, "11": 2, "12": 3, "13": 3, "14": 3
@@ -251,6 +274,7 @@
     "first_season": "1951",
     "total_laps": 60,
     "length.km": 5.148,
+    "event_name": "Eifel Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 2, "6": 2, "7": 2, "8": 2,
       "9": 2, "10": 2, "11": 2, "12": 3, "13": 3, "14": 3, "15": 3
@@ -261,6 +285,7 @@
     "first_season": "1971",
     "total_laps": 53,
     "length.km": 5.842,
+    "event_name": "French Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 2, "7": 2, "8": 2,
       "9": 2, "10": 3, "11": 3, "12": 3, "13": 3, "14": 3
@@ -271,6 +296,7 @@
     "first_season": "1951",
     "total_laps": 66,
     "length.km": 4.684,
+    "event_name": "Portuguese Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 2, "6": 2, "7": 2, "8": 2,
       "9": 2, "10": 2, "11": 2, "12": 3, "13": 3, "14": 3, "15": 3
@@ -281,6 +307,7 @@
     "first_season": "2020",
     "total_laps": 87,
     "length.km": 3.543,
+    "event_name": "Sakhir Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 2, "5": 2, "6": 2, "7": 2, "8": 2,
       "9": 2, "10": 3, "11": 3
@@ -291,6 +318,7 @@
     "first_season": "2004",
     "total_laps": 56,
     "length.km": 5.451,
+    "event_name": "Chinese Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 2, "7": 2, "8": 2,
       "9": 2, "10": 2, "11": 3, "12": 3, "13": 3, "14": 3, "15": 3,
@@ -302,6 +330,7 @@
     "first_season": "2014",
     "total_laps": 53,
     "length.km": 5.848,
+    "event_name": "Russian Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 2, "6": 2, "7": 2, "8": 2,
       "9": 2, "10": 2, "11": 2, "12": 3, "13": 3, "14": 3, "15": 3,
@@ -313,6 +342,7 @@
     "first_season": "1970",
     "total_laps": 53,
     "length.km": 4.318,
+    "event_name": "Austrian Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 2, "4": 2, "5": 2, "6": 2, "7": 3, "8": 3,
       "9": 3, "10": 3
@@ -323,6 +353,7 @@
     "first_season": "1987",
     "total_laps": 53,
     "length.km": 5.807,
+    "event_name": "Japanese Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 1, "8": 2,
       "9": 2, "10": 2, "11": 2, "12": 2, "13": 2, "14": 2, "15": 3,
@@ -334,6 +365,7 @@
     "first_season": "1952",
     "total_laps": 72,
     "length.km": 4.259,
+    "event_name": "Dutch Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 2, "8": 2,
       "9": 2, "10": 2, "11": 3, "12": 3, "13": 3, "14": 3
@@ -344,44 +376,11 @@
     "first_season": "2026",
     "total_laps": 57,
     "length.km": 5.416,
+    "event_name": "Spanish Grand Prix",
     "corners": {
       "1": 1, "2": 1, "3": 1, "4": 1, "5": 1, "6": 1, "7": 1, "8": 2,
       "9": 2, "10": 2, "11": 2, "12": 2, "13": 2, "14": 2, "15": 2,
       "16": 3, "17": 3, "18": 3, "19": 3, "20": 3, "21": 3, "22": 3
     }
-  },
-  "event_to_circuit": {
-    "Australian Grand Prix": "melbourne",
-    "Bahrain Grand Prix": "bahrain",
-    "Chinese Grand Prix": "shanghai",
-    "Azerbaijan Grand Prix": "baku",
-    "Spanish Grand Prix": "barcelona",
-    "Monaco Grand Prix": "monaco",
-    "Canadian Grand Prix": "montreal",
-    "French Grand Prix": "paul_ricard",
-    "Austrian Grand Prix": "spielberg",
-    "British Grand Prix": "silverstone",
-    "German Grand Prix": "hockenheim",
-    "Hungarian Grand Prix": "hungaroring",
-    "Belgian Grand Prix": "spa",
-    "Italian Grand Prix": "monza",
-    "Singapore Grand Prix": "marina_bay",
-    "Russian Grand Prix": "sochi",
-    "Japanese Grand Prix": "suzuka",
-    "Mexican Grand Prix": "mexico_city",
-    "United States Grand Prix": "austin",
-    "Brazilian Grand Prix": "interlagos",
-    "Abu Dhabi Grand Prix": "abu_dhabi",
-    "Emilia-Romagna Grand Prix": "imola",
-    "Tuscan Grand Prix": "mugello",
-    "Eifel Grand Prix": "nurburgring",
-    "Portuguese Grand Prix": "portimao",
-    "Turkish Grand Prix": "istanbul",
-    "Sakhir Grand Prix": "sakhir_outer",
-    "Saudi Arabian Grand Prix": "jeddah",
-    "Miami Grand Prix": "miami",
-    "Dutch Grand Prix": "zandvoort",
-    "Qatar Grand Prix": "lusail",
-    "Las Vegas Grand Prix": "las_vegas"
   }
 }
