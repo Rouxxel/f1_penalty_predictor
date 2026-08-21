@@ -1,0 +1,73 @@
+# FIA season document index pages (one per championship year).
+# The crawler visits each event sub-page under these URLs.
+seasons:
+  - year: 2019
+    url: "https://www.fia.com/documents/championships/fia-formula-one-world-championship-14/season/season-2019-971"
+  - year: 2020
+    url: "https://www.fia.com/documents/championships/fia-formula-one-world-championship-14/season/season-2020-1059"
+  - year: 2021
+    url: "https://www.fia.com/documents/championships/fia-formula-one-world-championship-14/season/season-2021-1108"
+  - year: 2022
+    url: "https://www.fia.com/documents/championships/fia-formula-one-world-championship-14/season/season-2022-2005"
+  - year: 2023
+    url: "https://www.fia.com/documents/championships/fia-formula-one-world-championship-14/season/season-2023-2042"
+  - year: 2024
+    url: "https://www.fia.com/documents/championships/fia-formula-one-world-championship-14/season/season-2024-2043"
+  - year: 2025
+    url: "https://www.fia.com/documents/championships/fia-formula-one-world-championship-14/season/season-2025-2071"
+
+# Used when --season is omitted on a single-season code path; pipeline default runs all seasons.
+default_season: 2019
+
+paths:
+  raw_fia: data/raw/fia
+  interim_docs: data/interim/extracted_documents
+  csv_out: dataset/csv
+  reports: reports/tables
+  reference: data/reference
+  ergast_cache: data/raw/race_data/ergast
+  fastf1_cache: data/raw/race_data/fastf1_cache
+
+# Match as whole words anywhere in the PDF filename/title (case-insensitive).
+# Naming varies by year, e.g. "Offence - ...", "Infringement - ...", "Doc 52 - Infringement - ...".
+document_include_patterns:
+  - Infringement
+  - Decision
+  - Offence
+  - Summons
+
+document_exclude_patterns:
+  - Entry List
+  - Classification
+  - Starting Grid
+  - scrutineering
+  - Championship Points
+  - PU elements
+  - gearboxes
+  - Circuit Map
+  - Race Directors
+  - Race Director
+  - Fuel declaration
+  - Parts and parameters
+  - Dry tyre type
+  - Provisional
+  - Final Race Classification
+  - Final Qualifying Classification
+  - P1 Classification
+  - P2 Classification
+  - P3 Classification
+  - Initial Scrutineering
+
+scraper:
+  rate_limit_seconds: 1.0
+  max_retries: 3
+  user_agent: "f1-penalty-predictor/1.0 (research; contact: local)"
+  fia_base_url: "https://www.fia.com"
+
+enrichment:
+  ergast_base_url: "https://api.jolpi.ca/ergast/f1"
+  ergast_fallback_url: "https://ergast.com/api/f1"
+  fastf1_cache_enabled: true
+
+validation:
+  min_parse_confidence: 0.7
