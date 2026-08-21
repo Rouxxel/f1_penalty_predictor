@@ -240,8 +240,22 @@ def parse_document(entry: DocumentEntry, cfg: PipelineConfig) -> dict[str, Any]:
 def parse_all_documents(entries: list[DocumentEntry], cfg: PipelineConfig) -> list[dict[str, Any]]:
     out_dir = ensure_dir(cfg.path("interim_docs") / str(cfg.season))
     parsed_docs: list[dict[str, Any]] = []
+    failures: list[dict[str, str]] = []
     for entry in entries:
-        doc = parse_document(entry, cfg)
+        try:
+            doc = parse_document(entry, cfg)
+        except Exception as exc:  # noqa: BLE001 - collect per-document failures
+            failures.append(
+                {
+                    "document_id": entry.document_id,
+                    "title": entry.title,
+                    "local_path": entry.local_path,
+                    "error": str(exc),
+                }
+            )
+            continue
         sio.write_json(out_dir / f"{entry.document_id}.json", doc)
         parsed_docs.append(doc)
+    if failures:
+        sio.write_json(out_dir / "parse_failures.json", failures)
     return parsed_docs

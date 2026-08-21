@@ -10,7 +10,8 @@ sys.path.insert(0, str(ROOT / "src"))
 from fia_ml.data.config import PipelineConfig
 from fia_ml.data.download import discover_event_urls, discover_pdfs_for_event
 
-cfg = PipelineConfig.from_yaml(ROOT / "configs" / "data.yaml").for_season(2025)
+year = int(sys.argv[1]) if len(sys.argv) > 1 else 2025
+cfg = PipelineConfig.from_yaml(ROOT / "configs" / "data.yaml").for_season(year)
 events = discover_event_urls(cfg.season_url, cfg)
 counts: list[tuple[str, int]] = []
 for name, url in events:
@@ -18,9 +19,10 @@ for name, url in events:
     counts.append((name, len(pdfs)))
 
 total = sum(n for _, n in counts)
-print(f"events={len(events)} stewarding_pdfs={total}")
+print(f"season={year} events={len(events)} stewarding_pdfs={total}")
 for name, n in counts[:5]:
     print(f"  {name}: {n}")
-print("  ...")
-for name, n in counts[-2:]:
-    print(f"  {name}: {n}")
+if len(counts) > 5:
+    print("  ...")
+    for name, n in counts[-2:]:
+        print(f"  {name}: {n}")

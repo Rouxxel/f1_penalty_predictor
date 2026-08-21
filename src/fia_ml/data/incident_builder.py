@@ -192,5 +192,10 @@ def build_from_interim(cfg: PipelineConfig) -> pd.DataFrame:
     if not interim_dir.exists():
         return pd.DataFrame(columns=SCHEMA_COLUMNS)
     for json_path in sorted(interim_dir.glob("*.json")):
-        docs.append(sio.read_json(json_path))
+        if json_path.name.endswith("_failures.json"):
+            continue
+        payload = sio.read_json(json_path)
+        if not isinstance(payload, dict):
+            continue
+        docs.append(payload)
     return build_incidents(docs, cfg)
