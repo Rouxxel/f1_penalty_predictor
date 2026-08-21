@@ -26,7 +26,7 @@ def extract_pdf_text(pdf_path: Path) -> str:
         doc = pymupdf.open(stream=data, filetype="pdf")
         parts = [page.get_text() for page in doc]
         doc.close()
-        return normalize_text("\n".join(parts))
+        text = "\n".join(parts)
     except ImportError:
         import io
 
@@ -34,11 +34,44 @@ def extract_pdf_text(pdf_path: Path) -> str:
 
         with pdfplumber.open(io.BytesIO(data)) as pdf:
             parts = [page.extract_text() or "" for page in pdf.pages]
-        return normalize_text("\n".join(parts))
+        text = "\n".join(parts)
+    return text.replace("\u00a0", " ").replace("\ufffd", " ")
+
+
+_FIELD_LABELS = (
+    "No / Driver|Competitor|Time|Session|Fact|Offence|Infringement|Decision|Reason|Document|Date"
+)
+
+
+def _extract_field(text: str, label: str) -> str:
+    if label.lower() == "reason":
+        for pattern in (
+            r"Reason\s*\n(.+)",
+            r"Reason\s+(.+?)(?=Competitors are reminded|Decisions of the Stewards|\Z)",
+        ):
+            match = re.search(pattern, text, re.DOTALL | re.IGNORECASE)
+            if match:
+                chunk = re.split(r"Competitors are reminded", match.group(1), maxsplit=1)[0]
+                return normalize_text(chunk)
+        return ""
+
+    newline_pattern = (
+        rf"{re.escape(label)}\s*\n(.+?)(?=\n(?:{_FIELD_LABELS})\s*\n|\Z)"
+    )
+    match = re.search(newline_pattern, text, re.DOTALL | re.IGNORECASE)
+    if match:
+        return normalize_text(match.group(1))
+
+    inline_pattern = rf"{re.escape(label)}\s+(.+?)(?=\s+(?:{_FIELD_LABELS})\s+|\Z)"
+    match = re.search(inline_pattern, text, re.DOTALL | re.IGNORECASE)
+    if match:
+        return normalize_text(match.group(1))
+    return ""
 
 
 def classify_document_type(title: str) -> str:
-    lowered = title.lower()
+    lowered = re.sub(r"[_\-.]+", " ", title.lower())
+    lowered = re.sub(r"\s+", " ", lowered).strip()
     if re.search(r"\bsummons\b", lowered):
         return "summons"
     if re.search(r"\binfringement\b", lowered):
@@ -67,20 +100,6 @@ def normalize_session(value: str) -> str:
         if key in lowered:
             return normalized
     return lowered or ""
-
-
-def _extract_field(text: str, label: str) -> str:
-    if label.lower() == "reason":
-        match = re.search(r"Reason\s*\n(.+)", text, re.DOTALL | re.IGNORECASE)
-        if match:
-            chunk = match.group(1)
-            chunk = re.split(r"\nCompetitors are reminded", chunk, maxsplit=1)[0]
-            return normalize_text(chunk)
-    pattern = rf"{re.escape(label)}\s*\n(.+?)(?=\n(?:No / Driver|Competitor|Time|Session|Fact|Offence|Decision|Reason|Document|Date)\s*\n|\Z)"
-    match = re.search(pattern, text, re.DOTALL | re.IGNORECASE)
-    if not match:
-        return ""
-    return normalize_text(match.group(1))
 
 
 def parse_car_driver(line: str) -> tuple[str, str]:

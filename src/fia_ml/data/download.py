@@ -69,12 +69,20 @@ def discover_event_urls(season_url: str, cfg: PipelineConfig) -> list[tuple[str,
     return events
 
 
+def _normalize_title_for_matching(title: str) -> str:
+    """Normalize PDF filenames so keyword matching works across FIA naming styles."""
+    stem = Path(title).stem if title.lower().endswith(".pdf") else title
+    normalized = re.sub(r"[_\-.]+", " ", stem.lower())
+    return re.sub(r"\s+", " ", normalized).strip()
+
+
 def _keyword_pattern(keyword: str) -> re.Pattern[str]:
     return re.compile(rf"\b{re.escape(keyword.lower())}\b", re.IGNORECASE)
 
 
 def _title_has_keyword(title: str, keyword: str) -> bool:
-    return _keyword_pattern(keyword).search(title) is not None
+    normalized = _normalize_title_for_matching(title)
+    return _keyword_pattern(keyword).search(normalized) is not None
 
 
 def _title_matches_include_patterns(title: str, patterns: list[str]) -> bool:
@@ -104,7 +112,7 @@ def discover_pdfs_for_event(event_url: str, event_name: str, cfg: PipelineConfig
     base = cfg.scraper.get("fia_base_url", "https://www.fia.com")
     pdfs: list[tuple[str, str]] = []
     for match in re.finditer(
-        r'href="(/sites/default/files/decision-document/([^"]+\.pdf))"',
+        r'href="((?:/sites/default/files|/system/files)/decision-document/([^"]+\.pdf))"',
         html,
         re.IGNORECASE,
     ):
@@ -123,13 +131,23 @@ def _sha256_file(path: Path) -> str:
 
 def _download_file(url: str, dest: Path, cfg: PipelineConfig) -> None:
     scraper = cfg.scraper
-    req = urllib.request.Request(
-        url,
-        headers={"User-Agent": scraper.get("user_agent", "f1-penalty-predictor/1.0")},
-    )
-    data = urllib.request.urlopen(req, timeout=120).read()
-    sio.write_bytes(dest, data)
-    time.sleep(float(scraper.get("rate_limit_seconds", 1.0)))
+    retries = int(scraper.get("max_retries", 3))
+    last_error: Exception | None = None
+    for attempt in range(retries):
+        try:
+            req = urllib.request.Request(
+                url,
+                headers={"User-Agent": scraper.get("user_agent", "f1-penalty-predictor/1.0")},
+            )
+            with urllib.request.urlopen(req, timeout=120) as response:
+                data = response.read()
+            sio.write_bytes(dest, data)
+            time.sleep(float(scraper.get("rate_limit_seconds", 1.0)))
+            return
+        except Exception as exc:  # noqa: BLE001 - retry loop
+            last_error = exc
+            time.sleep(2**attempt)
+    raise RuntimeError(f"Failed to download {url}: {last_error}") from last_error
 
 
 def make_document_id(season: int, event_slug: str, title: str) -> str:
@@ -148,6 +166,7 @@ def download_season(cfg: PipelineConfig) -> list[DocumentEntry]:
             existing[item["document_id"]] = DocumentEntry(**item)
 
     entries: list[DocumentEntry] = []
+    failures: list[dict[str, str]] = []
     event_urls = discover_event_urls(cfg.season_url, cfg)
     if not event_urls:
         raise RuntimeError(f"No event URLs found at {cfg.season_url}")
@@ -170,7 +189,11 @@ def download_season(cfg: PipelineConfig) -> list[DocumentEntry]:
                     continue
 
             if not local_path.exists():
-                _download_file(url, local_path, cfg)
+                try:
+                    _download_file(url, local_path, cfg)
+                except RuntimeError as exc:
+                    failures.append({"title": title, "url": url, "error": str(exc)})
+                    continue
 
             sha256 = _sha256_file(local_path)
             entry = DocumentEntry(
@@ -186,4 +209,6 @@ def download_season(cfg: PipelineConfig) -> list[DocumentEntry]:
             entries.append(entry)
 
     sio.write_json(manifest_path, [entry.__dict__ for entry in entries])
+    if failures:
+        sio.write_json(raw_root / "download_failures.json", failures)
     return entries
