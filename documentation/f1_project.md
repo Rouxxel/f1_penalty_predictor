@@ -76,18 +76,20 @@ This is a dual-lens system:
 
 ## Step 1 — Define the Unit of Data
 
-Define a single row as:
+Define a single **raw dataset row** as:
 
-An “incident instance” involving one or more drivers in a specific race context.
+An **incident instance** involving one or more drivers in a specific race context.
 
 Each row should include:
-- Drivers involved
+- Drivers involved (possibly multiple, comma-separated)
 - Incident type
 - Session type (race, qualifying, etc.)
-- Lap number and track location
+- Lap number and track location (when available)
 - FIA decision (label)
 
-This definition is critical before any data collection begins.
+The authoritative column layout is defined in `documentation/f1_dataset_example.csv`. Row 1 is the header, row 2 is an example incident, row 3 is a legend (`*` = categorical, `**` = multi-value).
+
+For machine learning, this incident-centric raw table is later **flattened** to one row per driver under investigation (see `project_spec.md` §3). Do not change the raw CSV format for that reason — flattening is a preprocessing step.
 
 ---
 
@@ -96,56 +98,140 @@ This definition is critical before any data collection begins.
 Do not attempt full F1 history.
 
 Start with:
-- One season (e.g., 2023 or 2024)
-- Only race sessions initially
-- Only incidents with official FIA decisions
+- One season (e.g., 2019 or 2023)
+- All sessions that produce steward documents (race, qualifying, sprint where applicable)
+- Only incidents with official FIA **Decision**, **Offence**, or **Summons** documents
 
 Target dataset size:
-- ~200 to 500 incidents
+- ~200 to 500 incident rows after deduplication
 
 ---
 
 ## Step 3 — Data Sources
 
-Primary sources:
-- FIA steward documents (official post-race reports)
-- Official race summaries
-- Wikipedia race incident summaries (for structure support)
+### Primary: FIA Decision Documents Portal
 
-Optional later:
+Official steward PDFs are published on the FIA website, organized by season and event.
+
+**Season index URL pattern:**
+```text
+https://www.fia.com/documents/championships/fia-formula-one-world-championship-14/season/season-{YEAR}-{ID}
+```
+
+Example: [2019 season documents](https://www.fia.com/documents/championships/fia-formula-one-world-championship-14/season/season-2019-971)
+
+**Important scraping facts:**
+- The season page HTML only lists PDFs for one expanded event by default (usually the last race of the season).
+- Each Grand Prix has its own event sub-page, discoverable from the season page dropdown:
+  ```text
+  .../season/season-{YEAR}-{ID}/event/{Grand%20Prix%20Name}
+  ```
+- PDF files live at:
+  ```text
+  https://www.fia.com/sites/default/files/decision-document/{filename}.pdf
+  ```
+- Typical event page contains 40–60 PDFs; only a subset is relevant for incidents.
+
+**Relevant document types (download these):**
+
+| Type | Use |
+|---|---|
+| Decision | Primary source for penalty outcome, fact, reason, cited article |
+| Offence | Post-race penalties; often contains full sanction detail |
+| Summons | Marks formal investigation; may precede a Decision |
+
+**Exclude** (administrative, not incident data): Entry List, Classification, Starting Grid, Scrutineering, Championship Points, PU/gearbox notices, Circuit Map, Race Director notes.
+
+**Fields extractable directly from FIA PDFs:**
+- Car number, driver name, team (competitor)
+- Session, document date/time
+- Fact, Offence, Decision, Reason
+- Regulation article cited
+- Turn/corner references in fact text (e.g., “turn 12”)
+- Penalty type and superlicence points (when stated)
+
+**Fields NOT in FIA PDFs** (must come from elsewhere):
+- Lap number (rarely stated)
+- Live race positions at incident time
+- Weather, track conditions, safety car state
+- Championship standings and points (point-in-time)
+- Sector mapping from corner number
+- Severity (subjective — heuristic or manual)
+- `current_top_4_drivers`, `years_in_sport`, historical superlicence totals
+
+### Secondary: Enrichment APIs
+
+| Source | Provides |
+|---|---|
+| [Ergast F1 API](http://ergast.com/api/f1/) | Calendar, round, circuit, country, driver/constructor standings before each race, car-number-to-driver mapping via results |
+| FastF1 (later) | Lap timing, positions, weather, SC/VSC periods |
+| Manual review | Severity, ambiguous incident classification, missing lap numbers |
+
+### Optional later
 - Race footage annotations
 - Motorsport journalism incident breakdowns
 
 ---
 
-## Step 4 — Define a Simple Dataset Schema
+## Step 4 — Dataset Schema
 
-Start with a minimal structure:
+The project schema is **not** the minimal 8-column starter set anymore. Use the full schema in:
 
-- race_id
-- driver_a
-- driver_b (optional)
-- lap_number
-- corner/sector (if available)
-- incident_type
-- session_type
-- weather
-- FIA_decision (label)
+```text
+documentation/f1_dataset_example.csv
+```
 
-Keep it simple at the beginning.
+Column groups:
+
+| Group | Columns |
+|---|---|
+| Identity | `incident_id`, `season`, `round`, `circuit`, `country`, `first_season` |
+| Race context | `rounds`, `num_teams`, `current_top_4_drivers`, `lap`, `lap_remaining`, `full_laps`, `completion_percentage`, `sector` |
+| Conditions | `flag`, `safety_car`, `track_conditions`, `weather_conditions`, `session` |
+| Incident | `incident_type`, `severity`, `positions_of_involved parties`, `num_drivers`, `drivers`, `nationalities`, `respective_teams` |
+| Standings (multi-value) | `driver_standings`, `driver_points`, `construct_standings`, `construct_points`, `years_in_sport`, `superlicense_points_before_incident` |
+| Labels | `investigation`, `incident_classification`, `driver_at_fault`, `penalty`, `superlicense_points_added`, `mentioned_article` |
+
+See `FIA_stewarding_dataset_feature_specification.md` for feature semantics, leakage rules, and data provenance per column.
 
 ---
 
-## Step 5 — Manual Data Collection Pipeline
+## Step 5 — Automated Data Collection Pipeline
 
-At this stage, most data will be manually constructed:
+Manual one-by-one extraction does not scale. The target pipeline:
 
-- Read steward reports
-- Extract incidents one by one
-- Convert them into structured rows
-- Store in CSV or database format
+```text
+FIA season URL
+      │
+      ▼
+Discover event sub-pages → download relevant PDFs
+      │
+      ▼
+Extract text → parse structured FIA fields
+      │
+      ▼
+Build raw incident rows (many columns empty)
+      │
+      ▼
+Enrichment join (Ergast, later FastF1)
+      │
+      ▼
+Validate against schema → output CSV
+```
 
-This is the most time-intensive but most important step.
+### Output file strategy
+
+| Artifact | Granularity | Purpose |
+|---|---|---|
+| `data/raw/fia/{season}/{event}/` | Per race weekend | Cached PDFs (re-runnable) |
+| `data/interim/extracted_documents/{season}/` | Per document | Parsed JSON/text |
+| `dataset/csv/raw_incidents_{season}.csv` | **One file per season** | Human-reviewable raw table matching `f1_dataset_example.csv` |
+| `dataset/csv/processed_{season}.csv` | One file per season | After enrichment + validation |
+| `data/processed/incidents.parquet` | Combined seasons | ML pipeline input after flattening |
+
+**Do not** use one CSV per race weekend as the canonical dataset — it fragments review and training. Use `season` + `round` + `circuit` columns to filter within a single season file. Per-event folders are fine for raw PDF storage only.
+
+Detailed pipeline design: `project_spec.md` §4.
 
 ---
 
@@ -153,11 +239,12 @@ This is the most time-intensive but most important step.
 
 Once enough data is collected:
 
-- Train/test split (preferably by race, not random split)
+- Flatten raw CSV to one-row-per-driver-investigation
+- Train/test split by season (never random)
 - Start with XGBoost or LightGBM
-- Evaluate with accuracy, F1 score, confusion matrix
+- Evaluate with accuracy, macro-F1, confusion matrix
 
-This model learns FIA behavior patterns.
+Future implementation plan: **Model Training Plan** (to be written separately).
 
 ---
 
@@ -175,6 +262,8 @@ This can be:
 
 This represents the normative “by-the-book” system.
 
+Future implementation plan: **Normative Rules Engine Plan** (to be written separately).
+
 ---
 
 ## Step 8 — Compare Both Models
@@ -190,9 +279,26 @@ This becomes the main analytical output of the project.
 
 ---
 
+## Planned Implementation Documents
+
+The following documents will be generated as separate implementation plans (not yet written):
+
+| Plan | Scope |
+|---|---|
+| **Dataset Generation Plan** | Scraper, PDF parser, enrichment, validation, CSV output |
+| **Model Training Plan** | Encoding, temporal split, XGBoost baseline, evaluation |
+| **Feature Engineering Plan** | Derived features, precedent stats, leakage tests |
+| **Normative Model Plan** | Rule encoding, deviation analysis |
+
+This file (`f1_project.md`) and the two companion specs define *what* and *why*. Implementation plans will define *how* step-by-step.
+
+---
+
 ## Key Advice
 
-- Start small and structured
+- Start small and structured — one season first
 - Data quality matters more than model complexity
 - Incident definition is the foundation of everything
-- Avoid adding complex features (social media, nationality, etc.) early unless clearly justified
+- FIA PDFs give labels and narrative; Ergast/FastF1 give context — neither is sufficient alone
+- Keep the raw CSV wide and human-readable; flatten and encode only for modeling
+- Avoid adding complex features (social media, nationality bias analysis, etc.) until the baseline pipeline works

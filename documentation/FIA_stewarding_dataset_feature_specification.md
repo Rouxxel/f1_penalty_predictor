@@ -30,6 +30,59 @@ The raw dataset can be very wide. It is acceptable for it to contain 100+ column
 
 ---
 
+## 1.1 Authoritative Raw Schema
+
+The canonical column layout for data collection is:
+
+```text
+documentation/f1_dataset_example.csv
+```
+
+- **Row 1:** column headers
+- **Row 2:** example incident (`a001`, Monza 2021)
+- **Row 3:** type legend — `*` = categorical, `**` = multi-value (comma-separated in one cell)
+
+This file defines the **raw incident-centric** dataset. For machine learning, rows are later flattened to one row per driver under investigation (see `project_spec.md` §3). Do not remove multi-value columns from the raw CSV; they exist because a single incident often involves multiple drivers.
+
+### Raw column inventory
+
+| Column | Type | Role |
+|---|---|---|
+| `incident_id` | string | Unique incident identifier |
+| `circuit`, `country`, `first_season` | * | Track context |
+| `round`, `season`, `rounds`, `num_teams` | int | Championship context |
+| `current_top_4_drivers` | ** | Top-4 driver names before race |
+| `lap`, `lap_remaining`, `full_laps`, `completion_percentage` | numeric | Race progression |
+| `sector` | int | Track sector (1–3) |
+| `flag`, `safety_car`, `track_conditions`, `weather_conditions` | * | Environmental / race control |
+| `session` | * | Practice, qualifying, sprint, race |
+| `incident_type`, `severity` | * | Incident classification |
+| `positions_of_involved parties` | ** | Car/running positions at incident |
+| `num_drivers` | int | Count of involved drivers |
+| `drivers`, `nationalities`, `respective_teams` | ** | Involved parties |
+| `driver_standings`, `driver_points` | ** | WDC position/points before race |
+| `construct_standings`, `construct_points` | ** | WCC position/points before race |
+| `years_in_sport`, `superlicense_points_before_incident` | ** | Driver history |
+| `investigation` | bool | Formal investigation opened |
+| `incident_classification` | * | Steward classification (leakage risk) |
+| `driver_at_fault` | string | **Label / leakage** |
+| `penalty` | string | **Primary target** |
+| `superlicense_points_added` | int | **Label** |
+| `mentioned_article` | string | **Label / leakage** |
+
+### Name mapping (raw CSV ↔ this document)
+
+| Raw CSV column | Feature spec equivalent |
+|---|---|
+| `rounds` | `total_rounds` / championship rounds in season |
+| `full_laps` | `total_laps` |
+| `positions_of_involved parties` | `driver_position_at_incident` (+ opponent), multi-value in raw |
+| `respective_teams` | `driver_team` (+ opponent), multi-value in raw |
+| `years_in_sport` | `driver_experience_years` |
+| `superlicense_points_before_incident` | `career_license_points` (point-in-time) |
+
+---
+
 # 2. Core Design Principles
 
 ## 2.1 One column should represent one meaningful piece of information
@@ -167,54 +220,54 @@ This is especially important for:
 
 Maintain multiple logical datasets/views rather than forcing everything into one table.
 
-## 5.1 Raw dataset
+## 5.1 Raw dataset (CSV — incident-centric)
 
-Contains as much information as can reasonably be collected.
-
-Potential size:
+Contains all columns from `f1_dataset_example.csv`. One row per incident; multi-value cells for multiple drivers.
 
 ```text
-100–150+ columns
+dataset/csv/raw_incidents_{season}.csv
 ```
 
-This is the data warehouse.
+This is the human-editable data warehouse. Expect many cells to be empty after automated PDF extraction; enrichment fills them.
 
-Example:
+---
+
+## 5.2 Enriched raw dataset (CSV)
+
+Same schema as 5.1, after Ergast (and optionally FastF1) joins and validation.
 
 ```text
-raw_incidents.parquet
+dataset/csv/processed_{season}.csv
 ```
 
 ---
 
-## 5.2 Modeling dataset
+## 5.3 Modeling dataset (Parquet — driver-centric)
 
-Contains validated and selected features.
+Flattened to one row per driver under investigation. Used for ML after encoding.
 
-Potential size:
+```text
+data/processed/incidents.parquet
+data/processed/train.parquet
+data/processed/validation.parquet
+data/processed/test.parquet
+```
+
+Potential size after feature selection:
 
 ```text
 30–70 useful features
 ```
 
-This is what is fed into the baseline ML models.
-
-Example:
-
-```text
-model_dataset.parquet
-```
-
 ---
 
-## 5.3 NLP dataset
+## 5.4 NLP dataset
 
 Keep long-form text separate from the tabular data.
 
-Example:
-
 ```text
 incident_id
+document_id
 fia_report
 steward_reasoning
 regulation_text
@@ -222,7 +275,57 @@ incident_summary
 embedding
 ```
 
-This allows NLP experiments without forcing raw text into the tabular dataset.
+Stored under `data/interim/extracted_documents/`. Allows NLP experiments without forcing raw text into the tabular CSV.
+
+---
+
+## 5.5 Data Provenance — Where Each Feature Comes From
+
+FIA steward PDFs are the **primary source for labels** but cover less than half the raw schema. Automated collection requires a multi-source pipeline.
+
+### FIA Decision Documents Portal
+
+**URL structure:**
+```text
+Season:  .../season/season-{YEAR}-{ID}
+Event:   .../season/season-{YEAR}-{ID}/event/{Grand Prix Name}
+PDF:     https://www.fia.com/sites/default/files/decision-document/{filename}.pdf
+```
+
+**Relevant PDF types:** Decision, Offence, Summons.
+
+**Extractable from PDF text:**
+
+| PDF field | Maps to column(s) |
+|---|---|
+| No / Driver | `drivers` (via car number → name mapping) |
+| Competitor | `respective_teams` |
+| Session | `session` |
+| Fact | incident narrative; turn/corner hints → `sector` (indirect) |
+| Offence | `incident_type`, `mentioned_article` (partial) |
+| Decision | `penalty`, `superlicense_points_added` |
+| Reason | `driver_at_fault` (label) |
+| Document type | `investigation` (Summons = true) |
+
+**Not in PDFs:** `lap`, weather, standings, positions, `severity`, most race context.
+
+### Ergast F1 API (enrichment V1)
+
+Provides: `season`, `round`, `circuit`, `country`, `rounds`, `num_teams`, driver/constructor standings and points before each race, driver nationality, car-number-to-driver mapping.
+
+All standings/points columns must use values **before** the incident race (see §3–§4).
+
+### FastF1 (enrichment V2+)
+
+Provides: `lap`, `positions_of_involved parties`, `flag`, `safety_car`, `track_conditions`, `weather_conditions`, lap-level timing for `completion_percentage`.
+
+### Manual / heuristic
+
+`severity`, ambiguous `incident_type`, missing lap numbers, corner→sector mapping when not inferable.
+
+### Pipeline reference
+
+Full stage breakdown: `project_spec.md` §4 and `f1_project.md` Step 5.
 
 ---
 
@@ -235,20 +338,26 @@ Incident information should describe what physically or procedurally happened.
 ```text
 incident_id
 season
-race_id
+round                  # raw CSV; race_id / circuit in model layer
 lap
-lap_fraction
+lap_remaining
+full_laps              # raw CSV name; total_laps in model layer
+completion_percentage
+sector
 ```
 
 ### Definitions
 
-| Feature | Description |
-|---|---|
-| `incident_id` | Unique identifier for the incident |
-| `season` | F1 season |
-| `race_id` | Unique race identifier |
-| `lap` | Lap on which the incident occurred |
-| `lap_fraction` | Approximate fraction of the lap at which the incident occurred, if available |
+| Feature | Raw CSV column | Description |
+|---|---|---|
+| `incident_id` | `incident_id` | Unique identifier for the incident |
+| `season` | `season` | F1 season year |
+| `round` | `round` | Championship round number |
+| `circuit` | `circuit` | Circuit slug (e.g., `monza`) |
+| `lap` | `lap` | Lap on which the incident occurred |
+| `full_laps` | `full_laps` | Total scheduled race laps |
+| `completion_percentage` | `completion_percentage` | `lap / full_laps * 100` |
+| `sector` | `sector` | Track sector 1, 2, or 3 |
 
 ---
 
@@ -1385,47 +1494,47 @@ Ask:
 
 > **"What information about this incident could plausibly influence a steward's decision?"**
 
-Then collect it.
+Then collect it — using FIA PDFs for labels, Ergast/FastF1 for context, and manual review where automation fails.
 
-The raw dataset can be large.
-
-The modeling dataset should be selective.
+The raw CSV can be large and partially empty after first-pass extraction. The modeling dataset should be selective.
 
 The strongest architecture is:
 
 ```text
-                    INCIDENT
-                       │
-        ┌──────────────┼──────────────┐
-        │              │              │
-      DRIVER        OPPONENT       PHYSICAL
-        │              │           CONTEXT
-        │              │              │
-     HISTORY      RELATIONSHIP     TELEMETRY
-        │              │              │
-        └──────────────┼──────────────┘
-                       │
-                 RACE CONTEXT
-                       │
-                CHAMPIONSHIP
-                       │
-                  REGULATIONS
-                       │
-                       ▼
-                FIA DECISION
+FIA season URL → PDFs → parsed fields → raw CSV (f1_dataset_example schema)
+                                              ↓
+                                    enrichment (Ergast / FastF1)
+                                              ↓
+                                    processed CSV → flatten → model parquet
+                                              ↓
+                                    ML model / normative rules / comparison
 ```
 
 The project should therefore prioritize:
 
-1. **Rich raw data**
-2. **Point-in-time correctness**
-3. **Leakage prevention**
-4. **Non-redundant feature design**
-5. **Temporal validation**
-6. **Historical precedent**
-7. **Explainability**
-8. **Fairness/bias analysis**
+1. **Rich raw data** (wide CSV, multi-value OK)
+2. **Automated collection** (scraper + parser + enrichment)
+3. **Point-in-time correctness**
+4. **Leakage prevention**
+5. **Non-redundant feature design** (in model layer)
+6. **Temporal validation**
+7. **Historical precedent**
+8. **Explainability**
+9. **Fairness/bias analysis**
 
 The goal is not to build the model with the most columns.
 
 The goal is to build a dataset that represents the incident as faithfully as possible, and then determine experimentally which information actually helps predict the FIA's decision.
+
+---
+
+## 35. Planned Implementation Documents
+
+| Plan | Purpose |
+|---|---|
+| Dataset Generation Implementation Plan | End-to-end: FIA URL → CSV |
+| Model Training Implementation Plan | Flatten, encode, train, evaluate |
+| Feature Engineering Implementation Plan | Derived + precedent features |
+| Normative Rules Implementation Plan | Rule engine + deviation analysis |
+
+Request these from the project assistant when ready to implement each phase.
