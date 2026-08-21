@@ -1,6 +1,9 @@
 {
   "monza": {
     "country": "italy",
+    "region": "lombardy",
+    "state": "monza_and_brianza",
+    "city": "monza",
     "first_season": 1950,
     "total_laps": 53,
     "length.km": 5.793,
@@ -12,6 +15,9 @@
   },
   "monaco": {
     "country": "monaco",
+    "region": "monaco",
+    "state": "monaco",
+    "city": "monaco",
     "first_season": 1950,
     "total_laps": 78,
     "length.km": 3.337,
@@ -24,6 +30,9 @@
   },
   "silverstone": {
     "country": "uk",
+    "region": "england",
+    "state": "northamptonshire",
+    "city": "silverstone",
     "first_season": 1950,
     "total_laps": 52,
     "length.km": 5.891,
@@ -36,6 +45,9 @@
   },
   "spa": {
     "country": "belgium",
+    "region": "wallonia",
+    "state": "liege",
+    "city": "stavelot",
     "first_season": 1950,
     "total_laps": 44,
     "length.km": 7.004,
@@ -46,8 +58,11 @@
       "16": 3, "17": 3, "18": 3, "19": 3
     }
   },
-  "abu_dhabi": {
+  "yas_marina": {
     "country": "uae",
+    "region": "abu_dhabi",
+    "state": "abu_dhabi",
+    "city": "abu_dhabi",
     "first_season": 2009,
     "total_laps": 58,
     "length.km": 5.281,
@@ -58,8 +73,11 @@
       "16": 3
     }
   },
-  "austin": {
+  "circuit_of_the_americas": {
     "country": "usa",
+    "region": "texas",
+    "state": "travis",
+    "city": "austin",
     "first_season": "2012",
     "total_laps": 56,
     "length.km": 5.513,
@@ -72,6 +90,9 @@
   },
   "bahrain": {
     "country": "bahrain",
+    "region": "southern",
+    "state": "southern",
+    "city": "sakhir",
     "first_season": "2004",
     "total_laps": 57,
     "length.km": 5.412,
@@ -83,6 +104,9 @@
   },
   "baku": {
     "country": "azerbaijan",
+    "region": "baku",
+    "state": "baku",
+    "city": "baku",
     "first_season": "2016",
     "total_laps": 51,
     "length.km": 6.003,
@@ -95,6 +119,9 @@
   },
   "barcelona": {
     "country": "spain",
+    "region": "catalonia",
+    "state": "barcelona",
+    "city": "montmelo",
     "first_season": "1991",
     "total_laps": 66,
     "length.km": 4.657,
@@ -107,6 +134,9 @@
   },
   "hockenheim": {
     "country": "germany",
+    "region": "baden-wurttemberg",
+    "state": "rhineland-neckar",
+    "city": "hockenheim",
     "first_season": "1970",
     "total_laps": 67,
     "length.km": 4.574,
@@ -119,6 +149,9 @@
   },
   "hungaroring": {
     "country": "hungary",
+    "region": "central_hungary",
+    "state": "pest",
+    "city": "mogyorod",
     "first_season": "1986",
     "total_laps": 70,
     "length.km": 4.381,
@@ -130,6 +163,9 @@
   },
   "imola": {
     "country": "italy",
+    "region": "emilia-romagna",
+    "state": "bologna",
+    "city": "imola",
     "first_season": "1980",
     "total_laps": 63,
     "length.km": 4.909,
@@ -142,6 +178,9 @@
   },
   "interlagos": {
     "country": "brazil",
+    "region": "southeast",
+    "state": "sao_paulo",
+    "city": "sao_paulo"
     "first_season": "1973",
     "total_laps": 71,
     "length.km": 4.309,
@@ -153,6 +192,9 @@
   },
   "istanbul": {
     "country": "turkey",
+    "region": "marmara",
+    "state": "istanbul",
+    "city": "istanbul",
     "first_season": "2005",
     "total_laps": 58,
     "length.km": 5.338,
@@ -164,6 +206,9 @@
   },
   "jeddah": {
     "country": "saudi_arabia",
+    "region": "makkah",
+    "state": "makkah",
+    "city": "jeddah",
     "first_season": "2021",
     "length.km": 6.174,
     "total_laps": 50,
@@ -177,6 +222,9 @@
   },
   "las_vegas": {
     "country": "usa",
+    "region": "nevada",
+    "state": "clark",
+    "city": "las_vegas",
     "first_season": "2023",
     "total_laps": 50,
     "length.km": 6.201,
@@ -189,6 +237,9 @@
   },
   "lusail": {
     "country": "qatar",
+    "region": "doha",
+    "state": "al_daayen",
+    "city": "lusail",
     "first_season": "2021",
     "total_laps": 57,
     "length.km": 5.419,
@@ -201,6 +252,9 @@
   },
   "marina_bay": {
     "country": "singapore",
+    "region": "central_region",
+    "state": "central_area",
+    "city": "singapore",
     "first_season": "2008",
     "total_laps": 62,
     "length.km": 4.927,
@@ -212,8 +266,11 @@
       "23": 3
     }
   },
-  "melbourne": {
+  "albert_park": {
     "country": "australia",
+    "region": "victoria",
+    "state": "victoria",
+    "city": "melbourne",
     "first_season": "1996",
     "total_laps": 58,
     "length.km": 5.303,
@@ -223,8 +280,11 @@
       "9": 3, "10": 3, "11": 3, "12": 3, "13": 3, "14": 3
     }
   },
-  "mexico_city": {
+  "hermanos_rodriguez": {
     "country": "mexico",
+    "region": "mexico_city",
+    "state": "mexico_city",
+    "city": "mexico_city",
     "first_season": "1963",
     "total_laps": 71,
     "length.km": 4.304,
@@ -237,6 +297,9 @@
   },
   "miami": {
     "country": "usa",
+    "region": "florida",
+    "state": "miami-dade",
+    "city": "miami_gardens",
     "first_season": "2022",
     "total_laps": 57,
     "length.km": 5.412,
@@ -247,8 +310,11 @@
       "16": 2, "17": 3, "18": 3, "19": 3
     }
   },
-  "montreal": {
+  "gilles_villeneuve": {
     "country": "canada",
+    "region": "quebec",
+    "state": "montreal",
+    "city": "montreal",
     "first_season": "1978",
     "total_laps": 70,
     "length.km": 4.361,
@@ -260,6 +326,9 @@
   },
   "mugello": {
     "country": "italy",
+    "region": "tuscany",
+    "state": "florence",
+    "city": "scarperia_e_san_piero",
     "first_season": "2020",
     "length.km": 5.245,
     "total_laps": 59,
@@ -271,6 +340,9 @@
   },
   "nurburgring": {
     "country": "germany",
+    "region": "rhineland_palatinate",
+    "state": "ahrweiler",
+    "city": "nurburg",
     "first_season": "1951",
     "total_laps": 60,
     "length.km": 5.148,
@@ -282,6 +354,9 @@
   },
   "paul_ricard": {
     "country": "france",
+    "region": "provence_alpes_cote_d_azur",
+    "state": "var",
+    "city": "le_castellet",
     "first_season": "1971",
     "total_laps": 53,
     "length.km": 5.842,
@@ -293,6 +368,9 @@
   },
   "portimao": {
     "country": "portugal",
+    "region": "algarve",
+    "state": "faro",
+    "city": "portimao",
     "first_season": "1951",
     "total_laps": 66,
     "length.km": 4.684,
@@ -304,6 +382,9 @@
   },
   "sakhir_outer": {
     "country": "bahrain",
+    "region": "southern",
+    "state": "southern",
+    "city": "sakhir",
     "first_season": "2020",
     "total_laps": 87,
     "length.km": 3.543,
@@ -315,6 +396,9 @@
   },
   "shanghai": {
     "country": "china",
+    "region": "east_china",
+    "state": "shanghai",
+    "city": "shanghai",
     "first_season": "2004",
     "total_laps": 56,
     "length.km": 5.451,
@@ -327,6 +411,9 @@
   },
   "sochi": {
     "country": "russia",
+    "region": "southern",
+    "state": "krasnodar_krai",
+    "city": "sochi",
     "first_season": "2014",
     "total_laps": 53,
     "length.km": 5.848,
@@ -339,6 +426,9 @@
   },
   "spielberg": {
     "country": "austria",
+    "region": "styria",
+    "state": "murtal",
+    "city": "spielberg",
     "first_season": "1970",
     "total_laps": 53,
     "length.km": 4.318,
@@ -350,6 +440,9 @@
   },
   "suzuka": {
     "country": "japan",
+    "region": "kansai",
+    "state": "mie",
+    "city": "suzuka",
     "first_season": "1987",
     "total_laps": 53,
     "length.km": 5.807,
@@ -362,6 +455,9 @@
   },
   "zandvoort": {
     "country": "netherlands",
+    "region": "north_holland",
+    "state": "north_holland",
+    "city": "zandvoort",
     "first_season": "1952",
     "total_laps": 72,
     "length.km": 4.259,
@@ -373,6 +469,9 @@
   },
   "madring": {
     "country": "spain",
+    "region": "madrid",
+    "state": "madrid",
+    "city": "madrid",
     "first_season": "2026",
     "total_laps": 57,
     "length.km": 5.416,
