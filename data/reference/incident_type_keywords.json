@@ -1,0 +1,12 @@
+{
+  "collision": ["collision", "contact", "crashed", "incident with car", "incident between", "turned into"],
+  "track_limits": ["track limits", "left the track", "exceeded track limits"],
+  "unsafe_release": ["unsafe release", "released unsafely"],
+  "blocking": ["impeding", "blocking", "dangerously slow"],
+  "pit_lane": ["pit lane", "pit entry", "pit exit", "speeding in the pit lane"],
+  "yellow_flag": ["yellow flag", "double yellow"],
+  "speeding": ["speeding", "exceeded the speed limit"],
+  "overtaking": ["overtaking under", "move under yellow"],
+  "driving_standards": ["dangerous driving", "repeated changes of direction", "weaving"],
+  "technical": ["technical infringement", "fuel flow", "plank", "floor"]
+}
