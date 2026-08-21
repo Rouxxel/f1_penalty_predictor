@@ -1,0 +1,1829 @@
+[
+  {
+    "incident_id": "2019__dc637624c0",
+    "event": "Abu Dhabi Grand Prix",
+    "car_number": "77",
+    "parse_confidence": 0.0,
+    "document_id": "2019_abu_dhabi_grand_prix_099085053264",
+    "time": "18:32 2019 ABU DHABI GRAND PRIX 28 November - 1 December 2019 The driver and team representative are required to report to the Stewards at 19:00 in relation to the incident below.",
+    "date": "29 November 2019"
+  },
+  {
+    "incident_id": "2019_race_f2c196a891",
+    "event": "Abu Dhabi Grand Prix",
+    "car_number": "88",
+    "parse_confidence": 1.0,
+    "document_id": "2019_abu_dhabi_grand_prix_167341b0bf05",
+    "time": "18:21 2019 ABU DHABI GRAND PRIX 28 November - 1 December 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "01 December 2019"
+  },
+  {
+    "incident_id": "2019__2e3717d043",
+    "event": "Abu Dhabi Grand Prix",
+    "car_number": "8",
+    "parse_confidence": 0.0,
+    "document_id": "2019_abu_dhabi_grand_prix_2755969979a2",
+    "time": "18:32 2019 ABU DHABI GRAND PRIX 28 November - 1 December 2019 The driver and team representative are required to report to the Stewards at 19:00 in relation to the incident below.",
+    "date": "29 November 2019"
+  },
+  {
+    "incident_id": "2019__0d6188664d",
+    "event": "Abu Dhabi Grand Prix",
+    "car_number": "23",
+    "parse_confidence": 0.0,
+    "document_id": "2019_abu_dhabi_grand_prix_4d00cbe397ac",
+    "time": "14:57 2019 ABU DHABI GRAND PRIX 28 November - 1 December 2019 The driver and team representative are required to report to the Stewards at 15:30 in relation to the incident below.",
+    "date": "30 November 2019"
+  },
+  {
+    "incident_id": "2019_race_3e8edd5d2f",
+    "event": "Abu Dhabi Grand Prix",
+    "car_number": "99",
+    "parse_confidence": 1.0,
+    "document_id": "2019_abu_dhabi_grand_prix_4da8c672e064",
+    "time": "18:21 2019 ABU DHABI GRAND PRIX 28 November - 1 December 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "01 December 2019"
+  },
+  {
+    "incident_id": "2019__2a0bdd8099",
+    "event": "Abu Dhabi Grand Prix",
+    "car_number": "26",
+    "parse_confidence": 0.0,
+    "document_id": "2019_abu_dhabi_grand_prix_74d36389cc99",
+    "time": "17:37 2019 ABU DHABI GRAND PRIX 28 November - 1 December 2019 The driver and team representative are required to report to the Stewards at 18:30 in relation to the incident below.",
+    "date": "30 November 2019"
+  },
+  {
+    "incident_id": "2019_practice_f480a3d053",
+    "event": "Abu Dhabi Grand Prix",
+    "car_number": "27",
+    "parse_confidence": 1.0,
+    "document_id": "2019_abu_dhabi_grand_prix_7daa68370c24",
+    "time": "15:56 2019 ABU DHABI GRAND PRIX 28 November - 1 December 2019 The Stewards, having received a report from the Race Director, summoned (documents 20 & 21) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "30 November 2019"
+  },
+  {
+    "incident_id": "2019__90b6b411b3",
+    "event": "Abu Dhabi Grand Prix",
+    "car_number": "27",
+    "parse_confidence": 0.0,
+    "document_id": "2019_abu_dhabi_grand_prix_ba34e7bc8bb4",
+    "time": "14:57 2019 ABU DHABI GRAND PRIX 28 November - 1 December 2019 The driver and team representative are required to report to the Stewards at 15:30 in relation to the incident below.",
+    "date": "30 November 2019"
+  },
+  {
+    "incident_id": "2019_practice_0c5a79582a",
+    "event": "Abu Dhabi Grand Prix",
+    "car_number": "77",
+    "parse_confidence": 1.0,
+    "document_id": "2019_abu_dhabi_grand_prix_d44e9d04b53d",
+    "time": "19:33 2019 ABU DHABI GRAND PRIX 28 November - 1 December 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (documents 9 & 10) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "29 November 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_b913779a0f",
+    "event": "Abu Dhabi Grand Prix",
+    "car_number": "26",
+    "parse_confidence": 1.0,
+    "document_id": "2019_abu_dhabi_grand_prix_ff2794b22b86",
+    "time": "18:53 2019 ABU DHABI GRAND PRIX 28 November - 1 December 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (documents 25 & 26) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "30 November 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_72178f5794",
+    "event": "Australian Grand Prix",
+    "car_number": "11",
+    "parse_confidence": 1.0,
+    "document_id": "2019_australian_grand_prix_451072131a0a",
+    "time": "20:03 2019 AUSTRALIAN GRAND PRIX 14 - 17 March 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (document 19) and heard from the driver and team representative, have considered the following matter and determine the following:",
+    "date": "16 March 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_1f3540cb43",
+    "event": "Australian Grand Prix",
+    "car_number": "20",
+    "parse_confidence": 1.0,
+    "document_id": "2019_australian_grand_prix_6fd39df867ac",
+    "time": "20:03 2019 AUSTRALIAN GRAND PRIX 14 - 17 March 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (document 17) and heard from the drivers and team representatives of Rich Energy Haas F1 Team and SportPesa Racing Point F1 Team, have considered the following matter and determine the following:",
+    "date": "16 March 2019"
+  },
+  {
+    "incident_id": "2019__19ea220597",
+    "event": "Australian Grand Prix",
+    "car_number": "11",
+    "parse_confidence": 0.0,
+    "document_id": "2019_australian_grand_prix_88ee40ccb17f",
+    "time": "18:40 2019 AUSTRALIAN GRAND PRIX 14 - 17 March 2019 The driver and team representative are required to report to the Stewards at 19:00 in relation to the incidents below.",
+    "date": "16 March 2019"
+  },
+  {
+    "incident_id": "2019__eb72e8751c",
+    "event": "Australian Grand Prix",
+    "car_number": "4",
+    "parse_confidence": 0.0,
+    "document_id": "2019_australian_grand_prix_8de5dcfd92ab",
+    "time": "14:44 2019 AUSTRALIAN GRAND PRIX 14 - 17 March 2019 The driver and team representative are required to report to the Stewards at 15:30 in relation to the incident below.",
+    "date": "16 March 2019"
+  },
+  {
+    "incident_id": "2019__5c0d0eecdf",
+    "event": "Australian Grand Prix",
+    "car_number": "20",
+    "parse_confidence": 0.0,
+    "document_id": "2019_australian_grand_prix_b8fb5c9edb5c",
+    "time": "17:35 2019 AUSTRALIAN GRAND PRIX 14 - 17 March 2019 The driver and team representative are required to report to the Stewards at 18:30 in relation to the incident below.",
+    "date": "16 March 2019"
+  },
+  {
+    "incident_id": "2019_practice_192ff84d1b",
+    "event": "Australian Grand Prix",
+    "car_number": "4",
+    "parse_confidence": 1.0,
+    "document_id": "2019_australian_grand_prix_c2b68ca354bf",
+    "time": "15:49 2019 AUSTRALIAN GRAND PRIX 14 - 17 March 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (document 13) and heard from the driver and team representative, have considered the following matter and determine the following",
+    "date": "16 March 2019"
+  },
+  {
+    "incident_id": "2019_race_f57d567216",
+    "event": "Austrian Grand Prix",
+    "car_number": "16",
+    "parse_confidence": 1.0,
+    "document_id": "2019_austrian_grand_prix_089a6a0950dd",
+    "time": "19:46 2019 AUSTRIAN GRAND PRIX 27 - 30 June 2019 The Stewards, having received a report from the Race Director, summoned (documents 46 & 47) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "30 June 2019"
+  },
+  {
+    "incident_id": "2019__c77442fa39",
+    "event": "Austrian Grand Prix",
+    "car_number": "7",
+    "parse_confidence": 0.0,
+    "document_id": "2019_austrian_grand_prix_0ba91262358a",
+    "time": "15:43 2019 AUSTRIAN GRAND PRIX 27 - 30 June 2019 The driver and team representative are required to report to the Stewards at 17:00 in relation to the incident below.",
+    "date": "29 June 2019"
+  },
+  {
+    "incident_id": "2019__26155f34c1",
+    "event": "Austrian Grand Prix",
+    "car_number": "63",
+    "parse_confidence": 0.0,
+    "document_id": "2019_austrian_grand_prix_0f80d5f54194",
+    "time": "15:43 2019 AUSTRIAN GRAND PRIX 27 - 30 June 2019 The driver and team representative are required to report to the Stewards at 16:30 in relation to the incident below.",
+    "date": "29 June 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_7fe543b12c",
+    "event": "Austrian Grand Prix",
+    "car_number": "20",
+    "parse_confidence": 1.0,
+    "document_id": "2019_austrian_grand_prix_2f4f8f61b74b",
+    "time": "15:09 2019 AUSTRIAN GRAND PRIX 27 - 30 June 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 22), have considered the following matter and determine the following:",
+    "date": "29 June 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_dd7dbe1a76",
+    "event": "Austrian Grand Prix",
+    "car_number": "44",
+    "parse_confidence": 1.0,
+    "document_id": "2019_austrian_grand_prix_3485d08f6d0e",
+    "time": "17:58 2019 AUSTRIAN GRAND PRIX 27 - 30 June 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (documents 26 and 27) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "29 June 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_1b55e44833",
+    "event": "Austrian Grand Prix",
+    "car_number": "63",
+    "parse_confidence": 1.0,
+    "document_id": "2019_austrian_grand_prix_3b60c3b3d528",
+    "time": "17:07 2019 AUSTRIAN GRAND PRIX 27 - 30 June 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (documents 24 and 25) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "29 June 2019"
+  },
+  {
+    "incident_id": "2019__fc7b302103",
+    "event": "Austrian Grand Prix",
+    "car_number": "16",
+    "parse_confidence": 0.0,
+    "document_id": "2019_austrian_grand_prix_4c85a7580ae5",
+    "time": "17:14 2019 AUSTRIAN GRAND PRIX 27 - 30 June 2019 The driver and team representative are required to report to the Stewards at 18:00 in relation to the incident below.",
+    "date": "30 June 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_c0facff3bc",
+    "event": "Austrian Grand Prix",
+    "car_number": "63",
+    "parse_confidence": 1.0,
+    "document_id": "2019_austrian_grand_prix_8684dfbd2538",
+    "time": "12:39 2019 AUSTRIAN GRAND PRIX 27 - 30 June 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 37), have considered the following matter and determine the following:",
+    "date": "30 June 2019"
+  },
+  {
+    "incident_id": "2019__e6c1800aec",
+    "event": "Austrian Grand Prix",
+    "car_number": "44",
+    "parse_confidence": 0.0,
+    "document_id": "2019_austrian_grand_prix_a713f954e4a9",
+    "time": "15:43 2019 AUSTRIAN GRAND PRIX 27 - 30 June 2019 The driver and team representative are required to report to the Stewards at 17:00 in relation to the incident below.",
+    "date": "29 June 2019"
+  },
+  {
+    "incident_id": "2019__7091a30875",
+    "event": "Austrian Grand Prix",
+    "car_number": "33",
+    "parse_confidence": 0.0,
+    "document_id": "2019_austrian_grand_prix_b1d01884f6b1",
+    "time": "17:14 2019 AUSTRIAN GRAND PRIX 27 - 30 June 2019 The driver and team representative are required to report to the Stewards at 18:00 in relation to the incident below.",
+    "date": "30 June 2019"
+  },
+  {
+    "incident_id": "2019_race_78df97052c",
+    "event": "Austrian Grand Prix",
+    "car_number": "33",
+    "parse_confidence": 1.0,
+    "document_id": "2019_austrian_grand_prix_c27544d7de1a",
+    "time": "19:46 2019 AUSTRIAN GRAND PRIX 27 - 30 June 2019 The Stewards, having received a report from the Race Director, summoned (documents 46 & 47) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "30 June 2019"
+  },
+  {
+    "incident_id": "2019_race_e11e74e0ae",
+    "event": "Austrian Grand Prix",
+    "car_number": "20",
+    "parse_confidence": 1.0,
+    "document_id": "2019_austrian_grand_prix_db01c8949727",
+    "time": "16:02 2019 AUSTRIAN GRAND PRIX 27 - 30 June 2019 The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "30 June 2019"
+  },
+  {
+    "incident_id": "2019__b9c9f06b44",
+    "event": "Austrian Grand Prix",
+    "car_number": "99",
+    "parse_confidence": 0.0,
+    "document_id": "2019_austrian_grand_prix_eca4bc0b4452",
+    "time": "19:17 2019 AUSTRIAN GRAND PRIX 27 - 30 June 2019 A team representative is required to report to the Stewards at 19:45 in relation to the incident below.",
+    "date": "28 June 2019"
+  },
+  {
+    "incident_id": "2019_practice_2f15277cda",
+    "event": "Austrian Grand Prix",
+    "car_number": "99",
+    "parse_confidence": 1.0,
+    "document_id": "2019_austrian_grand_prix_fccb1a162c26",
+    "time": "20:23 2019 AUSTRIAN GRAND PRIX 27 - 30 June 2019 The Stewards, having received a report from the Technical Delegate (document 13), summoned (document 15) and heard from the team representatives, have considered the following matter and determine the following:",
+    "date": "28 June 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_0463cdf275",
+    "event": "Azerbaijan Grand Prix",
+    "car_number": "10",
+    "parse_confidence": 1.0,
+    "document_id": "2019_azerbaijan_grand_prix_25bcfe4220cc",
+    "time": "14:22 2019 AZERBAIJAN GRAND PRIX 25 - 28 April 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 33), have considered the following matter and determine the following:",
+    "date": "28 April 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_c649af534e",
+    "event": "Azerbaijan Grand Prix",
+    "car_number": "7",
+    "parse_confidence": 1.0,
+    "document_id": "2019_azerbaijan_grand_prix_25ca45b229d9",
+    "time": "15:18 2019 AZERBAIJAN GRAND PRIX 25 - 28 April 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 40), have considered the following matter and determine the following:",
+    "date": "28 April 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_2f935fa06d",
+    "event": "Azerbaijan Grand Prix",
+    "car_number": "88",
+    "parse_confidence": 1.0,
+    "document_id": "2019_azerbaijan_grand_prix_69dc7d6228f8",
+    "time": "14:34 2019 AZERBAIJAN GRAND PRIX 25 - 28 April 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 33), have considered the following matter and determine the following:",
+    "date": "28 April 2019"
+  },
+  {
+    "incident_id": "2019_practice_58eaca7baa",
+    "event": "Azerbaijan Grand Prix",
+    "car_number": "10",
+    "parse_confidence": 1.0,
+    "document_id": "2019_azerbaijan_grand_prix_6e382d689821",
+    "time": "20:34 2019 AZERBAIJAN GRAND PRIX 25 - 28 April 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 9), have considered the following matter and determine the following:",
+    "date": "26 April 2019"
+  },
+  {
+    "incident_id": "2019_race_354375116a",
+    "event": "Azerbaijan Grand Prix",
+    "car_number": "88",
+    "parse_confidence": 1.0,
+    "document_id": "2019_azerbaijan_grand_prix_8ad39769469e",
+    "time": "16:54 2019 AZERBAIJAN GRAND PRIX 25 - 28 April 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "28 April 2019"
+  },
+  {
+    "incident_id": "2019__05486908c4",
+    "event": "Azerbaijan Grand Prix",
+    "car_number": "10",
+    "parse_confidence": 0.0,
+    "document_id": "2019_azerbaijan_grand_prix_a91e280de0b6",
+    "time": "21:58 2019 AZERBAIJAN GRAND PRIX 25 - 28 April 2019 A team representative is required to report to the Stewards at 22:15 in relation to the incident below.",
+    "date": "27 April 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_9da7e3994b",
+    "event": "Azerbaijan Grand Prix",
+    "car_number": "7",
+    "parse_confidence": 1.0,
+    "document_id": "2019_azerbaijan_grand_prix_b0d63d65a62a",
+    "time": "14:14 2019 AZERBAIJAN GRAND PRIX 25 - 28 April 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 33), summoned (document 34) and heard the team representatives, have considered the following matter and determine the following:",
+    "date": "28 April 2019"
+  },
+  {
+    "incident_id": "2019_race_f3d4beb9da",
+    "event": "Azerbaijan Grand Prix",
+    "car_number": "3",
+    "parse_confidence": 1.0,
+    "document_id": "2019_azerbaijan_grand_prix_b0da963b5d0d",
+    "time": "18:55 2019 AZERBAIJAN GRAND PRIX 25 - 28 April 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (documents 45 & 46) the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "28 April 2019"
+  },
+  {
+    "incident_id": "2019__9de303019b",
+    "event": "Azerbaijan Grand Prix",
+    "car_number": "3",
+    "parse_confidence": 0.0,
+    "document_id": "2019_azerbaijan_grand_prix_c3d36adc3780",
+    "time": "17:29 2019 AZERBAIJAN GRAND PRIX 25 - 28 April 2019 The driver and team representative are required to report to the Stewards at 18:30 in relation to the incident below.",
+    "date": "28 April 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_a5dc574293",
+    "event": "Azerbaijan Grand Prix",
+    "car_number": "10",
+    "parse_confidence": 1.0,
+    "document_id": "2019_azerbaijan_grand_prix_c45113886e04",
+    "time": "22:45 2019 AZERBAIJAN GRAND PRIX 25 - 28 April 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 25), summoned (document 27) and heard the team representatives, have considered the following matter and determine the following:",
+    "date": "27 April 2019"
+  },
+  {
+    "incident_id": "2019_practice_8bd5d27bb0",
+    "event": "Azerbaijan Grand Prix",
+    "car_number": "99",
+    "parse_confidence": 1.0,
+    "document_id": "2019_azerbaijan_grand_prix_ce9a153093fa",
+    "time": "14:39 2019 AZERBAIJAN GRAND PRIX 25 - 28 April 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 6), have considered the following matter and determine the following:",
+    "date": "26 April 2019"
+  },
+  {
+    "incident_id": "2019_practice_671a21b2ec",
+    "event": "Azerbaijan Grand Prix",
+    "car_number": "10",
+    "parse_confidence": 1.0,
+    "document_id": "2019_azerbaijan_grand_prix_dfb840f153c9",
+    "time": "14:25 2019 AZERBAIJAN GRAND PRIX 25 - 28 April 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 20), have considered the following matter and determine the following:",
+    "date": "27 April 2019"
+  },
+  {
+    "incident_id": "2019_race_712b44544f",
+    "event": "Bahrain Grand Prix",
+    "car_number": "99",
+    "parse_confidence": 1.0,
+    "document_id": "2019_bahrain_grand_prix_0ba4a327a289",
+    "time": "19:08 2019 BAHRAIN GRAND PRIX 28 - 31 March 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "31 March 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_818e03a4ba",
+    "event": "Bahrain Grand Prix",
+    "car_number": "8",
+    "parse_confidence": 1.0,
+    "document_id": "2019_bahrain_grand_prix_5f0f34c779d0",
+    "time": "20:49 2019 BAHRAIN GRAND PRIX 28 - 31 March 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (documents 20 and 21) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "30 March 2019"
+  },
+  {
+    "incident_id": "2019__e028abe700",
+    "event": "Bahrain Grand Prix",
+    "car_number": "5",
+    "parse_confidence": 0.0,
+    "document_id": "2019_bahrain_grand_prix_6d2996bda7f5",
+    "time": "20:59 2019 BAHRAIN GRAND PRIX 28 - 31 March 2019 The driver and team representative are required to report to the Stewards at 21:15 in relation to the incident below.",
+    "date": "30 March 2019"
+  },
+  {
+    "incident_id": "2019_race_adc1fd5950",
+    "event": "Bahrain Grand Prix",
+    "car_number": "26",
+    "parse_confidence": 1.0,
+    "document_id": "2019_bahrain_grand_prix_92b3a7e71015",
+    "time": "18:54 2019 BAHRAIN GRAND PRIX 28 - 31 March 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "31 March 2019"
+  },
+  {
+    "incident_id": "2019_race_0562fdea29",
+    "event": "Bahrain Grand Prix",
+    "car_number": "55",
+    "parse_confidence": 1.0,
+    "document_id": "2019_bahrain_grand_prix_a9be323a4b86",
+    "time": "18:53 2019 BAHRAIN GRAND PRIX 28 - 31 March 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "31 March 2019"
+  },
+  {
+    "incident_id": "2019_practice_21d39df03f",
+    "event": "Bahrain Grand Prix",
+    "car_number": "27",
+    "parse_confidence": 1.0,
+    "document_id": "2019_bahrain_grand_prix_c3e0c70e31ae",
+    "time": "18:14 2019 BAHRAIN GRAND PRIX 28 - 31 March 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (documents 8 and 9) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "29 March 2019"
+  },
+  {
+    "incident_id": "2019_race_dafc4cf6a8",
+    "event": "Bahrain Grand Prix",
+    "car_number": "26",
+    "parse_confidence": 1.0,
+    "document_id": "2019_bahrain_grand_prix_c738ace84072",
+    "time": "19:08 2019 BAHRAIN GRAND PRIX 28 - 31 March 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "31 March 2019"
+  },
+  {
+    "incident_id": "2019_race_59b4903d54",
+    "event": "Bahrain Grand Prix",
+    "car_number": "33",
+    "parse_confidence": 1.0,
+    "document_id": "2019_bahrain_grand_prix_c91892222260",
+    "time": "18:53 2019 BAHRAIN GRAND PRIX 28 - 31 March 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "31 March 2019"
+  },
+  {
+    "incident_id": "2019_race_a03c8b2ef6",
+    "event": "Bahrain Grand Prix",
+    "car_number": "3",
+    "parse_confidence": 1.0,
+    "document_id": "2019_bahrain_grand_prix_d540af5c05ed",
+    "time": "20:57 2019 BAHRAIN GRAND PRIX 28 - 31 March 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (document 38) and heard from the driver and team representative, have considered the following matter and determine the following:",
+    "date": "31 March 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_7864d4f9d8",
+    "event": "Bahrain Grand Prix",
+    "car_number": "5",
+    "parse_confidence": 1.0,
+    "document_id": "2019_bahrain_grand_prix_ff3972ff9025",
+    "time": "21:44 2019 BAHRAIN GRAND PRIX 28 - 31 March 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (document 24) and heard from the driver and team representative, reviewed telemetry from car 5, have considered the following matter and determine the following:",
+    "date": "30 March 2019"
+  },
+  {
+    "incident_id": "2019_practice_72ecc3f346",
+    "event": "Belgian Grand Prix",
+    "car_number": "26",
+    "parse_confidence": 1.0,
+    "document_id": "2019_belgian_grand_prix_31ed9cb537a9",
+    "time": "12:29 2019 BELGIAN GRAND PRIX 29 August - 1 September 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 20), have considered the following matter and determine the following:",
+    "date": "31 August 2019"
+  },
+  {
+    "incident_id": "2019_race_dcbd8e938c",
+    "event": "Belgian Grand Prix",
+    "car_number": "11",
+    "parse_confidence": 1.0,
+    "document_id": "2019_belgian_grand_prix_43356b2b77fe",
+    "time": "18:00 2019 BELGIAN GRAND PRIX 29 August - 1 September 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (documents 41 & 42) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "01 September 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_622b181574",
+    "event": "Belgian Grand Prix",
+    "car_number": "99",
+    "parse_confidence": 1.0,
+    "document_id": "2019_belgian_grand_prix_4c23aec0a233",
+    "time": "13:49 2019 BELGIAN GRAND PRIX 29 August - 1 September 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 32), have considered the following matter and determine the following:",
+    "date": "01 September 2019"
+  },
+  {
+    "incident_id": "2019_practice_d9697c22c3",
+    "event": "Belgian Grand Prix",
+    "car_number": "16",
+    "parse_confidence": 1.0,
+    "document_id": "2019_belgian_grand_prix_d3ddbda3416a",
+    "time": "14:43 2019 BELGIAN GRAND PRIX 29 August - 1 September 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "30 August 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_b663bdfc11",
+    "event": "Belgian Grand Prix",
+    "car_number": "88",
+    "parse_confidence": 1.0,
+    "document_id": "2019_belgian_grand_prix_f3ebcfa7be2c",
+    "time": "13:49 2019 BELGIAN GRAND PRIX 29 August - 1 September 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 32), have considered the following matter and determine the following:",
+    "date": "01 September 2019"
+  },
+  {
+    "incident_id": "2019_race_a177214878",
+    "event": "Brazilian Grand Prix",
+    "car_number": "16",
+    "parse_confidence": 1.0,
+    "document_id": "2019_brazilian_grand_prix_08417cc30588",
+    "time": "17:48 2019 BRAZILIAN GRAND PRIX 14 - 17 November 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (document 39) and heard from the drivers and team representative, have considered the following matter and determine the following:",
+    "date": "17 November 2019"
+  },
+  {
+    "incident_id": "2019_race_634eb4b94a",
+    "event": "Brazilian Grand Prix",
+    "car_number": "88",
+    "parse_confidence": 1.0,
+    "document_id": "2019_brazilian_grand_prix_0948b12c14d1",
+    "time": "15:08 2019 BRAZILIAN GRAND PRIX 14 - 17 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "17 November 2019"
+  },
+  {
+    "incident_id": "2019_practice_bc5c7b8cb1",
+    "event": "Brazilian Grand Prix",
+    "car_number": "11",
+    "parse_confidence": 1.0,
+    "document_id": "2019_brazilian_grand_prix_169c6a01f445",
+    "time": "14:04 2019 BRAZILIAN GRAND PRIX 14 - 17 November 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (documents 16 & 17) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "16 November 2019"
+  },
+  {
+    "incident_id": "2019_race_3e01f32533",
+    "event": "Brazilian Grand Prix",
+    "car_number": "27",
+    "parse_confidence": 1.0,
+    "document_id": "2019_brazilian_grand_prix_4ffdb6eb3b9d",
+    "time": "17:49 2019 BRAZILIAN GRAND PRIX 14 - 17 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "17 November 2019"
+  },
+  {
+    "incident_id": "2019_race_f013007059",
+    "event": "Brazilian Grand Prix",
+    "car_number": "5",
+    "parse_confidence": 1.0,
+    "document_id": "2019_brazilian_grand_prix_745499b7383c",
+    "time": "17:48 2019 BRAZILIAN GRAND PRIX 14 - 17 November 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (document 39) and heard from the drivers and team representative, have considered the following matter and determine the following:",
+    "date": "17 November 2019"
+  },
+  {
+    "incident_id": "2019_race_77d5f034c4",
+    "event": "Brazilian Grand Prix",
+    "car_number": "44",
+    "parse_confidence": 1.0,
+    "document_id": "2019_brazilian_grand_prix_e96fcb0e4b94",
+    "time": "16:45 2019 BRAZILIAN GRAND PRIX 14 - 17 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "17 November 2019"
+  },
+  {
+    "incident_id": "2019_practice_9242a08994",
+    "event": "Brazilian Grand Prix",
+    "car_number": "16",
+    "parse_confidence": 1.0,
+    "document_id": "2019_brazilian_grand_prix_ee62f5ecd9a9",
+    "time": "11:35 2019 BRAZILIAN GRAND PRIX 14 - 17 November 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 7), have considered the following matter and determine the following:",
+    "date": "15 November 2019"
+  },
+  {
+    "incident_id": "2019_race_d38106a3e8",
+    "event": "Brazilian Grand Prix",
+    "car_number": "3",
+    "parse_confidence": 1.0,
+    "document_id": "2019_brazilian_grand_prix_f7b5d8f62c11",
+    "time": "14:54 2019 BRAZILIAN GRAND PRIX 14 - 17 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "17 November 2019"
+  },
+  {
+    "incident_id": "2019_race_ff8d3cddca",
+    "event": "British Grand Prix",
+    "car_number": "5",
+    "parse_confidence": 1.0,
+    "document_id": "2019_british_grand_prix_580b4f09ea50",
+    "time": "15:33 2019 BRITISH GRAND PRIX 11 - 14 Juy 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "14 July 2019"
+  },
+  {
+    "incident_id": "2019_race_0b83e333a3",
+    "event": "British Grand Prix",
+    "car_number": "4",
+    "parse_confidence": 1.0,
+    "document_id": "2019_british_grand_prix_6b2ae7d4e765",
+    "time": "14:57 2019 BRITISH GRAND PRIX 11 - 14 Juy 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "14 July 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_45b440e70b",
+    "event": "Canadian Grand Prix",
+    "car_number": "55",
+    "parse_confidence": 1.0,
+    "document_id": "2019_canadian_grand_prix_133d6bad217e",
+    "time": "16:33 2019 CANADIAN GRAND PRIX 6 - 9 June 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (documents 25 and 26) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "08 June 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_b4eca92ad2",
+    "event": "Canadian Grand Prix",
+    "car_number": "16",
+    "parse_confidence": 1.0,
+    "document_id": "2019_canadian_grand_prix_26e1d10c06a8",
+    "time": "18:12 2019 CANADIAN GRAND PRIX 6 - 9 June 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "08 June 2019"
+  },
+  {
+    "incident_id": "2019__0f741b7bbe",
+    "event": "Canadian Grand Prix",
+    "car_number": "55",
+    "parse_confidence": 0.0,
+    "document_id": "2019_canadian_grand_prix_3c8f35d41e50",
+    "time": "14:25 2019 CANADIAN GRAND PRIX 6 - 9 June 2019 The driver and team representative are required to report to the Stewards at 15:30 in relation to the incident below.",
+    "date": "08 June 2019"
+  },
+  {
+    "incident_id": "2019_practice_d5da7ae55e",
+    "event": "Canadian Grand Prix",
+    "car_number": "4",
+    "parse_confidence": 1.0,
+    "document_id": "2019_canadian_grand_prix_772714eeb23f",
+    "time": "13:29 2019 CANADIAN GRAND PRIX 6 - 9 June 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (document 19) heard from the driver and team representative, have considered the following matter and determine the following:",
+    "date": "08 June 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_1e3fe1eb62",
+    "event": "Canadian Grand Prix",
+    "car_number": "20",
+    "parse_confidence": 1.0,
+    "document_id": "2019_canadian_grand_prix_86102165fdc2",
+    "time": "12:31 2019 CANADIAN GRAND PRIX 6 - 9 June 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 36), have considered the following matter and determine the following:",
+    "date": "09 June 2019"
+  },
+  {
+    "incident_id": "2019_practice_f40132af42",
+    "event": "Canadian Grand Prix",
+    "car_number": "20",
+    "parse_confidence": 1.0,
+    "document_id": "2019_canadian_grand_prix_ac5f1ba88b71",
+    "time": "19:02 2019 CANADIAN GRAND PRIX 6 - 9 June 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (document 11) heard from the driver and team representative, have considered the following matter and determine the following:",
+    "date": "07 June 2019"
+  },
+  {
+    "incident_id": "2019__2a8bfeaf69",
+    "event": "Canadian Grand Prix",
+    "car_number": "18",
+    "parse_confidence": 0.0,
+    "document_id": "2019_canadian_grand_prix_d6ca07dbf89f",
+    "time": "15:33 2019 CANADIAN GRAND PRIX 6 - 9 June 2019 The driver and team representative are required to report to the Stewards at 16:00 in relation to the incident below.",
+    "date": "07 June 2019"
+  },
+  {
+    "incident_id": "2019_practice_5321890a98",
+    "event": "Canadian Grand Prix",
+    "car_number": "18",
+    "parse_confidence": 1.0,
+    "document_id": "2019_canadian_grand_prix_db97d57a2742",
+    "time": "18:41 2019 CANADIAN GRAND PRIX 6 - 9 June 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (documents 8 and 9) heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "07 June 2019"
+  },
+  {
+    "incident_id": "2019_practice_ebf3229943",
+    "event": "Canadian Grand Prix",
+    "car_number": "8",
+    "parse_confidence": 1.0,
+    "document_id": "2019_canadian_grand_prix_dd4f140a3c92",
+    "time": "18:41 2019 CANADIAN GRAND PRIX 6 - 9 June 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (documents 8 and 9) heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "07 June 2019"
+  },
+  {
+    "incident_id": "2019_race_48b4f80f91",
+    "event": "Canadian Grand Prix",
+    "car_number": "5",
+    "parse_confidence": 1.0,
+    "document_id": "2019_canadian_grand_prix_f2adc8ba8ee4",
+    "time": "15:51 2019 CANADIAN GRAND PRIX 6 - 9 June 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "09 June 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_3045785150",
+    "event": "Chinese Grand Prix",
+    "car_number": "23",
+    "parse_confidence": 1.0,
+    "document_id": "2019_chinese_grand_prix_250cf0d8ade1",
+    "time": "11:43 2019 CHINESE GRAND PRIX 11 - 14 April 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 27), have considered the following matter and determine the following:",
+    "date": "14 April 2019"
+  },
+  {
+    "incident_id": "2019_race_66966b26ad",
+    "event": "Chinese Grand Prix",
+    "car_number": "26",
+    "parse_confidence": 1.0,
+    "document_id": "2019_chinese_grand_prix_95036836017a",
+    "time": "14:45 2019 CHINESE GRAND PRIX 11 - 14 April 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "14 April 2019"
+  },
+  {
+    "incident_id": "2019_practice_bcdf4b4113",
+    "event": "Chinese Grand Prix",
+    "car_number": "10",
+    "parse_confidence": 1.0,
+    "document_id": "2019_chinese_grand_prix_fc7cba9e6c6e",
+    "time": "10:21 2019 CHINESE GRAND PRIX 11 - 14 April 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "12 April 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_ba9ba43d71",
+    "event": "French Grand Prix",
+    "car_number": "3",
+    "parse_confidence": 1.0,
+    "document_id": "2019_french_grand_prix_0731edc58727",
+    "time": "17:23 2019 FRENCH GRAND PRIX 20 - 23 June 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (documents 27 and 28) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "22 June 2019"
+  },
+  {
+    "incident_id": "2019_race_8b61a4032c",
+    "event": "French Grand Prix",
+    "car_number": "11",
+    "parse_confidence": 1.0,
+    "document_id": "2019_french_grand_prix_19379ad6b59d",
+    "time": "15:56 2019 FRENCH GRAND PRIX 20 - 23 June 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "23 June 2019"
+  },
+  {
+    "incident_id": "2019_race_278bfb37ae",
+    "event": "French Grand Prix",
+    "car_number": "3",
+    "parse_confidence": 1.0,
+    "document_id": "2019_french_grand_prix_6e38a2c89690",
+    "time": "19:31 2019 FRENCH GRAND PRIX 20 - 23 June 2019 The Stewards, having received a report from the Race Director, summoned (documents 46 & 47) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "23 June 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_c2d456e282",
+    "event": "French Grand Prix",
+    "car_number": "7",
+    "parse_confidence": 1.0,
+    "document_id": "2019_french_grand_prix_8d2f131ed50b",
+    "time": "17:44 2019 FRENCH GRAND PRIX 20 - 23 June 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (documents 28 and 29) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "22 June 2019"
+  },
+  {
+    "incident_id": "2019_practice_8cf88eb920",
+    "event": "French Grand Prix",
+    "car_number": "44",
+    "parse_confidence": 1.0,
+    "document_id": "2019_french_grand_prix_a847bba98d49",
+    "time": "17:43 2019 FRENCH GRAND PRIX 20 - 23 June 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (documents 13 & 14) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "21 June 2019"
+  },
+  {
+    "incident_id": "2019_race_ce994871b4",
+    "event": "French Grand Prix",
+    "car_number": "3",
+    "parse_confidence": 1.0,
+    "document_id": "2019_french_grand_prix_d2937df2c1eb",
+    "time": "19:31 2019 FRENCH GRAND PRIX 20 - 23 June 2019 The Stewards, having received a report from the Race Director, summoned (documents 45,46 & 47) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "23 June 2019"
+  },
+  {
+    "incident_id": "2019_practice_6657e966fa",
+    "event": "French Grand Prix",
+    "car_number": "3",
+    "parse_confidence": 1.0,
+    "document_id": "2019_french_grand_prix_f16a2e6e3953",
+    "time": "12:16 2019 FRENCH GRAND PRIX 20 - 23 June 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "21 June 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_87ff550604",
+    "event": "French Grand Prix",
+    "car_number": "33",
+    "parse_confidence": 1.0,
+    "document_id": "2019_french_grand_prix_f6fda005e2c9",
+    "time": "17:05 2019 FRENCH GRAND PRIX 20 - 23 June 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "22 June 2019"
+  },
+  {
+    "incident_id": "2019_practice_e249d57c77",
+    "event": "French Grand Prix",
+    "car_number": "27",
+    "parse_confidence": 1.0,
+    "document_id": "2019_french_grand_prix_f94723156d41",
+    "time": "12:13 2019 FRENCH GRAND PRIX 20 - 23 June 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "21 June 2019"
+  },
+  {
+    "incident_id": "2019_practice_3059e862d6",
+    "event": "German Grand Prix",
+    "car_number": "55",
+    "parse_confidence": 1.0,
+    "document_id": "2019_german_grand_prix_04e01bcb2b5b",
+    "time": "14:04 2019 GERMAN GRAND PRIX 25 - 28 July 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "27 July 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_27d5ca004a",
+    "event": "German Grand Prix",
+    "car_number": "5",
+    "parse_confidence": 1.0,
+    "document_id": "2019_german_grand_prix_063e0394df93",
+    "time": "12:37 2019 GERMAN GRAND PRIX 25 - 28 July 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 42), have considered the following matter and determine the following:",
+    "date": "28 July 2019"
+  },
+  {
+    "incident_id": "2019_practice_bec7ae60ea",
+    "event": "German Grand Prix",
+    "car_number": "5",
+    "parse_confidence": 1.0,
+    "document_id": "2019_german_grand_prix_26edc63a8c3b",
+    "time": "14:00 2019 GERMAN GRAND PRIX 25 - 28 July 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "27 July 2019"
+  },
+  {
+    "incident_id": "2019_race_d2e96f80d4",
+    "event": "German Grand Prix",
+    "car_number": "10",
+    "parse_confidence": 1.0,
+    "document_id": "2019_german_grand_prix_291fb3364855",
+    "time": "18:46 2019 GERMAN GRAND PRIX 25 - 28 July 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "28 July 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_f3f007b06d",
+    "event": "German Grand Prix",
+    "car_number": "77",
+    "parse_confidence": 1.0,
+    "document_id": "2019_german_grand_prix_4e6a0e4891c6",
+    "time": "15:41 2019 GERMAN GRAND PRIX 25 - 28 July 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "27 July 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_4b97709788",
+    "event": "German Grand Prix",
+    "car_number": "26",
+    "parse_confidence": 1.0,
+    "document_id": "2019_german_grand_prix_53e314c4cee6",
+    "time": "16:50 2019 GERMAN GRAND PRIX 25 - 28 July 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (documents 28 & 29) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "27 July 2019"
+  },
+  {
+    "incident_id": "2019_practice_00d78a0fee",
+    "event": "German Grand Prix",
+    "car_number": "5",
+    "parse_confidence": 1.0,
+    "document_id": "2019_german_grand_prix_5ee18d4beac9",
+    "time": "13:52 2019 GERMAN GRAND PRIX 25 - 28 July 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "27 July 2019"
+  },
+  {
+    "incident_id": "2019_race_74b1b4ac47",
+    "event": "German Grand Prix",
+    "car_number": "16",
+    "parse_confidence": 1.0,
+    "document_id": "2019_german_grand_prix_6c6ff7edc8b7",
+    "time": "17:45 2019 GERMAN GRAND PRIX 25 - 28 July 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "28 July 2019"
+  },
+  {
+    "incident_id": "2019_practice_358788b8e5",
+    "event": "German Grand Prix",
+    "car_number": "26",
+    "parse_confidence": 1.0,
+    "document_id": "2019_german_grand_prix_88a97c925d70",
+    "time": "13:56 2019 GERMAN GRAND PRIX 25 - 28 July 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "27 July 2019"
+  },
+  {
+    "incident_id": "2019_practice_cfb1666568",
+    "event": "German Grand Prix",
+    "car_number": "44",
+    "parse_confidence": 1.0,
+    "document_id": "2019_german_grand_prix_8991eb46ba1a",
+    "time": "14:01 2019 GERMAN GRAND PRIX 25 - 28 July 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "27 July 2019"
+  },
+  {
+    "incident_id": "2019_practice_4ecbba843c",
+    "event": "German Grand Prix",
+    "car_number": "7",
+    "parse_confidence": 1.0,
+    "document_id": "2019_german_grand_prix_8a3f7a5b817c",
+    "time": "14:03 2019 GERMAN GRAND PRIX 25 - 28 July 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "27 July 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_f995eb28e1",
+    "event": "German Grand Prix",
+    "car_number": "10",
+    "parse_confidence": 1.0,
+    "document_id": "2019_german_grand_prix_99bb87c03f97",
+    "time": "16:09 2019 GERMAN GRAND PRIX 25 - 28 July 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "27 July 2019"
+  },
+  {
+    "incident_id": "2019_practice_a9fb3b6aba",
+    "event": "German Grand Prix",
+    "car_number": "23",
+    "parse_confidence": 1.0,
+    "document_id": "2019_german_grand_prix_b4f7f526daf6",
+    "time": "13:57 2019 GERMAN GRAND PRIX 25 - 28 July 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "27 July 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_0aa78a0860",
+    "event": "German Grand Prix",
+    "car_number": "88",
+    "parse_confidence": 1.0,
+    "document_id": "2019_german_grand_prix_bd5e097aab11",
+    "time": "15:51 2019 GERMAN GRAND PRIX 25 - 28 July 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "27 July 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_727709fe3c",
+    "event": "German Grand Prix",
+    "car_number": "16",
+    "parse_confidence": 1.0,
+    "document_id": "2019_german_grand_prix_c58da1dc861c",
+    "time": "15:51 2019 GERMAN GRAND PRIX 25 - 28 July 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "27 July 2019"
+  },
+  {
+    "incident_id": "2019__9c05586100",
+    "event": "Japanese Grand Prix",
+    "car_number": "",
+    "parse_confidence": 0.333,
+    "document_id": "2019_japanese_grand_prix_faca6e4efccf",
+    "time": "19:39 2019 JAPANESE GRAND PRIX 10 - 13 October 2019 Stewards’ Decision Admissibility of SportPesa Racing Point F1 Team Protest Against Renault F1 Team Cars Having received a protest from SportPesa Racing Point F1 Team against the Renault F1 Team concerning an alleged pre-set lap distance-dependent brake bias adjustment system on cars 3 and 27, the Stewards summoned and heard from the team representatives of both teams and a representative of the FIA Technical Department. The Stewards determined that the protest met all requirements specified in Article 13 of the International Sporting Code and is, therefore, admissible. This point was agreed to by the team representatives of the Renault F1 Team. The FIA Technical Department representative was directed to seal and impound the FIA standard electronic control units and steering wheels of cars 3 and 27 in preparation for conducting a detailed analysis of those pieces. The representative is further directed to conduct a detailed analysis of the hardware, software, and data associated with them and, when complete, provide a written report to the Stewards with their findings, to include an assessment that matches those findings against the potential technical infringements detailed in the protest. The representative is authorized in the name of the Stewards to call upon such outside technical assistance, including representatives of the Renault F1 and SportPesa Racing Point F1 Teams, in the conduct of their assessment. When the likely submission date of the assessment can be determined, the FIA Technical Department representative will communicate that to the Chairman of the Stewards so that the next meeting time to assess the claims made in the protest can be scheduled. The Stewards Gerd Ennser Dennis Dean Tom Kristensen Yasuhiro Yodono",
+    "date": "13 October 2019"
+  },
+  {
+    "incident_id": "2019_race_f81ec68df0",
+    "event": "German Grand Prix",
+    "car_number": "44",
+    "parse_confidence": 1.0,
+    "document_id": "2019_german_grand_prix_ebd91770d601",
+    "time": "18:42 2019 GERMAN GRAND PRIX 25 - 28 July 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "28 July 2019"
+  },
+  {
+    "incident_id": "2019_race_75627af678",
+    "event": "German Grand Prix",
+    "car_number": "44",
+    "parse_confidence": 1.0,
+    "document_id": "2019_german_grand_prix_efca599a9ad8",
+    "time": "17:58 2019 GERMAN GRAND PRIX 25 - 28 July 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "28 July 2019"
+  },
+  {
+    "incident_id": "2019_race_0c719924d2",
+    "event": "German Grand Prix",
+    "car_number": "99",
+    "parse_confidence": 1.0,
+    "document_id": "2019_german_grand_prix_f7b11f49951a",
+    "time": "20:52 2019 GERMAN GRAND PRIX 25 - 28 July 2019 The Stewards, having received a report from the Race Director, summoned (document 52) and heard from team representatives, have considered the following matter and determine the following:",
+    "date": "28 July 2019"
+  },
+  {
+    "incident_id": "2019_race_ae5b0369e6",
+    "event": "German Grand Prix",
+    "car_number": "7",
+    "parse_confidence": 1.0,
+    "document_id": "2019_german_grand_prix_fe6b97d8ef83",
+    "time": "20:52 2019 GERMAN GRAND PRIX 25 - 28 July 2019 The Stewards, having received a report from the Race Director, summoned (document 52) and heard from team representatives, have considered the following matter and determine the following:",
+    "date": "28 July 2019"
+  },
+  {
+    "incident_id": "2019_practice_9ad23e0ddc",
+    "event": "Hungarian Grand Prix",
+    "car_number": "4",
+    "parse_confidence": 1.0,
+    "document_id": "2019_hungarian_grand_prix_35cf9b0edb9a",
+    "time": "13:23 2019 HUNGARIAN GRAND PRIX 1 - 4 August 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (document 6) and heard from the driver and team representative, have considered the following matter and determine the following:",
+    "date": "02 August 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_4d8d736f2e",
+    "event": "Hungarian Grand Prix",
+    "car_number": "99",
+    "parse_confidence": 1.0,
+    "document_id": "2019_hungarian_grand_prix_e6145855ff10",
+    "time": "17:53 2019 HUNGARIAN GRAND PRIX 1 - 4 August 2019 The Stewards, having received a report from the Race Director, summoned (documents 18 and 19) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "03 August 2019"
+  },
+  {
+    "incident_id": "2019_reconnaissance laps_096c6f606c",
+    "event": "Hungarian Grand Prix",
+    "car_number": "44",
+    "parse_confidence": 1.0,
+    "document_id": "2019_hungarian_grand_prix_92dee35f064d",
+    "time": "15:04 2019 HUNGARIAN GRAND PRIX 1 - 4 August 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "04 August 2019"
+  },
+  {
+    "incident_id": "2019_practice_63516f8670",
+    "event": "Hungarian Grand Prix",
+    "car_number": "7",
+    "parse_confidence": 1.0,
+    "document_id": "2019_hungarian_grand_prix_edefac77ccf6",
+    "time": "15:21 2019 HUNGARIAN GRAND PRIX 1 - 4 August 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "02 August 2019"
+  },
+  {
+    "incident_id": "2019_practice_c3c2c601aa",
+    "event": "Italian Grand Prix",
+    "car_number": "26",
+    "parse_confidence": 1.0,
+    "document_id": "2019_italian_grand_prix_2a75f0299d5a",
+    "time": "14:44 2019 ITALIAN GRAND PRIX 5 - 8 September 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "07 September 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_df811d6e30",
+    "event": "Italian Grand Prix",
+    "car_number": "27",
+    "parse_confidence": 1.0,
+    "document_id": "2019_italian_grand_prix_4ac099693af2",
+    "time": "18:50 2019 ITALIAN GRAND PRIX 5 - 8 September 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (document 31) and heard from the driver and team representative, have considered the following matter and determine the following:",
+    "date": "07 September 2019"
+  },
+  {
+    "incident_id": "2019_race_08f4deff9a",
+    "event": "Italian Grand Prix",
+    "car_number": "55",
+    "parse_confidence": 1.0,
+    "document_id": "2019_italian_grand_prix_5487b659f3bd",
+    "time": "17:36 2019 ITALIAN GRAND PRIX 5 - 8 September 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (document 59) and heard from the team representative, have considered the following matter and determine the following:",
+    "date": "08 September 2019"
+  },
+  {
+    "incident_id": "2019_practice_6cd06bf72e",
+    "event": "Italian Grand Prix",
+    "car_number": "16",
+    "parse_confidence": 1.0,
+    "document_id": "2019_italian_grand_prix_5a9494cce024",
+    "time": "14:44 2019 ITALIAN GRAND PRIX 5 - 8 September 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "07 September 2019"
+  },
+  {
+    "incident_id": "2019_race_0e644701f8",
+    "event": "Italian Grand Prix",
+    "car_number": "18",
+    "parse_confidence": 1.0,
+    "document_id": "2019_italian_grand_prix_6035f5fa8dc2",
+    "time": "16:20 2019 ITALIAN GRAND PRIX 5 - 8 September 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "08 September 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_57001f0264",
+    "event": "Italian Grand Prix",
+    "car_number": "5",
+    "parse_confidence": 1.0,
+    "document_id": "2019_italian_grand_prix_64c949f003fe",
+    "time": "20:16 2019 ITALIAN GRAND PRIX 5 - 8 September 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (document 36) and heard from the driver and team representative, have considered the following matter and determine the following:",
+    "date": "07 September 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_d8295cc78b",
+    "event": "Italian Grand Prix",
+    "car_number": "55",
+    "parse_confidence": 1.0,
+    "document_id": "2019_italian_grand_prix_6760101d0fce",
+    "time": "20:42 2019 ITALIAN GRAND PRIX 5 - 8 September 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (document 35) and heard from the driver and team representative, have considered the following matter and determine the following:",
+    "date": "07 September 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_fed5d5da0d",
+    "event": "Italian Grand Prix",
+    "car_number": "23",
+    "parse_confidence": 1.0,
+    "document_id": "2019_italian_grand_prix_6b0b81f37760",
+    "time": "15:45 2019 ITALIAN GRAND PRIX 5 - 8 September 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "07 September 2019"
+  },
+  {
+    "incident_id": "2019_practice_09cb43a565",
+    "event": "Italian Grand Prix",
+    "car_number": "18",
+    "parse_confidence": 1.0,
+    "document_id": "2019_italian_grand_prix_6cb23b048516",
+    "time": "14:44 2019 ITALIAN GRAND PRIX 5 - 8 September 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "07 September 2019"
+  },
+  {
+    "incident_id": "2019_race_b0ef12f8ec",
+    "event": "Italian Grand Prix",
+    "car_number": "5",
+    "parse_confidence": 1.0,
+    "document_id": "2019_italian_grand_prix_7d518bd5d36b",
+    "time": "15:56 2019 ITALIAN GRAND PRIX 5 - 8 September 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "08 September 2019"
+  },
+  {
+    "incident_id": "2019_practice_b09786c1a4",
+    "event": "Italian Grand Prix",
+    "car_number": "23",
+    "parse_confidence": 1.0,
+    "document_id": "2019_italian_grand_prix_8ca7178eb459",
+    "time": "14:44 2019 ITALIAN GRAND PRIX 5 - 8 September 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "07 September 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_27a542c197",
+    "event": "Italian Grand Prix",
+    "car_number": "7",
+    "parse_confidence": 1.0,
+    "document_id": "2019_italian_grand_prix_8fa5e90dda93",
+    "time": "13:27 2019 ITALIAN GRAND PRIX 5 - 8 September 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 47), have considered the following matter and determine the following:",
+    "date": "08 September 2019"
+  },
+  {
+    "incident_id": "2019_race_da3e3009c0",
+    "event": "Italian Grand Prix",
+    "car_number": "7",
+    "parse_confidence": 1.0,
+    "document_id": "2019_italian_grand_prix_955f35d183d8",
+    "time": "16:21 2019 ITALIAN GRAND PRIX 5 - 8 September 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 54), have considered the following matter and determine the following:",
+    "date": "08 September 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_601c622889",
+    "event": "Italian Grand Prix",
+    "car_number": "18",
+    "parse_confidence": 1.0,
+    "document_id": "2019_italian_grand_prix_c91383f00741",
+    "time": "20:41 2019 ITALIAN GRAND PRIX 5 - 8 September 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (document 34) and heard from the driver and team representative, have considered the following matter and determine the following:",
+    "date": "07 September 2019"
+  },
+  {
+    "incident_id": "2019_practice_373385bd07",
+    "event": "Italian Grand Prix",
+    "car_number": "20",
+    "parse_confidence": 1.0,
+    "document_id": "2019_italian_grand_prix_d8d896e07e6d",
+    "time": "14:43 2019 ITALIAN GRAND PRIX 5 - 8 September 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "07 September 2019"
+  },
+  {
+    "incident_id": "2019_race_ac7d5c7bd4",
+    "event": "Italian Grand Prix",
+    "car_number": "23",
+    "parse_confidence": 1.0,
+    "document_id": "2019_italian_grand_prix_e45e05a713a4",
+    "time": "16:21 2019 ITALIAN GRAND PRIX 5 - 8 September 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "08 September 2019"
+  },
+  {
+    "incident_id": "2019_practice_e69a66d98a",
+    "event": "Italian Grand Prix",
+    "car_number": "8",
+    "parse_confidence": 1.0,
+    "document_id": "2019_italian_grand_prix_e8def0d02955",
+    "time": "14:43 2019 ITALIAN GRAND PRIX 5 - 8 September 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "07 September 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_e23b37c5db",
+    "event": "Italian Grand Prix",
+    "car_number": "27",
+    "parse_confidence": 1.0,
+    "document_id": "2019_italian_grand_prix_ef4e2b7525f2",
+    "time": "20:41 2019 ITALIAN GRAND PRIX 5 - 8 September 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (document 33) and heard from the driver and team representative, have considered the following matter and determine the following:",
+    "date": "07 September 2019"
+  },
+  {
+    "incident_id": "2019_race_11e2f439ea",
+    "event": "Japanese Grand Prix",
+    "car_number": "16",
+    "parse_confidence": 1.0,
+    "document_id": "2019_japanese_grand_prix_0f03f4d21980",
+    "time": "18:05 2019 JAPANESE GRAND PRIX 10 - 13 October 2019 The Stewards, having received a report from the Race Director, summoned (document 35) and heard from the driver and team representative, have considered the following matter and determine the following:",
+    "date": "13 October 2019"
+  },
+  {
+    "incident_id": "2019_race_cc3f5813c1",
+    "event": "Japanese Grand Prix",
+    "car_number": "16",
+    "parse_confidence": 1.0,
+    "document_id": "2019_japanese_grand_prix_1d2977e76d4e",
+    "time": "18:05 2019 JAPANESE GRAND PRIX 10 - 13 October 2019 The Stewards, having received a report from the Race Director, summoned (documents 35 and 36) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "13 October 2019"
+  },
+  {
+    "incident_id": "2019_practice_9456775dbe",
+    "event": "Japanese Grand Prix",
+    "car_number": "11",
+    "parse_confidence": 1.0,
+    "document_id": "2019_japanese_grand_prix_345c9bf3f21a",
+    "time": "14:59 2019 JAPANESE GRAND PRIX 10 - 13 October 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "11 October 2019"
+  },
+  {
+    "incident_id": "2019_race_3555dcbcd9",
+    "event": "Japanese Grand Prix",
+    "car_number": "10",
+    "parse_confidence": 1.0,
+    "document_id": "2019_japanese_grand_prix_9b5fabe6b15e",
+    "time": "18:20 2019 JAPANESE GRAND PRIX 10 - 13 October 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "13 October 2019"
+  },
+  {
+    "incident_id": "2019_race_0d7ea76159",
+    "event": "Japanese Grand Prix",
+    "car_number": "11",
+    "parse_confidence": 1.0,
+    "document_id": "2019_japanese_grand_prix_a0fd9f9fbb42",
+    "time": "18:20 2019 JAPANESE GRAND PRIX 10 - 13 October 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "13 October 2019"
+  },
+  {
+    "incident_id": "2019_race_a8b42ab55a",
+    "event": "Japanese Grand Prix",
+    "car_number": "5",
+    "parse_confidence": 1.0,
+    "document_id": "2019_japanese_grand_prix_beafab9c4c17",
+    "time": "15:18 2019 JAPANESE GRAND PRIX 10 - 13 October 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "13 October 2019"
+  },
+  {
+    "incident_id": "2019_race_dc91ac6997",
+    "event": "Japanese Grand Prix",
+    "car_number": "33",
+    "parse_confidence": 1.0,
+    "document_id": "2019_japanese_grand_prix_c76794de53ea",
+    "time": "18:05 2019 JAPANESE GRAND PRIX 10 - 13 October 2019 The Stewards, having received a report from the Race Director, summoned (documents 35 and 36) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "13 October 2019"
+  },
+  {
+    "incident_id": "2019_race_23f2976da8",
+    "event": "Japanese Grand Prix",
+    "car_number": "",
+    "parse_confidence": 1.0,
+    "document_id": "2019_japanese_grand_prix_d019ddc062b3",
+    "time": "14:20 2019 JAPANESE GRAND PRIX 10 - 13 October 2019 The Stewards Title Offence - Haas (Mr Guenther Steiner) Description Offence - Haas (Mr Guenther Steiner) Enclosed JPN DOC 10 - Offence - Haas.pdf Gerd Ennser Dennis Dean Tom Kristensen Yasuhiro Yodono 2019 JAPANESE GRAND PRIX 10 – 13 October 2019 From The Stewards",
+    "date": "11 October 2019"
+  },
+  {
+    "incident_id": "2019_race_7bbac0a4ee",
+    "event": "Mexican Grand Prix",
+    "car_number": "26",
+    "parse_confidence": 1.0,
+    "document_id": "2019_mexican_grand_prix_01c950864d86",
+    "time": "15:16 2019 MEXICAN GRAND PRIX 24 - 27 October 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "27 October 2019"
+  },
+  {
+    "incident_id": "2019_race_71645fdcd6",
+    "event": "Mexican Grand Prix",
+    "car_number": "4",
+    "parse_confidence": 1.0,
+    "document_id": "2019_mexican_grand_prix_0de892dbbf7e",
+    "time": "16:40 2019 MEXICAN GRAND PRIX 24 - 27 October 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (document 32) and heard from the team representative, have considered the following matter and determine the following:",
+    "date": "27 October 2019"
+  },
+  {
+    "incident_id": "2019_practice_c45f400d3b",
+    "event": "Mexican Grand Prix",
+    "car_number": "8",
+    "parse_confidence": 1.0,
+    "document_id": "2019_mexican_grand_prix_51f26ea3e827",
+    "time": "11:41 2019 MEXICAN GRAND PRIX 24 - 27 October 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "25 October 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_c383ab8d64",
+    "event": "Mexican Grand Prix",
+    "car_number": "33",
+    "parse_confidence": 1.0,
+    "document_id": "2019_mexican_grand_prix_5e7c6575bdf8",
+    "time": "17:25 2019 MEXICAN GRAND PRIX 24 - 27 October 2019 The Stewards, having received a report from the Race Director, summoned (document 23) and heard from the driver and team representative, have considered the following matter and determine the following:",
+    "date": "26 October 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_225903bbaa",
+    "event": "Monaco Grand Prix",
+    "car_number": "27",
+    "parse_confidence": 1.0,
+    "document_id": "2019_monaco_grand_prix_25ff626b94a4",
+    "time": "18:18 2019 MONACO GRAND PRIX 22 - 26 May 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "25 May 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_07b41a5ba2",
+    "event": "Monaco Grand Prix",
+    "car_number": "10",
+    "parse_confidence": 1.0,
+    "document_id": "2019_monaco_grand_prix_3495eaa72b86",
+    "time": "18:04 2019 MONACO GRAND PRIX 22 - 26 May 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (documents 24 and 26) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "25 May 2019"
+  },
+  {
+    "incident_id": "2019_race_7e3b88834d",
+    "event": "Monaco Grand Prix",
+    "car_number": "20",
+    "parse_confidence": 1.0,
+    "document_id": "2019_monaco_grand_prix_3bb528031af1",
+    "time": "20:22 2019 MONACO GRAND PRIX 22 - 26 May 2019 The Stewards, having received a report from the Race Director, summoned (documents 43 and 44) heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "26 May 2019"
+  },
+  {
+    "incident_id": "2019_race_bb11f9bd44",
+    "event": "Monaco Grand Prix",
+    "car_number": "99",
+    "parse_confidence": 1.0,
+    "document_id": "2019_monaco_grand_prix_43ce2182fc8a",
+    "time": "18:00 2019 MONACO GRAND PRIX 22 - 26 May 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "26 May 2019"
+  },
+  {
+    "incident_id": "2019_race_acddfe1ad9",
+    "event": "Monaco Grand Prix",
+    "car_number": "33",
+    "parse_confidence": 1.0,
+    "document_id": "2019_monaco_grand_prix_6558f1cc7820",
+    "time": "17:27 2019 MONACO GRAND PRIX 22 - 26 May 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "26 May 2019"
+  },
+  {
+    "incident_id": "2019_race_913493f3f2",
+    "event": "Monaco Grand Prix",
+    "car_number": "33",
+    "parse_confidence": 1.0,
+    "document_id": "2019_monaco_grand_prix_8ef7dfb2dc85",
+    "time": "16:56 2019 MONACO GRAND PRIX 22 - 26 May 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "26 May 2019"
+  },
+  {
+    "incident_id": "2019_practice_2504e42c9c",
+    "event": "Monaco Grand Prix",
+    "car_number": "5",
+    "parse_confidence": 1.0,
+    "document_id": "2019_monaco_grand_prix_90f4dd2b38f2",
+    "time": "12:32 2019 MONACO GRAND PRIX 22 - 26 May 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "23 May 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_5314de67d8",
+    "event": "Monaco Grand Prix",
+    "car_number": "11",
+    "parse_confidence": 1.0,
+    "document_id": "2019_monaco_grand_prix_a07209c899ed",
+    "time": "18:26 2019 MONACO GRAND PRIX 22 - 26 May 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "25 May 2019"
+  },
+  {
+    "incident_id": "2019_practice_97f8136142",
+    "event": "Monaco Grand Prix",
+    "car_number": "16",
+    "parse_confidence": 1.0,
+    "document_id": "2019_monaco_grand_prix_a5509352a163",
+    "time": "12:09 2019 MONACO GRAND PRIX 22 - 26 May 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "23 May 2019"
+  },
+  {
+    "incident_id": "2019_race_a4974311e4",
+    "event": "Monaco Grand Prix",
+    "car_number": "44",
+    "parse_confidence": 1.0,
+    "document_id": "2019_monaco_grand_prix_b5f2cb6d26ae",
+    "time": "17:27 2019 MONACO GRAND PRIX 22 - 26 May 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "26 May 2019"
+  },
+  {
+    "incident_id": "2019_race_7933c34f21",
+    "event": "Monaco Grand Prix",
+    "car_number": "18",
+    "parse_confidence": 1.0,
+    "document_id": "2019_monaco_grand_prix_b98a696fe88b",
+    "time": "18:00 2019 MONACO GRAND PRIX 22 - 26 May 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "26 May 2019"
+  },
+  {
+    "incident_id": "2019_practice_7f92010fa4",
+    "event": "Monaco Grand Prix",
+    "car_number": "44",
+    "parse_confidence": 1.0,
+    "document_id": "2019_monaco_grand_prix_bbb6aabc23e6",
+    "time": "16:43 2019 MONACO GRAND PRIX 22 - 26 May 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "23 May 2019"
+  },
+  {
+    "incident_id": "2019_race_4cf087c694",
+    "event": "Monaco Grand Prix",
+    "car_number": "8",
+    "parse_confidence": 1.0,
+    "document_id": "2019_monaco_grand_prix_c76871e6864a",
+    "time": "19:29 2019 MONACO GRAND PRIX 22 - 26 May 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "26 May 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_debb78a7a5",
+    "event": "Monaco Grand Prix",
+    "car_number": "16",
+    "parse_confidence": 1.0,
+    "document_id": "2019_monaco_grand_prix_caa0772eab62",
+    "time": "18:22 2019 MONACO GRAND PRIX 22 - 26 May 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "25 May 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_84c6dface5",
+    "event": "Monaco Grand Prix",
+    "car_number": "99",
+    "parse_confidence": 1.0,
+    "document_id": "2019_monaco_grand_prix_d14719e4900f",
+    "time": "17:33 2019 MONACO GRAND PRIX 22 - 26 May 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (documents 22 and 23) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "25 May 2019"
+  },
+  {
+    "incident_id": "2019_practice_3695780042",
+    "event": "Monaco Grand Prix",
+    "car_number": "16",
+    "parse_confidence": 1.0,
+    "document_id": "2019_monaco_grand_prix_ed7f71622404",
+    "time": "13:52 2019 MONACO GRAND PRIX 22 - 26 May 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (document 18) the driver and team representative, have considered the following matter and determine the following:",
+    "date": "25 May 2019"
+  },
+  {
+    "incident_id": "2019_practice_e45af744d7",
+    "event": "Russian Grand Prix",
+    "car_number": "10",
+    "parse_confidence": 1.0,
+    "document_id": "2019_russian_grand_prix_63b01f34057f",
+    "time": "12:16 2019 RUSSIAN GRAND PRIX 26 - 29 September 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "28 September 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_1e46a8e233",
+    "event": "Russian Grand Prix",
+    "car_number": "23",
+    "parse_confidence": 1.0,
+    "document_id": "2019_russian_grand_prix_b30373ee1ebb",
+    "time": "11:58 2019 RUSSIAN GRAND PRIX 26 - 29 September 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 32), have considered the following matter and determine the following:",
+    "date": "29 September 2019"
+  },
+  {
+    "incident_id": "2019_race_ed8ef2a8a7",
+    "event": "Russian Grand Prix",
+    "car_number": "20",
+    "parse_confidence": 1.0,
+    "document_id": "2019_russian_grand_prix_c499d51540a1",
+    "time": "15:53 2019 RUSSIAN GRAND PRIX 26 - 29 September 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "29 September 2019"
+  },
+  {
+    "incident_id": "2019_race_17e9db0249",
+    "event": "Russian Grand Prix",
+    "car_number": "7",
+    "parse_confidence": 1.0,
+    "document_id": "2019_russian_grand_prix_e3a358a584d2",
+    "time": "14:46 2019 RUSSIAN GRAND PRIX 26 - 29 September 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "29 September 2019"
+  },
+  {
+    "incident_id": "2019_race_c40e022cd2",
+    "event": "Singapore Grand Prix",
+    "car_number": "63",
+    "parse_confidence": 1.0,
+    "document_id": "2019_singapore_grand_prix_079aa712ffcd",
+    "time": "00:18 2019 SINGAPORE GRAND PRIX 19 - 22 September 2019 The Stewards, having received a report from the Race Director, summoned (documents 44 and 45) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "23 September 2019"
+  },
+  {
+    "incident_id": "2019_race_0229da0850",
+    "event": "Singapore Grand Prix",
+    "car_number": "7",
+    "parse_confidence": 1.0,
+    "document_id": "2019_singapore_grand_prix_0f62df4e89dd",
+    "time": "23:57 2019 SINGAPORE GRAND PRIX 19 - 22 September 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (documents 42 and 43) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "22 September 2019"
+  },
+  {
+    "incident_id": "2019_practice_feac7677b2",
+    "event": "Singapore Grand Prix",
+    "car_number": "11",
+    "parse_confidence": 1.0,
+    "document_id": "2019_singapore_grand_prix_215fa3ceb42b",
+    "time": "23:09 2019 SINGAPORE GRAND PRIX 19 - 22 September 2019 The Stewards, having received a report from the Race Director, summoned (documents 12 & 13) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "20 September 2019"
+  },
+  {
+    "incident_id": "2019_race_aae0e3be22",
+    "event": "Singapore Grand Prix",
+    "car_number": "99",
+    "parse_confidence": 1.0,
+    "document_id": "2019_singapore_grand_prix_229d1fddb352",
+    "time": "23:57 2019 SINGAPORE GRAND PRIX 19 - 22 September 2019 The Stewards, having received a report from the Race Director, summoned (document 41) and heard from the driver and team representative, have considered the following matter and determine the following:",
+    "date": "22 September 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_a325d24b54",
+    "event": "Singapore Grand Prix",
+    "car_number": "11",
+    "parse_confidence": 1.0,
+    "document_id": "2019_singapore_grand_prix_4c7f75c15da5",
+    "time": "21:09 2019 SINGAPORE GRAND PRIX 19 - 22 September 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 23), have considered the following matter and determine the following:",
+    "date": "21 September 2019"
+  },
+  {
+    "incident_id": "2019_race_d17a5f56c0",
+    "event": "Singapore Grand Prix",
+    "car_number": "55",
+    "parse_confidence": 1.0,
+    "document_id": "2019_singapore_grand_prix_5b0d6ca3503d",
+    "time": "20:45 2019 SINGAPORE GRAND PRIX 19 - 22 September 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "22 September 2019"
+  },
+  {
+    "incident_id": "2019_race_bf6f44f3d2",
+    "event": "Singapore Grand Prix",
+    "car_number": "27",
+    "parse_confidence": 1.0,
+    "document_id": "2019_singapore_grand_prix_5d4505182781",
+    "time": "20:45 2019 SINGAPORE GRAND PRIX 19 - 22 September 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "22 September 2019"
+  },
+  {
+    "incident_id": "2019_race_932888577b",
+    "event": "Singapore Grand Prix",
+    "car_number": "26",
+    "parse_confidence": 1.0,
+    "document_id": "2019_singapore_grand_prix_7b8b0d6a0109",
+    "time": "23:57 2019 SINGAPORE GRAND PRIX 19 - 22 September 2019 The Stewards The Stewards, having received a report from the Race Director, summoned (documents 42 and 43) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "22 September 2019"
+  },
+  {
+    "incident_id": "2019_race_5e68e294e0",
+    "event": "Singapore Grand Prix",
+    "car_number": "8",
+    "parse_confidence": 1.0,
+    "document_id": "2019_singapore_grand_prix_9269d48fbca8",
+    "time": "00:18 2019 SINGAPORE GRAND PRIX 19 - 22 September 2019 The Stewards, having received a report from the Race Director, summoned (documents 44 and 45) and heard from the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "23 September 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_ddfbb26400",
+    "event": "Singapore Grand Prix",
+    "car_number": "3",
+    "parse_confidence": 1.0,
+    "document_id": "2019_singapore_grand_prix_afc53ddc19fd",
+    "time": "02:58 2019 SINGAPORE GRAND PRIX 19 - 22 September 2019 The Stewards, having received a report from the Technical Delegate (document 26), summoned (document 27) and heard from a team representative, have considered the following matter and determine the following:",
+    "date": "22 September 2019"
+  },
+  {
+    "incident_id": "2019_practice_de17882497",
+    "event": "Singapore Grand Prix",
+    "car_number": "44",
+    "parse_confidence": 1.0,
+    "document_id": "2019_singapore_grand_prix_b807c07870d3",
+    "time": "19:42 2019 SINGAPORE GRAND PRIX 19 - 22 September 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 10), have considered the following matter and determine the following:",
+    "date": "20 September 2019"
+  },
+  {
+    "incident_id": "2019_race_849b1e8e0e",
+    "event": "Spanish Grand Prix",
+    "car_number": "18",
+    "parse_confidence": 1.0,
+    "document_id": "2019_spanish_grand_prix_545a2dc616af",
+    "time": "18:59 2019 SPANISH GRAND PRIX 9 - 12 May 2019 The Stewards, having received a report from the Race Director, summoned (documents 37 & 38) the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "12 May 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_94478cccf7",
+    "event": "Spanish Grand Prix",
+    "car_number": "27",
+    "parse_confidence": 1.0,
+    "document_id": "2019_spanish_grand_prix_a5b9e3b82d1d",
+    "time": "14:01 2019 SPANISH GRAND PRIX 9 - 12 May 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 33), have considered the following matter and determine the following:",
+    "date": "12 May 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_68716166d4",
+    "event": "Spanish Grand Prix",
+    "car_number": "27",
+    "parse_confidence": 1.0,
+    "document_id": "2019_spanish_grand_prix_b8932afdb58e",
+    "time": "11:58 2019 SPANISH GRAND PRIX 9 - 12 May 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 26), and heard from the Team Representative, have considered the following matter and determine the following:",
+    "date": "12 May 2019"
+  },
+  {
+    "incident_id": "2019_race_49253c2053",
+    "event": "Spanish Grand Prix",
+    "car_number": "4",
+    "parse_confidence": 1.0,
+    "document_id": "2019_spanish_grand_prix_e46c2242aa36",
+    "time": "18:59 2019 SPANISH GRAND PRIX 9 - 12 May 2019 The Stewards, having received a report from the Race Director, summoned (documents 37 & 38) the drivers and team representatives, have considered the following matter and determine the following:",
+    "date": "12 May 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_212e376927",
+    "event": "Spanish Grand Prix",
+    "car_number": "63",
+    "parse_confidence": 1.0,
+    "document_id": "2019_spanish_grand_prix_f9f1c7df9778",
+    "time": "15:12 2019 SPANISH GRAND PRIX 9 - 12 May 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 19), have considered the following matter and determine the following:",
+    "date": "11 May 2019"
+  },
+  {
+    "incident_id": "2019_practice_decad130b4",
+    "event": "United States Grand Prix",
+    "car_number": "44",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_02b0e5756d97",
+    "time": "12:47 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "01 November 2019"
+  },
+  {
+    "incident_id": "2019_race_055a456501",
+    "event": "United States Grand Prix",
+    "car_number": "4",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_0bdb67f0d54b",
+    "time": "14:55 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "03 November 2019"
+  },
+  {
+    "incident_id": "2019_practice_e8a40de06c",
+    "event": "United States Grand Prix",
+    "car_number": "11",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_11694cedd90d",
+    "time": "19:08 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Technical Delegate (document 28), summoned (document 29) and heard from the driver and team representative, have considered the following matter and determine the following:",
+    "date": "01 November 2019"
+  },
+  {
+    "incident_id": "2019_race_86feeb2f24",
+    "event": "United States Grand Prix",
+    "car_number": "33",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_1304b5ffec8a",
+    "time": "14:56 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "03 November 2019"
+  },
+  {
+    "incident_id": "2019_race_464f35e698",
+    "event": "United States Grand Prix",
+    "car_number": "20",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_170b62570d16",
+    "time": "14:55 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "03 November 2019"
+  },
+  {
+    "incident_id": "2019_race_adced35999",
+    "event": "United States Grand Prix",
+    "car_number": "99",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_22464ca907d1",
+    "time": "14:24 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "03 November 2019"
+  },
+  {
+    "incident_id": "2019_practice_6aa031828b",
+    "event": "United States Grand Prix",
+    "car_number": "5",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_28bb44bd0f05",
+    "time": "16:34 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "01 November 2019"
+  },
+  {
+    "incident_id": "2019_race_b45a72a88e",
+    "event": "United States Grand Prix",
+    "car_number": "55",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_4164c95f1f0f",
+    "time": "14:11 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "03 November 2019"
+  },
+  {
+    "incident_id": "2019_practice_c25f8d59b7",
+    "event": "United States Grand Prix",
+    "car_number": "63",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_4228c7a7ce6f",
+    "time": "16:34 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "01 November 2019"
+  },
+  {
+    "incident_id": "2019_practice_0853894fd6",
+    "event": "United States Grand Prix",
+    "car_number": "23",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_48b2d44747de",
+    "time": "12:05 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "01 November 2019"
+  },
+  {
+    "incident_id": "2019_race_a214b7b8c9",
+    "event": "United States Grand Prix",
+    "car_number": "8",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_567cc6d4ab32",
+    "time": "14:12 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "03 November 2019"
+  },
+  {
+    "incident_id": "2019_race_e2ae6aa12b",
+    "event": "United States Grand Prix",
+    "car_number": "23",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_5edbd2e2fc70",
+    "time": "13:30 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "03 November 2019"
+  },
+  {
+    "incident_id": "2019_practice_3bfd50c992",
+    "event": "United States Grand Prix",
+    "car_number": "4",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_756e1d42b140",
+    "time": "16:34 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "01 November 2019"
+  },
+  {
+    "incident_id": "2019_race_e248e8ca90",
+    "event": "United States Grand Prix",
+    "car_number": "63",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_89c10ff4930a",
+    "time": "14:25 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "03 November 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_d1cfbc2e74",
+    "event": "United States Grand Prix",
+    "car_number": "26",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_8fe2cc4fdd89",
+    "time": "16:50 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "02 November 2019"
+  },
+  {
+    "incident_id": "2019_practice_64703ca040",
+    "event": "United States Grand Prix",
+    "car_number": "18",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_a13049b9232a",
+    "time": "12:34 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "01 November 2019"
+  },
+  {
+    "incident_id": "2019_practice_b7014dbaef",
+    "event": "United States Grand Prix",
+    "car_number": "33",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_a857fe027f5f",
+    "time": "12:05 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "01 November 2019"
+  },
+  {
+    "incident_id": "2019_race_d6a3fea696",
+    "event": "United States Grand Prix",
+    "car_number": "26",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_aea795bc2b2b",
+    "time": "14:14 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "03 November 2019"
+  },
+  {
+    "incident_id": "2019_practice_cea6030ab5",
+    "event": "United States Grand Prix",
+    "car_number": "26",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_dd5df1db22ed",
+    "time": "12:47 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "01 November 2019"
+  },
+  {
+    "incident_id": "2019_qualifying_3546054c93",
+    "event": "United States Grand Prix",
+    "car_number": "23",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_df9336b674d7",
+    "time": "17:08 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "02 November 2019"
+  },
+  {
+    "incident_id": "2019_practice_9d351e0590",
+    "event": "United States Grand Prix",
+    "car_number": "10",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_f6778b82b8a0",
+    "time": "12:05 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "01 November 2019"
+  },
+  {
+    "incident_id": "2019_practice_057cdc242c",
+    "event": "United States Grand Prix",
+    "car_number": "20",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_f81766df75b8",
+    "time": "12:35 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "01 November 2019"
+  },
+  {
+    "incident_id": "2019_race_06f5be8f8d",
+    "event": "United States Grand Prix",
+    "car_number": "26",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_fb57886641d7",
+    "time": "15:39 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "03 November 2019"
+  },
+  {
+    "incident_id": "2019_practice_a5e25c981e",
+    "event": "United States Grand Prix",
+    "car_number": "16",
+    "parse_confidence": 1.0,
+    "document_id": "2019_united_states_grand_prix_fbc20c3b6ec9",
+    "time": "12:35 2019 UNITED STATES GRAND PRIX 31 October - 3 November 2019 The Stewards The Stewards, having received a report from the Race Director, have considered the following matter and determine the following:",
+    "date": "01 November 2019"
+  }
+]
