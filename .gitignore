@@ -9,6 +9,8 @@ __pycache__/
 # Specifics
 extracted_documents/
 fia/
+ergast/
+fastf1_cache/
 
 # Distribution / packaging
 .Python
