@@ -7,8 +7,14 @@ __pycache__/
 *.so
 
 # Specifics
-extracted_documents/
-fia/
+2019/
+2020/
+2021/
+2022/
+2023/
+2024/
+2025/
+2026/
 ergast/
 fastf1_cache/
 review_queue_*.csv
