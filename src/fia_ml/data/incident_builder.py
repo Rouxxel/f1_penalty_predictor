@@ -10,7 +10,12 @@ from typing import Any
 import pandas as pd
 
 from fia_ml.data.config import PipelineConfig
-from fia_ml.data.reference_data import load_reference
+from fia_ml.data.reference_data import (
+    build_event_name_to_circuit_map,
+    load_circuits,
+    load_incident_type_keywords,
+    load_reference,
+)
 from fia_ml.data.schema import SCHEMA_COLUMNS, empty_row
 from fia_ml.paths import ensure_dir
 from fia_ml.utils import secure_file_io as sio
@@ -39,7 +44,7 @@ def infer_sector(turn_number: str, circuit_slug: str, circuits: dict[str, Any]) 
 
 
 def resolve_circuit(event: str, circuits_ref: dict[str, Any]) -> tuple[str, str, str]:
-    event_map = circuits_ref.get("event_to_circuit", {})
+    event_map = build_event_name_to_circuit_map(circuits_ref)
     circuit_slug = event_map.get(event, slugify_name(event.replace(" Grand Prix", "")))
     circuit_meta = circuits_ref.get(circuit_slug, {})
     country = circuit_meta.get("country", "")
