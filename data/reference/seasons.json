@@ -397,5 +397,73 @@
             "yas_marina"
         ],
         "url": "https://en.wikipedia.org/wiki/2024_Formula_One_season"
+    },
+    "2025": {
+        "year": 2025,
+        "rounds": 24,
+        "teams.standings_order": [
+            {"id": "mclaren", "name": "McLaren"},
+            {"id": "mercedes", "name": "Mercedes"},
+            {"id": "red_bull", "name": "Red Bull Racing"},
+            {"id": "ferrari", "name": "Ferrari"},
+            {"id": "williams", "name": "Williams"},
+            {"id": "racing_bulls", "name": "Racing Bulls"},
+            {"id": "aston_martin", "name": "Aston Martin"},
+            {"id": "haas", "name": "Haas F1 Team"},
+            {"id": "sauber", "name": "Kick Sauber"}
+            {"id": "alpine", "name": "Alpine"}
+        ],
+        "drivers.standings_order": [
+            {"id": "lando_norris", "name": "Lando Norris", "team": "mclaren"},
+            {"id": "max_verstappen", "name": "Max Verstappen", "team": "red_bull"},
+            {"id": "oscar_piastri", "name": "Oscar Piastri", "team": "mclaren"},
+            {"id": "george_russell", "name": "George Russell", "team": "mercedes"},
+            {"id": "charles_leclerc", "name": "Charles Leclerc", "team": "ferrari"},
+            {"id": "lewis_hamilton", "name": "Lewis Hamilton", "team": "ferrari"},
+            {"id": "kimi_antonelli", "name": "Kimi Antonelli", "team": "mercedes"},
+            {"id": "alexander_albon", "name": "Alexander Albon", "team": "williams"},
+            {"id": "carlos_sainz", "name": "Carlos Sainz", "team": "williams"},  
+            {"id": "fernando_alonso", "name": "Fernando Alonso", "team": "aston_martin"},
+            {"id": "nico_hulkenberg", "name": "Nico Hulkenberg", "team": "sauber"},
+            {"id": "isack_hadjar", "name": "Isack Hadjar", "team": "racing_bulls"},
+            {"id": "ollie_bearman", "name": "Ollie Bearman", "team": "haas"},
+            {"id": "liam_lawson", "name": "Liam Lawson", "team": "racing_bulls"},
+            {"id": "esteban_ocon", "name": "Esteban Ocon", "team": "haas"},
+            {"id": "lance_stroll", "name": "Lance Stroll", "team": "aston_martin"},
+            {"id": "yuki_tsunoda", "name": "Yuki Tsunoda", "team": "red_bull"},
+            {"id": "pierre_gasly", "name": "Pierre Gasly", "team": "alpine"},
+            {"id": "gabriel_bortoleto", "name": "Gabriel Bortoleto", "team": "sauber"},
+            {"id": "franco_colapinto", "name": "Franco Colapinto", "team": "alpine"},
+            {"id": "jack_doohan", "name": "Jack Doohan", "team": "alpine"}
+        ],
+        "champion": "lando_norris",
+        "constructors_champion": "mclaren",
+        "calendar_in_order": [
+            "albert_park",
+            "shangai",
+            "suzuka",
+            "barcelona",
+            "jeddah",
+            "miami",
+            "imola",
+            "monaco",
+            "barcelona",
+            "gilles_villeneuve",
+            "spielberg",
+            "silverstone",
+            "spa",
+            "hungaroring",
+            "zandvoort",
+            "monza",
+            "baku",
+            "marina_bay",
+            "circuit_of_the_americas",
+            "hermanos_rodriguez",
+            "interlagos",
+            "las_vegas",
+            "qatar",
+            "yas_marina"
+        ],
+        "url": "https://en.wikipedia.org/wiki/2025_Formula_One_season"
     }
 }
