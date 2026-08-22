@@ -1,0 +1,521 @@
+{
+    "max_verstappen": {
+        "id": "max_verstappen",
+        "name": "Max Verstappen",
+        "nationality": "Dutch",
+        "nationality_code": "NLD",
+        "nationality_flag": "🇳🇱",
+        "world_championships": 4,
+        "birth_date": "1997-09-30",
+        "birth_place": "Hasselt, Belgium",
+        "debut": "2015",
+        "relevant_relatives": [
+            {
+                "name": "Jos Verstappen",
+                "relationship": "Father"
+            },
+            {
+                "name": "Nelson Piquet",
+                "relationship": "Father in Law"
+            }
+        ]
+    },
+    "george_russell": {
+        "id": "george_russell",
+        "name": "George Russell",
+        "nationality": "British",
+        "nationality_code": "GBR",
+        "nationality_flag": "🇬🇧",
+        "world_championships": 0,
+        "birth_date": "1998-02-15",
+        "birth_place": "King's Lynn, England",
+        "debut": "2019",
+        "relevant_relatives": []
+    },
+    "lando_norris": {
+        "id": "lando_norris",
+        "name": "Lando Norris",
+        "nationality": "British",
+        "nationality_code": "GBR",
+        "nationality_flag": "🇬🇧",
+        "world_championships": 1,
+        "birth_date": "1999-11-13",
+        "birth_place": "Bristol, England",
+        "debut": "2019",
+        "relevant_relatives": []
+    },
+    "charles_leclerc": {
+        "id": "charles_leclerc",
+        "name": "Charles Leclerc",
+        "nationality": "Monegasque",
+        "nationality_code": "MCO",
+        "nationality_flag": "🇲🇨",
+        "world_championships": 0,
+        "birth_date": "1997-10-16",
+        "birth_place": "Monte Carlo, Monaco",
+        "debut": "2018",
+        "relevant_relatives": []
+    },
+    "oscar_piastri": {
+        "id": "oscar_piastri",
+        "name": "Oscar Piastri",
+        "nationality": "Australian",
+        "nationality_code": "AUS",
+        "nationality_flag": "🇦🇺",
+        "world_championships": 0,
+        "birth_date": "2001-04-06",
+        "birth_place": "Melbourne, Australia",
+        "debut": "2023",
+        "relevant_relatives": []
+    },
+    "kimi_antonelli": {
+        "id": "kimi_antonelli",
+        "name": "Kimi Antonelli",
+        "nationality": "Italian",
+        "nationality_code": "ITA",
+        "nationality_flag": "🇮🇹",
+        "world_championships": 0,
+        "birth_date": "2006-08-25",
+        "birth_place": "Bologna, Italy",
+        "debut": "2025",
+        "relevant_relatives": []
+    },
+    "lewis_hamilton": {
+        "id": "lewis_hamilton",
+        "name": "Lewis Hamilton",
+        "nationality": "British",
+        "nationality_code": "GBR",
+        "nationality_flag": "🇬🇧",
+        "world_championships": 7,
+        "birth_date": "1985-01-07",
+        "birth_place": "Stevenage, England",
+        "debut": "2007",
+        "relevant_relatives": []
+    },
+    "pierre_gasly": {
+        "id": "pierre_gasly",
+        "name": "Pierre Gasly",
+        "nationality": "French",
+        "nationality_code": "FRA",
+        "nationality_flag": "🇫🇷",
+        "world_championships": 0,
+        "birth_date": "1996-02-07",
+        "birth_place": "Rouen, France",
+        "debut": "2017",
+        "relevant_relatives": []
+    },
+    "gabriel_bortoleto": {
+        "id": "gabriel_bortoleto",
+        "name": "Gabriel Bortoleto",
+        "nationality": "Brazilian",
+        "nationality_code": "BRA",
+        "nationality_flag": "🇧🇷",
+        "world_championships": 0,
+        "birth_date": "2004-10-14",
+        "birth_place": "São Paulo, Brazil",
+        "debut": "2024",
+        "relevant_relatives": []
+    },
+    "arvid_lindblad": {
+        "id": "arvid_lindblad",
+        "name": "Arvid Lindblad",
+        "nationality": "British",
+        "nationality_code": "GBR",
+        "nationality_flag": "🇬🇧",
+        "world_championships": 0,
+        "birth_date": "2007-08-08",
+        "birth_place": "London, England",
+        "debut": "2026",
+        "relevant_relatives": []
+    },
+    "liam_lawson": {
+        "id": "liam_lawson",
+        "name": "Liam Lawson",
+        "nationality": "New Zealand",
+        "nationality_code": "NZL",
+        "nationality_flag": "🇳🇿",
+        "world_championships": 0,
+        "birth_date": "2002-02-11",
+        "birth_place": "Hastings, New Zealand",
+        "debut": "2023",
+        "relevant_relatives": []
+    },
+    "yuki_tsunoda": {
+        "id": "yuki_tsunoda",
+        "name": "Yuki Tsunoda",
+        "nationality": "Japanese",
+        "nationality_code": "JPN",
+        "nationality_flag": "🇯🇵",
+        "world_championships": 0,
+        "birth_date": "2000-05-11",
+        "birth_place": "Sagamihara, Japan",
+        "debut": "2021",
+        "relevant_relatives": []
+    },
+    "franco_colapinto": {
+        "id": "franco_colapinto",
+        "name": "Franco Colapinto",
+        "nationality": "Argentinian",
+        "nationality_code": "ARG",
+        "nationality_flag": "🇦🇷",
+        "world_championships": 0,
+        "birth_date": "2003-05-27",
+        "birth_place": "Buenos Aires, Argentina",
+        "debut": "2024",
+        "relevant_relatives": []
+    },
+    "nico_hulkenberg": {
+        "id": "nico_hulkenberg",
+        "name": "Nico Hulkenberg",
+        "nationality": "German",
+        "nationality_code": "DEU",
+        "nationality_flag": "🇩🇪",
+        "world_championships": 0,
+        "birth_date": "1987-08-19",
+        "birth_place": "Emmerich am Rhein, Germany",
+        "debut": "2010",
+        "relevant_relatives": []
+    },
+    "esteban_ocon": {
+        "id": "esteban_ocon",
+        "name": "Esteban Ocon",
+        "nationality": "French",
+        "nationality_code": "FRA",
+        "nationality_flag": "🇫🇷",
+        "world_championships": 0,
+        "birth_date": "1996-09-17",
+        "birth_place": "Évreux, France",
+        "debut": "2016",
+        "relevant_relatives": []
+    },
+    "alexander_albon": {
+        "id": "alexander_albon",
+        "name": "Alexander Albon",
+        "nationality": "Thai",
+        "nationality_code": "THA",
+        "nationality_flag": "🇹🇭",
+        "world_championships": 0,
+        "birth_date": "1996-03-23",
+        "birth_place": "London, England",
+        "debut": "2019",
+        "relevant_relatives": []
+    },
+    "ollie_bearman": {
+        "id": "ollie_bearman",
+        "name": "Ollie Bearman",
+        "nationality": "British",
+        "nationality_code": "GBR",
+        "nationality_flag": "🇬🇧",
+        "world_championships": 0,
+        "birth_date": "2005-05-08",
+        "birth_place": "Chelmsford, England",
+        "debut": "2024",
+        "relevant_relatives": []
+    },
+    "lance_stroll": {
+        "id": "lance_stroll",
+        "name": "Lance Stroll",
+        "nationality": "Canadian",
+        "nationality_code": "CAN",
+        "nationality_flag": "🇨🇦",
+        "world_championships": 0,
+        "birth_date": "1998-10-29",
+        "birth_place": "Montreal, Canada",
+        "debut": "2017",
+        "relevant_relatives": [
+            {
+                "name": "Lawrence Stroll",
+                "relationship": "Father"
+            }
+        ]
+    },
+    "valtteri_bottas": {
+        "id": "valtteri_bottas",
+        "name": "Valtteri Bottas",
+        "nationality": "Finnish",
+        "nationality_code": "FIN",
+        "nationality_flag": "🇫🇮",
+        "world_championships": 0,
+        "birth_date": "1989-08-28",
+        "birth_place": "Nastola, Finland",
+        "debut": "2013",
+        "relevant_relatives": []
+    },
+    "sergio_perez": {
+        "id": "sergio_perez",
+        "name": "Sergio Perez",
+        "nationality": "Mexican",
+        "nationality_code": "MEX",
+        "nationality_flag": "🇲🇽",
+        "world_championships": 0,
+        "birth_date": "1990-01-26",
+        "birth_place": "Guadalajara, Mexico",
+        "debut": "2011",
+        "relevant_relatives": []
+    },
+    "carlos_sainz": {
+        "id": "carlos_sainz",
+        "name": "Carlos Sainz",
+        "nationality": "Spanish",
+        "nationality_code": "ESP",
+        "nationality_flag": "🇪🇸",
+        "world_championships": 0,
+        "birth_date": "1994-09-01",
+        "birth_place": "Madrid, Spain",
+        "debut": "2015",
+        "relevant_relatives": [
+            {
+                "name": "Carlos Sainz Sr.",
+                "relationship": "Father"
+            }
+        ]
+    },
+    "fernando_alonso": {
+        "id": "fernando_alonso",
+        "name": "Fernando Alonso",
+        "nationality": "Spanish",
+        "nationality_code": "ESP",
+        "nationality_flag": "🇪🇸",
+        "world_championships": 2,
+        "birth_date": "1981-07-29",
+        "birth_place": "Oviedo, Spain",
+        "debut": "2001",
+        "relevant_relatives": []
+    },
+    "daniil_kvyat": {
+        "id": "daniil_kvyat",
+        "name": "Daniil Kvyat",
+        "nationality": "Russian",
+        "nationality_code": "RUS",
+        "nationality_flag": "🇷🇺",
+        "world_championships": 0,
+        "birth_date": "1994-04-26",
+        "birth_place": "Ufa, Russia",
+        "debut": "2014",
+        "relevant_relatives": []
+    },
+    "nikita_mazepin": {
+        "id": "nikita_mazepin",
+        "name": "Nikita Mazepin",
+        "nationality": "Russian",
+        "nationality_code": "RUS",
+        "nationality_flag": "🇷🇺",
+        "world_championships": 0,
+        "birth_date": "1999-03-2",
+        "birth_place": "Moscow, Russia",
+        "debut": "2021",
+        "relevant_relatives": [
+            {
+                "name": "Dmitry Mazepin",
+                "relationship": "Father"
+            }
+        ]
+    },
+    "logan_sargeant": {
+        "id": "logan_sargeant",
+        "name": "Logan Sargeant",
+        "nationality": "American",
+        "nationality_code": "USA",
+        "nationality_flag": "🇺🇸",
+        "world_championships": 0,
+        "birth_date": "2000-12-31",
+        "birth_place": "Fort Lauderdale, USA",
+        "debut": "2023",
+        "relevant_relatives": []
+    },
+    "nick_de_vries": {
+        "id": "nick_de_vries",
+        "name": "Nick de Vries",
+        "nationality": "Dutch",
+        "nationality_code": "NLD",
+        "nationality_flag": "🇳🇱",
+        "world_championships": 0,
+        "birth_date": "1995-02-06",
+        "birth_place": "Uitwellingerga, Netherlands",
+        "debut": "2022",
+        "relevant_relatives": []
+    },
+    "isack_hadjar": {
+        "id": "isack_hadjar",
+        "name": "Isack Hadjar",
+        "nationality": "French",
+        "nationality_code": "FRA",
+        "nationality_flag": "🇫🇷",
+        "world_championships": 0,
+        "birth_date": "2004-09-28",
+        "birth_place": "Paris, France",
+        "debut": "2025",
+        "relevant_relatives": []
+    },
+    "jack_doohan": {
+        "id": "jack_doohan",
+        "name": "Jack Doohan",
+        "nationality": "Australian",
+        "nationality_code": "AUS",
+        "nationality_flag": "🇦🇺",
+        "world_championships": 0,
+        "birth_date": "2003-01-20",
+        "birth_place": "Gold Coast, Australia",
+        "debut": "2024",
+        "relevant_relatives": []
+    },
+    "guanyu_zhou": {
+        "id": "guanyu_zhou",
+        "name": "Guanyu Zhou",
+        "nationality": "Chinese",
+        "nationality_code": "CHN",
+        "nationality_flag": "🇨🇳",
+        "world_championships": 0,
+        "birth_date": "1999-05-30",
+        "birth_place": "Shanghai, China",
+        "debut": "2022",
+        "relevant_relatives": []
+    },
+    "sebastian_vettel": {
+        "id": "sebastian_vettel",
+        "name": "Sebastian Vettel",
+        "nationality": "German",
+        "nationality_code": "DEU",
+        "nationality_flag": "🇩🇪",
+        "world_championships": 4,
+        "birth_date": "1987-07-03",
+        "birth_place": "Heppenheim, Germany",
+        "debut": "2007",
+        "relevant_relatives": []
+    },
+    "daniel_ricciardo": {
+        "id": "daniel_ricciardo",
+        "name": "Daniel Ricciardo",
+        "nationality": "Australian",
+        "nationality_code": "AUS",
+        "nationality_flag": "🇦🇺",
+        "world_championships": 0,
+        "birth_date": "1989-07-01",
+        "birth_place": "Perth, Australia",
+        "debut": "2011",
+        "relevant_relatives": []
+    },
+    "kimi_raikkonen": {
+        "id": "kimi_raikkonen",
+        "name": "Kimi Raikkonen",
+        "nationality": "Finnish",
+        "nationality_code": "FIN",
+        "nationality_flag": "🇫🇮",
+        "world_championships": 1,
+        "birth_date": "1979-10-17",
+        "birth_place": "Espoo, Finland",
+        "debut": "2001",
+        "relevant_relatives": []
+    },
+    "kevin_magnussen": {
+        "id": "kevin_magnussen",
+        "name": "Kevin Magnussen",
+        "nationality": "Danish",
+        "nationality_code": "DNK",
+        "nationality_flag": "🇩🇰",
+        "world_championships": 0,
+        "birth_date": "1992-10-05",
+        "birth_place": "Roskilde, Denmark",
+        "debut": "2014",
+        "relevant_relatives": []
+    },
+    "antonio_giovinazzi": {
+        "id": "antonio_giovinazzi",
+        "name": "Antonio Giovinazzi",
+        "nationality": "Italian",
+        "nationality_code": "ITA",
+        "nationality_flag": "🇮🇹",
+        "world_championships": 0,
+        "birth_date": "1993-12-14",
+        "birth_place": "Martina Franca, Italy",
+        "debut": "2017",
+        "relevant_relatives": []
+    },
+    "romain_grosjean": {
+        "id": "romain_grosjean",
+        "name": "Romain Grosjean",
+        "nationality": "French",
+        "nationality_code": "FRA",
+        "nationality_flag": "🇫🇷",
+        "world_championships": 0,
+        "birth_date": "1986-04-17",
+        "birth_place": "Geneva, Switzerland",
+        "debut": "2009",
+        "relevant_relatives": []
+    },
+    "robert_kubica": {
+        "id": "robert_kubica",
+        "name": "Robert Kubica",
+        "nationality": "Polish",
+        "nationality_code": "POL",
+        "nationality_flag": "🇵🇱",
+        "world_championships": 0,
+        "birth_date": "1984-12-07",
+        "birth_place": "Kraków, Poland",
+        "debut": "2006",
+        "relevant_relatives": []
+    },
+    "nicholas_latifi": {
+        "id": "nicholas_latifi",
+        "name": "Nicholas Latifi",
+        "nationality": "Canadian",
+        "nationality_code": "CAN",
+        "nationality_flag": "🇨🇦",
+        "world_championships": 0,
+        "birth_date": "1995-06-29",
+        "birth_place": "Montreal, Canada",
+        "debut": "2020",
+        "relevant_relatives": [
+            {
+                "name": "Michael Latifi",
+                "relationship": "Father"
+            }
+        ]
+    },
+    "jack_aitken": {
+        "id": "jack_aitken",
+        "name": "Jack Aitken",
+        "nationality": "British",
+        "nationality_code": "GBR",
+        "nationality_flag": "🇬🇧",
+        "world_championships": 0,
+        "birth_date": "1995-09-23",
+        "birth_place": "London, England",
+        "debut": "2020",
+        "relevant_relatives": []
+    },
+    "pietro_fittipaldi": {
+        "id": "pietro_fittipaldi",
+        "name": "Pietro Fittipaldi",
+        "nationality": "Brazilian",
+        "nationality_code": "BRA",
+        "nationality_flag": "🇧🇷",
+        "world_championships": 0,
+        "birth_date": "1996-06-25",
+        "birth_place": "Miami, USA",
+        "debut": "2020",
+        "relevant_relatives": [
+            {
+                "name": "Emerson Fittipaldi",
+                "relationship": "Grandfather"
+            }
+        ]
+    },
+    "mick_schumacher": {
+        "id": "mick_schumacher",
+        "name": "Mick Schumacher",
+        "nationality": "German",
+        "nationality_code": "DEU",
+        "nationality_flag": "🇩🇪",
+        "world_championships": 0,
+        "birth_date": "1999-03-22",
+        "birth_place": "Genolier, Switzerland",
+        "debut": "2021",
+        "relevant_relatives": [
+            {
+                "name": "Michael Schumacher",
+                "relationship": "Father"
+            }
+        ]
+    }
+}
