@@ -67,6 +67,7 @@ scraper:
 enrichment:
   ergast_base_url: "https://api.jolpi.ca/ergast/f1"
   ergast_fallback_url: "https://ergast.com/api/f1"
+  ergast_fallback_enabled: true
   fastf1_cache_enabled: true
 
 validation:

@@ -44,6 +44,7 @@ python dataset/scripts/run_pipeline.py --config configs/data.yaml --stage valida
 
 - Season URLs live in `configs/data.yaml` under `seasons`. Use `--season` to limit runs.
 - The downloader keeps PDFs whose filenames contain **Infringement**, **Decision**, **Offence**, or **Summons** (whole-word match, anywhere in the title). Naming varies by year (e.g. `Doc 52 - Infringement - ...` in 2025 vs `Offence - ...` in 2019).
+- **Enrichment order:** local reference JSON (`data/reference/`) first, then Ergast API fallback, then FastF1 for lap/weather/SC. See `data/reference/README.md`.
 - FastF1 enrichment is slow on first run; cache lives in `data/raw/race_data/fastf1_cache/`.
 - Ergast responses are cached under `data/raw/race_data/ergast/{season}/`.
 - Fill `severity` manually via review queue — not inferred automatically.
