@@ -1,0 +1,162 @@
+{
+    "red_bull": {
+        "id": "red_bull",
+        "name": "Red Bull Racing",
+        "legacy_ids": [
+            "stewart_grand_prix",
+            "jaguar_racing"
+        ],
+        "nationality": "Austrian",
+        "nationality_code": "AUT",
+        "nationality_flag": "�🇹",
+        "hq_location": "Milton Keynes, United Kingdom",
+        "team_first_entry": 1997,
+        "team_last_entry": 2026
+    },
+    "mercedes": {
+        "id": "mercedes",
+        "name": "Mercedes AMG F1 Team",
+        "legacy_ids": [
+            "brawn_gp",
+            "honda_racing",
+            "britishamerican_racing",
+            "tyrrell_racing"
+        ],
+        "nationality": "German",
+        "nationality_code": "GER",
+        "nationality_flag": "🇩",
+        "hq_location": "Brackley, United Kingdom",
+        "team_first_entry": 1970,
+        "team_last_entry": 2026
+    },
+    "ferrari": {
+        "id": "ferrari",
+        "name": "Scuderia Ferrari",
+        "legacy_ids": [
+            null
+        ],
+        "nationality": "Italian",
+        "nationality_code": "ITA",
+        "nationality_flag": "�🇮",
+        "hq_location": "Maranello, Italy",
+        "team_first_entry": 1950,
+        "team_last_entry": 2026
+    },
+    "mclaren": {
+        "id": "mclaren",
+        "name": "McLaren F1 Team",
+        "legacy_ids": [
+            null
+        ],
+        "nationality": "British",
+        "nationality_code": "GBR",
+        "nationality_flag": "�🇬",
+        "hq_location": "Woking, United Kingdom",
+        "team_first_entry": 1966,
+        "team_last_entry": 2026
+    },
+    "racing_bulls": {
+        "id": "racing_bulls",
+        "name": "Racing Bulls",
+        "legacy_ids": [
+            "rb",
+            "alphatauri",
+            "toro_rosso",
+            "minardi"
+        ],
+        "nationality": "Italian",
+        "nationality_code": "ITA",
+        "nationality_flag": "�🇮",
+        "hq_location": "Faenza, Italy",
+        "team_first_entry": 1985,
+        "team_last_entry": 2026
+    },
+    "alpine": {
+        "id": "alpine",
+        "name": "Alpine F1 Team",
+        "legacy_ids": [
+            "renault",
+            "lotus_f1_team",
+            "renault",
+            "benetton",
+            "toleman"
+        ],
+        "nationality": "French",
+        "nationality_code": "FRA",
+        "nationality_flag": "�🇫",
+        "hq_location": "Enstone, United Kingdom",
+        "team_first_entry": 1986,
+        "team_last_entry": 2026
+    },
+    "haas": {
+        "id": "haas",
+        "name": "Haas F1 Team",
+        "legacy_ids": [
+            null
+        ],
+        "nationality": "American",
+        "nationality_code": "USA",
+        "nationality_flag": "�🇺",
+        "hq_location": "Kannapolis, United States",
+        "team_first_entry": 2016,
+        "team_last_entry": 2026
+    },
+    "audi": {
+        "id": "audi",
+        "name": "Audi F1 Team",
+        "legacy_ids": [
+            "sauber",
+            "alfa_romeo",
+            "bmw_sauber"
+        ],
+        "nationality": "German",
+        "nationality_code": "GER",
+        "nationality_flag": "🇩",
+        "hq_location": "Hinwil, Switzerland",
+        "team_first_entry": 2026,
+        "team_last_entry": 2026
+    },
+    "williams": {
+        "id": "williams",
+        "name": "Williams F1 Team",
+        "legacy_ids": [
+            null
+        ],
+        "nationality": "British",
+        "nationality_code": "GBR",
+        "nationality_flag": "�🇬",
+        "hq_location": "Grove, United Kingdom",
+        "team_first_entry": 1978,
+        "team_last_entry": 2026
+    },
+    "aston_martin": {
+        "id": "aston_martin",
+        "name": "Aston Martin F1 Team",
+        "legacy_ids": [
+            "racing_point",
+            "force_india",
+            "spyker_f1_team",
+            "midland_f1_team",
+            "jordan_grand_prix"
+        ],
+        "nationality": "British",
+        "nationality_code": "GBR",
+        "nationality_flag": "�🇬",
+        "hq_location": "Silverstone, United Kingdom",
+        "team_first_entry": 2018,
+        "team_last_entry": 2026
+    },
+    "cadillac": {
+        "id": "cadillac",
+        "name": "Cadillac F1 Team",
+        "legacy_ids": [
+            null
+        ],
+        "nationality": "American",
+        "nationality_code": "USA",
+        "nationality_flag": "�🇺",
+        "hq_location": "Silverstone, United Kingdom",
+        "team_first_entry": 2026,
+        "team_last_entry": 2026
+    }
+}
