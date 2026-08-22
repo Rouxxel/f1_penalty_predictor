@@ -8,7 +8,7 @@ from typing import Any
 import pandas as pd
 
 from fia_ml.data.config import PipelineConfig
-from fia_ml.data.enrichment.ergast import load_meta
+from fia_ml.data.enrichment.common import load_meta
 from fia_ml.data.schema import MULTI_VALUE_COLUMNS, SCHEMA_COLUMNS
 from fia_ml.paths import ensure_dir
 from fia_ml.utils import secure_file_io as sio
