@@ -7,7 +7,8 @@ from typing import Any
 import pandas as pd
 
 from fia_ml.data.config import PipelineConfig
-from fia_ml.data.enrichment.ergast import load_meta, load_season_calendar, map_event_to_round
+from fia_ml.data.enrichment.common import is_blank, load_meta, map_event_to_round
+from fia_ml.data.reference_data import build_event_name_to_circuit_map, load_circuits, load_seasons
 from fia_ml.paths import ensure_dir
 
 
@@ -37,7 +38,24 @@ def _parse_time_to_seconds(value: str) -> int | None:
     return None
 
 
-def enrich_with_fastf1(df: pd.DataFrame, cfg: PipelineConfig) -> pd.DataFrame:
+def _round_from_reference(event: str, cfg: PipelineConfig) -> int | None:
+    seasons = load_seasons(cfg)
+    season_data = seasons.get(str(cfg.season))
+    if not season_data:
+        return None
+    circuits = load_circuits(cfg)
+    event_to_circuit = build_event_name_to_circuit_map(circuits)
+    calendar = list(season_data.get("calendar_in_order", []))
+    round_num, _ = map_event_to_round(event, calendar, event_to_circuit)
+    return round_num
+
+
+def enrich_with_fastf1(
+    df: pd.DataFrame,
+    cfg: PipelineConfig,
+    *,
+    fill_gaps_only: bool = True,
+) -> pd.DataFrame:
     if df.empty:
         return df
 
@@ -52,7 +70,6 @@ def enrich_with_fastf1(df: pd.DataFrame, cfg: PipelineConfig) -> pd.DataFrame:
 
     out = df.copy()
     meta = load_meta(cfg)
-    calendar = load_season_calendar(cfg)
     session_cache: dict[tuple[int, str], Any] = {}
 
     for idx, row in out.iterrows():
@@ -60,7 +77,7 @@ def enrich_with_fastf1(df: pd.DataFrame, cfg: PipelineConfig) -> pd.DataFrame:
         meta_row = meta.get(incident_id, {})
         event = meta_row.get("event", "")
         session = str(row.get("session", "")).lower()
-        round_num = map_event_to_round(event, calendar)
+        round_num = _round_from_reference(event, cfg)
         if not round_num:
             continue
 
@@ -79,24 +96,34 @@ def enrich_with_fastf1(df: pd.DataFrame, cfg: PipelineConfig) -> pd.DataFrame:
             continue
 
         try:
-            if hasattr(event_obj, "laps") and event_obj.laps is not None and len(event_obj.laps) > 0:
+            if (
+                (not fill_gaps_only or is_blank(row.get("full_laps")))
+                and hasattr(event_obj, "laps")
+                and event_obj.laps is not None
+                and len(event_obj.laps) > 0
+            ):
                 out.at[idx, "full_laps"] = str(int(event_obj.laps["LapNumber"].max()))
         except Exception:  # noqa: BLE001
             pass
 
         try:
-            weather = event_obj.weather_data
-            if weather is not None and len(weather) > 0:
-                last = weather.iloc[-1]
-                rainfall = getattr(last, "Rainfall", False)
-                track = str(getattr(last, "TrackStatus", "Dry"))
-                out.at[idx, "track_conditions"] = "wet" if rainfall or "wet" in track.lower() else "dry"
-                out.at[idx, "weather_conditions"] = "rain" if rainfall else "sunny"
+            if is_blank(row.get("track_conditions")) or is_blank(row.get("weather_conditions")) or not fill_gaps_only:
+                weather = event_obj.weather_data
+                if weather is not None and len(weather) > 0:
+                    last = weather.iloc[-1]
+                    rainfall = getattr(last, "Rainfall", False)
+                    track = str(getattr(last, "TrackStatus", "Dry"))
+                    if is_blank(row.get("track_conditions")) or not fill_gaps_only:
+                        out.at[idx, "track_conditions"] = (
+                            "wet" if rainfall or "wet" in track.lower() else "dry"
+                        )
+                    if is_blank(row.get("weather_conditions")) or not fill_gaps_only:
+                        out.at[idx, "weather_conditions"] = "rain" if rainfall else "sunny"
         except Exception:  # noqa: BLE001
             pass
 
         incident_time = _parse_time_to_seconds(str(meta_row.get("time", "")))
-        if incident_time and session == "race":
+        if incident_time and session == "race" and (is_blank(row.get("lap")) or not fill_gaps_only):
             try:
                 laps = event_obj.laps
                 for _, lap_row in laps.iterrows():
@@ -111,16 +138,19 @@ def enrich_with_fastf1(df: pd.DataFrame, cfg: PipelineConfig) -> pd.DataFrame:
                 pass
 
         try:
-            messages = event_obj.race_control_messages
-            if messages is not None and len(messages) > 0:
-                sc_active = any("SAFETY CAR" in str(m).upper() for m in messages["Message"].astype(str))
-                vsc_active = any("VIRTUAL SAFETY CAR" in str(m).upper() for m in messages["Message"].astype(str))
-                if sc_active:
-                    out.at[idx, "safety_car"] = "safety_car"
-                elif vsc_active:
-                    out.at[idx, "safety_car"] = "vsc"
-                else:
-                    out.at[idx, "safety_car"] = "none"
+            if is_blank(row.get("safety_car")) or not fill_gaps_only:
+                messages = event_obj.race_control_messages
+                if messages is not None and len(messages) > 0:
+                    sc_active = any("SAFETY CAR" in str(m).upper() for m in messages["Message"].astype(str))
+                    vsc_active = any(
+                        "VIRTUAL SAFETY CAR" in str(m).upper() for m in messages["Message"].astype(str)
+                    )
+                    if sc_active:
+                        out.at[idx, "safety_car"] = "safety_car"
+                    elif vsc_active:
+                        out.at[idx, "safety_car"] = "vsc"
+                    else:
+                        out.at[idx, "safety_car"] = "none"
         except Exception:  # noqa: BLE001
             pass
 

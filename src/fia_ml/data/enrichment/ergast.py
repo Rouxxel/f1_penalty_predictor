@@ -1,4 +1,4 @@
-"""Ergast / Jolpica API enrichment with local caching."""
+"""Ergast / Jolpica API enrichment fallback for gaps not covered by reference data."""
 
 from __future__ import annotations
 
@@ -6,12 +6,12 @@ import json
 import time
 import urllib.error
 import urllib.request
-from pathlib import Path
 from typing import Any
 
 import pandas as pd
 
 from fia_ml.data.config import PipelineConfig
+from fia_ml.data.enrichment.common import is_blank, load_meta
 from fia_ml.paths import ensure_dir
 from fia_ml.utils import secure_file_io as sio
 
@@ -120,29 +120,25 @@ def build_car_to_driver_map(results: list[dict[str, Any]]) -> dict[str, str]:
     return mapping
 
 
-def load_meta(cfg: PipelineConfig) -> dict[str, dict[str, Any]]:
-    meta_path = cfg.path("csv_out") / f"raw_incidents_{cfg.season}.meta.json"
-    if not meta_path.exists():
-        return {}
-    rows = sio.read_json(meta_path)
-    return {row["incident_id"]: row for row in rows}
-
-
-def enrich_with_ergast(df: pd.DataFrame, cfg: PipelineConfig) -> pd.DataFrame:
+def enrich_with_ergast(df: pd.DataFrame, cfg: PipelineConfig, *, fill_gaps_only: bool = True) -> pd.DataFrame:
     if df.empty:
+        return df
+    if not cfg.enrichment.get("ergast_fallback_enabled", True):
         return df
 
     out = df.copy()
     meta = load_meta(cfg)
     calendar = load_season_calendar(cfg)
     total_rounds = len(calendar)
-    out["rounds"] = str(total_rounds)
+    if fill_gaps_only and is_blank(out["rounds"].iloc[0] if len(out) else ""):
+        out["rounds"] = str(total_rounds)
 
-    constructors_seen: set[str] = set()
-    for round_num in range(1, total_rounds + 1):
-        for item in load_constructor_standings(cfg, round_num):
-            constructors_seen.add(item["Constructor"]["constructorId"])
-    out["num_teams"] = str(len(constructors_seen) or "")
+    if fill_gaps_only and is_blank(out["num_teams"].iloc[0] if len(out) else ""):
+        constructors_seen: set[str] = set()
+        for round_num in range(1, total_rounds + 1):
+            for item in load_constructor_standings(cfg, round_num):
+                constructors_seen.add(item["Constructor"]["constructorId"])
+        out["num_teams"] = str(len(constructors_seen) or "")
 
     for idx, row in out.iterrows():
         incident_id = row.get("incident_id", "")
@@ -154,10 +150,11 @@ def enrich_with_ergast(df: pd.DataFrame, cfg: PipelineConfig) -> pd.DataFrame:
 
         race_info = next((r for r in calendar if r["round"] == round_num), None)
         if race_info:
-            out.at[idx, "round"] = str(round_num)
-            if not row.get("circuit"):
+            if is_blank(row.get("round")) or not fill_gaps_only:
+                out.at[idx, "round"] = str(round_num)
+            if is_blank(row.get("circuit")) or not fill_gaps_only:
                 out.at[idx, "circuit"] = race_info["circuit_id"]
-            if not row.get("country"):
+            if is_blank(row.get("country")) or not fill_gaps_only:
                 out.at[idx, "country"] = race_info["country"]
 
         standings_round = max(round_num - 1, 0)
@@ -167,7 +164,7 @@ def enrich_with_ergast(df: pd.DataFrame, cfg: PipelineConfig) -> pd.DataFrame:
         car_map = build_car_to_driver_map(results)
 
         car_number = str(meta_row.get("car_number", ""))
-        if car_number and car_number in car_map:
+        if car_number and car_number in car_map and is_blank(row.get("drivers")):
             out.at[idx, "drivers"] = car_map[car_number]
 
         driver_ids = [d.strip() for d in str(out.at[idx, "drivers"]).split(",") if d.strip()]
@@ -176,8 +173,6 @@ def enrich_with_ergast(df: pd.DataFrame, cfg: PipelineConfig) -> pd.DataFrame:
         d_points: list[str] = []
         c_standings: list[str] = []
         c_points: list[str] = []
-        years_list: list[str] = []
-        sl_points_list: list[str] = []
 
         driver_lookup = {slugify_driver_id(s["Driver"]["driverId"]): s for s in driver_standings}
         constructor_lookup = {
@@ -199,19 +194,20 @@ def enrich_with_ergast(df: pd.DataFrame, cfg: PipelineConfig) -> pd.DataFrame:
                     c_standings.append(str(c_st["position"]))
                     c_points.append(str(c_st["points"]))
 
-            sl_points_list.append("0")
-            years_list.append("")
-
         if driver_ids:
-            out.at[idx, "nationalities"] = ",".join(nat_list)
-            out.at[idx, "driver_standings"] = ",".join(d_standings)
-            out.at[idx, "driver_points"] = ",".join(d_points)
-            out.at[idx, "construct_standings"] = ",".join(c_standings)
-            out.at[idx, "construct_points"] = ",".join(c_points)
-            out.at[idx, "years_in_sport"] = ",".join(years_list)
-            out.at[idx, "superlicense_points_before_incident"] = ",".join(sl_points_list)
+            if is_blank(row.get("nationalities")) or not fill_gaps_only:
+                out.at[idx, "nationalities"] = ",".join(nat_list)
+            if is_blank(row.get("driver_standings")) or not fill_gaps_only:
+                out.at[idx, "driver_standings"] = ",".join(d_standings)
+            if is_blank(row.get("driver_points")) or not fill_gaps_only:
+                out.at[idx, "driver_points"] = ",".join(d_points)
+            if is_blank(row.get("construct_standings")) or not fill_gaps_only:
+                out.at[idx, "construct_standings"] = ",".join(c_standings)
+            if is_blank(row.get("construct_points")) or not fill_gaps_only:
+                out.at[idx, "construct_points"] = ",".join(c_points)
 
         top4 = [slugify_driver_id(s["Driver"]["driverId"]) for s in driver_standings[:4]]
-        out.at[idx, "current_top_4_drivers"] = ",".join(top4)
+        if is_blank(row.get("current_top_4_drivers")) or not fill_gaps_only:
+            out.at[idx, "current_top_4_drivers"] = ",".join(top4)
 
     return out
