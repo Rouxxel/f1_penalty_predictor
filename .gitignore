@@ -11,6 +11,7 @@ extracted_documents/
 fia/
 ergast/
 fastf1_cache/
+review_queue_*.csv
 
 # Distribution / packaging
 .Python
