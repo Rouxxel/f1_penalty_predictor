@@ -4,13 +4,20 @@ from __future__ import annotations
 
 import hashlib
 import re
-import time
 import urllib.parse
-import urllib.request
 from dataclasses import dataclass
 from pathlib import Path
 
+import requests
+
 from fia_ml.data.config import PipelineConfig
+from fia_ml.data.fia_http import (
+    _championship_url,
+    create_fia_session,
+    download_fia_file,
+    fetch_fia_html,
+    warmup_fia_session,
+)
 from fia_ml.paths import PROJECT_ROOT, ensure_dir
 from fia_ml.utils import secure_file_io as sio
 
@@ -33,26 +40,20 @@ def slugify_event(name: str) -> str:
     return slug.strip("_")
 
 
-def _fetch_html(url: str, cfg: PipelineConfig) -> str:
-    scraper = cfg.scraper
-    req = urllib.request.Request(
-        url,
-        headers={"User-Agent": scraper.get("user_agent", "f1-penalty-predictor/1.0")},
+def discover_event_urls(
+    season_url: str,
+    cfg: PipelineConfig,
+    session: requests.Session,
+    *,
+    warmed: bool = False,
+) -> list[tuple[str, str]]:
+    html = fetch_fia_html(
+        session,
+        cfg,
+        season_url,
+        referer=_championship_url(cfg),
+        warmed=warmed,
     )
-    retries = int(scraper.get("max_retries", 3))
-    last_error: Exception | None = None
-    for attempt in range(retries):
-        try:
-            with urllib.request.urlopen(req, timeout=60) as response:
-                return response.read().decode("utf-8", "replace")
-        except Exception as exc:  # noqa: BLE001 - retry loop
-            last_error = exc
-            time.sleep(2**attempt)
-    raise RuntimeError(f"Failed to fetch {url}: {last_error}") from last_error
-
-
-def discover_event_urls(season_url: str, cfg: PipelineConfig) -> list[tuple[str, str]]:
-    html = _fetch_html(season_url, cfg)
     pattern = re.compile(
         r'value="(/documents/championships/fia-formula-one-world-championship-14/season/[^"]+/event/[^"]+)"'
     )
@@ -107,8 +108,15 @@ def _should_include_pdf(title: str, cfg: PipelineConfig) -> bool:
     return True
 
 
-def discover_pdfs_for_event(event_url: str, event_name: str, cfg: PipelineConfig) -> list[tuple[str, str]]:
-    html = _fetch_html(event_url, cfg)
+def discover_pdfs_for_event(
+    event_url: str,
+    event_name: str,
+    cfg: PipelineConfig,
+    session: requests.Session,
+    *,
+    season_url: str,
+) -> list[tuple[str, str]]:
+    html = fetch_fia_html(session, cfg, event_url, referer=season_url, warmed=True)
     base = cfg.scraper.get("fia_base_url", "https://www.fia.com")
     pdfs: list[tuple[str, str]] = []
     for match in re.finditer(
@@ -129,25 +137,16 @@ def _sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
-def _download_file(url: str, dest: Path, cfg: PipelineConfig) -> None:
-    scraper = cfg.scraper
-    retries = int(scraper.get("max_retries", 3))
-    last_error: Exception | None = None
-    for attempt in range(retries):
-        try:
-            req = urllib.request.Request(
-                url,
-                headers={"User-Agent": scraper.get("user_agent", "f1-penalty-predictor/1.0")},
-            )
-            with urllib.request.urlopen(req, timeout=120) as response:
-                data = response.read()
-            sio.write_bytes(dest, data)
-            time.sleep(float(scraper.get("rate_limit_seconds", 1.0)))
-            return
-        except Exception as exc:  # noqa: BLE001 - retry loop
-            last_error = exc
-            time.sleep(2**attempt)
-    raise RuntimeError(f"Failed to download {url}: {last_error}") from last_error
+def _download_file(
+    url: str,
+    dest: Path,
+    cfg: PipelineConfig,
+    session: requests.Session,
+    *,
+    referer: str,
+) -> None:
+    data = download_fia_file(session, cfg, url, referer=referer)
+    sio.write_bytes(dest, data)
 
 
 def make_document_id(season: int, event_slug: str, title: str) -> str:
@@ -167,14 +166,22 @@ def download_season(cfg: PipelineConfig) -> list[DocumentEntry]:
 
     entries: list[DocumentEntry] = []
     failures: list[dict[str, str]] = []
-    event_urls = discover_event_urls(cfg.season_url, cfg)
+    session = create_fia_session(cfg)
+    warmup_fia_session(session, cfg, cfg.season_url)
+    event_urls = discover_event_urls(cfg.season_url, cfg, session, warmed=True)
     if not event_urls:
         raise RuntimeError(f"No event URLs found at {cfg.season_url}")
 
     for event_name, event_url in event_urls:
         event_slug = slugify_event(event_name)
         event_dir = ensure_dir(raw_root / event_slug)
-        pdfs = discover_pdfs_for_event(event_url, event_name, cfg)
+        pdfs = discover_pdfs_for_event(
+            event_url,
+            event_name,
+            cfg,
+            session,
+            season_url=cfg.season_url,
+        )
 
         for title, url in pdfs:
             safe_name = title.replace("/", "-")
@@ -190,7 +197,7 @@ def download_season(cfg: PipelineConfig) -> list[DocumentEntry]:
 
             if not local_path.exists():
                 try:
-                    _download_file(url, local_path, cfg)
+                    _download_file(url, local_path, cfg, session, referer=event_url)
                 except RuntimeError as exc:
                     failures.append({"title": title, "url": url, "error": str(exc)})
                     continue
