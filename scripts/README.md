@@ -1,0 +1,1 @@
+just some helper scripts to check things
