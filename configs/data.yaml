@@ -59,9 +59,11 @@ document_exclude_patterns:
   - Initial Scrutineering
 
 scraper:
-  rate_limit_seconds: 1.0
+  rate_limit_seconds: 3.0
   max_retries: 3
-  user_agent: "f1-penalty-predictor/1.0 (research; contact: local)"
+  timeout_seconds: 60
+  warmup_enabled: true
+  user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
   fia_base_url: "https://www.fia.com"
 
 enrichment:
