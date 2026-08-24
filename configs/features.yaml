@@ -14,6 +14,7 @@ history:
 championship:
   title_contender_max_standing: 3
   title_contender_max_gap: 40
+  points_per_race_max: 25
 
 race:
   final_laps_completion_threshold: 85
