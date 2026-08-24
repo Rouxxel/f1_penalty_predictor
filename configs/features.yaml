@@ -1,0 +1,28 @@
+# V2 feature engineering configuration
+# See FEATURE_ENGINEERING_PLAN.md
+
+precedent:
+  similarity_keys:
+    - [incident_type, severity, session]
+    - [incident_type, severity, session, circuit]  # ablation only
+  min_precedent_count: 3
+
+history:
+  rolling_windows: [3, 5]
+  rate_features: true
+
+championship:
+  title_contender_max_standing: 3
+  title_contender_max_gap: 40
+
+race:
+  final_laps_completion_threshold: 85
+  race_stage_bins:
+    early_max: 33
+    middle_max: 66
+    late_max: 85
+
+selection:
+  max_missing_rate: 0.40
+  correlation_threshold: 0.95
+  importance_drop_percentile: 20

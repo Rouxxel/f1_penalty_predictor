@@ -1,0 +1,54 @@
+# V2 model training — same hyperparameters as V1 for fair comparison
+# See FEATURE_ENGINEERING_PLAN.md
+
+feature_version: v2
+
+paths:
+  csv_input_glob: dataset/csv/processed_*.csv
+  processed: data/processed
+  models: ml_models
+  reports: reports
+  target_mapping: configs/target_mapping.yaml
+  features_config: configs/features.yaml
+
+inputs:
+  seasons: [2019, 2025]
+
+splits:
+  mode: temporal
+  train_seasons: [2019]
+  validation_season: 2025
+  test_season: null
+
+features:
+  incidents_file: incidents.parquet
+  features_v1_file: features.parquet
+  features_file: features_v2.parquet
+  train_file: train_v2.parquet
+  validation_file: validation_v2.parquet
+  test_file: test_v2.parquet
+
+output:
+  model_dir: xgboost_v2
+
+model:
+  objective: multi:softprob
+  num_class: 3
+  eval_metric: mlogloss
+  max_depth: 4
+  learning_rate: 0.05
+  n_estimators: 500
+  early_stopping_rounds: 30
+  subsample: 0.8
+  colsample_bytree: 0.8
+  random_state: 42
+
+class_imbalance:
+  strategy: inverse_frequency
+
+evaluation:
+  primary_metric: macro_f1
+  min_macro_f1: 0.40
+  compare_to_v1: true
+
+random_state: 42
