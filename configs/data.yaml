@@ -59,6 +59,8 @@ document_exclude_patterns:
   - Initial Scrutineering
 
 scraper:
+  fetch_backend: playwright   # requests | playwright (use playwright if FIA returns 403)
+  playwright_headless: true
   rate_limit_seconds: 3.0
   max_retries: 3
   timeout_seconds: 60
