@@ -9,6 +9,7 @@ from typing import Any
 from fia_ml.preprocessing.prepare import prepare_datasets
 from fia_ml.training.config import TrainingConfig
 from fia_ml.training.train_baselines import train_baselines
+from fia_ml.training.train_xgboost import train_xgboost
 
 
 class Stage(str, Enum):
@@ -53,7 +54,10 @@ def _run_prepare(
 
 
 def _run_train(cfg: TrainingConfig) -> dict[str, Any]:
-    return {"baseline": train_baselines(cfg)}
+    return {
+        "baseline": train_baselines(cfg),
+        "xgboost": train_xgboost(cfg),
+    }
 
 
 def _run_evaluate(cfg: TrainingConfig) -> dict[str, Any]:

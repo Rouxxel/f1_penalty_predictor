@@ -10,36 +10,18 @@ import pandas as pd
 
 from fia_ml.models.baseline import MajorityClassBaseline, SessionStratifiedBaseline
 from fia_ml.paths import ensure_dir
-from fia_ml.preprocessing.encoding import TARGET_COLUMN
 from fia_ml.training.config import TrainingConfig
+from fia_ml.training.data_loaders import labels, load_train_val_frames
 from fia_ml.training.metrics import compute_metrics
 from fia_ml.utils import secure_file_io as sio
 
 
-def _feature_matrix(df: pd.DataFrame) -> pd.DataFrame:
-    return df[[c for c in df.columns if c.startswith(("cat__", "num__"))]]
-
-
-def _labels(df: pd.DataFrame) -> pd.Series:
-    return df[TARGET_COLUMN].astype(int)
-
-
 def train_baselines(cfg: TrainingConfig) -> dict[str, Any]:
     """Fit majority and session-stratified baselines; evaluate on validation set."""
-    processed_dir = cfg.path("processed")
-    train_path = processed_dir / "train.parquet"
-    val_path = processed_dir / "validation.parquet"
+    train_df, val_df = load_train_val_frames(cfg)
 
-    if not train_path.exists() or not val_path.exists():
-        raise FileNotFoundError(
-            "Missing train.parquet or validation.parquet — run --stage prepare first"
-        )
-
-    train_df = pd.read_parquet(train_path)
-    val_df = pd.read_parquet(val_path)
-
-    y_train = _labels(train_df)
-    y_val = _labels(val_df)
+    y_train = labels(train_df)
+    y_val = labels(val_df)
 
     majority = MajorityClassBaseline().fit(y_train)
     majority_pred = majority.predict(len(val_df))
