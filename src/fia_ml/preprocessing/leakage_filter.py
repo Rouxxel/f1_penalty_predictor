@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from fia_ml.preprocessing.feature_engineering import FORBIDDEN_REDUNDANT_DERIVED
+
 # Columns never used as model inputs (identifiers, labels, outcome leakage).
 FORBIDDEN_FEATURE_COLUMNS = frozenset(
     {
@@ -62,10 +64,6 @@ V1_CATEGORICAL_FEATURES = frozenset(
 V1_BOOLEAN_FEATURES = frozenset(
     {
         "same_team",
-        "top_4_driver",
-        "top_4_opponent",
-        "is_race_session",
-        "is_qualifying",
     }
 )
 
@@ -76,7 +74,7 @@ V1_NUMERIC_FEATURES = frozenset(
         "rounds",
         "num_teams",
         "lap",
-        "laps_remaining",
+        "lap_remaining",
         "full_laps",
         "completion_percentage",
         "first_season",
@@ -114,7 +112,7 @@ def columns_to_drop_for_missingness(df, threshold: float = MISSINGNESS_DROP_THRE
 
 def select_feature_columns(df, *, extra_forbidden: set[str] | None = None) -> list[str]:
     """Return ordered feature column names for X."""
-    forbidden = set(FORBIDDEN_FEATURE_COLUMNS)
+    forbidden = set(FORBIDDEN_FEATURE_COLUMNS) | FORBIDDEN_REDUNDANT_DERIVED
     if extra_forbidden:
         forbidden |= extra_forbidden
 

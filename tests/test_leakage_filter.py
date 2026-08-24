@@ -58,3 +58,27 @@ def test_assert_no_leakage_raises() -> None:
     except ValueError:
         raised = True
     assert raised
+
+
+def test_environmental_columns_are_schema_only() -> None:
+    """flag, safety_car, track/weather conditions have no derived boolean twins."""
+    df = pd.DataFrame(
+        {
+            "circuit": ["monza"],
+            "driver": ["a"],
+            "round": [10],
+            "season": [2019],
+            "flag": ["yellow_flag"],
+            "safety_car": ["safety_car"],
+            "track_conditions": ["dry"],
+            "weather_conditions": ["sunny"],
+            "session": ["race"],
+        }
+    )
+    features = select_feature_columns(df)
+    assert "flag" in features
+    assert "safety_car" in features
+    assert "track_conditions" in features
+    assert "weather_conditions" in features
+    assert "session" in features
+    assert not any(name.startswith("is_") for name in features)

@@ -121,7 +121,6 @@ def flatten_incidents(df: pd.DataFrame) -> pd.DataFrame:
             for col in MULTI_VALUE_COLUMNS
             if col in incident.index
         }
-        top4 = set(split_multi_value(incident.get("current_top_4_drivers", "")))
 
         for idx, driver in enumerate(drivers):
             row: dict[str, object] = {
@@ -145,11 +144,6 @@ def flatten_incidents(df: pd.DataFrame) -> pd.DataFrame:
                 row["opponent"] = None
                 for _, dest_col in _OPPONENT_FIELD_MAP:
                     row[dest_col] = None
-
-            row["top_4_driver"] = driver in top4
-            row["top_4_opponent"] = (
-                row["opponent"] in top4 if row.get("opponent") else False
-            )
 
             rows.append(row)
 
