@@ -1,0 +1,110 @@
+{
+  "validation_rows": 144,
+  "train_rows": 90,
+  "majority_class": {
+    "predicted_class": 1,
+    "metrics": {
+      "accuracy": 0.6666666666666666,
+      "macro_f1": 0.26666666666666666,
+      "weighted_f1": 0.5333333333333334,
+      "per_class": {
+        "0": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 34
+        },
+        "1": {
+          "precision": 0.6666666666666666,
+          "recall": 1.0,
+          "f1": 0.8,
+          "support": 96
+        },
+        "2": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 14
+        }
+      },
+      "confusion_matrix": [
+        [
+          0,
+          34,
+          0
+        ],
+        [
+          0,
+          96,
+          0
+        ],
+        [
+          0,
+          14,
+          0
+        ]
+      ],
+      "labels": [
+        0,
+        1,
+        2
+      ]
+    }
+  },
+  "session_stratified": {
+    "session_modes": {
+      "practice": 1,
+      "qualifying": 2,
+      "race": 1,
+      "reconnaissance laps": 1
+    },
+    "global_fallback": 1,
+    "metrics": {
+      "accuracy": 0.625,
+      "macro_f1": 0.3593890386343217,
+      "weighted_f1": 0.5560796645702306,
+      "per_class": {
+        "0": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 34
+        },
+        "1": {
+          "precision": 0.7241379310344828,
+          "recall": 0.875,
+          "f1": 0.7924528301886793,
+          "support": 96
+        },
+        "2": {
+          "precision": 0.21428571428571427,
+          "recall": 0.42857142857142855,
+          "f1": 0.2857142857142857,
+          "support": 14
+        }
+      },
+      "confusion_matrix": [
+        [
+          0,
+          24,
+          10
+        ],
+        [
+          0,
+          84,
+          12
+        ],
+        [
+          0,
+          8,
+          6
+        ]
+      ],
+      "labels": [
+        0,
+        1,
+        2
+      ]
+    }
+  }
+}
