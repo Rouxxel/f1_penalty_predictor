@@ -6,6 +6,7 @@ from enum import Enum
 from pathlib import Path
 from typing import Any
 
+from fia_ml.preprocessing.prepare import prepare_datasets
 from fia_ml.training.config import TrainingConfig
 
 
@@ -47,9 +48,7 @@ def _run_prepare(
     *,
     input_paths: list[Path] | None = None,
 ) -> dict[str, Any]:
-    raise NotImplementedError(
-        "Stage 'prepare' is not implemented yet (Phase B: preprocessing)."
-    )
+    return prepare_datasets(cfg, input_paths=input_paths)
 
 
 def _run_train(cfg: TrainingConfig) -> dict[str, Any]:
