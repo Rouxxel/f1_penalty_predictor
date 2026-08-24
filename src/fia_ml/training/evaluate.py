@@ -211,8 +211,10 @@ def _write_report(
 
 
 def _evaluate_test_split(cfg: TrainingConfig, label_names: dict[str, str]) -> dict[str, Any] | None:
-    test_path = cfg.path("processed") / "test.parquet"
-    model_path = cfg.path("models") / "xgboost" / "model.json"
+    features_cfg = cfg.features or {}
+    test_name = features_cfg.get("test_file", "test.parquet")
+    test_path = cfg.path("processed") / test_name
+    model_path = cfg.model_dir() / "model.json"
     if not test_path.exists() or not model_path.exists():
         return None
 
@@ -239,11 +241,11 @@ def _evaluate_test_split(cfg: TrainingConfig, label_names: dict[str, str]) -> di
 def run_evaluation(cfg: TrainingConfig) -> dict[str, Any]:
     """Generate plots, error analysis, and markdown report from saved model artifacts."""
     models_dir = cfg.path("models")
-    xgb_dir = models_dir / "xgboost"
+    xgb_dir = cfg.model_dir()
     metrics_path = xgb_dir / "metrics.json"
     predictions_path = xgb_dir / "predictions_val.json"
     importance_path = xgb_dir / "feature_importance.json"
-    preprocessor_meta_path = models_dir / "preprocessor.meta.json"
+    preprocessor_meta_path = cfg.preprocessor_path().with_suffix(".meta.json")
 
     if not metrics_path.exists():
         raise FileNotFoundError(
@@ -284,7 +286,12 @@ def run_evaluation(cfg: TrainingConfig) -> dict[str, Any]:
     sio.write_json(errors_path, errors)
 
     report_dir = ensure_dir(cfg.path("reports") / "model_reports")
-    report_path = report_dir / f"v1_training_report_{date.today().isoformat()}.md"
+    report_prefix = (
+        "v2_feature_engineering_report"
+        if cfg.feature_version == "v2"
+        else "v1_training_report"
+    )
+    report_path = report_dir / f"{report_prefix}_{date.today().isoformat()}.md"
     figures = {
         "confusion_matrix_val": str(confusion_val_path.relative_to(PROJECT_ROOT)),
         "feature_importance_top20": str(importance_fig_path.relative_to(PROJECT_ROOT)),

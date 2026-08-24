@@ -50,7 +50,7 @@ def train_xgboost(cfg: TrainingConfig) -> dict[str, Any]:
     y_proba = trainer.predict_proba(X_val)
     val_metrics = compute_metrics(y_val.to_numpy(), y_pred, y_proba=y_proba)
 
-    xgb_dir = ensure_dir(cfg.path("models") / "xgboost")
+    xgb_dir = ensure_dir(cfg.model_dir())
     model_path = xgb_dir / "model.json"
     trainer.model.save_model(model_path)
 

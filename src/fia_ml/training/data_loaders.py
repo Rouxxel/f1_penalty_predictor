@@ -13,12 +13,15 @@ from fia_ml.training.config import TrainingConfig
 
 def load_train_val_frames(cfg: TrainingConfig) -> tuple[pd.DataFrame, pd.DataFrame]:
     processed_dir = cfg.path("processed")
-    train_path = processed_dir / "train.parquet"
-    val_path = processed_dir / "validation.parquet"
+    features_cfg = cfg.features or {}
+    train_name = features_cfg.get("train_file", "train.parquet")
+    val_name = features_cfg.get("validation_file", "validation.parquet")
+    train_path = processed_dir / train_name
+    val_path = processed_dir / val_name
 
     if not train_path.exists() or not val_path.exists():
         raise FileNotFoundError(
-            "Missing train.parquet or validation.parquet — run --stage prepare first"
+            f"Missing {train_name} or {val_name} — run prepare/features_v2 first"
         )
 
     return pd.read_parquet(train_path), pd.read_parquet(val_path)

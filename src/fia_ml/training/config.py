@@ -18,10 +18,24 @@ class TrainingConfig:
     model: dict[str, Any] = field(default_factory=dict)
     class_imbalance: dict[str, Any] = field(default_factory=dict)
     evaluation: dict[str, Any] = field(default_factory=dict)
+    features: dict[str, Any] = field(default_factory=dict)
+    output: dict[str, Any] = field(default_factory=dict)
+    feature_version: str = "v1"
     random_state: int = 42
 
     def path(self, key: str) -> Path:
         return PROJECT_ROOT / self.paths[key]
+
+    def model_subdir(self) -> str:
+        return str(self.output.get("model_dir", "xgboost"))
+
+    def model_dir(self) -> Path:
+        return self.path("models") / self.model_subdir()
+
+    def preprocessor_path(self) -> Path:
+        if self.feature_version == "v2":
+            return self.path("models") / f"preprocessor_{self.model_subdir()}.joblib"
+        return self.path("models") / "preprocessor.joblib"
 
     @property
     def target_mapping_path(self) -> Path:
@@ -39,6 +53,9 @@ class TrainingConfig:
             model=dict(raw.get("model", {})),
             class_imbalance=dict(raw.get("class_imbalance", {})),
             evaluation=dict(raw.get("evaluation", {})),
+            features=dict(raw.get("features", {})),
+            output=dict(raw.get("output", {})),
+            feature_version=str(raw.get("feature_version", "v1")),
             random_state=int(raw.get("random_state", 42)),
         )
 

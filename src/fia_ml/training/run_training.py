@@ -13,7 +13,9 @@ from fia_ml.training.pipeline import Stage, run_training
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="FIA penalty predictor — V1 model training")
+    parser = argparse.ArgumentParser(
+        description="FIA penalty predictor — model training (V1 and V2)"
+    )
     parser.add_argument(
         "--config",
         type=Path,
