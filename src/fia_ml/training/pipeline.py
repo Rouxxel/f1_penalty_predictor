@@ -8,6 +8,7 @@ from typing import Any
 
 from fia_ml.preprocessing.prepare import prepare_datasets
 from fia_ml.training.config import TrainingConfig
+from fia_ml.training.train_baselines import train_baselines
 
 
 class Stage(str, Enum):
@@ -52,9 +53,7 @@ def _run_prepare(
 
 
 def _run_train(cfg: TrainingConfig) -> dict[str, Any]:
-    raise NotImplementedError(
-        "Stage 'train' is not implemented yet (Phase C–D: baseline + XGBoost)."
-    )
+    return {"baseline": train_baselines(cfg)}
 
 
 def _run_evaluate(cfg: TrainingConfig) -> dict[str, Any]:
