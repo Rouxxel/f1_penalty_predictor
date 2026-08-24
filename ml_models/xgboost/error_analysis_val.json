@@ -1,0 +1,546 @@
+[
+  {
+    "incident_id": "2025_race_b5f6435097",
+    "row_id": "2025_race_b5f6435097_fernando_alonso",
+    "penalty": "no_penalty_applied.",
+    "session": "race",
+    "actual_severity": 0,
+    "predicted_severity": 1
+  },
+  {
+    "incident_id": "2025_race_f0690b4134",
+    "row_id": "2025_race_f0690b4134_alexander_albon",
+    "penalty": "no_penalty_applied.",
+    "session": "race",
+    "actual_severity": 0,
+    "predicted_severity": 1
+  },
+  {
+    "incident_id": "2025_qualifying_35b9057129",
+    "row_id": "2025_qualifying_35b9057129_charles_leclerc",
+    "penalty": "no_further_action",
+    "session": "qualifying",
+    "actual_severity": 0,
+    "predicted_severity": 1
+  },
+  {
+    "incident_id": "2025_race_47adfa78e4",
+    "row_id": "2025_race_47adfa78e4_lewis_hamilton",
+    "penalty": "disqualification",
+    "session": "race",
+    "actual_severity": 2,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_race_cc93c50b96",
+    "row_id": "2025_race_cc93c50b96_charles_leclerc",
+    "penalty": "disqualification",
+    "session": "race",
+    "actual_severity": 2,
+    "predicted_severity": 1
+  },
+  {
+    "incident_id": "2025_race_fe3c37f387",
+    "row_id": "2025_race_fe3c37f387_pierre_gasly",
+    "penalty": "disqualification",
+    "session": "race",
+    "actual_severity": 2,
+    "predicted_severity": 1
+  },
+  {
+    "incident_id": "2025_reconnaissance laps_686f546ac2",
+    "row_id": "2025_reconnaissance laps_686f546ac2_nico_hulkenberg",
+    "penalty": "warning",
+    "session": "reconnaissance laps",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_qualifying_b715030d8d",
+    "row_id": "2025_qualifying_b715030d8d_kimi_antonelli",
+    "penalty": "drop_of_1_grid_position_for_the_next_race_in_which_the_driver_participates.",
+    "session": "qualifying",
+    "actual_severity": 2,
+    "predicted_severity": 1
+  },
+  {
+    "incident_id": "2025_qualifying_d6f37adaf4",
+    "row_id": "2025_qualifying_d6f37adaf4_george_russell",
+    "penalty": "drop_of_1_grid_position_for_the_next_race_in_which_the_driver_participates.",
+    "session": "qualifying",
+    "actual_severity": 2,
+    "predicted_severity": 1
+  },
+  {
+    "incident_id": "2025_race_2fa76babc1",
+    "row_id": "2025_race_2fa76babc1_nico_hulkenberg",
+    "penalty": "disqualification",
+    "session": "race",
+    "actual_severity": 2,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_race_9fc679b982",
+    "row_id": "2025_race_9fc679b982_jack_doohan",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_race_bfbdf59dc3",
+    "row_id": "2025_race_bfbdf59dc3_lando_norris",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_qualifying_00eda94900",
+    "row_id": "2025_qualifying_00eda94900_alexander_albon",
+    "penalty": "reprimand",
+    "session": "qualifying",
+    "actual_severity": 1,
+    "predicted_severity": 2
+  },
+  {
+    "incident_id": "2025_qualifying_c42375cbb7",
+    "row_id": "2025_qualifying_c42375cbb7_max_verstappen",
+    "penalty": "reprimand",
+    "session": "qualifying",
+    "actual_severity": 1,
+    "predicted_severity": 2
+  },
+  {
+    "incident_id": "2025_reconnaissance laps_90437e24a0",
+    "row_id": "2025_reconnaissance laps_90437e24a0_charles_leclerc",
+    "penalty": "reprimand",
+    "session": "reconnaissance laps",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_sprint_75ac16b051",
+    "row_id": "2025_sprint_75ac16b051_alexander_albon",
+    "penalty": "5s_time_penalty",
+    "session": "sprint",
+    "actual_severity": 1,
+    "predicted_severity": 2
+  },
+  {
+    "incident_id": "2025_sprint_7743cd6bdb",
+    "row_id": "2025_sprint_7743cd6bdb_oliver_bearman",
+    "penalty": "5s_time_penalty",
+    "session": "sprint",
+    "actual_severity": 1,
+    "predicted_severity": 2
+  },
+  {
+    "incident_id": "2025_sprint_ef07e7bf5b",
+    "row_id": "2025_sprint_ef07e7bf5b_max_verstappen",
+    "penalty": "10s_time_penalty",
+    "session": "sprint",
+    "actual_severity": 1,
+    "predicted_severity": 2
+  },
+  {
+    "incident_id": "2025_practice_e6a853b940",
+    "row_id": "2025_practice_e6a853b940_charles_leclerc",
+    "penalty": "the_competitor_(scuderia_ferrari_hp)_is_fined_€5,000.",
+    "session": "practice",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_qualifying_9db1bf5b10",
+    "row_id": "2025_qualifying_9db1bf5b10_franco_colapinto",
+    "penalty": "drop_of_1_grid_position_for_the_next_race_in_which_the_driver_participates.",
+    "session": "qualifying",
+    "actual_severity": 2,
+    "predicted_severity": 1
+  },
+  {
+    "incident_id": "2025_practice_9290f33fa0",
+    "row_id": "2025_practice_9290f33fa0_yuki_tsunoda",
+    "penalty": "no_further_action",
+    "session": "practice",
+    "actual_severity": 0,
+    "predicted_severity": 1
+  },
+  {
+    "incident_id": "2025__e0ad7a5a2a",
+    "row_id": "2025__e0ad7a5a2a_franco_colapinto",
+    "penalty": "no_further_action",
+    "session": "",
+    "actual_severity": 0,
+    "predicted_severity": 1
+  },
+  {
+    "incident_id": "2025_qualifying_a40f2b52df",
+    "row_id": "2025_qualifying_a40f2b52df_lance_stroll",
+    "penalty": "warning",
+    "session": "qualifying",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_race_86a8de9cbc",
+    "row_id": "2025_race_86a8de9cbc_max_verstappen",
+    "penalty": "no_further_action",
+    "session": "race",
+    "actual_severity": 0,
+    "predicted_severity": 1
+  },
+  {
+    "incident_id": "2025_practice_23bf117035",
+    "row_id": "2025_practice_23bf117035_george_russell",
+    "penalty": "warning",
+    "session": "practice",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_race_8e9a2110ef",
+    "row_id": "2025_race_8e9a2110ef_pierre_gasly",
+    "penalty": "warning",
+    "session": "race",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_race_979577b1ba",
+    "row_id": "2025_race_979577b1ba_lance_stroll",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_race_fd442945a1",
+    "row_id": "2025_race_fd442945a1_esteban_ocon",
+    "penalty": "no_further_action",
+    "session": "race",
+    "actual_severity": 0,
+    "predicted_severity": 1
+  },
+  {
+    "incident_id": "2025_qualifying_5f37cb3f9a",
+    "row_id": "2025_qualifying_5f37cb3f9a_george_russell",
+    "penalty": "reprimand",
+    "session": "qualifying",
+    "actual_severity": 1,
+    "predicted_severity": 2
+  },
+  {
+    "incident_id": "2025_practice_9d7432e036",
+    "row_id": "2025_practice_9d7432e036_oliver_bearman",
+    "penalty": "drop_of_10_grid_positions_for_the_next_race_in_which_the_driver_participates._4_",
+    "session": "practice",
+    "actual_severity": 2,
+    "predicted_severity": 1
+  },
+  {
+    "incident_id": "2025_race_cb450c757a",
+    "row_id": "2025_race_cb450c757a_oliver_bearman",
+    "penalty": "no_further_action",
+    "session": "race",
+    "actual_severity": 0,
+    "predicted_severity": 1
+  },
+  {
+    "incident_id": "2025_race_f9c047be21",
+    "row_id": "2025_race_f9c047be21_esteban_ocon",
+    "penalty": "no_further_action",
+    "session": "race",
+    "actual_severity": 0,
+    "predicted_severity": 1
+  },
+  {
+    "incident_id": "2025_qualifying_720497309f",
+    "row_id": "2025_qualifying_720497309f_george_russell",
+    "penalty": "reprimand",
+    "session": "qualifying",
+    "actual_severity": 1,
+    "predicted_severity": 2
+  },
+  {
+    "incident_id": "2025_qualifying_d0ea52fe74",
+    "row_id": "2025_qualifying_d0ea52fe74_yuki_tsunoda",
+    "penalty": "reprimand",
+    "session": "qualifying",
+    "actual_severity": 1,
+    "predicted_severity": 2
+  },
+  {
+    "incident_id": "2025_practice_bd1d70bba7",
+    "row_id": "2025_practice_bd1d70bba7_max_verstappen",
+    "penalty": "warning",
+    "session": "practice",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_race_0cd1d2cfee",
+    "row_id": "2025_race_0cd1d2cfee_yuki_tsunoda",
+    "penalty": "no_further_action",
+    "session": "race",
+    "actual_severity": 0,
+    "predicted_severity": 1
+  },
+  {
+    "incident_id": "2025_race_e2e75856bb",
+    "row_id": "2025_race_e2e75856bb_nico_hulkenberg",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_qualifying_86bcfdf0db",
+    "row_id": "2025_qualifying_86bcfdf0db_max_verstappen",
+    "penalty": "no_further_action",
+    "session": "qualifying",
+    "actual_severity": 0,
+    "predicted_severity": 2
+  },
+  {
+    "incident_id": "2025_race_7a4594a0e3",
+    "row_id": "2025_race_7a4594a0e3_lewis_hamilton",
+    "penalty": "drop_of_5_grid_positions_for_the_next_race_in_which_the_driver_participates._2_p",
+    "session": "race",
+    "actual_severity": 2,
+    "predicted_severity": 1
+  },
+  {
+    "incident_id": "2025_practice_e85d9a557e",
+    "row_id": "2025_practice_e85d9a557e_oscar_piastri",
+    "penalty": "reprimand",
+    "session": "practice",
+    "actual_severity": 1,
+    "predicted_severity": 2
+  },
+  {
+    "incident_id": "2025_qualifying_1cdd6c5aa9",
+    "row_id": "2025_qualifying_1cdd6c5aa9_kimi_antonelli",
+    "penalty": "reprimand",
+    "session": "qualifying",
+    "actual_severity": 1,
+    "predicted_severity": 2
+  },
+  {
+    "incident_id": "2025_practice_e0f6c57c46",
+    "row_id": "2025_practice_e0f6c57c46_lewis_hamilton",
+    "penalty": "no_further_action",
+    "session": "practice",
+    "actual_severity": 0,
+    "predicted_severity": 1
+  },
+  {
+    "incident_id": "2025_qualifying_59229cbf80",
+    "row_id": "2025_qualifying_59229cbf80_nico_hulkenberg",
+    "penalty": "no_further_action",
+    "session": "qualifying",
+    "actual_severity": 0,
+    "predicted_severity": 2
+  },
+  {
+    "incident_id": "2025_qualifying_814a90a8e0",
+    "row_id": "2025_qualifying_814a90a8e0_yuki_tsunoda",
+    "penalty": "no_further_action",
+    "session": "qualifying",
+    "actual_severity": 0,
+    "predicted_severity": 2
+  },
+  {
+    "incident_id": "2025_qualifying_c47784592c",
+    "row_id": "2025_qualifying_c47784592c_gabriel_bortoleto",
+    "penalty": "no_further_action",
+    "session": "qualifying",
+    "actual_severity": 0,
+    "predicted_severity": 2
+  },
+  {
+    "incident_id": "2025_qualifying_c9697feed6",
+    "row_id": "2025_qualifying_c9697feed6_george_russell",
+    "penalty": "no_further_action",
+    "session": "qualifying",
+    "actual_severity": 0,
+    "predicted_severity": 2
+  },
+  {
+    "incident_id": "2025_race_b7b3d437d1",
+    "row_id": "2025_race_b7b3d437d1_lewis_hamilton",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_qualifying_1613f68ae6",
+    "row_id": "2025_qualifying_1613f68ae6_gabriel_bortoleto",
+    "penalty": "the_competitor_(stake_f1_team_kick_sauber)_is_fined_€100.",
+    "session": "qualifying",
+    "actual_severity": 1,
+    "predicted_severity": 2
+  },
+  {
+    "incident_id": "2025_race_3b08461816",
+    "row_id": "2025_race_3b08461816_yuki_tsunoda",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_sprint_062c330763",
+    "row_id": "2025_sprint_062c330763_oliver_bearman",
+    "penalty": "5s_time_penalty",
+    "session": "sprint",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_sprint_1e220dbb2e",
+    "row_id": "2025_sprint_1e220dbb2e_liam_lawson",
+    "penalty": "5s_time_penalty",
+    "session": "sprint",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025__0cfe9aa8b5",
+    "row_id": "2025__0cfe9aa8b5_gabriel_bortoleto",
+    "penalty": "no_further_action",
+    "session": "",
+    "actual_severity": 0,
+    "predicted_severity": 1
+  },
+  {
+    "incident_id": "2025_qualifying_2a4bee4713",
+    "row_id": "2025_qualifying_2a4bee4713_kimi_antonelli",
+    "penalty": "no_further_action",
+    "session": "qualifying",
+    "actual_severity": 0,
+    "predicted_severity": 2
+  },
+  {
+    "incident_id": "2025_qualifying_6897d890dc",
+    "row_id": "2025_qualifying_6897d890dc_franco_colapinto",
+    "penalty": "the_competitor_(bwt_alpine_f1_team)_is_fined_€5,000.",
+    "session": "qualifying",
+    "actual_severity": 1,
+    "predicted_severity": 2
+  },
+  {
+    "incident_id": "2025_qualifying_6ecd5bc361",
+    "row_id": "2025_qualifying_6ecd5bc361_george_russell",
+    "penalty": "no_further_action",
+    "session": "qualifying",
+    "actual_severity": 0,
+    "predicted_severity": 2
+  },
+  {
+    "incident_id": "2025_race_0b1acfcdd6",
+    "row_id": "2025_race_0b1acfcdd6_oscar_piastri",
+    "penalty": "disqualification",
+    "session": "race",
+    "actual_severity": 2,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_race_edf50412ee",
+    "row_id": "2025_race_edf50412ee_lando_norris",
+    "penalty": "disqualification",
+    "session": "race",
+    "actual_severity": 2,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_race_f03cb2a383",
+    "row_id": "2025_race_f03cb2a383_kimi_antonelli",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_qualifying_215d55a367",
+    "row_id": "2025_qualifying_215d55a367_carlos_sainz",
+    "penalty": "the_competitor_(atlassian_williams_racing)_is_fined_€5,000.",
+    "session": "qualifying",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_race_026f71b45e",
+    "row_id": "2025_race_026f71b45e_esteban_ocon",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_race_cf275da23c",
+    "row_id": "2025_race_cf275da23c_oliver_bearman",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_sprint_3b7e8062dd",
+    "row_id": "2025_sprint_3b7e8062dd_yuki_tsunoda",
+    "penalty": "5s_time_penalty",
+    "session": "sprint",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_sprint_d31a83879b",
+    "row_id": "2025_sprint_d31a83879b_kimi_antonelli",
+    "penalty": "5s_time_penalty",
+    "session": "sprint",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_from the garage and meet both drivers for a photo opportunity. the stewards require a report from the competitor, verifying that the proposal has been implemented. in view of the above, we have decided to suspend the majority of the penalty. the stewards competitors are reminded that they have the right to appeal certain decisions of the stewards, in accordance with article 15 of the fia international sporting code and chapter 4 of the fia judicial and disciplinary rules, within the applicable time limits. decisions of the stewards are taken independently of the fia and are based solely on the relevant regulations, guidelines and evidence presented. garry connelly mathieu remmerie derek warwick mohammed al hashmi_22e6c10aca",
+    "row_id": "2025_from the garage and meet both drivers for a photo opportunity. the stewards require a report from the competitor, verifying that the proposal has been implemented. in view of the above, we have decided to suspend the majority of the penalty. the stewards competitors are reminded that they have the right to appeal certain decisions of the stewards, in accordance with article 15 of the fia international sporting code and chapter 4 of the fia judicial and disciplinary rules, within the applicable time limits. decisions of the stewards are taken independently of the fia and are based solely on the relevant regulations, guidelines and evidence presented. garry connelly mathieu remmerie derek warwick mohammed al hashmi_22e6c10aca_lance_stroll",
+    "penalty": "the_competitor_(aston_martin_aramco_f1_team)_is_fined_€25,000_of_which_€15,000_i",
+    "session": "from the garage and meet both drivers for a photo opportunity. the stewards require a report from the competitor, verifying that the proposal has been implemented. in view of the above, we have decided to suspend the majority of the penalty. the stewards competitors are reminded that they have the right to appeal certain decisions of the stewards, in accordance with article 15 of the fia international sporting code and chapter 4 of the fia judicial and disciplinary rules, within the applicable time limits. decisions of the stewards are taken independently of the fia and are based solely on the relevant regulations, guidelines and evidence presented. garry connelly mathieu remmerie derek warwick mohammed al hashmi",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_race_81fccbe048",
+    "row_id": "2025_race_81fccbe048_oliver_bearman",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_race_96753f1b90",
+    "row_id": "2025_race_96753f1b90_pierre_gasly",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  },
+  {
+    "incident_id": "2025_race_9cba4f40db",
+    "row_id": "2025_race_9cba4f40db_lando_norris",
+    "penalty": "no_further_action",
+    "session": "race",
+    "actual_severity": 0,
+    "predicted_severity": 1
+  },
+  {
+    "incident_id": "2025_race_c6172fd4dd",
+    "row_id": "2025_race_c6172fd4dd_lance_stroll",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "actual_severity": 1,
+    "predicted_severity": 0
+  }
+]
