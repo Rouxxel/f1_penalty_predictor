@@ -2,6 +2,80 @@
 
 Fills empty columns in `raw_incidents_{season}.csv` after the **build** stage. Invoked by `--stage enrich` in the CLI (or as part of `--stage all`).
 
+**Seasons with enriched output today:** 2019, 2025. Seasons **2020–2024** have no processed data yet (download blocked) — enrichment will run automatically once those seasons are built.
+
+---
+
+## Future improvements
+
+Tracked gaps between the target schema ([`documentation/f1_dataset_example.csv`](../../../documentation/f1_dataset_example.csv)) and what the enrichers fill today. Observed fill rates are from `reports/tables/data_quality_{season}.json` on the 2019 and 2025 runs.
+
+### Missing seasons
+
+| Season | Enrichment status | Blocker |
+|--------|-------------------|---------|
+| 2019 | Enriched + validated | — |
+| 2020–2024 | **No data** | FIA PDF download blocked (403/WAF) at `download` stage |
+| 2025 | Enriched + validated | — |
+
+No enrichment code changes are needed for missing seasons — run the pipeline once PDFs exist:
+
+```bash
+python dataset/scripts/run_pipeline.py --stage enrich --season 2020
+python dataset/scripts/run_pipeline.py --stage validate --season 2020
+```
+
+### Columns not yet enriched (or only partially)
+
+```mermaid
+flowchart TD
+    subgraph done["Implemented and filling"]
+        D1["round · circuit · country"]
+        D2["drivers · nationalities · teams"]
+        D3["full_laps · weather · safety_car"]
+        D4["driver/construct standings partial"]
+    end
+
+    subgraph future["Future work"]
+        F1["lap · lap_remaining · completion_%"]
+        F2["positions_of_involved parties"]
+        F3["flag"]
+        F4["superlicense_points_before_incident"]
+        F5["point-in-time standings round N-1"]
+        F6["multi-driver column alignment"]
+        F7["severity manual review"]
+    end
+
+    done --> CSV["processed_{season}.csv"]
+    future -.-> CSV
+```
+
+| Column | Status | 2019 fill | 2025 fill | Planned fix |
+|--------|--------|-----------|-----------|-------------|
+| `lap` | Broken / not aligning | 0% | 0% | Parse PDF `time` reliably; map to FastF1 session timeline |
+| `lap_remaining` | Derived from `lap` | 0% | 0% | Auto-computed in `validation.py` once `lap` works |
+| `completion_percentage` | Derived from `lap` | 0% | 0% | Auto-computed in `validation.py` once `lap` works |
+| `positions_of_involved parties` | **Not implemented** | 0% | 0% | FastF1 running positions at incident lap/time |
+| `flag` | **Not implemented** | 0% | 0% | FastF1 race control messages (yellow/red/etc.) |
+| `superlicense_points_before_incident` | **Not implemented** | 0% | 0% | Rolling sum of `superlicense_points_added` from prior incidents per driver |
+| `severity` | **Manual only** | 0% | 0% | Human labels via `review_queue_{season}.csv` |
+| `driver_standings`, `driver_points`, `nationalities`, `years_in_sport` | Partial on **multi-driver** rows | 99%* | 75%* | Per-driver Ergast/reference lookup when `num_drivers > 1` |
+| `construct_standings`, `construct_points` | Partial | 55% | 68% | Ergast constructor standings per round |
+| `driver_standings`, `driver_points` (timing) | Approximate | 99% | 75% | Replace season totals with **round N−1** point-in-time standings |
+| `driver_at_fault` | Weak heuristics | 5% | 4% | Improve PDF Reason/Fact parsing |
+| `sector` | Partial (turn→sector map) | 48% | 3% | Expand `circuits.json` corner/sector maps |
+
+\*Overall fill rate is high, but validation reports **misaligned multi-value lengths** on two-driver incidents (~19 rows in 2019, ~21 in 2025).
+
+### Suggested implementation order
+
+1. **Multi-driver column alignment** — fix validation errors on two-car incidents
+2. **`lap` / time alignment** — unlocks `lap_remaining` and `completion_percentage`
+3. **Point-in-time standings** — Ergast round N−1 instead of season totals from `seasons.json`
+4. **`positions_of_involved parties` + `flag`** — additional FastF1 session features
+5. **`superlicense_points_before_incident`** — dataset-internal rolling feature
+6. **`severity`** — manual review workflow (ongoing)
+
 ---
 
 ## Enrichment flow
@@ -210,12 +284,15 @@ First run per season is **slow** (downloads session data per round). Later runs 
 
 ## Columns still manual / unimplemented
 
-| Column | Why |
-|--------|-----|
+See [Future improvements](#future-improvements) for the full table with fill rates and planned fixes. Summary:
+
+| Column | Why empty today |
+|--------|-----------------|
 | `severity` | Subjective — fill via review queue |
-| `superlicense_points_before_incident` | Not in reference data yet |
+| `superlicense_points_before_incident` | Rolling penalty history not built |
 | `positions_of_involved parties` | Planned FastF1 feature |
 | `flag` | Not implemented |
+| `lap`, `lap_remaining`, `completion_percentage` | PDF time → FastF1 lap alignment failing |
 
 ---
 
@@ -264,4 +341,5 @@ from fia_ml.data.enrichment import (
 
 Normally you do not call these directly; use `dataset/scripts/run_pipeline.py --stage enrich`.
 
-Parent pipeline docs: [`../README.md`](../README.md)
+- Parent pipeline docs: [`../README.md`](../README.md)
+- CLI and dataset coverage: [`../../../dataset/scripts/README.md`](../../../dataset/scripts/README.md)

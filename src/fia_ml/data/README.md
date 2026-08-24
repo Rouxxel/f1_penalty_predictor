@@ -10,6 +10,71 @@ dataset/scripts/run_pipeline.py
 
 Run all commands below from the **project root** (`f1_penalty_predictor/`).
 
+CLI details and current dataset status: [`dataset/scripts/README.md`](../../../dataset/scripts/README.md).
+
+---
+
+## Current dataset coverage
+
+| Season | Status | `processed_{season}.csv` rows |
+|--------|--------|-------------------------------|
+| **2019** | Complete | 203 |
+| 2020 | **Missing** — FIA download blocked | — |
+| 2021 | **Missing** — FIA download blocked | — |
+| 2022 | **Missing** — FIA download blocked | — |
+| 2023 | **Missing** — FIA download blocked | — |
+| 2024 | **Missing** — FIA download blocked | — |
+| **2025** | Complete | 343 |
+
+**546 incident rows** are available across 2019 + 2025 — sufficient to start [`MODEL_TRAINING_PLAN.md`](../../../MODEL_TRAINING_PLAN.md). Seasons 2020–2024 can be backfilled when FIA access returns or PDFs are added manually under `data/raw/fia/{season}/`.
+
+```mermaid
+flowchart LR
+    subgraph available["Available"]
+        A2019["2019"]
+        A2025["2025"]
+    end
+
+    subgraph backlog["Backlog"]
+        B["2020–2024"]
+    end
+
+    available --> ML["Model training"]
+    backlog -.->|"future pipeline runs"| available
+```
+
+---
+
+## Future improvements
+
+### Missing seasons (2020–2024)
+
+Blocked at the **download** stage by FIA CloudFront/WAF (403 on `/documents/` paths). The pipeline is otherwise ready — backfill with:
+
+```bash
+python dataset/scripts/run_pipeline.py --stage all --season 2020
+```
+
+See [`dataset/scripts/README.md`](../../../dataset/scripts/README.md) for Playwright setup and manual PDF workflows.
+
+### Incomplete enrichment columns
+
+Several columns in `processed_{season}.csv` are empty or only partially filled. Full detail: [`enrichment/README.md`](enrichment/README.md#future-improvements).
+
+| Priority | Column(s) | Gap |
+|----------|-----------|-----|
+| High | `lap`, `lap_remaining`, `completion_percentage` | FastF1 time→lap alignment not working (0% fill) |
+| High | Multi-driver rows | `driver_standings`, `nationalities`, etc. misaligned when `drivers` has 2+ values |
+| Medium | `positions_of_involved parties`, `flag` | Not implemented in FastF1 enricher |
+| Medium | `superlicense_points_before_incident` | Rolling penalty history not implemented |
+| Medium | Standings columns | Season totals used; point-in-time (round N−1) not implemented |
+| Low | `severity` | Manual review only — fill via `review_queue_{season}.csv` |
+| Low | `construct_standings`, `construct_points` | ~55–68% fill on existing seasons |
+
+These gaps do **not** block model training on penalty classification; they are tracked for future enrichment work.
+
+---
+
 ## Pipeline overview
 
 ```mermaid
@@ -248,6 +313,7 @@ flowchart TD
 | `validation.py` | Schema checks, review queue, `processed_{season}.csv` export |
 | `pipeline.py` | Stage orchestration (`run_pipeline`, `run_pipeline_for_seasons`) |
 | `enrichment/` | Enrich stage — see [`enrichment/README.md`](enrichment/README.md) |
+| `fia_http.py` | HTTP/Playwright client for FIA download (requests + browser backends) |
 
 ---
 
@@ -313,6 +379,8 @@ flowchart LR
 
 ## Related docs
 
+- [`dataset/scripts/README.md`](../../../dataset/scripts/README.md) — CLI usage, dataset coverage, enrichment gaps
 - [`dataset/README.md`](../../../dataset/README.md) — CLI folder overview
 - [`documentation/dataset_generation_runbook.md`](../../../documentation/dataset_generation_runbook.md) — operator runbook
 - [`DATASET_GENERATION_PLAN.md`](../../../DATASET_GENERATION_PLAN.md) — full implementation plan
+- [`MODEL_TRAINING_PLAN.md`](../../../MODEL_TRAINING_PLAN.md) — next step with available seasons
