@@ -12,7 +12,7 @@ if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
 from fia_ml.data.config import PipelineConfig
-from fia_ml.data.fia_http import create_fia_session, fetch_fia_html, warmup_fia_session
+from fia_ml.data.fia_http import create_fia_client
 
 EVENT_PATTERN = re.compile(
     r'value="(/documents/championships/fia-formula-one-world-championship-14/season/[^"]+/event/[^"]+)"'
@@ -23,23 +23,27 @@ def main() -> int:
     cfg = PipelineConfig.from_yaml()
     season_cfg = cfg.for_season(2020)
     url = season_cfg.season_url
+    backend = season_cfg.scraper.get("fetch_backend", "playwright")
 
     print("FIA document access probe")
+    print(f"backend: {backend}")
     print(f"season url: {url}\n")
 
-    session = create_fia_session(season_cfg)
+    client = create_fia_client(season_cfg)
     try:
-        warmup_fia_session(session, season_cfg, url)
-        html = fetch_fia_html(session, season_cfg, url, warmed=True)
+        html = client.fetch_html(url)
     except Exception as exc:
         print(f"FAILED: {exc}")
-        print(
-            "\nIf your browser can open the docs via the FIA homepage but this script cannot,"
-            "\nFIA is blocking automated clients (not just rate limits)."
-            "\nTry waiting 24h, then one season at a time. If it still fails, use browser"
-            "\nautomation (Playwright) or download PDFs manually into data/raw/fia/{season}/."
-        )
+        if backend == "requests":
+            print(
+                "\nTry Playwright instead:"
+                "\n  pip install playwright"
+                "\n  playwright install chromium"
+                "\nThen set scraper.fetch_backend: playwright in configs/data.yaml"
+            )
         return 1
+    finally:
+        client.close()
 
     events = len(EVENT_PATTERN.findall(html))
     print(f"OK: fetched {len(html)} bytes, found {events} event options")

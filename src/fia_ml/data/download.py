@@ -8,16 +8,8 @@ import urllib.parse
 from dataclasses import dataclass
 from pathlib import Path
 
-import requests
-
 from fia_ml.data.config import PipelineConfig
-from fia_ml.data.fia_http import (
-    _championship_url,
-    create_fia_session,
-    download_fia_file,
-    fetch_fia_html,
-    warmup_fia_session,
-)
+from fia_ml.data.fia_http import FiaClient, championship_url, create_fia_client
 from fia_ml.paths import PROJECT_ROOT, ensure_dir
 from fia_ml.utils import secure_file_io as sio
 
@@ -43,17 +35,9 @@ def slugify_event(name: str) -> str:
 def discover_event_urls(
     season_url: str,
     cfg: PipelineConfig,
-    session: requests.Session,
-    *,
-    warmed: bool = False,
+    client: FiaClient,
 ) -> list[tuple[str, str]]:
-    html = fetch_fia_html(
-        session,
-        cfg,
-        season_url,
-        referer=_championship_url(cfg),
-        warmed=warmed,
-    )
+    html = client.fetch_html(season_url, referer=championship_url(cfg))
     pattern = re.compile(
         r'value="(/documents/championships/fia-formula-one-world-championship-14/season/[^"]+/event/[^"]+)"'
     )
@@ -112,11 +96,11 @@ def discover_pdfs_for_event(
     event_url: str,
     event_name: str,
     cfg: PipelineConfig,
-    session: requests.Session,
+    client: FiaClient,
     *,
     season_url: str,
 ) -> list[tuple[str, str]]:
-    html = fetch_fia_html(session, cfg, event_url, referer=season_url, warmed=True)
+    html = client.fetch_html(event_url, referer=season_url)
     base = cfg.scraper.get("fia_base_url", "https://www.fia.com")
     pdfs: list[tuple[str, str]] = []
     for match in re.finditer(
@@ -140,12 +124,11 @@ def _sha256_file(path: Path) -> str:
 def _download_file(
     url: str,
     dest: Path,
-    cfg: PipelineConfig,
-    session: requests.Session,
+    client: FiaClient,
     *,
     referer: str,
 ) -> None:
-    data = download_fia_file(session, cfg, url, referer=referer)
+    data = client.download_bytes(url, referer=referer)
     sio.write_bytes(dest, data)
 
 
@@ -166,54 +149,56 @@ def download_season(cfg: PipelineConfig) -> list[DocumentEntry]:
 
     entries: list[DocumentEntry] = []
     failures: list[dict[str, str]] = []
-    session = create_fia_session(cfg)
-    warmup_fia_session(session, cfg, cfg.season_url)
-    event_urls = discover_event_urls(cfg.season_url, cfg, session, warmed=True)
-    if not event_urls:
-        raise RuntimeError(f"No event URLs found at {cfg.season_url}")
+    client = create_fia_client(cfg)
+    try:
+        event_urls = discover_event_urls(cfg.season_url, cfg, client)
+        if not event_urls:
+            raise RuntimeError(f"No event URLs found at {cfg.season_url}")
 
-    for event_name, event_url in event_urls:
-        event_slug = slugify_event(event_name)
-        event_dir = ensure_dir(raw_root / event_slug)
-        pdfs = discover_pdfs_for_event(
-            event_url,
-            event_name,
-            cfg,
-            session,
-            season_url=cfg.season_url,
-        )
-
-        for title, url in pdfs:
-            safe_name = title.replace("/", "-")
-            local_path = event_dir / safe_name
-            document_id = make_document_id(season, event_slug, title)
-
-            if local_path.exists() and document_id in existing:
-                prior = existing[document_id]
-                current_hash = _sha256_file(local_path)
-                if prior.sha256 == current_hash:
-                    entries.append(prior)
-                    continue
-
-            if not local_path.exists():
-                try:
-                    _download_file(url, local_path, cfg, session, referer=event_url)
-                except RuntimeError as exc:
-                    failures.append({"title": title, "url": url, "error": str(exc)})
-                    continue
-
-            sha256 = _sha256_file(local_path)
-            entry = DocumentEntry(
-                document_id=document_id,
-                url=url,
-                local_path=str(local_path.relative_to(PROJECT_ROOT)),
-                event=event_name,
-                event_slug=event_slug,
-                title=title,
-                sha256=sha256,
-                season=season,
+        for event_name, event_url in event_urls:
+            event_slug = slugify_event(event_name)
+            event_dir = ensure_dir(raw_root / event_slug)
+            pdfs = discover_pdfs_for_event(
+                event_url,
+                event_name,
+                cfg,
+                client,
+                season_url=cfg.season_url,
             )
-            entries.append(entry)
+
+            for title, url in pdfs:
+                safe_name = title.replace("/", "-")
+                local_path = event_dir / safe_name
+                document_id = make_document_id(season, event_slug, title)
+
+                if local_path.exists() and document_id in existing:
+                    prior = existing[document_id]
+                    current_hash = _sha256_file(local_path)
+                    if prior.sha256 == current_hash:
+                        entries.append(prior)
+                        continue
+
+                if not local_path.exists():
+                    try:
+                        _download_file(url, local_path, client, referer=event_url)
+                    except RuntimeError as exc:
+                        failures.append({"title": title, "url": url, "error": str(exc)})
+                        continue
+
+                sha256 = _sha256_file(local_path)
+                entry = DocumentEntry(
+                    document_id=document_id,
+                    url=url,
+                    local_path=str(local_path.relative_to(PROJECT_ROOT)),
+                    event=event_name,
+                    event_slug=event_slug,
+                    title=title,
+                    sha256=sha256,
+                    season=season,
+                )
+                entries.append(entry)
+    finally:
+        client.close()
 
     sio.write_json(manifest_path, [entry.__dict__ for entry in entries])
     if failures:
