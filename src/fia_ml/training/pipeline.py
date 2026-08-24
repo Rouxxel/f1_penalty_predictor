@@ -8,6 +8,7 @@ from typing import Any
 
 from fia_ml.preprocessing.prepare import prepare_datasets
 from fia_ml.training.config import TrainingConfig
+from fia_ml.training.evaluate import run_evaluation
 from fia_ml.training.train_baselines import train_baselines
 from fia_ml.training.train_xgboost import train_xgboost
 
@@ -61,6 +62,4 @@ def _run_train(cfg: TrainingConfig) -> dict[str, Any]:
 
 
 def _run_evaluate(cfg: TrainingConfig) -> dict[str, Any]:
-    raise NotImplementedError(
-        "Stage 'evaluate' is not implemented yet (Phase E: metrics and reports)."
-    )
+    return run_evaluation(cfg)
