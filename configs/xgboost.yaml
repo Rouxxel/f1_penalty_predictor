@@ -1,0 +1,43 @@
+# V1 model training configuration
+# See MODEL_TRAINING_PLAN.md
+
+paths:
+  csv_input_glob: dataset/csv/processed_*.csv
+  processed: data/processed
+  models: ml_models
+  reports: reports
+  target_mapping: configs/target_mapping.yaml
+
+# Seasons to load (null = discover all processed_*.csv in dataset/csv/)
+inputs:
+  seasons: [2019, 2025]
+
+splits:
+  mode: temporal
+  # With only 2019 + 2025 available: train on 2019, validate on 2025.
+  # Add test_season when a third held-out season exists (e.g. 2024).
+  train_seasons: [2019]
+  validation_season: 2025
+  test_season: null
+
+model:
+  objective: multi:softprob
+  num_class: 3
+  eval_metric: mlogloss
+  max_depth: 4
+  learning_rate: 0.05
+  n_estimators: 500
+  early_stopping_rounds: 30
+  subsample: 0.8
+  colsample_bytree: 0.8
+  random_state: 42
+
+class_imbalance:
+  strategy: inverse_frequency
+
+evaluation:
+  primary_metric: macro_f1
+  min_macro_f1: 0.40
+  min_improvement_over_baseline: 0.10
+
+random_state: 42

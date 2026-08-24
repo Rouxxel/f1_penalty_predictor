@@ -1,0 +1,46 @@
+# Penalty string → penalty_severity (0=no_penalty, 1=minor, 2=major)
+# Patterns are matched case-insensitively as substrings in the raw penalty field.
+# First matching class wins (order: major → minor → no_penalty).
+
+classes:
+  2:
+    name: major
+    patterns:
+      - disqualification
+      - dsq
+      - grid
+      - place grid
+      - grid drop
+      - grid penalty
+      - suspension
+      - stop and go
+      - stop-go
+      - time penalty 10 seconds
+      - 10 second time penalty
+      - 15 second
+      - 20 second
+  1:
+    name: minor
+    patterns:
+      - warning
+      - reprimand
+      - fine
+      - drive through
+      - drive-through
+      - 5 second
+      - 5s
+      - 10 second
+      - 10s
+      - time penalty
+      - penalty points
+  0:
+    name: no_penalty
+    patterns:
+      - no further action
+      - no action
+      - no penalty
+      - resolved during race
+      - noted
+      - reminder
+
+# Rows with empty penalty or no pattern match are excluded from training (Summons-only).
