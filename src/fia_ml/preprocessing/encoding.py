@@ -23,7 +23,7 @@ from fia_ml.preprocessing.leakage_filter import (
 from fia_ml.utils import secure_file_io as sio
 
 TARGET_COLUMN = "penalty_severity"
-METADATA_COLUMNS = ("penalty", "row_id", "incident_id")
+METADATA_COLUMNS = ("penalty", "row_id", "incident_id", "session")
 
 
 @dataclass
