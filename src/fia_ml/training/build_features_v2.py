@@ -10,11 +10,13 @@ import pandas as pd
 
 from fia_ml.features.config import FeaturesConfig
 from fia_ml.features.pipeline import add_v2_features
+from fia_ml.features.selection import prune_encoded_by_importance, prune_raw_features
 from fia_ml.paths import PROJECT_ROOT, ensure_dir
 from fia_ml.preprocessing.encoding import fit_encode_splits, save_encoding_artifacts
 from fia_ml.preprocessing.leakage_filter import select_feature_columns
 from fia_ml.preprocessing.splitting import temporal_split, verify_no_season_overlap
 from fia_ml.training.config import TrainingConfig
+from fia_ml.utils import secure_file_io as sio
 
 
 def _feature_paths(cfg: TrainingConfig) -> dict[str, Path]:
@@ -51,9 +53,28 @@ def build_features_v2(cfg: TrainingConfig) -> dict[str, Any]:
 
     train_df, val_df, test_df = temporal_split(enriched, cfg.splits)
     feature_columns = select_feature_columns(enriched)
+    feature_columns, selection_report = prune_raw_features(
+        train_df, feature_columns, features_cfg
+    )
     train_enc, val_enc, test_enc, artifacts = fit_encode_splits(
         train_df, val_df, test_df, feature_columns
     )
+
+    drop_percentile = float(features_cfg.selection.get("importance_drop_percentile", 20))
+    train_enc, val_enc, dropped_importance, importance_report = prune_encoded_by_importance(
+        train_enc,
+        val_enc,
+        cfg.model,
+        class_imbalance_strategy=str(cfg.class_imbalance.get("strategy", "inverse_frequency")),
+        drop_percentile=drop_percentile,
+    )
+    selection_report["importance"] = importance_report
+    selection_report["dropped_importance"] = dropped_importance
+
+    if test_enc is not None and not test_enc.empty:
+        kept_encoded = importance_report.get("kept_encoded_columns", [])
+        meta_cols = [c for c in test_enc.columns if not c.startswith(("cat__", "num__"))]
+        test_enc = test_enc[kept_encoded + meta_cols]
 
     processed_dir = ensure_dir(cfg.path("processed"))
     models_dir = ensure_dir(cfg.path("models"))
@@ -80,6 +101,10 @@ def build_features_v2(cfg: TrainingConfig) -> dict[str, Any]:
     encoder_path = models_dir / f"preprocessor_{model_subdir}.joblib"
     save_encoding_artifacts(artifacts, encoder_path)
 
+    reports_dir = ensure_dir(cfg.path("reports"))
+    selection_path = reports_dir / "selection_report_v2.json"
+    sio.write_json(selection_path, selection_report)
+
     return {
         "feature_version": cfg.feature_version,
         "incidents_rows": len(enriched),
@@ -87,6 +112,8 @@ def build_features_v2(cfg: TrainingConfig) -> dict[str, Any]:
         "validation_rows": len(val_enc),
         "test_rows": len(test_enc) if test_enc is not None else 0,
         "feature_columns": feature_columns,
+        "encoded_feature_columns": list(importance_report.get("kept_encoded_columns", [])),
+        "selection": selection_report,
         "v2_groups": ["race", "driver", "history", "precedent"],
         "outputs": {
             "features_v1": str(v1_features.relative_to(PROJECT_ROOT)) if v1_features.exists() else None,
@@ -95,5 +122,6 @@ def build_features_v2(cfg: TrainingConfig) -> dict[str, Any]:
             "validation_v2": str(paths["validation"].relative_to(PROJECT_ROOT)),
             "test_v2": test_path,
             "preprocessor": str(encoder_path.relative_to(PROJECT_ROOT)),
+            "selection_report": str(selection_path.relative_to(PROJECT_ROOT)),
         },
     }
