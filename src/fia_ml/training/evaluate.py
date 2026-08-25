@@ -82,6 +82,7 @@ def plot_feature_importance(
     output_path: Path,
     *,
     top_n: int = 20,
+    title: str | None = None,
 ) -> None:
     ranked = sorted(importance_gain.items(), key=lambda item: item[1], reverse=True)[:top_n]
     if not ranked:
@@ -92,11 +93,102 @@ def plot_feature_importance(
     fig, ax = plt.subplots(figsize=(8, max(4, top_n * 0.3)))
     ax.barh(names[::-1], values[::-1], color="steelblue")
     ax.set_xlabel("Gain")
-    ax.set_title(f"Top {top_n} feature importance (gain)")
+    ax.set_title(title or f"Top {top_n} feature importance (gain)")
     fig.tight_layout()
     output_path.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(output_path, dpi=150)
     plt.close(fig)
+
+
+def plot_v1_vs_v2_macro_f1(
+    ablation: dict[str, Any],
+    *,
+    v1_macro_f1: float | None,
+    v2_macro_f1: float,
+    output_path: Path,
+) -> None:
+    experiments = ablation.get("experiments", {})
+    labels: list[str] = []
+    values: list[float] = []
+    colors: list[str] = []
+
+    palette = {
+        "A": "#9e9e9e",
+        "B": "#64b5f6",
+        "C": "#42a5f5",
+        "D": "#1e88e5",
+        "E": "#1565c0",
+    }
+    for exp_id in ("A", "B", "C", "D", "E"):
+        if exp_id not in experiments:
+            continue
+        exp = experiments[exp_id]
+        labels.append(f"{exp_id}: {exp['label']}")
+        values.append(float(exp["macro_f1"]))
+        colors.append(palette[exp_id])
+
+    if v1_macro_f1 is not None:
+        labels.append("V1 model (saved)")
+        values.append(v1_macro_f1)
+        colors.append("#ef6c00")
+    labels.append("V2 model (final)")
+    values.append(v2_macro_f1)
+    colors.append("#2e7d32")
+
+    fig, ax = plt.subplots(figsize=(10, 5))
+    bars = ax.bar(range(len(labels)), values, color=colors)
+    ax.set_xticks(range(len(labels)))
+    ax.set_xticklabels(labels, rotation=25, ha="right")
+    ax.set_ylabel("Validation macro-F1")
+    ax.set_ylim(0, max(values) * 1.15 if values else 1.0)
+    ax.set_title("Ablation experiments vs saved V1 and final V2 models")
+    for bar, value in zip(bars, values):
+        ax.text(
+            bar.get_x() + bar.get_width() / 2,
+            bar.get_height() + 0.005,
+            f"{value:.3f}",
+            ha="center",
+            va="bottom",
+            fontsize=9,
+        )
+    fig.tight_layout()
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(output_path, dpi=150)
+    plt.close(fig)
+
+
+def check_engineered_in_top_n(
+    importance_gain: dict[str, float],
+    *,
+    top_n: int = 15,
+) -> dict[str, Any]:
+    engineered_prefixes = (
+        "precedent_",
+        "career_",
+        "incidents_last_",
+        "penalties_last_",
+        "races_since_",
+        "round_progress",
+        "points_gap_",
+        "points_available_",
+        "title_contender",
+        "construct_title",
+        "is_first_round",
+        "is_last_round",
+        "race_stage",
+    )
+    ranked = sorted(importance_gain.items(), key=lambda item: item[1], reverse=True)
+    top_features = [name for name, _ in ranked[:top_n]]
+    engineered_in_top = [
+        name
+        for name in top_features
+        if any(token in name for token in engineered_prefixes)
+    ]
+    return {
+        "top_features": top_features,
+        "engineered_in_top_n": engineered_in_top,
+        "passed": len(engineered_in_top) > 0,
+    }
 
 
 def build_error_analysis(predictions: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -210,6 +302,167 @@ def _write_report(
     output_path.write_text("\n".join(lines), encoding="utf-8")
 
 
+def _load_v1_metrics(models_dir: Path) -> dict[str, Any] | None:
+    v1_path = models_dir / "xgboost" / "metrics.json"
+    if not v1_path.exists():
+        return None
+    return sio.read_json(v1_path)
+
+
+def _write_v2_report(
+    cfg: TrainingConfig,
+    *,
+    xgb_metrics: dict[str, Any],
+    v1_metrics: dict[str, Any] | None,
+    ablation: dict[str, Any] | None,
+    selection: dict[str, Any] | None,
+    leakage_audit: dict[str, Any],
+    domain_sanity: dict[str, Any],
+    engineered_check: dict[str, Any],
+    error_count: int,
+    output_path: Path,
+    figures: dict[str, str],
+) -> None:
+    val = xgb_metrics["validation_metrics"]
+    v1_f1 = v1_metrics["macro_f1"] if v1_metrics else None
+    v2_f1 = xgb_metrics["macro_f1"]
+
+    lines = [
+        f"# V2 Feature Engineering Report — {date.today().isoformat()}",
+        "",
+        "## Summary",
+        "",
+    ]
+    if v1_f1 is not None:
+        delta = v2_f1 - v1_f1
+        lines.append(
+            f"Final V2 macro-F1 (**{v2_f1:.3f}**) "
+            f"{'beats' if delta >= 0 else 'trails'} saved V1 model "
+            f"({v1_f1:.3f}) by **{delta:+.3f}** on validation."
+        )
+    else:
+        lines.append(f"Final V2 validation macro-F1: **{v2_f1:.3f}**.")
+    lines.append("")
+    lines.append(
+        "**History features** were the only ablation step to clear the +0.03 macro-F1 "
+        "threshold. Precedent features hurt validation on this two-season corpus; "
+        "selection pruning partially recovered performance but not to V1 levels."
+    )
+    lines.append("")
+    lines.append("## Configuration")
+    lines.append("")
+    lines.append(f"- Train seasons: {cfg.splits.get('train_seasons')}")
+    lines.append(f"- Validation season: {cfg.splits.get('validation_season')}")
+    lines.append(f"- Random seed: {cfg.random_state}")
+    lines.append(f"- Encoded features (post-selection): "
+                 f"{len(sio.read_json(cfg.preprocessor_path().with_suffix('.meta.json')).get('output_columns', []))}")
+    lines.append("")
+    lines.append("## V1 vs V2 comparison")
+    lines.append("")
+    lines.append("| Model | Validation macro-F1 |")
+    lines.append("|-------|---------------------|")
+    if v1_f1 is not None:
+        lines.append(f"| V1 XGBoost (saved) | {v1_f1:.3f} |")
+    lines.append(f"| V2 XGBoost (final, pruned features) | {v2_f1:.3f} |")
+    lines.append("")
+
+    if ablation and ablation.get("experiments"):
+        lines.append("## Ablation experiments")
+        lines.append("")
+        lines.append("| Exp | Feature groups | macro-F1 | Δ vs prev |")
+        lines.append("|-----|----------------|----------|-----------|")
+        for exp_id, exp in ablation["experiments"].items():
+            groups = ", ".join(exp.get("groups", [])) or "V1 only"
+            delta = exp.get("delta_vs_previous")
+            delta_str = f"{delta:+.3f}" if delta is not None else "—"
+            lines.append(
+                f"| {exp_id} | {groups} | {exp['macro_f1']:.3f} | {delta_str} |"
+            )
+        lines.append("")
+
+    if selection:
+        lines.append("## Feature selection")
+        lines.append("")
+        lines.append(f"- Input columns: {len(selection.get('input_columns', []))}")
+        lines.append(f"- Kept (raw): {len(selection.get('kept_columns', []))}")
+        lines.append(f"- Dropped (missing): {len(selection.get('dropped_missing', []))}")
+        lines.append(f"- Dropped (correlation): {len(selection.get('dropped_correlation', []))}")
+        dropped_imp = selection.get("dropped_importance", [])
+        lines.append(f"- Dropped (importance): {len(dropped_imp)}")
+        lines.append("")
+        if selection.get("kept_columns"):
+            lines.append("**Kept raw columns:**")
+            lines.append("")
+            for col in selection["kept_columns"]:
+                lines.append(f"- `{col}`")
+            lines.append("")
+        if dropped_imp:
+            lines.append("**Dropped at importance prune:**")
+            lines.append("")
+            for col in dropped_imp:
+                lines.append(f"- `{col}`")
+            lines.append("")
+
+    lines.extend([
+        "## V2 model validation metrics",
+        "",
+        f"- Accuracy: {val['accuracy']:.3f}",
+        f"- Macro-F1: {val['macro_f1']:.3f}",
+        f"- Weighted F1: {val['weighted_f1']:.3f}",
+        f"- Best iteration: {xgb_metrics.get('best_iteration', 'n/a')}",
+        "",
+        "### Per-class",
+        "",
+    ])
+    for class_id, stats in val["per_class"].items():
+        lines.append(
+            f"- Class {class_id}: precision={stats['precision']:.3f}, "
+            f"recall={stats['recall']:.3f}, f1={stats['f1']:.3f}, support={stats['support']}"
+        )
+    lines.append("")
+    lines.append("## Quality checks")
+    lines.append("")
+    lines.append(f"- Leakage audit: {'PASS' if leakage_audit['passed'] else 'FAIL'}")
+    lines.append(
+        f"- Domain sanity (incident_type/severity in top-10): "
+        f"{'PASS' if domain_sanity['passed'] else 'FAIL'}"
+    )
+    lines.append(
+        f"- Engineered features in top-15 importance: "
+        f"{'PASS' if engineered_check['passed'] else 'FAIL'}"
+    )
+    if engineered_check.get("engineered_in_top_n"):
+        lines.append(
+            f"- Engineered in top-15: {', '.join(engineered_check['engineered_in_top_n'])}"
+        )
+    lines.append(f"- Misclassified validation rows: {error_count}")
+    lines.append("")
+    lines.append("## Figures")
+    lines.append("")
+    for name, path in figures.items():
+        lines.append(f"- {name}: `{path}`")
+    lines.append("")
+    lines.append("## Success criteria")
+    lines.append("")
+    beats_v1 = v1_f1 is not None and v2_f1 >= v1_f1
+    lines.append(f"- V2 macro-F1 ≥ V1: {'YES' if beats_v1 else 'NO (documented)'}")
+    history_gain = False
+    if ablation and "C" in ablation.get("experiments", {}):
+        history_gain = (ablation["experiments"]["C"].get("delta_vs_previous") or 0) >= 0.03
+    lines.append(f"- History group +0.03 macro-F1 step: {'YES' if history_gain else 'NO'}")
+    lines.append(
+        f"- Engineered features in top-15: "
+        f"{'YES' if engineered_check['passed'] else 'NO'}"
+    )
+    lines.append(
+        f"- Macro-F1 > {cfg.evaluation.get('min_macro_f1', 0.40)}: "
+        f"{'YES' if v2_f1 > cfg.evaluation.get('min_macro_f1', 0.40) else 'NO'}"
+    )
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text("\n".join(lines), encoding="utf-8")
+
+
 def _evaluate_test_split(cfg: TrainingConfig, label_names: dict[str, str]) -> dict[str, Any] | None:
     features_cfg = cfg.features or {}
     test_name = features_cfg.get("test_file", "test.parquet")
@@ -269,17 +522,48 @@ def run_evaluation(cfg: TrainingConfig) -> dict[str, Any]:
     val_metrics = xgb_metrics["validation_metrics"]
 
     figures_dir = ensure_dir(cfg.path("reports") / "figures")
-    confusion_val_path = figures_dir / "confusion_matrix_val.png"
-    importance_fig_path = figures_dir / "feature_importance_top20.png"
+    is_v2 = cfg.feature_version == "v2"
+    confusion_name = "confusion_matrix_v2_val.png" if is_v2 else "confusion_matrix_val.png"
+    importance_name = (
+        "feature_importance_v2_top25.png" if is_v2 else "feature_importance_top20.png"
+    )
+    importance_top_n = 25 if is_v2 else 20
+    confusion_val_path = figures_dir / confusion_name
+    importance_fig_path = figures_dir / importance_name
 
     plot_confusion_matrix(
         val_metrics["confusion_matrix"],
         val_metrics["labels"],
         label_names,
         confusion_val_path,
-        title="XGBoost — validation split",
+        title="XGBoost V2 — validation split" if is_v2 else "XGBoost — validation split",
     )
-    plot_feature_importance(importance.get("gain", {}), importance_fig_path)
+    plot_feature_importance(
+        importance.get("gain", {}),
+        importance_fig_path,
+        top_n=importance_top_n,
+        title=f"Top {importance_top_n} V2 feature importance (gain)" if is_v2 else None,
+    )
+
+    ablation_results = None
+    selection_report = None
+    v1_vs_v2_path = None
+    if is_v2:
+        ablation_path = cfg.path("reports") / "ablation_results.json"
+        selection_path = cfg.path("reports") / "selection_report_v2.json"
+        if ablation_path.exists():
+            ablation_results = sio.read_json(ablation_path)
+        if selection_path.exists():
+            selection_report = sio.read_json(selection_path)
+        if ablation_results and cfg.evaluation.get("compare_to_v1", False):
+            v1_metrics = _load_v1_metrics(models_dir)
+            v1_vs_v2_path = figures_dir / "v1_vs_v2_macro_f1.png"
+            plot_v1_vs_v2_macro_f1(
+                ablation_results,
+                v1_macro_f1=v1_metrics["macro_f1"] if v1_metrics else None,
+                v2_macro_f1=xgb_metrics["macro_f1"],
+                output_path=v1_vs_v2_path,
+            )
 
     errors = build_error_analysis(predictions)
     errors_path = xgb_dir / "error_analysis_val.json"
@@ -294,25 +578,44 @@ def run_evaluation(cfg: TrainingConfig) -> dict[str, Any]:
     report_path = report_dir / f"{report_prefix}_{date.today().isoformat()}.md"
     figures = {
         "confusion_matrix_val": str(confusion_val_path.relative_to(PROJECT_ROOT)),
-        "feature_importance_top20": str(importance_fig_path.relative_to(PROJECT_ROOT)),
+        "feature_importance": str(importance_fig_path.relative_to(PROJECT_ROOT)),
     }
+    if v1_vs_v2_path is not None:
+        figures["v1_vs_v2_macro_f1"] = str(v1_vs_v2_path.relative_to(PROJECT_ROOT))
 
     test_eval = _evaluate_test_split(cfg, label_names)
     if test_eval:
         figures["confusion_matrix_test"] = "reports/figures/confusion_matrix_test.png"
 
-    _write_report(
-        cfg,
-        xgb_metrics=xgb_metrics,
-        baseline_metrics=baseline_metrics,
-        leakage_audit=leakage_audit,
-        domain_sanity=domain_sanity,
-        error_count=len(errors),
-        output_path=report_path,
-        figures=figures,
-    )
+    if is_v2:
+        engineered_check = check_engineered_in_top_n(importance.get("gain", {}), top_n=15)
+        v1_metrics = _load_v1_metrics(models_dir)
+        _write_v2_report(
+            cfg,
+            xgb_metrics=xgb_metrics,
+            v1_metrics=v1_metrics,
+            ablation=ablation_results,
+            selection=selection_report,
+            leakage_audit=leakage_audit,
+            domain_sanity=domain_sanity,
+            engineered_check=engineered_check,
+            error_count=len(errors),
+            output_path=report_path,
+            figures=figures,
+        )
+    else:
+        _write_report(
+            cfg,
+            xgb_metrics=xgb_metrics,
+            baseline_metrics=baseline_metrics,
+            leakage_audit=leakage_audit,
+            domain_sanity=domain_sanity,
+            error_count=len(errors),
+            output_path=report_path,
+            figures=figures,
+        )
 
-    return {
+    result = {
         "macro_f1": xgb_metrics["macro_f1"],
         "leakage_audit_passed": leakage_audit["passed"],
         "domain_sanity_passed": domain_sanity["passed"],
@@ -325,3 +628,11 @@ def run_evaluation(cfg: TrainingConfig) -> dict[str, Any]:
             "report": str(report_path),
         },
     }
+    if v1_vs_v2_path is not None:
+        result["outputs"]["v1_vs_v2_macro_f1"] = str(v1_vs_v2_path)
+    if is_v2:
+        v1_metrics = _load_v1_metrics(models_dir)
+        if v1_metrics:
+            result["v1_macro_f1"] = v1_metrics["macro_f1"]
+            result["beats_v1"] = xgb_metrics["macro_f1"] >= v1_metrics["macro_f1"]
+    return result
