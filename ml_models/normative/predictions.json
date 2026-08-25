@@ -1,0 +1,1406 @@
+{
+  "2019_practice_192ff84d1b_lando_norris": {
+    "normative_penalty_detail": "10s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "unsafe_release_general",
+    "normative_reason": "Unsafe release \u2192 time penalty"
+  },
+  "2019_qualifying_1f3540cb43_kevin_magnussen": {
+    "normative_penalty_detail": "10s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "unsafe_release_pit",
+    "normative_reason": "Unsafe release in competitive session \u2192 time penalty"
+  },
+  "2019_qualifying_72178f5794_sergio_perez": {
+    "normative_penalty_detail": "10s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "unsafe_release_pit",
+    "normative_reason": "Unsafe release in competitive session \u2192 time penalty"
+  },
+  "2019_qualifying_7864d4f9d8_sebastian_vettel": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_race_0562fdea29_carlos_sainz": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "collision_unclassified",
+    "normative_reason": "Collision without matching fact pattern \u2192 manual review"
+  },
+  "2019_race_59b4903d54_max_verstappen": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "collision_unclassified",
+    "normative_reason": "Collision without matching fact pattern \u2192 manual review"
+  },
+  "2019_race_712b44544f_antonio_giovinazzi": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "collision_unclassified",
+    "normative_reason": "Collision without matching fact pattern \u2192 manual review"
+  },
+  "2019_race_a03c8b2ef6_daniel_ricciardo": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_race_adc1fd5950_daniil_kvyat": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2019_race_dafc4cf6a8_daniil_kvyat": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "collision_unclassified",
+    "normative_reason": "Collision without matching fact pattern \u2192 manual review"
+  },
+  "2019_practice_bcdf4b4113_pierre_gasly": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2019_qualifying_3045785150_alexander_albon": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_race_66966b26ad_daniil_kvyat": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "collision_unclassified",
+    "normative_reason": "Collision without matching fact pattern \u2192 manual review"
+  },
+  "2019_practice_671a21b2ec_pierre_gasly": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_practice_8bd5d27bb0_antonio_giovinazzi": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_qualifying_9da7e3994b_kimi_raikkonen": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_qualifying_a5dc574293_pierre_gasly": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_race_354375116a_robert_kubica": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_qualifying_212e376927_george_russell": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_race_49253c2053_lando_norris": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_race_849b1e8e0e_lance_stroll": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_practice_2504e42c9c_sebastian_vettel": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2019_practice_3695780042_charles_leclerc": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_practice_7f92010fa4_lewis_hamilton": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2019_practice_97f8136142_charles_leclerc": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2019_qualifying_225903bbaa_nico_hulkenberg": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_qualifying_5314de67d8_sergio_perez": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_qualifying_debb78a7a5_charles_leclerc": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_race_4cf087c694_romain_grosjean": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2019_race_7933c34f21_lance_stroll": {
+    "normative_penalty_detail": "warning",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "track_limits_first_offence",
+    "normative_reason": "First or second track-limits breach in rolling window \u2192 warning"
+  },
+  "2019_race_7e3b88834d_kevin_magnussen": {
+    "normative_penalty_detail": "warning",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "track_limits_first_offence",
+    "normative_reason": "First or second track-limits breach in rolling window \u2192 warning"
+  },
+  "2019_race_913493f3f2_max_verstappen": {
+    "normative_penalty_detail": "10s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "unsafe_release_pit",
+    "normative_reason": "Unsafe release in competitive session \u2192 time penalty"
+  },
+  "2019_race_a4974311e4_lewis_hamilton": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_race_acddfe1ad9_max_verstappen": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_race_bb11f9bd44_antonio_giovinazzi": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_practice_5321890a98_lance_stroll": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "collision_unclassified",
+    "normative_reason": "Collision without matching fact pattern \u2192 manual review"
+  },
+  "2019_practice_d5da7ae55e_lando_norris": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_practice_ebf3229943_romain_grosjean": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "collision_unclassified",
+    "normative_reason": "Collision without matching fact pattern \u2192 manual review"
+  },
+  "2019_practice_f40132af42_kevin_magnussen": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_qualifying_1e3fe1eb62_kevin_magnussen": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_race_48b4f80f91_sebastian_vettel": {
+    "normative_penalty_detail": "warning",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "track_limits_first_offence",
+    "normative_reason": "First or second track-limits breach in rolling window \u2192 warning"
+  },
+  "2019_practice_6657e966fa_daniel_ricciardo": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2019_practice_e249d57c77_nico_hulkenberg": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2019_race_278bfb37ae_daniel_ricciardo": {
+    "normative_penalty_detail": "warning",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "track_limits_first_offence",
+    "normative_reason": "First or second track-limits breach in rolling window \u2192 warning"
+  },
+  "2019_race_8b61a4032c_sergio_perez": {
+    "normative_penalty_detail": "warning",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "track_limits_first_offence",
+    "normative_reason": "First or second track-limits breach in rolling window \u2192 warning"
+  },
+  "2019_race_ce994871b4_daniel_ricciardo": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_practice_2f15277cda_antonio_giovinazzi": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_qualifying_7fe543b12c_kevin_magnussen": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_race_e11e74e0ae_kevin_magnussen": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_race_0b83e333a3_lando_norris": {
+    "normative_penalty_detail": "10s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "unsafe_release_pit",
+    "normative_reason": "Unsafe release in competitive session \u2192 time penalty"
+  },
+  "2019_qualifying_27d5ca004a_sebastian_vettel": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_qualifying_4b97709788_daniil_kvyat": {
+    "normative_penalty_detail": "10s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "unsafe_release_pit",
+    "normative_reason": "Unsafe release in competitive session \u2192 time penalty"
+  },
+  "2019_qualifying_f3f007b06d_valtteri_bottas": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2019_race_0c719924d2_antonio_giovinazzi": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_race_74b1b4ac47_charles_leclerc": {
+    "normative_penalty_detail": "10s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "unsafe_release_pit",
+    "normative_reason": "Unsafe release in competitive session \u2192 time penalty"
+  },
+  "2019_race_75627af678_lewis_hamilton": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2019_race_ae5b0369e6_kimi_raikkonen": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_race_f81ec68df0_lewis_hamilton": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_practice_63516f8670_kimi_raikkonen": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2019_practice_9ad23e0ddc_lando_norris": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_reconnaissance laps_096c6f606c_lewis_hamilton": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2019_practice_72ecc3f346_daniil_kvyat": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_practice_d9697c22c3_charles_leclerc": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2019_qualifying_622b181574_antonio_giovinazzi": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_qualifying_b663bdfc11_robert_kubica": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_race_dcbd8e938c_sergio_perez": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_qualifying_27a542c197_kimi_raikkonen": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_qualifying_57001f0264_sebastian_vettel": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_qualifying_601c622889_lance_stroll": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_qualifying_d8295cc78b_carlos_sainz": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_qualifying_df811d6e30_nico_hulkenberg": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_qualifying_e23b37c5db_nico_hulkenberg": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_race_08f4deff9a_carlos_sainz": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_race_ac7d5c7bd4_alexander_albon": {
+    "normative_penalty_detail": "warning",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "track_limits_first_offence",
+    "normative_reason": "First or second track-limits breach in rolling window \u2192 warning"
+  },
+  "2019_race_da3e3009c0_kimi_raikkonen": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_practice_de17882497_lewis_hamilton": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_qualifying_a325d24b54_sergio_perez": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_qualifying_ddfbb26400_daniel_ricciardo": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_race_aae0e3be22_antonio_giovinazzi": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_practice_e45af744d7_pierre_gasly": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2019_race_17e9db0249_kimi_raikkonen": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_race_ed8ef2a8a7_kevin_magnussen": {
+    "normative_penalty_detail": "warning",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "track_limits_first_offence",
+    "normative_reason": "First or second track-limits breach in rolling window \u2192 warning"
+  },
+  "2019_practice_9456775dbe_sergio_perez": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2019_race_11e2f439ea_charles_leclerc": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_race_a8b42ab55a_sebastian_vettel": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_qualifying_c383ab8d64_max_verstappen": {
+    "normative_penalty_detail": "10s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "yellow_flag_breach",
+    "normative_reason": "Yellow flag infringement \u2192 time penalty"
+  },
+  "2019_race_71645fdcd6_lando_norris": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_practice_9242a08994_charles_leclerc": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2019_race_634eb4b94a_robert_kubica": {
+    "normative_penalty_detail": "10s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "unsafe_release_pit",
+    "normative_reason": "Unsafe release in competitive session \u2192 time penalty"
+  },
+  "2019_qualifying_b913779a0f_daniil_kvyat": {
+    "normative_penalty_detail": "10s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "unsafe_release_pit",
+    "normative_reason": "Unsafe release in competitive session \u2192 time penalty"
+  },
+  "2025_race_5fd5abdd32_lewis_hamilton": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_b5f6435097_fernando_alonso": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_eb67e9e849_yuki_tsunoda": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_f0690b4134_alexander_albon": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_qualifying_35b9057129_charles_leclerc": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_qualifying_b3f1fae208_lance_stroll": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_1c61ec4aa3_jack_doohan": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_47adfa78e4_lewis_hamilton": {
+    "normative_penalty_detail": "licence_points",
+    "normative_penalty_severity": 2,
+    "normative_rule_id": "technical_breach",
+    "normative_reason": "Technical / procedural breach \u2192 major sanction"
+  },
+  "2025_race_cc93c50b96_charles_leclerc": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_fe3c37f387_pierre_gasly": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_reconnaissance laps_1b31146e31_yuki_tsunoda": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_reconnaissance laps_59c4255ddc_gabriel_bortoleto": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_reconnaissance laps_686f546ac2_nico_hulkenberg": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_practice_086e12fa1a_lewis_hamilton": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_practice_26e0437873_lance_stroll": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_practice_9819f8d6fd_max_verstappen": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_practice_a8bedd4480_kimi_antonelli": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_practice_d16cc7cbaf_carlos_sainz": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_practice_e49476c23b_oscar_piastri": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_99eaef2c74_carlos_sainz": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_qualifying_b715030d8d_kimi_antonelli": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_qualifying_d6f37adaf4_george_russell": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_race_2fa76babc1_nico_hulkenberg": {
+    "normative_penalty_detail": "licence_points",
+    "normative_penalty_severity": 2,
+    "normative_rule_id": "technical_breach",
+    "normative_reason": "Technical / procedural breach \u2192 major sanction"
+  },
+  "2025_race_3b9d36df15_george_russell": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_9fc679b982_jack_doohan": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_bfbdf59dc3_lando_norris": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_practice_28d185945a_liam_lawson": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_practice_adadfa0914_jack_doohan": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_race_87481469bc_max_verstappen": {
+    "normative_penalty_detail": "warning",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "track_limits_first_offence",
+    "normative_reason": "First or second track-limits breach in rolling window \u2192 warning"
+  },
+  "2025_race_e8b86bf1da_liam_lawson": {
+    "normative_penalty_detail": "warning",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "track_limits_first_offence",
+    "normative_reason": "First or second track-limits breach in rolling window \u2192 warning"
+  },
+  "2025_practice_1316885435_lando_norris": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_practice_74af3f4433_jack_doohan": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_qualifying_00eda94900_alexander_albon": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_qualifying_c42375cbb7_max_verstappen": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_87de1e0c1f_carlos_sainz": {
+    "normative_penalty_detail": "10s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "yellow_flag_breach",
+    "normative_reason": "Yellow flag infringement \u2192 time penalty"
+  },
+  "2025_race_904cd2d106_lewis_hamilton": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_9b8bbec2bd_yuki_tsunoda": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_race_cea4e321ba_carlos_sainz": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_e2d10b6306_pierre_gasly": {
+    "normative_penalty_detail": "10s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "yellow_flag_breach",
+    "normative_reason": "Yellow flag infringement \u2192 time penalty"
+  },
+  "2025_reconnaissance laps_90437e24a0_charles_leclerc": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_sprint_75ac16b051_alexander_albon": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_sprint_7743cd6bdb_oliver_bearman": {
+    "normative_penalty_detail": "10s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "unsafe_release_pit",
+    "normative_reason": "Unsafe release in competitive session \u2192 time penalty"
+  },
+  "2025_sprint_ef07e7bf5b_max_verstappen": {
+    "normative_penalty_detail": "10s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "unsafe_release_pit",
+    "normative_reason": "Unsafe release in competitive session \u2192 time penalty"
+  },
+  "2025_practice_167e1ac8dc_franco_colapinto": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_practice_9fde774e39_carlos_sainz": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_practice_e6a853b940_charles_leclerc": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_qualifying_9db1bf5b10_franco_colapinto": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_practice_9290f33fa0_yuki_tsunoda": {
+    "normative_penalty_detail": "10s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "yellow_flag_breach",
+    "normative_reason": "Yellow flag infringement \u2192 time penalty"
+  },
+  "2025_race_ec3972128f_george_russell": {
+    "normative_penalty_detail": "warning",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "track_limits_first_offence",
+    "normative_reason": "First or second track-limits breach in rolling window \u2192 warning"
+  },
+  "2025_reconnaissance laps_077979f88e_oliver_bearman": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025__e0ad7a5a2a_franco_colapinto": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_qualifying_a40f2b52df_lance_stroll": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_2803835084_alexander_albon": {
+    "normative_penalty_detail": "warning",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "track_limits_first_offence",
+    "normative_reason": "First or second track-limits breach in rolling window \u2192 warning"
+  },
+  "2025_race_86a8de9cbc_max_verstappen": {
+    "normative_penalty_detail": "warning",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "track_limits_first_offence",
+    "normative_reason": "First or second track-limits breach in rolling window \u2192 warning"
+  },
+  "2025_race_a28cb3cf51_oliver_bearman": {
+    "normative_penalty_detail": "warning",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "track_limits_first_offence",
+    "normative_reason": "First or second track-limits breach in rolling window \u2192 warning"
+  },
+  "2025_practice_23bf117035_george_russell": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_practice_286f2e9bbe_george_russell": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_practice_8e527d0178_george_russell": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_practice_bd8bb5b770_alexander_albon": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_practice_f5be4d9825_oscar_piastri": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_qualifying_d04cd4e2c9_esteban_ocon": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_6bad943deb_charles_leclerc": {
+    "normative_penalty_detail": "5s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "overtaking_race",
+    "normative_reason": "Race impeding / overtaking infringement \u2192 time penalty"
+  },
+  "2025_race_8b3d73c775_oliver_bearman": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_8e9a2110ef_pierre_gasly": {
+    "normative_penalty_detail": "5s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "overtaking_race",
+    "normative_reason": "Race impeding / overtaking infringement \u2192 time penalty"
+  },
+  "2025_race_979577b1ba_lance_stroll": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_ae260109fd_oscar_piastri": {
+    "normative_penalty_detail": "5s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "overtaking_race",
+    "normative_reason": "Race impeding / overtaking infringement \u2192 time penalty"
+  },
+  "2025_race_b5ad11cdbb_esteban_ocon": {
+    "normative_penalty_detail": "5s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "overtaking_race",
+    "normative_reason": "Race impeding / overtaking infringement \u2192 time penalty"
+  },
+  "2025_race_b96c3cf34d_carlos_sainz": {
+    "normative_penalty_detail": "5s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "overtaking_race",
+    "normative_reason": "Race impeding / overtaking infringement \u2192 time penalty"
+  },
+  "2025_race_ce982b7c63_kimi_antonelli": {
+    "normative_penalty_detail": "5s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "overtaking_race",
+    "normative_reason": "Race impeding / overtaking infringement \u2192 time penalty"
+  },
+  "2025_race_fd442945a1_esteban_ocon": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_practice_ec49a7ed48_kimi_antonelli": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_qualifying_5f37cb3f9a_george_russell": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_practice_9d7432e036_oliver_bearman": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_practice_e19dc7147a_carlos_sainz": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_8183cfadc1_oscar_piastri": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_cb450c757a_oliver_bearman": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "collision_unclassified",
+    "normative_reason": "Collision without matching fact pattern \u2192 manual review"
+  },
+  "2025_race_f9c047be21_esteban_ocon": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "collision_unclassified",
+    "normative_reason": "Collision without matching fact pattern \u2192 manual review"
+  },
+  "2025_qualifying_720497309f_george_russell": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_qualifying_d0ea52fe74_yuki_tsunoda": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_practice_bd1d70bba7_max_verstappen": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_0cd1d2cfee_yuki_tsunoda": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_d5c902fef9_max_verstappen": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_e2e75856bb_nico_hulkenberg": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_qualifying_86bcfdf0db_max_verstappen": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_18061ca0b8_gabriel_bortoleto": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_7a4594a0e3_lewis_hamilton": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_race_9725a7c919_kimi_antonelli": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_race_ae7fa5c969_george_russell": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "collision_unclassified",
+    "normative_reason": "Collision without matching fact pattern \u2192 manual review"
+  },
+  "2025_race_e78303e300_charles_leclerc": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "collision_unclassified",
+    "normative_reason": "Collision without matching fact pattern \u2192 manual review"
+  },
+  "2025_practice_466b84c243_oscar_piastri": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_practice_fafb92adb6_isack_hadjar": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_0386a77940_carlos_sainz": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_7736d4c718_fernando_alonso": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_race_7a8d9562fd_lance_stroll": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_practice_e85d9a557e_oscar_piastri": {
+    "normative_penalty_detail": "10s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "yellow_flag_breach",
+    "normative_reason": "Yellow flag infringement \u2192 time penalty"
+  },
+  "2025_qualifying_1cdd6c5aa9_kimi_antonelli": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_qualifying_88642087ac_esteban_ocon": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_77b82ec55d_fernando_alonso": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_fd4e2d5eaa_oscar_piastri": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_practice_23a0367aaf_charles_leclerc": {
+    "normative_penalty_detail": "10s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "unsafe_release_general",
+    "normative_reason": "Unsafe release \u2192 time penalty"
+  },
+  "2025_practice_e0f6c57c46_lewis_hamilton": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_qualifying_2223fcdace_carlos_sainz": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_qualifying_59229cbf80_nico_hulkenberg": {
+    "normative_penalty_detail": "10s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "yellow_flag_breach",
+    "normative_reason": "Yellow flag infringement \u2192 time penalty"
+  },
+  "2025_qualifying_814a90a8e0_yuki_tsunoda": {
+    "normative_penalty_detail": "10s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "yellow_flag_breach",
+    "normative_reason": "Yellow flag infringement \u2192 time penalty"
+  },
+  "2025_qualifying_9c7c3c423d_alexander_albon": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_qualifying_c47784592c_gabriel_bortoleto": {
+    "normative_penalty_detail": "10s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "yellow_flag_breach",
+    "normative_reason": "Yellow flag infringement \u2192 time penalty"
+  },
+  "2025_qualifying_c9697feed6_george_russell": {
+    "normative_penalty_detail": "10s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "yellow_flag_breach",
+    "normative_reason": "Yellow flag infringement \u2192 time penalty"
+  },
+  "2025_race_b7b3d437d1_lewis_hamilton": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_reconnaissance laps_660922d129_alexander_albon": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_qualifying_1613f68ae6_gabriel_bortoleto": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_race_1e555b8b56_lewis_hamilton": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_21fef9744c_lewis_hamilton": {
+    "normative_penalty_detail": "warning",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "track_limits_first_offence",
+    "normative_reason": "First or second track-limits breach in rolling window \u2192 warning"
+  },
+  "2025_race_24f9314388_carlos_sainz": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_race_e5441a1a28_carlos_sainz": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_qualifying_3f65afabc7_lewis_hamilton": {
+    "normative_penalty_detail": "10s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "yellow_flag_breach",
+    "normative_reason": "Yellow flag infringement \u2192 time penalty"
+  },
+  "2025_race_3b08461816_yuki_tsunoda": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_sprint_062c330763_oliver_bearman": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_sprint_1e220dbb2e_liam_lawson": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "collision_unclassified",
+    "normative_reason": "Collision without matching fact pattern \u2192 manual review"
+  },
+  "2025__0cfe9aa8b5_gabriel_bortoleto": {
+    "normative_penalty_detail": "10s",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "yellow_flag_breach",
+    "normative_reason": "Yellow flag infringement \u2192 time penalty"
+  },
+  "2025__2a8c2fbf5b_alexander_albon": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_practice_627629664b_lewis_hamilton": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_practice_f18f4f6fb4_charles_leclerc": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_qualifying_2a4bee4713_kimi_antonelli": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_qualifying_6897d890dc_franco_colapinto": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_qualifying_6ecd5bc361_george_russell": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_0b1acfcdd6_oscar_piastri": {
+    "normative_penalty_detail": "licence_points",
+    "normative_penalty_severity": 2,
+    "normative_rule_id": "technical_breach",
+    "normative_reason": "Technical / procedural breach \u2192 major sanction"
+  },
+  "2025_race_edf50412ee_lando_norris": {
+    "normative_penalty_detail": "licence_points",
+    "normative_penalty_severity": 2,
+    "normative_rule_id": "technical_breach",
+    "normative_reason": "Technical / procedural breach \u2192 major sanction"
+  },
+  "2025_race_f03cb2a383_kimi_antonelli": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_qualifying_215d55a367_carlos_sainz": {
+    "normative_penalty_detail": "licence_points",
+    "normative_penalty_severity": 2,
+    "normative_rule_id": "technical_breach",
+    "normative_reason": "Technical / procedural breach \u2192 major sanction"
+  },
+  "2025_qualifying_5c4a7afcf1_nico_hulkenberg": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_026f71b45e_esteban_ocon": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_62c92389bb_lance_stroll": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_race_a5aee38466_isack_hadjar": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_cf275da23c_oliver_bearman": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_sprint_3b7e8062dd_yuki_tsunoda": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_sprint_d31a83879b_kimi_antonelli": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_from the garage and meet both drivers for a photo opportunity. the stewards require a report from the competitor, verifying that the proposal has been implemented. in view of the above, we have decided to suspend the majority of the penalty. the stewards competitors are reminded that they have the right to appeal certain decisions of the stewards, in accordance with article 15 of the fia international sporting code and chapter 4 of the fia judicial and disciplinary rules, within the applicable time limits. decisions of the stewards are taken independently of the fia and are based solely on the relevant regulations, guidelines and evidence presented. garry connelly mathieu remmerie derek warwick mohammed al hashmi_22e6c10aca_lance_stroll": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_from the garage and meet both drivers for a photo opportunity. the stewards require a report from the competitor, verifying that the proposal has been implemented. in view of the above, we have decided to suspend the majority of the penalty. the stewards competitors are reminded that they have the right to appeal certain decisions of the stewards, in accordance with article 15 of the fia international sporting code and chapter 4 of the fia judicial and disciplinary rules, within the applicable time limits. decisions of the stewards are taken independently of the fia and are based solely on the relevant regulations, guidelines and evidence presented. garry connelly mathieu remmerie derek warwick mohammed al hashmi_95921b408e_fernando_alonso": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_4a62dadce8_yuki_tsunoda": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_6aa003e1ba_alexander_albon": {
+    "normative_penalty_detail": "reprimand",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "pit_lane_general",
+    "normative_reason": "Pit lane infringement without explicit speeding fact \u2192 reprimand"
+  },
+  "2025_race_81fccbe048_oliver_bearman": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_96753f1b90_pierre_gasly": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  },
+  "2025_race_9cba4f40db_lando_norris": {
+    "normative_penalty_detail": "warning",
+    "normative_penalty_severity": 1,
+    "normative_rule_id": "track_limits_first_offence",
+    "normative_reason": "First or second track-limits breach in rolling window \u2192 warning"
+  },
+  "2025_race_c6172fd4dd_lance_stroll": {
+    "normative_penalty_detail": "manual_review",
+    "normative_penalty_severity": 0,
+    "normative_rule_id": "other_unclassified",
+    "normative_reason": "Unclassified incident type \u2192 manual review"
+  }
+}
