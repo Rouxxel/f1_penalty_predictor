@@ -88,6 +88,17 @@ V2_NUMERIC_FEATURES = frozenset(
         "points_gap_to_leader",
         "points_gap_to_opponent",
         "points_available_remaining",
+        "career_incidents",
+        "career_penalties",
+        "career_major_penalties",
+        "career_incidents_per_100_races",
+        "career_penalties_per_100_races",
+        "incidents_last_3_races",
+        "incidents_last_5_races",
+        "penalties_last_3_races",
+        "penalties_last_5_races",
+        "races_since_last_penalty",
+        "races_since_last_incident",
     }
 )
 
