@@ -1,0 +1,134 @@
+# Normative stewarding rules — human-authored, priority-ordered (lower = higher priority)
+# See NORMATIVE_RULES_PLAN.md. Phase A: schema + starter rules; full rule set in Phase D.
+
+version: "1.0.0"
+description: "Consistent Appendix L / ISC interpretation for F1 stewarding research (V1 draft)"
+
+assumptions:
+  - "Avoidable contact with lasting advantage → time penalty (minor)"
+  - "Racing incident with no driver predominantly at fault → no further action"
+  - "Repeated same-class offence within 5 races → escalate one severity level"
+  - "Qualifying blocking / impeding → grid penalty for next session (major)"
+  - "Output is one documented interpretation — not certified regulatory ground truth"
+  - "Escalation counters use FIA actual prior outcomes by default (see configs/normative.yaml)"
+  - "Rows without a matching rule receive manual_review until rules are expanded"
+
+rules:
+  - id: collision_avoidable_advantage
+    priority: 10
+    conditions:
+      incident_type: collision
+      fact_contains_any:
+        - "gained an advantage"
+        - "gaining an advantage"
+        - "left the track and gained"
+      session_in: [race, qualifying, sprint]
+    outcome:
+      penalty_detail: 5s
+      penalty_severity: 1
+      cited_regulation: "Appendix L Chapter IV Article 2"
+    reason: "Avoidable incident with advantage gained → time penalty"
+
+  - id: collision_racing_no_fault
+    priority: 20
+    conditions:
+      incident_type: collision
+      fact_contains_any:
+        - "racing incident"
+        - "no driver wholly or predominantly to blame"
+        - "no further action"
+    outcome:
+      penalty_detail: no_action
+      penalty_severity: 0
+    reason: "Racing incident with no single driver predominantly at fault"
+
+  - id: collision_reckless
+    priority: 15
+    conditions:
+      incident_type: collision
+      fact_contains_any:
+        - "dangerous driving"
+        - "reckless"
+        - "dangerous manoeuvre"
+    outcome:
+      penalty_detail: 10s
+      penalty_severity: 2
+      cited_regulation: "Appendix L Chapter IV"
+    reason: "Reckless or dangerous driving → major time penalty"
+
+  - id: track_limits_first_offence
+    priority: 30
+    conditions:
+      incident_type: track_limits
+      driver_track_limits_last_5_races:
+        lt: 2
+    outcome:
+      penalty_detail: warning
+      penalty_severity: 1
+    reason: "First or second track-limits breach in rolling window → warning"
+
+  - id: track_limits_repeat
+    priority: 31
+    conditions:
+      incident_type: track_limits
+      driver_track_limits_last_5_races:
+        gte: 2
+    outcome:
+      penalty_detail: 5s
+      penalty_severity: 1
+    reason: "Repeated track limits breaches → escalation to time penalty"
+
+  - id: unsafe_release_pit
+    priority: 40
+    conditions:
+      incident_type: unsafe_release
+      session_in: [race, qualifying, sprint]
+    outcome:
+      penalty_detail: 10s
+      penalty_severity: 1
+    reason: "Unsafe release in competitive session → time penalty"
+
+  - id: blocking_qualifying
+    priority: 50
+    conditions:
+      incident_type: overtaking
+      session_in: [qualifying]
+      fact_contains_any:
+        - "impeded"
+        - "impeding"
+        - "blocking"
+    outcome:
+      penalty_detail: grid_drop
+      penalty_severity: 2
+    reason: "Qualifying impeding → grid penalty"
+
+  - id: yellow_flag_breach
+    priority: 60
+    conditions:
+      incident_type: yellow_flag
+    outcome:
+      penalty_detail: 10s
+      penalty_severity: 1
+    reason: "Yellow flag infringement → time penalty"
+
+  - id: pit_lane_speeding
+    priority: 70
+    conditions:
+      incident_type: pit_lane
+      fact_contains_any:
+        - "speeding"
+        - "pit lane speed"
+        - "exceeded the pit lane speed limit"
+    outcome:
+      penalty_detail: reprimand
+      penalty_severity: 1
+    reason: "Pit lane speeding → reprimand or minor penalty"
+
+  - id: default_unmatched
+    priority: 9999
+    conditions:
+      default: true
+    outcome:
+      penalty_detail: manual_review
+      penalty_severity: 0
+    reason: "No specific rule matched — requires manual review"

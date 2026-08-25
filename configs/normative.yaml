@@ -1,0 +1,23 @@
+# Normative rules engine runtime configuration
+# See NORMATIVE_RULES_PLAN.md
+
+rules_path: configs/normative_rules.yaml
+
+escalation:
+  mode: fia_history          # fia_history | normative_history
+  windows: [3, 5, 10]
+
+comparison:
+  fia_label_column: penalty_severity
+  normative_label_column: normative_penalty_severity
+  include_ml_comparison: true
+
+unmatched:
+  default_outcome: manual_review
+  log_unmatched: true
+
+paths:
+  incidents: data/processed/incidents.parquet
+  output: data/processed/incidents_with_normative.parquet
+  models_dir: ml_models/normative
+  reports_dir: reports/normative
