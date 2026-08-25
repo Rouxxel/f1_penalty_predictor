@@ -2,7 +2,10 @@
 # See FEATURE_ENGINEERING_PLAN.md
 
 precedent:
+  # severity is 0% filled — use incident_type+session until manual labeling (see current_gaps.md)
+  active_similarity_key: [incident_type, session]
   similarity_keys:
+    - [incident_type, session]
     - [incident_type, severity, session]
     - [incident_type, severity, session, circuit]  # ablation only
   min_precedent_count: 3
