@@ -54,6 +54,8 @@ def test_add_v2_features_preserves_rows() -> None:
         {
             "incident_id": ["i1"],
             "driver": ["a"],
+            "season": [2019],
+            "round": [1],
             "session": ["race"],
             "driver_team": ["t1"],
             "opponent_team": [None],
