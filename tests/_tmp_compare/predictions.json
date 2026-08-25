@@ -1,1 +1,12 @@
-[{"row_id": "row_a", "pred_xgboost": 0}, {"row_id": "row_b", "pred_xgboost": 0}]
+[
+    {"row_id": "row_a", "pred_xgboost": 0}, 
+    {"row_id": "row_b", "pred_xgboost": 0},
+    {"row_id": "row_c", "pred_xgboost": 1},
+    {"row_id": "row_d", "pred_xgboost": 1},
+    {"row_id": "row_e", "pred_xgboost": 0},
+    {"row_id": "row_f", "pred_xgboost": 1},
+    {"row_id": "row_g", "pred_xgboost": 0},
+    {"row_id": "row_h", "pred_xgboost": 1},
+    {"row_id": "row_i", "pred_xgboost": 0},
+    {"row_id": "row_j", "pred_xgboost": 1}
+]
