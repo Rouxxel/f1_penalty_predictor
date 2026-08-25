@@ -1,4 +1,4 @@
-"""Temporal correctness tests for precedent features (Phase D)."""
+"""Temporal correctness tests for precedent features"""
 
 from __future__ import annotations
 

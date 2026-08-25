@@ -1,4 +1,4 @@
-"""Scaffold tests for V2 feature engineering (Phase A)."""
+"""Scaffold tests for V2 feature engineering"""
 
 from __future__ import annotations
 

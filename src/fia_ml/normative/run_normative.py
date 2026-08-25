@@ -51,7 +51,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--compare",
         action="store_true",
-        help="Compare normative outcomes vs FIA labels (Phase E)",
+        help="Compare normative outcomes vs FIA labels",
     )
     parser.add_argument(
         "--report-dir",
@@ -63,7 +63,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--ml-predictions",
         type=Path,
         default=None,
-        help="Optional ML predictions JSON for three-way comparison (Phase E)",
+        help="Optional ML predictions JSON for three-way comparison",
     )
     return parser
 
@@ -95,11 +95,11 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.compare or args.report_dir or args.ml_predictions:
         raise NotImplementedError(
-            "Comparison and reporting are not implemented yet (Normative Rules Phase E)."
+            "Comparison and reporting are not implemented yet."
         )
 
     raise NotImplementedError(
-        "Batch normative prediction is not implemented yet (Normative Rules Phase D)."
+        "Batch normative prediction is not implemented yet."
     )
 
 

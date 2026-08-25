@@ -1,4 +1,4 @@
-"""Generate normative deviation reports and figures. Implemented in Phase E."""
+"""Generate normative deviation reports and figures."""
 
 from __future__ import annotations
 
@@ -15,5 +15,5 @@ def write_deviation_report(
 ) -> dict[str, str]:
     """Write markdown summary, CSV breakdowns, and figures."""
     raise NotImplementedError(
-        "Deviation reporting is not implemented yet (Normative Rules Phase E)."
+        "Deviation reporting is not implemented yet."
     )

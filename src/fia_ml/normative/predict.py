@@ -1,4 +1,4 @@
-"""Batch apply normative rules to incidents. Implemented in Phase D."""
+"""Batch apply normative rules to incidents."""
 
 from __future__ import annotations
 
@@ -18,7 +18,7 @@ def predict_normative(
 ) -> pd.DataFrame:
     """Return incidents with normative_* outcome columns."""
     raise NotImplementedError(
-        "Batch normative prediction is not implemented yet (Normative Rules Phase D)."
+        "Batch normative prediction is not implemented yet."
     )
 
 

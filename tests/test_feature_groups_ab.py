@@ -1,4 +1,4 @@
-"""Tests for V2 race and championship feature groups (Phase B)."""
+"""Tests for V2 race and championship feature groups"""
 
 from __future__ import annotations
 

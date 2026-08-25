@@ -1,4 +1,4 @@
-"""Temporal correctness tests for driver history features (Phase C)."""
+"""Temporal correctness tests for driver history features"""
 
 from __future__ import annotations
 
