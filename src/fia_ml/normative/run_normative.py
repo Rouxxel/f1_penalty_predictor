@@ -9,7 +9,15 @@ import sys
 from pathlib import Path
 from typing import Any
 
+import pandas as pd
+
 from fia_ml.normative.config import NormativeConfig
+from fia_ml.normative.predict import (
+    predict_normative,
+    write_predictions_json,
+    write_predictions_output,
+    write_rules_version,
+)
 from fia_ml.normative.rules_loader import load_rules
 from fia_ml.paths import DEFAULT_NORMATIVE_CONFIG, PROJECT_ROOT, ensure_dir
 from fia_ml.utils import secure_file_io as sio
@@ -81,6 +89,46 @@ def validate_rules(rules_path: Path) -> dict[str, Any]:
     }
 
 
+def run_predict(
+    cfg: NormativeConfig,
+    *,
+    rules_path: Path,
+    input_path: Path,
+    output_path: Path,
+) -> dict[str, Any]:
+    if not input_path.exists():
+        raise FileNotFoundError(f"Missing input incidents file: {input_path}")
+
+    loaded = load_rules(rules_path)
+    incidents = pd.read_parquet(input_path)
+    predicted = predict_normative(incidents, loaded, cfg)
+
+    write_predictions_output(predicted, output_path)
+    models_dir = ensure_dir(PROJECT_ROOT / cfg.paths.get("models_dir", "ml_models/normative"))
+    rules_version_path = write_rules_version(loaded, models_dir)
+    predictions_path = write_predictions_json(predicted, models_dir)
+
+    rule_counts = predicted["normative_rule_id"].value_counts().to_dict()
+    manual_review_rate = float(
+        (predicted["normative_penalty_detail"] == "manual_review").mean()
+    )
+
+    return {
+        "status": "ok",
+        "input_rows": len(incidents),
+        "output_rows": len(predicted),
+        "rules_version": loaded.version,
+        "content_hash": loaded.content_hash,
+        "manual_review_rate": manual_review_rate,
+        "rule_match_counts": rule_counts,
+        "outputs": {
+            "incidents_with_normative": str(output_path.relative_to(PROJECT_ROOT)),
+            "rules_version": str(rules_version_path.relative_to(PROJECT_ROOT)),
+            "predictions": str(predictions_path.relative_to(PROJECT_ROOT)),
+        },
+    }
+
+
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     cfg = NormativeConfig.from_yaml(args.config)
@@ -98,9 +146,16 @@ def main(argv: list[str] | None = None) -> int:
             "Comparison and reporting are not implemented yet."
         )
 
-    raise NotImplementedError(
-        "Batch normative prediction is not implemented yet."
+    input_path = (args.input or cfg.resolve_path("incidents")).resolve()
+    output_path = (args.output or cfg.resolve_path("output")).resolve()
+    result = run_predict(
+        cfg,
+        rules_path=rules_path,
+        input_path=input_path,
+        output_path=output_path,
     )
+    print(json.dumps(result, indent=2, default=str))
+    return 0
 
 
 if __name__ == "__main__":
