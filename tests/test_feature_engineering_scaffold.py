@@ -102,8 +102,9 @@ def test_features_v2_stage_builds_parquet(v2_cfg: TrainingConfig) -> None:
             "penalty": ["5s", "no further action"],
             "circuit": ["monza", "monaco"],
             "country": ["italy", "monaco"],
-            "incident_type": ["collision", "track_limits"],
-        }
+                "incident_type": ["collision", "track_limits"],
+                "rounds": [21, 24],
+            }
     )
     incidents.to_parquet(processed / "incidents.parquet", index=False)
     incidents.to_parquet(processed / "features.parquet", index=False)
