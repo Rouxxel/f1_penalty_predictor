@@ -1,6 +1,6 @@
 # Current Gaps Registry
 
-> **Last updated:** 2026-08-25 (Phase E complete)  
+> **Last updated:** 2026-08-25 (Phase F complete)  
 > **Purpose:** Single registry of missing data, incomplete columns, unmet plan success criteria, and deferred work across the project.  
 > **Authoritative schema:** [`documentation/f1_dataset_example.csv`](documentation/f1_dataset_example.csv)
 
@@ -263,7 +263,7 @@ Fill rates from `data_quality_2019.json` and `data_quality_2025.json`.
 | C — History | ✅ | `history.py` + `test_history_rolling.py` |
 | D — Precedent | ✅ | `precedent.py` + `test_precedent_temporal.py` |
 | E — Selection + ablation | ✅ | `selection.py`, `ablation.py`, `reports/ablation_results.json` |
-| F — Re-train + report | ❌ **Next** | No `xgboost_v2` model; no v1 vs v2 figures |
+| F — Re-train + report | ✅ | `ml_models/xgboost_v2/`, `v2_feature_engineering_report_*.md` |
 
 ### V2 feature groups — implementation vs usability
 
@@ -358,7 +358,36 @@ Precedent similarity key `(incident_type, severity, session)` per original plan 
 | V2 does not beat V1 | Valid negative result — document in Phase F report |
 | Correlation prune on small train (90 rows) | Aggressive drops (e.g. `round`, `season`, `driver_standing`) — may over-prune |
 | `race_stage` dropped at missing step | 0% `completion_percentage` fill |
-| No ablation figure yet | `v1_vs_v2_macro_f1.png` — Phase F |
+
+### 6.3 Phase F — final V2 model & report
+
+**Trained:** `ml_models/xgboost_v2/model.json` on pruned `train_v2.parquet` (25 encoded features).
+
+| Model | Validation macro-F1 | Best iteration |
+|-------|---------------------|----------------|
+| V1 XGBoost (saved) | **0.402** | 30 |
+| V2 XGBoost (final) | 0.381 | 18 |
+
+**V2 does not beat V1** (−0.021). Documented as valid negative result — small train set (90 rows), two-season gap (2019→2025), precedent group hurt ablation, aggressive selection on sparse columns.
+
+**Artifacts:**
+- `reports/model_reports/v2_feature_engineering_report_2026-08-25.md`
+- `reports/figures/v1_vs_v2_macro_f1.png`
+- `reports/figures/feature_importance_v2_top25.png`
+- `reports/figures/confusion_matrix_v2_val.png`
+- `ml_models/xgboost_v2/feature_importance.json`
+
+**FE plan success criteria (final):**
+
+| Criterion | Result |
+|-----------|--------|
+| `features_v2.parquet` with Groups A–E | ✅ |
+| Temporal leakage tests | ✅ |
+| Ablation A–E | ✅ |
+| V2 macro-F1 ≥ V1 | ❌ 0.381 vs 0.402 |
+| Engineered group +0.03 step | ✅ History (C) +0.035 |
+| Engineered in top-15 importance | ✅ (precedent/history features present) |
+| `v2_feature_engineering_report_{date}.md` | ✅ |
 
 | Planned | Status |
 |---------|--------|
@@ -368,9 +397,9 @@ Precedent similarity key `(incident_type, severity, session)` per original plan 
 | Extended leakage audit (precedent/history) in `leakage_filter.py` | ⚠️ Partial — precedent columns registered in `V2_NUMERIC_FEATURES`; no dedicated audit helper |
 | Ablation experiments A–E | ✅ |
 | `ablation_results.json` | ✅ `reports/ablation_results.json` |
-| `reports/figures/v1_vs_v2_macro_f1.png` | ❌ |
-| `reports/figures/feature_importance_v2_top25.png` | ❌ |
-| `v2_feature_engineering_report_{date}.md` | ❌ |
+| `reports/figures/v1_vs_v2_macro_f1.png` | ✅ |
+| `reports/figures/feature_importance_v2_top25.png` | ✅ |
+| `v2_feature_engineering_report_{date}.md` | ✅ |
 
 ### FE success criteria vs actual
 
@@ -379,9 +408,9 @@ Precedent similarity key `(incident_type, severity, session)` per original plan 
 | `features_v2.parquet` with Groups A–E columns | ✅ A–D engineered; E selection applied at build |
 | Temporal leakage tests (history + precedent) | ✅ |
 | Ablation A–E in `ablation_results.json` | ✅ |
-| V2 macro-F1 ≥ V1 | ❌ Ablation E = 0.371 vs A = 0.430 |
-| Engineered group +0.03 macro-F1 step | ⚠️ History (C) +0.035 ✅; precedent (D) −0.075 ❌ |
-| Engineered features in top-15 importance | ❌ Not measured |
+| V2 macro-F1 ≥ V1 | ❌ 0.381 vs 0.402 (documented) |
+| Engineered group +0.03 macro-F1 step | ✅ History (C) +0.035 |
+| Engineered features in top-15 importance | ✅ |
 
 ### Known V2 design limitations
 
@@ -444,7 +473,7 @@ Depends on point-in-time history features (partially available in V2 Groups C/D)
 ### Feature engineering & training
 - [x] Phase D — `precedent.py` (fallback key without `severity` active)
 - [x] Phase E — `selection.py`, ablation A–E
-- [ ] Phase F — train `xgboost_v2`, v1 vs v2 report
+- [x] Phase F — train `xgboost_v2`, v1 vs v2 report
 - [x] Fix V2 columns dropped at encode (`encoding.py` V2 feature sets)
 - [ ] `test_enrichment_ergast.py` + point-in-time standings test
 
@@ -463,6 +492,7 @@ Depends on point-in-time history features (partially available in V2 Groups C/D)
 | `configs/data.yaml` | Scraper + enrichment toggles |
 | `configs/features.yaml` | V2 feature thresholds |
 | `reports/ablation_results.json` | Ablation A–E macro-F1 |
-| `reports/selection_report_v2.json` | Kept/dropped columns rationale |
+| `reports/model_reports/v2_feature_engineering_report_*.md` | V1 vs V2 comparison + selection rationale |
+| `ml_models/xgboost_v2/` | Final V2 model artifacts |
 | `configs/xgboost.yaml` / `xgboost_v2.yaml` | Training splits + paths |
 | `current_gaps.md` | This file |
