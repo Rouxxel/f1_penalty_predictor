@@ -123,6 +123,71 @@ rules:
       penalty_severity: 1
     reason: "Pit lane speeding → reprimand or minor penalty"
 
+  - id: pit_lane_general
+    priority: 72
+    conditions:
+      incident_type: pit_lane
+    outcome:
+      penalty_detail: reprimand
+      penalty_severity: 1
+    reason: "Pit lane infringement without explicit speeding fact → reprimand"
+
+  - id: collision_unclassified
+    priority: 25
+    conditions:
+      incident_type: collision
+    outcome:
+      penalty_detail: manual_review
+      penalty_severity: 0
+    reason: "Collision without matching fact pattern → manual review"
+
+  - id: unsafe_release_general
+    priority: 42
+    conditions:
+      incident_type: unsafe_release
+    outcome:
+      penalty_detail: 10s
+      penalty_severity: 1
+    reason: "Unsafe release → time penalty"
+
+  - id: overtaking_race
+    priority: 52
+    conditions:
+      incident_type: overtaking
+      session_in: [race, sprint]
+    outcome:
+      penalty_detail: 5s
+      penalty_severity: 1
+    reason: "Race impeding / overtaking infringement → time penalty"
+
+  - id: yellow_flag_practice
+    priority: 61
+    conditions:
+      incident_type: yellow_flag
+      session_in: [practice]
+    outcome:
+      penalty_detail: warning
+      penalty_severity: 1
+    reason: "Practice yellow flag breach → warning"
+
+  - id: technical_breach
+    priority: 80
+    conditions:
+      incident_type: technical
+    outcome:
+      penalty_detail: licence_points
+      penalty_severity: 2
+    reason: "Technical / procedural breach → major sanction"
+
+  - id: other_unclassified
+    priority: 95
+    conditions:
+      incident_type: other
+    outcome:
+      penalty_detail: manual_review
+      penalty_severity: 0
+    reason: "Unclassified incident type → manual review"
+
   - id: default_unmatched
     priority: 9999
     conditions:
