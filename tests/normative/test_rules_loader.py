@@ -1,4 +1,4 @@
-"""Tests for normative rules loader (Phase A)."""
+"""Tests for normative rules loader"""
 
 from __future__ import annotations
 

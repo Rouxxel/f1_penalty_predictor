@@ -1,4 +1,4 @@
-"""Tests for normative condition evaluation (Phase B)."""
+"""Tests for normative condition evaluation"""
 
 from __future__ import annotations
 

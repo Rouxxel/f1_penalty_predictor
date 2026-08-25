@@ -1,4 +1,4 @@
-"""Temporal correctness tests for normative escalation counters (Phase C)."""
+"""Temporal correctness tests for normative escalation counters"""
 
 from __future__ import annotations
 

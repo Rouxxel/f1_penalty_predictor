@@ -1,4 +1,4 @@
-"""Tests for V2 feature selection (Phase E)."""
+"""Tests for V2 feature selection"""
 
 from __future__ import annotations
 

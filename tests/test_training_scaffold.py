@@ -1,4 +1,4 @@
-"""Scaffold tests for V1 model training (Phase A)."""
+"""Scaffold tests for V1 model training"""
 
 from __future__ import annotations
 
