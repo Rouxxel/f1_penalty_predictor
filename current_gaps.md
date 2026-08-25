@@ -1,6 +1,6 @@
 # Current Gaps Registry
 
-> **Last updated:** 2026-08-25 (Normative Phase A complete)  
+> **Last updated:** 2026-08-25 (Normative Phase B complete)  
 > **Purpose:** Single registry of missing data, incomplete columns, unmet plan success criteria, and deferred work across the project.  
 > **Authoritative schema:** [`documentation/f1_dataset_example.csv`](documentation/f1_dataset_example.csv)
 
@@ -430,8 +430,8 @@ Precedent similarity key `(incident_type, severity, session)` per original plan 
 | Phase | Status | Deliverable |
 |-------|--------|-------------|
 | A — Rule schema & loader | ✅ | `configs/normative_rules.yaml`, `configs/normative.yaml`, `rules_loader.py`, `--validate-rules` CLI |
-| B — Condition engine | ❌ **Next** | `conditions.py` stub only |
-| C — Escalation pre-pass | ❌ | `escalation.py` stub |
+| B — Condition engine | ✅ | `conditions.py` + `test_conditions.py` (16 tests) |
+| C — Escalation pre-pass | ❌ **Next** | `escalation.py` stub |
 | D — Rule engine + batch predict | ❌ | `rule_engine.py`, `predict.py`; need ≥15 rules (currently **10**) |
 | E — Comparison & reporting | ❌ | `compare.py`, `report.py` |
 | F — Review & iteration | ❌ | Manual review of top deviations |
@@ -445,21 +445,31 @@ Precedent similarity key `(incident_type, severity, session)` per original plan 
 | `src/fia_ml/normative/schema.py` | ✅ dataclass schema + validation |
 | `src/fia_ml/normative/rules_loader.py` | ✅ load + SHA-256 content hash |
 | `src/fia_ml/normative/run_normative.py` | ✅ `--validate-rules` works |
-| Module stubs | ✅ `conditions`, `escalation`, `rule_engine`, `predict`, `compare`, `report` |
+| Module stubs | ✅ `escalation`, `rule_engine`, `predict`, `compare`, `report` (conditions ✅) |
 | `tests/normative/test_rules_loader.py` | ✅ 6 tests passing |
 
 **Validate:** `python -m fia_ml.normative.run_normative --validate-rules`
+
+### Phase B deliverables (done)
+
+| Capability | Status |
+|------------|--------|
+| `conditions.py` — `evaluate_conditions()` | ✅ |
+| Implicit `eq`, `session_in`, `fact_contains_any`, `gte`/`lt`/`eq`/`in`/`contains` | ✅ |
+| Nested `and` / `or`, `default: true`, AND semantics on leaf keys | ✅ |
+| `normalize_session()` for race/qualifying/sprint/practice | ✅ |
+| `tests/normative/test_conditions.py` | ✅ 16 tests |
 
 ### Normative gaps & blockers
 
 | Gap | Impact | Planned fix |
 |-----|--------|-------------|
 | **Only 10 rules** (plan target ≥15) | Many rows will hit `default_unmatched` | Phase D — author rules for `other` (128 rows), `technical`, `pit_lane` without fact text |
-| **`fact` text not on `incidents.parquet`** | Rules using `fact_contains_any` cannot match yet | Join from `data/interim/extracted_documents/{season}/` during predict (Phase D) |
+| **`fact` text not on `incidents.parquet`** | `fact_contains_any` always false until joined | Join from `data/interim/extracted_documents/{season}/` during predict (Phase D) |
 | **Escalation counters not computed** | `driver_track_limits_last_5_races` etc. undefined on rows | Phase C `escalation.py` |
-| **Condition evaluator missing** | No normative predictions yet | Phase B `conditions.py` |
+| **Condition evaluator missing** | ~~No normative predictions yet~~ | ✅ Phase B — still needs rule engine (Phase D) |
 | **`incident_type: other` dominates** (128/234 rows) | Low rule coverage until `other` is split or keyword rules added | Inspect PDF Facts; add subtype rules or improve classifier |
-| **`session` values may not match `session_in`** | YAML uses `[race, qualifying, sprint]` lowercase | Normalize session strings in condition engine (Phase B) |
+| **`session` normalization edge cases** | Long corrupted session strings in 2025 data map to non-race tokens | Data cleanup or stricter session parser in dataset pipeline |
 | **No `rules_version.json` written yet** | Hash computed at load only | Write to `ml_models/normative/` in Phase D predict pass |
 | **No deviation report / parquet output** | Success criteria unmet | Phases D–E |
 | **FIA history vs normative history modes** | Config flag exists; neither implemented | Phase C |
@@ -473,7 +483,7 @@ Precedent similarity key `(incident_type, severity, session)` per original plan 
 | Deterministic run on full `incidents.parquet` | ❌ Phase D |
 | ≥80% rows matched (≤20% manual_review) | ❌ not measured |
 | Deviation report + breakdowns | ❌ Phase E |
-| Unit tests all categories | ⚠️ loader only |
+| Unit tests all categories | ⚠️ loader + conditions ✅; escalation/engine/compare pending |
 | Non-trivial deviation shown | ❌ |
 | Top deviation cases reviewed | ❌ Phase F |
 | `rules_version.json` tracks hash | ❌ load-time hash only |
@@ -525,7 +535,7 @@ Depends on point-in-time history (V2 Groups C/D logic reusable in Phase C escala
 
 ### Normative rules
 - [x] Phase A — schema, loader, `--validate-rules` CLI
-- [ ] Phase B — `conditions.py` + tests
+- [x] Phase B — `conditions.py` + tests
 - [ ] Phase C — `escalation.py` + temporal tests
 - [ ] Phase D — rule engine, ≥15 rules, `incidents_with_normative.parquet`
 - [ ] Phase E — deviation report + figures
