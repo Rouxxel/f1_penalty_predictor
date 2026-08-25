@@ -23,7 +23,7 @@ def rules_path() -> Path:
 def test_load_default_rules_file(rules_path: Path) -> None:
     loaded = load_rules(rules_path)
     assert loaded.version == "1.0.0"
-    assert loaded.rule_count == 10
+    assert loaded.rule_count == 17
     assert loaded.document.rules[-1].id == "default_unmatched"
     assert loaded.content_hash == rules_file_hash(rules_path)
 
