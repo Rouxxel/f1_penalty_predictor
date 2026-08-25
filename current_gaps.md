@@ -1,6 +1,6 @@
 # Current Gaps Registry
 
-> **Last updated:** 2026-08-25 (Phase D complete)  
+> **Last updated:** 2026-08-25 (Phase E complete)  
 > **Purpose:** Single registry of missing data, incomplete columns, unmet plan success criteria, and deferred work across the project.  
 > **Authoritative schema:** [`documentation/f1_dataset_example.csv`](documentation/f1_dataset_example.csv)
 
@@ -262,8 +262,8 @@ Fill rates from `data_quality_2019.json` and `data_quality_2025.json`.
 | B — Race + championship | ✅ | `race.py`, `driver.py` |
 | C — History | ✅ | `history.py` + `test_history_rolling.py` |
 | D — Precedent | ✅ | `precedent.py` + `test_precedent_temporal.py` |
-| E — Selection + ablation | ❌ **Next** | `selection.py` stub; `ablation` stage raises `NotImplementedError` |
-| F — Re-train + report | ❌ | No `xgboost_v2` model; no v1 vs v2 figures |
+| E — Selection + ablation | ✅ | `selection.py`, `ablation.py`, `reports/ablation_results.json` |
+| F — Re-train + report | ❌ **Next** | No `xgboost_v2` model; no v1 vs v2 figures |
 
 ### V2 feature groups — implementation vs usability
 
@@ -321,15 +321,53 @@ Precedent similarity key `(incident_type, severity, session)` per original plan 
 | `precedent_minor_penalty_rate` | ✅ |
 | `precedent_major_penalty_rate` | ✅ |
 
-### FE tests & audits (planned vs actual)
+### 6.2 Phase E — selection & ablation results
+
+**Implemented:** `src/fia_ml/features/selection.py` (missing-rate + correlation + importance prune), `src/fia_ml/training/ablation.py` (experiments A–E), integrated into `build_features_v2.py`.
+
+**Selection steps (on 2019 train):**
+1. Drop columns with >40% missing
+2. Correlation prune (|r| > 0.95) — drop lower mutual-information column
+3. Preliminary XGBoost → drop bottom 20% encoded features by gain
+
+**Ablation macro-F1 (validation 2025):**
+
+| Exp | Features | macro-F1 | Δ vs prev |
+|-----|----------|----------|-----------|
+| A | V1 baseline | **0.430** | — |
+| B | + race/championship | 0.388 | −0.042 |
+| C | + history | 0.423 | **+0.035** |
+| D | + precedent | 0.349 | −0.075 |
+| E | + selection prune | 0.371 | +0.022 |
+
+**Key findings:**
+- **History group (C)** is the only step meeting the +0.03 macro-F1 ablation target (+0.035 over B).
+- **Precedent (D)** hurts validation (−0.075) — likely sparse groups + two-season corpus + 6-year shift.
+- **Selection (E)** recovers some loss vs D (+0.022) but **full V2 still below V1** (0.371 vs 0.430).
+- V1 ablation baseline (0.430) exceeds prior V1 trained report (0.402) — ablation retrains in-memory with current encode pipeline; small differences expected.
+
+**Artifacts:**
+- `reports/ablation_results.json`
+- `reports/selection_report_v2.json`
+- `train_v2.parquet` now has **21** post-selection encoded features (down from 49 pre-prune)
+
+**Remaining Phase E gaps:**
+
+| Gap | Notes |
+|-----|-------|
+| V2 does not beat V1 | Valid negative result — document in Phase F report |
+| Correlation prune on small train (90 rows) | Aggressive drops (e.g. `round`, `season`, `driver_standing`) — may over-prune |
+| `race_stage` dropped at missing step | 0% `completion_percentage` fill |
+| No ablation figure yet | `v1_vs_v2_macro_f1.png` — Phase F |
 
 | Planned | Status |
 |---------|--------|
 | `test_history_rolling.py` | ✅ |
 | `test_precedent_temporal.py` | ✅ (6 tests) |
+| `test_selection.py` | ✅ (3 tests) |
 | Extended leakage audit (precedent/history) in `leakage_filter.py` | ⚠️ Partial — precedent columns registered in `V2_NUMERIC_FEATURES`; no dedicated audit helper |
-| Ablation experiments A–E | ❌ |
-| `ablation_results.json` | ❌ |
+| Ablation experiments A–E | ✅ |
+| `ablation_results.json` | ✅ `reports/ablation_results.json` |
 | `reports/figures/v1_vs_v2_macro_f1.png` | ❌ |
 | `reports/figures/feature_importance_v2_top25.png` | ❌ |
 | `v2_feature_engineering_report_{date}.md` | ❌ |
@@ -338,11 +376,11 @@ Precedent similarity key `(incident_type, severity, session)` per original plan 
 
 | Criterion | Status |
 |-----------|--------|
-| `features_v2.parquet` with Groups A–E columns | ⚠️ A–D yes; E (selection prune) missing |
+| `features_v2.parquet` with Groups A–E columns | ✅ A–D engineered; E selection applied at build |
 | Temporal leakage tests (history + precedent) | ✅ |
-| Ablation A–E in `ablation_results.json` | ❌ |
-| V2 macro-F1 ≥ V1 | ❌ V2 not trained |
-| Engineered group +0.03 macro-F1 step | ❌ Not measured |
+| Ablation A–E in `ablation_results.json` | ✅ |
+| V2 macro-F1 ≥ V1 | ❌ Ablation E = 0.371 vs A = 0.430 |
+| Engineered group +0.03 macro-F1 step | ⚠️ History (C) +0.035 ✅; precedent (D) −0.075 ❌ |
 | Engineered features in top-15 importance | ❌ Not measured |
 
 ### Known V2 design limitations
@@ -351,7 +389,7 @@ Precedent similarity key `(incident_type, severity, session)` per original plan 
 |------------|-------|
 | `races_since_last_penalty` / `races_since_last_incident` | Same-season only; `NaN` when last event was prior season |
 | `is_final_laps` | Intentionally **not** implemented (redundant with `race_stage.final_laps`) |
-| `selection.py` correlation + importance prune | Stub — Phase E |
+| `selection.py` correlation + importance prune | ✅ Phase E |
 | `circuit` in precedent key | Configured for ablation only; risk of sparse groups |
 
 ---
@@ -405,7 +443,7 @@ Depends on point-in-time history features (partially available in V2 Groups C/D)
 
 ### Feature engineering & training
 - [x] Phase D — `precedent.py` (fallback key without `severity` active)
-- [ ] Phase E — `selection.py`, ablation A–E
+- [x] Phase E — `selection.py`, ablation A–E
 - [ ] Phase F — train `xgboost_v2`, v1 vs v2 report
 - [x] Fix V2 columns dropped at encode (`encoding.py` V2 feature sets)
 - [ ] `test_enrichment_ergast.py` + point-in-time standings test
@@ -424,5 +462,7 @@ Depends on point-in-time history features (partially available in V2 Groups C/D)
 | `data/interim/extracted_documents/{season}/` | Parsed PDF JSON + `raw_text` (NLP-ready) |
 | `configs/data.yaml` | Scraper + enrichment toggles |
 | `configs/features.yaml` | V2 feature thresholds |
+| `reports/ablation_results.json` | Ablation A–E macro-F1 |
+| `reports/selection_report_v2.json` | Kept/dropped columns rationale |
 | `configs/xgboost.yaml` / `xgboost_v2.yaml` | Training splits + paths |
 | `current_gaps.md` | This file |
