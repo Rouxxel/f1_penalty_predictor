@@ -5,7 +5,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from fia_ml.features.common import to_float
+from fia_ml.features.common import is_strictly_prior, to_float
 from fia_ml.features.config import FeaturesConfig
 
 HISTORY_OUTPUT_COLUMNS = (
@@ -21,15 +21,6 @@ HISTORY_OUTPUT_COLUMNS = (
     "races_since_last_penalty",
     "races_since_last_incident",
 )
-
-
-def _is_strictly_prior(
-    season: int,
-    round_num: int,
-    prior_season: int,
-    prior_round: int,
-) -> bool:
-    return (prior_season < season) or (prior_season == season and prior_round < round_num)
 
 
 def _rounds_since_same_season(
@@ -59,7 +50,7 @@ def _history_for_driver(group: pd.DataFrame, windows: list[int]) -> pd.DataFrame
         prior = [
             entry
             for entry in prior_rows
-            if _is_strictly_prior(season, round_num, entry["season"], entry["round"])
+            if is_strictly_prior(season, round_num, entry["season"], entry["round"])
         ]
 
         career_incidents = len(prior)

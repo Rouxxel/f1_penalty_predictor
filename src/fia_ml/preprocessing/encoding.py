@@ -18,8 +18,15 @@ from fia_ml.preprocessing.leakage_filter import (
     V1_BOOLEAN_FEATURES,
     V1_CATEGORICAL_FEATURES,
     V1_NUMERIC_FEATURES,
+    V2_BOOLEAN_FEATURES,
+    V2_CATEGORICAL_FEATURES,
+    V2_NUMERIC_FEATURES,
     assert_no_leakage,
 )
+
+CATEGORICAL_FEATURES = V1_CATEGORICAL_FEATURES | V2_CATEGORICAL_FEATURES
+BOOLEAN_FEATURES = V1_BOOLEAN_FEATURES | V2_BOOLEAN_FEATURES
+NUMERIC_FEATURES = V1_NUMERIC_FEATURES | V2_NUMERIC_FEATURES
 from fia_ml.utils import secure_file_io as sio
 
 TARGET_COLUMN = "penalty_severity"
@@ -42,9 +49,9 @@ def _bool_to_int(series: pd.Series) -> pd.Series:
 def _prepare_raw_features(df: pd.DataFrame, feature_columns: list[str]) -> pd.DataFrame:
     out = df[feature_columns].copy()
     for col in feature_columns:
-        if col in V1_BOOLEAN_FEATURES:
+        if col in BOOLEAN_FEATURES:
             out[col] = _bool_to_int(out[col])
-        elif col in V1_NUMERIC_FEATURES:
+        elif col in NUMERIC_FEATURES:
             out[col] = pd.to_numeric(out[col], errors="coerce")
         else:
             out[col] = out[col].astype(str).replace({"": np.nan, "nan": np.nan})
@@ -52,8 +59,8 @@ def _prepare_raw_features(df: pd.DataFrame, feature_columns: list[str]) -> pd.Da
 
 
 def build_preprocessor(feature_columns: list[str]) -> ColumnTransformer:
-    cat_cols = [c for c in feature_columns if c in V1_CATEGORICAL_FEATURES]
-    num_cols = [c for c in feature_columns if c in V1_NUMERIC_FEATURES or c in V1_BOOLEAN_FEATURES]
+    cat_cols = [c for c in feature_columns if c in CATEGORICAL_FEATURES]
+    num_cols = [c for c in feature_columns if c in NUMERIC_FEATURES or c in BOOLEAN_FEATURES]
 
     transformers: list[tuple[str, Pipeline, list[str]]] = []
     if cat_cols:

@@ -99,6 +99,10 @@ V2_NUMERIC_FEATURES = frozenset(
         "penalties_last_5_races",
         "races_since_last_penalty",
         "races_since_last_incident",
+        "precedent_count",
+        "precedent_no_penalty_rate",
+        "precedent_minor_penalty_rate",
+        "precedent_major_penalty_rate",
     }
 )
 
