@@ -1,6 +1,6 @@
 # Current Gaps Registry
 
-> **Last updated:** 2026-08-25 (normative rule engine + batch predict)  
+> **Last updated:** 2026-08-25 (normative comparison & reporting)  
 > **Purpose:** Single registry of missing data, incomplete columns, unmet plan success criteria, and deferred work across the project.  
 > **Authoritative schema:** [`documentation/f1_dataset_example.csv`](documentation/f1_dataset_example.csv)
 
@@ -433,8 +433,8 @@ Precedent similarity key `(incident_type, severity, session)` per original plan 
 | B — Condition engine | ✅ | `conditions.py` + `test_conditions.py` (16 tests) |
 | C — Escalation pre-pass | ✅ | `escalation.py` + `test_escalation_temporal.py` (7 tests) |
 | D — Rule engine + batch predict | ✅ | `rule_engine.py`, `predict.py`, 17 rules, `incidents_with_normative.parquet` |
-| E — Comparison & reporting | ❌ **Next** | `compare.py`, `report.py` |
-| F — Review & iteration | ❌ | Manual review of top deviations |
+| E — Comparison & reporting | ✅ | `compare.py`, `report.py`, deviation report |
+| F — Review & iteration | ❌ **Next** | Manual review of top deviations |
 
 ### Phase A deliverables (done)
 
@@ -496,6 +496,38 @@ Precedent similarity key `(incident_type, severity, session)` per original plan 
 | Top matched rules | `other_unclassified` (128), `pit_lane_general` (45), `track_limits_first_offence` (15) |
 | Fact text joined from interim JSON | 0 rows (interim dirs empty in repo) |
 
+### Comparison & reporting (done)
+
+| Artifact | Status |
+|----------|--------|
+| `compare.py` | ✅ Agreement, Cohen's kappa, confusion matrix, breakdowns, optional ML |
+| `report.py` | ✅ Markdown summary, CSV breakdowns, figures |
+| `run_normative.py` | ✅ `--compare`, `--report-dir`, `--ml-predictions` |
+| `tests/normative/test_compare.py` | ✅ 4 tests |
+| `reports/normative/deviation_summary_2026-08-25.md` | ✅ |
+| `ml_models/normative/evaluation_metrics.json` | ✅ |
+
+**Run:**
+```bash
+python -m fia_ml.normative.run_normative \
+  --input data/processed/incidents_with_normative.parquet \
+  --compare \
+  --ml-predictions ml_models/xgboost_v2/predictions_val.json \
+  --report-dir reports/normative/
+```
+
+**First deviation analysis (234 rows):**
+
+| Metric | Value |
+|--------|-------|
+| FIA vs normative agreement | **52.6%** |
+| Cohen's kappa | **0.223** |
+| FIA harsher rate | **41.5%** (mean deviation −0.45) |
+| Normative harsher rate | **6.0%** |
+| Agreement excl. `manual_review` | **79.8%** (94 matched rows) |
+| Highest disagreement type | `other` (70.3%) |
+| ML overlap (val set, 144 rows) | FIA–ML 47.2%, normative–ML 60.4% |
+
 ### Normative gaps & blockers
 
 | Gap | Impact | Planned fix |
@@ -504,7 +536,6 @@ Precedent similarity key `(incident_type, severity, session)` per original plan 
 | **`fact` text not populated** | `fact_contains_any` rules rarely fire (12 collisions → `collision_unclassified`) | Populate `data/interim/extracted_documents/{season}/` via dataset pipeline |
 | **`incident_type: other` dominates** (128/234) | Routed to `other_unclassified` → `manual_review` | Improve incident classifier or add keyword sub-rules |
 | **Collision fact rules unused** | No advantage/racing/reckless matches without Fact | Depends on fact join |
-| **Deviation report / comparison** | Not built | `compare.py` + `report.py` (next step in plan) |
 | **No fixture file** `tests/fixtures/normative_incidents.json` | Synthetic regression set missing | Add 20–30 labeled rows |
 | **`normative_history` ablation** | Needs second-pass with normative outcomes | Iterative predict when comparing modes |
 | **Session string corruption (2025)** | Some rows have garbage `session` values | Dataset cleanup |
@@ -516,10 +547,10 @@ Precedent similarity key `(incident_type, severity, session)` per original plan 
 | ≥15 documented rules | ✅ 17 rules |
 | Deterministic run on full `incidents.parquet` | ✅ |
 | ≥80% rows matched (≤20% `manual_review`) | ❌ 59.8% `manual_review` |
-| Deviation report + breakdowns | ❌ Next in plan |
-| Unit tests (loader, conditions, escalation, engine) | ✅ 37 tests |
-| Non-trivial deviation shown | ❌ Needs comparison step |
-| Top deviation cases reviewed | ❌ |
+| Deviation report + breakdowns | ✅ |
+| Unit tests (loader, conditions, escalation, engine, compare) | ✅ 41 tests |
+| Non-trivial deviation shown | ✅ FIA harsher on 41.5% of rows; `other` type 70% disagreement |
+| Top deviation cases reviewed | ❌ Next in plan |
 | `rules_version.json` tracks hash | ✅ |
 
 Depends on point-in-time history (V2 Groups C/D logic reusable in Phase C escalation).
@@ -572,6 +603,8 @@ Depends on point-in-time history (V2 Groups C/D logic reusable in Phase C escala
 - [x] Condition evaluator + tests
 - [x] Escalation counters + temporal tests
 - [x] Rule engine, 17 rules, `incidents_with_normative.parquet`
+- [x] Comparison & deviation report (`compare.py`, `report.py`)
+- [ ] Manual review of top deviations + rule iteration
 - [ ] Deviation comparison + report (`compare.py`, `report.py`)
 - [ ] Manual review of top deviations + rule iteration
 
