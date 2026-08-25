@@ -1,6 +1,6 @@
 # Current Gaps Registry
 
-> **Last updated:** 2026-08-25  
+> **Last updated:** 2026-08-25 (Phase D complete)  
 > **Purpose:** Single registry of missing data, incomplete columns, unmet plan success criteria, and deferred work across the project.  
 > **Authoritative schema:** [`documentation/f1_dataset_example.csv`](documentation/f1_dataset_example.csv)
 
@@ -241,17 +241,14 @@ Fill rates from `data_quality_2019.json` and `data_quality_2025.json`.
 
 ### V2 preprocessor encode drops (2019 train slice)
 
-60 columns in `feature_columns` → **26** in `output_columns` (`preprocessor_xgboost_v2.meta.json`). Groups dropped because train split has no observed values:
+64 columns in `feature_columns` → **49** in `output_columns` (`preprocessor_xgboost_v2.meta.json`) after fixing `encoding.py` to include V2 feature sets (was 26 before fix).
 
-| Dropped group | Examples |
-|---------------|----------|
-| Race progression | `lap`, `lap_remaining`, `completion_percentage`, `race_stage` |
-| Environmental | `flag`, `severity` |
-| Opponent / relational | `opponent_*`, `standing_difference`, `points_difference` |
-| V2 history | `career_*`, `incidents_last_*`, `penalties_last_*`, `races_since_*` |
-| V2 championship | `points_gap_to_leader`, `title_contender`, `round_progress`, etc. |
+| Status | Columns |
+|--------|---------|
+| ✅ Now encoded (V2) | `precedent_*`, `career_*`, `incidents_last_*`, `penalties_last_*`, `races_since_*`, `round_progress`, `points_gap_to_leader`, `points_available_remaining`, `title_contender`, `construct_title_contender`, `is_first_round`, `is_last_round`, `race_stage` |
+| ❌ Still dropped (no train observations) | `flag`, `severity`, `lap`, `lap_remaining`, `completion_percentage`, `opponent_*`, `standing_difference`, `points_difference`, `points_gap_to_opponent`, `superlicense_points_before_incident` |
 
-Many V2 history columns **should** have values on 2019 train — verify whether sklearn drops them due to all-zero variance or a separate bug when filling gaps later.
+**Fixed in Phase D:** `encoding.py` previously only mapped V1 categorical/numeric/boolean sets, silently dropping all V2 engineered columns at fit time.
 
 ---
 
@@ -264,8 +261,8 @@ Many V2 history columns **should** have values on 2019 train — verify whether 
 | A — Scaffolding | ✅ | `configs/features.yaml`, `xgboost_v2.yaml`, CLI stages |
 | B — Race + championship | ✅ | `race.py`, `driver.py` |
 | C — History | ✅ | `history.py` + `test_history_rolling.py` |
-| D — Precedent | ❌ **Next** | `precedent.py` stub only |
-| E — Selection + ablation | ❌ | `selection.py` stub; `ablation` stage raises `NotImplementedError` |
+| D — Precedent | ✅ | `precedent.py` + `test_precedent_temporal.py` |
+| E — Selection + ablation | ❌ **Next** | `selection.py` stub; `ablation` stage raises `NotImplementedError` |
 | F — Re-train + report | ❌ | No `xgboost_v2` model; no v1 vs v2 figures |
 
 ### V2 feature groups — implementation vs usability
@@ -275,27 +272,62 @@ Many V2 history columns **should** have values on 2019 train — verify whether 
 | A — `race_stage`, `round_progress`, … | ✅ | `race_stage` needs `completion_percentage` (0% fill) |
 | B — `points_gap_to_leader`, `title_contender`, … | ✅ | Leader/gap uses standings that are season totals, not round N−1 |
 | C — career + rolling history | ✅ | Works from labels; limited by 2 seasons + small train |
-| D — `precedent_*` | ❌ | Not implemented |
+| D — `precedent_*` | ✅ | Active key `(incident_type, session)` — see §6.1 |
 | F — opponent history (optional) | ❌ | Deferred to V2.1 ablation |
 
-### Critical blocker for Phase D (precedent)
+### 6.1 Phase D — precedent implementation notes
 
-Precedent similarity key is `(incident_type, severity, session)` per `configs/features.yaml`. **`severity` is 0% filled** → precedent groups will be empty or degenerate until severity is manually labeled.
+**Implemented:** `src/fia_ml/features/precedent.py` with temporal strict-prior filtering (same rule as history: same-season round `<` only).
 
-| Precedent column (planned) | Status |
-|-----------------------------|--------|
-| `precedent_count` | ❌ |
-| `precedent_no_penalty_rate` | ❌ |
-| `precedent_minor_penalty_rate` | ❌ |
-| `precedent_major_penalty_rate` | ❌ |
+| Feature | Definition |
+|---------|------------|
+| `precedent_count` | Prior incidents matching active similarity key |
+| `precedent_no_penalty_rate` | Share with `penalty_severity == 0` among priors |
+| `precedent_minor_penalty_rate` | Share with `penalty_severity == 1` |
+| `precedent_major_penalty_rate` | Share with `penalty_severity == 2` |
+
+**Active similarity key:** `(incident_type, session)` via `active_similarity_key` in `configs/features.yaml`.  
+**Reason:** `severity` is 0% filled — the planned `(incident_type, severity, session)` key is configured but **dormant** until manual labeling.
+
+**Fallback:** When `precedent_count < min_precedent_count` (3), rates impute to the **global** temporally-prior distribution (all incident types/sessions).
+
+**Coverage on 234 driver-rows (post-flatten):**
+
+| Metric | Value |
+|--------|-------|
+| `precedent_count == 0` | 43 rows (18%) |
+| `precedent_count < 3` (uses global prior for rates) | 75 rows (32%) |
+| `precedent_count >= 3` (group-specific rates) | 159 rows (68%) |
+| NaN rate columns | 3 rows (first incidents with no global prior) |
+
+**Remaining precedent gaps:**
+
+| Gap | Impact |
+|-----|--------|
+| `severity` unlabeled | Cannot activate `(incident_type, severity, session)` key — coarser groups |
+| Two-season corpus (2019 + 2025 only) | 2025 rows cannot see 2020–2024 precedents; 6-year distribution shift |
+| Sparse `incident_type` × `session` cells | 32% of rows fall back to global prior |
+| `circuit` in precedent key | Ablation-only; not active (risk of overfitting) |
+| Cross-season precedent | 2019 incidents **do** count as priors for 2025 (strict temporal order) |
+
+### Critical blocker for severity-based precedent (deferred)
+
+Precedent similarity key `(incident_type, severity, session)` per original plan requires **`severity` manual labeling** (0% fill). Switch `active_similarity_key` in `configs/features.yaml` once `severity` is populated.
+
+| Precedent column | Status |
+|------------------|--------|
+| `precedent_count` | ✅ |
+| `precedent_no_penalty_rate` | ✅ |
+| `precedent_minor_penalty_rate` | ✅ |
+| `precedent_major_penalty_rate` | ✅ |
 
 ### FE tests & audits (planned vs actual)
 
 | Planned | Status |
 |---------|--------|
 | `test_history_rolling.py` | ✅ |
-| `test_precedent_temporal.py` | ❌ |
-| Extended leakage audit (precedent/history) in `leakage_filter.py` | ❌ Partial — basic leakage only |
+| `test_precedent_temporal.py` | ✅ (6 tests) |
+| Extended leakage audit (precedent/history) in `leakage_filter.py` | ⚠️ Partial — precedent columns registered in `V2_NUMERIC_FEATURES`; no dedicated audit helper |
 | Ablation experiments A–E | ❌ |
 | `ablation_results.json` | ❌ |
 | `reports/figures/v1_vs_v2_macro_f1.png` | ❌ |
@@ -306,8 +338,8 @@ Precedent similarity key is `(incident_type, severity, session)` per `configs/fe
 
 | Criterion | Status |
 |-----------|--------|
-| `features_v2.parquet` with Groups A–E columns | ⚠️ A–C yes; E missing |
-| Temporal leakage tests (history + precedent) | ⚠️ History ✅; precedent ❌ |
+| `features_v2.parquet` with Groups A–E columns | ⚠️ A–D yes; E (selection prune) missing |
+| Temporal leakage tests (history + precedent) | ✅ |
 | Ablation A–E in `ablation_results.json` | ❌ |
 | V2 macro-F1 ≥ V1 | ❌ V2 not trained |
 | Engineered group +0.03 macro-F1 step | ❌ Not measured |
@@ -362,7 +394,7 @@ Depends on point-in-time history features (partially available in V2 Groups C/D)
 
 ### High-priority columns
 - [ ] `lap` → unlocks `lap_remaining`, `completion_percentage`, `race_stage`
-- [ ] `severity` (manual) → **required for precedent features**
+- [ ] `severity` (manual) → enables `(incident_type, severity, session)` precedent key
 - [ ] `flag`
 - [ ] `positions_of_involved parties`
 - [ ] `superlicense_points_before_incident`
@@ -372,10 +404,10 @@ Depends on point-in-time history features (partially available in V2 Groups C/D)
 - [ ] Multi-driver `driver_standings`, `nationalities`, `years_in_sport`
 
 ### Feature engineering & training
-- [ ] Phase D — `precedent.py` (+ consider fallback key without `severity`)
+- [x] Phase D — `precedent.py` (fallback key without `severity` active)
 - [ ] Phase E — `selection.py`, ablation A–E
 - [ ] Phase F — train `xgboost_v2`, v1 vs v2 report
-- [ ] Investigate V2 columns dropped at encode on 2019 train
+- [x] Fix V2 columns dropped at encode (`encoding.py` V2 feature sets)
 - [ ] `test_enrichment_ergast.py` + point-in-time standings test
 
 ### Normative rules (later)
