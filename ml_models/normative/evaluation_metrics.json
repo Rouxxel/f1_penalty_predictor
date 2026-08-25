@@ -1,0 +1,105 @@
+{
+  "generated_at": "2026-08-25",
+  "aggregate": {
+    "row_count": 234,
+    "agreement_rate": 0.5256410256410257,
+    "disagreement_rate": 0.47435897435897434,
+    "cohens_kappa": 0.22287047841306895,
+    "mean_deviation_direction": -0.44871794871794873,
+    "mean_deviation_magnitude": 0.5683760683760684,
+    "fia_harsher_rate": 0.41452991452991456,
+    "normative_harsher_rate": 0.05982905982905983,
+    "manual_review_rate": 0.5982905982905983,
+    "confusion_matrix": {
+      "labels": [
+        0,
+        1,
+        2
+      ],
+      "matrix": [
+        [
+          48,
+          13,
+          0
+        ],
+        [
+          70,
+          71,
+          1
+        ],
+        [
+          22,
+          5,
+          4
+        ]
+      ],
+      "row_label": "fia",
+      "column_label": "normative"
+    },
+    "agreement_rate_excl_manual_review": 0.7978723404255319,
+    "cohens_kappa_excl_manual_review": 0.2505245488879563,
+    "matched_row_count": 94
+  },
+  "ml_comparison": {
+    "ml_predictions_path": "C:\\Users\\Acer\\Documents\\GitHub\\f1_penalty_predictor\\ml_models\\xgboost_v2\\predictions_val.json",
+    "prediction_column": "pred_xgboost",
+    "overlap_rows": 144,
+    "agreement_fia_ml": 0.4722222222222222,
+    "agreement_normative_ml": 0.6041666666666666,
+    "agreement_fia_normative": 0.4930555555555556,
+    "cohens_kappa_fia_ml": 0.07707876539045366,
+    "cohens_kappa_normative_ml": 0.3337662337662338,
+    "confusion_fia_vs_ml": {
+      "labels": [
+        0,
+        1,
+        2
+      ],
+      "matrix": [
+        [
+          13,
+          15,
+          6
+        ],
+        [
+          34,
+          51,
+          11
+        ],
+        [
+          5,
+          5,
+          4
+        ]
+      ],
+      "row_label": "fia",
+      "column_label": "normative"
+    },
+    "confusion_normative_vs_ml": {
+      "labels": [
+        0,
+        1,
+        2
+      ],
+      "matrix": [
+        [
+          41,
+          25,
+          16
+        ],
+        [
+          6,
+          46,
+          5
+        ],
+        [
+          5,
+          0,
+          0
+        ]
+      ],
+      "row_label": "fia",
+      "column_label": "normative"
+    }
+  }
+}
