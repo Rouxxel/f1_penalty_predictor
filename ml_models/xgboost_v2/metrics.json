@@ -1,0 +1,60 @@
+{
+  "train_rows": 90,
+  "validation_rows": 144,
+  "best_iteration": 18,
+  "validation_metrics": {
+    "accuracy": 0.4722222222222222,
+    "macro_f1": 0.3805584843601833,
+    "weighted_f1": 0.5007902799053057,
+    "per_class": {
+      "0": {
+        "precision": 0.25,
+        "recall": 0.38235294117647056,
+        "f1": 0.3023255813953488,
+        "support": 34
+      },
+      "1": {
+        "precision": 0.7183098591549296,
+        "recall": 0.53125,
+        "f1": 0.6107784431137725,
+        "support": 96
+      },
+      "2": {
+        "precision": 0.19047619047619047,
+        "recall": 0.2857142857142857,
+        "f1": 0.22857142857142856,
+        "support": 14
+      }
+    },
+    "confusion_matrix": [
+      [
+        13,
+        15,
+        6
+      ],
+      [
+        34,
+        51,
+        11
+      ],
+      [
+        5,
+        5,
+        4
+      ]
+    ],
+    "labels": [
+      0,
+      1,
+      2
+    ],
+    "log_loss": 1.0167524380695296
+  },
+  "macro_f1": 0.3805584843601833,
+  "baseline_comparison": {
+    "majority_macro_f1": 0.26666666666666666,
+    "session_stratified_macro_f1": 0.3593890386343217
+  },
+  "beats_majority_baseline": true,
+  "beats_session_baseline": true
+}
