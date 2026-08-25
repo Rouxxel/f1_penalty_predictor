@@ -106,6 +106,59 @@ V2_NUMERIC_FEATURES = frozenset(
     }
 )
 
+V2_RACE_FEATURE_COLUMNS = frozenset(
+    {
+        "race_stage",
+        "round_progress",
+        "is_first_round",
+        "is_last_round",
+    }
+)
+
+V2_CHAMPIONSHIP_FEATURE_COLUMNS = frozenset(
+    {
+        "points_gap_to_leader",
+        "points_gap_to_opponent",
+        "title_contender",
+        "construct_title_contender",
+        "points_available_remaining",
+    }
+)
+
+V2_HISTORY_FEATURE_COLUMNS = frozenset(
+    {
+        "career_incidents",
+        "career_penalties",
+        "career_major_penalties",
+        "career_incidents_per_100_races",
+        "career_penalties_per_100_races",
+        "incidents_last_3_races",
+        "incidents_last_5_races",
+        "penalties_last_3_races",
+        "penalties_last_5_races",
+        "races_since_last_penalty",
+        "races_since_last_incident",
+    }
+)
+
+V2_PRECEDENT_FEATURE_COLUMNS = frozenset(
+    {
+        "precedent_count",
+        "precedent_no_penalty_rate",
+        "precedent_minor_penalty_rate",
+        "precedent_major_penalty_rate",
+    }
+)
+
+V2_ENGINEERED_BY_GROUP: dict[str, frozenset[str]] = {
+    "race": V2_RACE_FEATURE_COLUMNS,
+    "championship": V2_CHAMPIONSHIP_FEATURE_COLUMNS,
+    "history": V2_HISTORY_FEATURE_COLUMNS,
+    "precedent": V2_PRECEDENT_FEATURE_COLUMNS,
+}
+
+ALL_V2_ENGINEERED_FEATURES = frozenset().union(*V2_ENGINEERED_BY_GROUP.values())
+
 V1_NUMERIC_FEATURES = frozenset(
     {
         "round",
@@ -167,6 +220,25 @@ def select_feature_columns(df, *, extra_forbidden: set[str] | None = None) -> li
         + list(V2_NUMERIC_FEATURES)
     )
     return [col for col in candidates if col in df.columns and col not in forbidden]
+
+
+def select_feature_columns_for_groups(
+    df,
+    groups: frozenset[str],
+    *,
+    extra_forbidden: set[str] | None = None,
+) -> list[str]:
+    """Return feature columns for an ablation experiment (V1 + selected V2 groups)."""
+    all_cols = select_feature_columns(df, extra_forbidden=extra_forbidden)
+    v1_cols = [col for col in all_cols if col not in ALL_V2_ENGINEERED_FEATURES]
+    if not groups:
+        return v1_cols
+
+    allowed_v2: set[str] = set()
+    for group in groups:
+        allowed_v2 |= V2_ENGINEERED_BY_GROUP[group]
+    v2_cols = [col for col in all_cols if col in allowed_v2]
+    return v1_cols + v2_cols
 
 
 def assert_no_leakage(feature_columns: list[str]) -> None:
