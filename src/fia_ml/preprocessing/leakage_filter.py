@@ -67,6 +67,30 @@ V1_BOOLEAN_FEATURES = frozenset(
     }
 )
 
+V2_CATEGORICAL_FEATURES = frozenset(
+    {
+        "race_stage",
+    }
+)
+
+V2_BOOLEAN_FEATURES = frozenset(
+    {
+        "is_first_round",
+        "is_last_round",
+        "title_contender",
+        "construct_title_contender",
+    }
+)
+
+V2_NUMERIC_FEATURES = frozenset(
+    {
+        "round_progress",
+        "points_gap_to_leader",
+        "points_gap_to_opponent",
+        "points_available_remaining",
+    }
+)
+
 V1_NUMERIC_FEATURES = frozenset(
     {
         "round",
@@ -121,8 +145,11 @@ def select_feature_columns(df, *, extra_forbidden: set[str] | None = None) -> li
 
     candidates = (
         list(V1_CATEGORICAL_FEATURES)
+        + list(V2_CATEGORICAL_FEATURES)
         + list(V1_BOOLEAN_FEATURES)
+        + list(V2_BOOLEAN_FEATURES)
         + list(V1_NUMERIC_FEATURES)
+        + list(V2_NUMERIC_FEATURES)
     )
     return [col for col in candidates if col in df.columns and col not in forbidden]
 
