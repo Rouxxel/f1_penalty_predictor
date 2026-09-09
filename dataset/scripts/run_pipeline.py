@@ -26,6 +26,12 @@ def main() -> int:
         help="Path to data.yaml config file",
     )
     parser.add_argument(
+        "--enrichment-config",
+        type=Path,
+        default=PROJECT_ROOT / "configs" / "enrichment.yaml",
+        help="Path to enrichment.yaml settings (loaded alongside data config)",
+    )
+    parser.add_argument(
         "--stage",
         choices=[s.value for s in Stage],
         default=Stage.ALL.value,
@@ -40,7 +46,7 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    cfg = PipelineConfig.from_yaml(args.config)
+    cfg = PipelineConfig.from_yaml(args.config, enrichment_config_path=args.enrichment_config)
     results = run_pipeline_for_seasons(cfg, Stage(args.stage), args.seasons)
     print(json.dumps(results, indent=2, default=str))
     return 0
