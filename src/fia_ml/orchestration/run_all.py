@@ -9,6 +9,7 @@ import sys
 import time
 from enum import Enum
 from pathlib import Path
+from collections.abc import Callable
 from typing import Any
 
 from fia_ml.data.config import PipelineConfig
@@ -176,6 +177,65 @@ def _check_phase_prerequisites(
     return missing
 
 
+def _phase_already_ran(
+    phase: PipelinePhase,
+    *,
+    seasons: list[int],
+    normative_config: Path,
+) -> bool:
+    """Return True when completion artifacts for this phase already exist."""
+    if phase == PipelinePhase.DATASET:
+        return all(
+            (PROJECT_ROOT / "dataset" / "csv" / f"processed_{season}.csv").exists()
+            for season in seasons
+        )
+
+    markers = {
+        PipelinePhase.V1: PROJECT_ROOT / "ml_models" / "xgboost" / "metrics.json",
+        PipelinePhase.V2: PROJECT_ROOT / "ml_models" / "xgboost_v2" / "metrics.json",
+        PipelinePhase.NLP: PROJECT_ROOT / "ml_models" / "nlp" / "metrics.json",
+    }
+    if phase == PipelinePhase.NORMATIVE:
+        norm_cfg = NormativeConfig.from_yaml(normative_config)
+        rel = norm_cfg.paths.get("output", "data/processed/incidents_with_normative.parquet")
+        return (PROJECT_ROOT / rel).exists()
+
+    marker = markers.get(phase)
+    return marker is not None and marker.exists()
+
+
+def _confirm_rerun(
+    phase: PipelinePhase,
+    *,
+    force: bool,
+    confirm_fn: Callable[[str], str] | None = None,
+) -> bool:
+    """Ask whether to re-run a phase whose outputs already exist."""
+    if force:
+        return True
+
+    message = f"Step '{phase.value}' already ran. Run it again? [Y/N]: "
+    if confirm_fn is not None:
+        answer = confirm_fn(message)
+    elif not sys.stdin.isatty():
+        print(
+            f"Skipping '{phase.value}' (outputs exist; non-interactive). "
+            "Use --force to re-run without prompting.",
+            file=sys.stderr,
+        )
+        return False
+    else:
+        answer = input(message)
+
+    normalized = answer.strip().lower()
+    if normalized in {"y", "yes"}:
+        return True
+    if normalized in {"", "n", "no"}:
+        return False
+    print("Please enter Y or N.", file=sys.stderr)
+    return _confirm_rerun(phase, force=force, confirm_fn=confirm_fn)
+
+
 def _validate_prerequisites(
     phases: list[PipelinePhase],
     *,
@@ -245,6 +305,8 @@ def run_full_pipeline(
     only: PipelinePhase | None = None,
     start_from: PipelinePhase | None = None,
     dry_run: bool = False,
+    force: bool = False,
+    confirm_fn: Callable[[str], str] | None = None,
 ) -> dict[str, Any]:
     """Execute configured pipeline phases and return a summary dict."""
     v1_cfg = TrainingConfig.from_yaml(v1_config)
@@ -274,8 +336,21 @@ def run_full_pipeline(
         for phase in phases
         if phase != PipelinePhase.DATASET
     }
+    already_ran = {
+        phase.value: _phase_already_ran(
+            phase,
+            seasons=resolved_seasons,
+            normative_config=normative_config,
+        )
+        for phase in phases
+    }
     if dry_run:
-        return {"status": "dry_run", "plan": plan, "prerequisites": prerequisites}
+        return {
+            "status": "dry_run",
+            "plan": plan,
+            "prerequisites": prerequisites,
+            "already_ran": already_ran,
+        }
 
     _validate_prerequisites(
         phases,
@@ -286,8 +361,17 @@ def run_full_pipeline(
 
     os.environ.setdefault("USE_TF", "0")
 
-    results: dict[str, Any] = {"status": "ok", "plan": plan, "phases": {}}
+    results: dict[str, Any] = {"status": "ok", "plan": plan, "phases": {}, "skipped_phases": []}
     for phase in phases:
+        if _phase_already_ran(
+            phase,
+            seasons=resolved_seasons,
+            normative_config=normative_config,
+        ) and not _confirm_rerun(phase, force=force, confirm_fn=confirm_fn):
+            results["skipped_phases"].append(phase.value)
+            print(f"\n=== [{phase.value}] skipped (already ran) ===", flush=True)
+            continue
+
         started = time.perf_counter()
         print(f"\n=== [{phase.value}] starting ===", flush=True)
         if phase == PipelinePhase.DATASET:
@@ -384,6 +468,11 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Execute pipelines (required; bare 'python main.py' does not run anything)",
     )
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Re-run phases without Y/N confirmation when outputs already exist",
+    )
     return parser
 
 
@@ -416,6 +505,7 @@ def main(argv: list[str] | None = None) -> int:
             only=only,
             start_from=start_from,
             dry_run=args.dry_run,
+            force=args.force,
         )
     except PrerequisiteError as exc:
         print(str(exc), file=sys.stderr)
