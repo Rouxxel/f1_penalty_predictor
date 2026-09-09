@@ -8,6 +8,8 @@ from fia_ml.orchestration.run_all import (
     PipelinePhase,
     PrerequisiteError,
     _check_phase_prerequisites,
+    _confirm_rerun,
+    _phase_already_ran,
     _phases_to_run,
     _validate_prerequisites,
     main,
@@ -26,6 +28,7 @@ def test_dry_run_default_plan():
         "normative",
     ]
     assert result["plan"]["seasons"] == [2019, 2025]
+    assert "already_ran" in result
 
 
 def test_dry_run_dataset_only():
@@ -79,6 +82,49 @@ def test_normative_prerequisites_do_not_require_nlp(monkeypatch):
     )
     assert missing == ["data/processed/incidents.parquet"]
     assert not any("nlp" in item.lower() for item in missing)
+
+
+def test_phase_already_ran_v1_when_metrics_exist():
+    assert _phase_already_ran(
+        PipelinePhase.V1,
+        seasons=[2019, 2025],
+        normative_config=ROOT / "configs" / "normative.yaml",
+    )
+
+
+def test_confirm_rerun_respects_force():
+    assert _confirm_rerun(PipelinePhase.V1, force=True) is True
+
+
+def test_confirm_rerun_declines_on_n():
+    assert _confirm_rerun(
+        PipelinePhase.V1,
+        force=False,
+        confirm_fn=lambda _msg: "n",
+    ) is False
+
+
+def test_confirm_rerun_accepts_y():
+    assert _confirm_rerun(
+        PipelinePhase.V1,
+        force=False,
+        confirm_fn=lambda _msg: "Y",
+    ) is True
+
+
+def test_run_full_pipeline_skips_when_user_declines_rerun(monkeypatch):
+    monkeypatch.setattr(
+        "fia_ml.orchestration.run_all._phase_already_ran",
+        lambda phase, **kwargs: phase == PipelinePhase.V1,
+    )
+    monkeypatch.setattr("fia_ml.orchestration.run_all._run_v1", lambda _cfg: {"ok": True})
+
+    result = run_full_pipeline(
+        only=PipelinePhase.V1,
+        confirm_fn=lambda _msg: "n",
+    )
+    assert result["skipped_phases"] == ["v1"]
+    assert "v1" not in result["phases"]
 
 
 def test_validate_prerequisites_raises(monkeypatch):
