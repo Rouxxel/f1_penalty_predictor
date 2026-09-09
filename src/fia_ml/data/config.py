@@ -6,7 +6,8 @@ from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Any
 
-from fia_ml.paths import DEFAULT_CONFIG, PROJECT_ROOT
+from fia_ml.data.enrichment_config import EnrichmentConfig
+from fia_ml.paths import DEFAULT_CONFIG, DEFAULT_ENRICHMENT_CONFIG, PROJECT_ROOT
 from fia_ml.utils import secure_file_io as sio
 
 
@@ -26,6 +27,7 @@ class PipelineConfig:
     document_exclude_patterns: list[str] = field(default_factory=list)
     scraper: dict[str, Any] = field(default_factory=dict)
     enrichment: dict[str, Any] = field(default_factory=dict)
+    enrichment_settings: EnrichmentConfig = field(default_factory=EnrichmentConfig)
     validation: dict[str, Any] = field(default_factory=dict)
 
     def path(self, key: str) -> Path:
@@ -49,9 +51,16 @@ class PipelineConfig:
         return [replace(self, season=season.year, season_url=season.url) for season in targets]
 
     @classmethod
-    def from_yaml(cls, config_path: Path | None = None) -> PipelineConfig:
+    def from_yaml(
+        cls,
+        config_path: Path | None = None,
+        enrichment_config_path: Path | None = None,
+    ) -> PipelineConfig:
         path = config_path or DEFAULT_CONFIG
         raw = sio.read_yaml(path)
+        enrichment_settings = EnrichmentConfig.from_yaml(
+            enrichment_config_path or DEFAULT_ENRICHMENT_CONFIG
+        )
 
         seasons = [
             SeasonConfig(year=int(item["year"]), url=str(item["url"]))
@@ -79,5 +88,6 @@ class PipelineConfig:
             document_exclude_patterns=list(raw.get("document_exclude_patterns", [])),
             scraper=dict(raw.get("scraper", {})),
             enrichment=dict(raw.get("enrichment", {})),
+            enrichment_settings=enrichment_settings,
             validation=dict(raw.get("validation", {})),
         )

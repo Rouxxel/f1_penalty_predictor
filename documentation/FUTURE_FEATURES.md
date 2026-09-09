@@ -13,6 +13,7 @@
 | Capability | Artifacts |
 |------------|-----------|
 | Dataset pipeline (2019 + 2025) | `dataset/scripts/run_pipeline.py`, `processed_{season}.csv` |
+| Data enrichment (hybrid stack) | `configs/enrichment.yaml`, `src/fia_ml/data/enrichment/`, `data/interim/enrichment_meta/` |
 | V1 tabular model | `ml_models/xgboost/` |
 | V2 tabular model + ablation | `ml_models/xgboost_v2/` |
 | Normative rule engine + deviation report | `configs/normative_rules.yaml`, `ml_models/normative/`, `reports/normative/` |
@@ -37,22 +38,27 @@ Normative rules sit **alongside** the ML track (comparison layer), not as a vers
 
 ---
 
-## 1. Dataset & enrichment (future)
+## 1. Dataset & enrichment
 
-Hybrid enrichment stack: OpenF1 (2023+) + FastF1 (2019–2022), timestamp alignment, provenance sidecar, standings fix, rolling superlicense points, text-field assist. Runbook: [`dataset_generation_runbook.md`](dataset_generation_runbook.md) · open gaps: [`current_gaps.md`](../current_gaps.md) §1–§4.
+**Built (2026-09):** Hybrid enrichment pipeline — reference → Ergast (round N−1) → `timestamp.py` → OpenF1 (2023+) → FastF1 → `superlicense.py` → `text_fields.py` → provenance sidecar → quality gates. Config: [`configs/enrichment.yaml`](../configs/enrichment.yaml). Tests: `tests/test_enrichment_*.py` (37 tests). Reports: `reports/tables/enrichment_report_{season}.json`.
 
-| Feature | Tier | Notes |
-|---------|-----------|-------|
-| **Point-in-time standings** | A | Ergast round N−1; stop reference season-end overwrite |
-| **Lap / time alignment** | A | `timestamp.py` + OpenF1/FastF1 lap join |
-| **`flag`**, **positions** | A | Race-control / timing at incident timestamp |
-| **`sector`** | A | Turn lookup + OpenF1 RC sector |
-| **`superlicense_points_before_incident`** | B | Rolling from prior FIA decisions in corpus |
-| **`driver_at_fault`**, **`severity`** | B | Rule-based assist + review queue; full NLP → §2 |
-| **Seasons 2020–2024** | Parallel | FIA WAF / manual PDF backfill — enrich once CSVs exist |
-| **Season-specific PDF templates** | C | Parser maintenance per era |
-| **NLP sidecar on `raw_text`** | §2 | Structured fields from free text — not Tier A enrichment |
-| **Enrichment tests** | A | `test_enrichment_ergast.py`, `test_enrichment_fastf1.py`, `test_enrichment_openf1.py` |
+Runbook: [`dataset_generation_runbook.md`](dataset_generation_runbook.md) · open gaps: [`current_gaps.md`](../current_gaps.md) §1–§4.
+
+| Feature | Status | Notes |
+|---------|--------|-------|
+| **Point-in-time standings** | **Built** | Ergast round N−1 overwrite; 2019 96%, 2025 78% provenance |
+| **`superlicense_points_before_incident`** | **Built** | Rolling per driver; 99% (2019) / 81% (2025) fill |
+| **Provenance sidecar** | **Built** | `data/interim/enrichment_meta/{season}.json` |
+| **Quality gates** | **Built** | Merged into `data_quality_{season}.json` |
+| **`driver_at_fault` assist** | **Built** (partial) | Rule-based; ~25% fill; low-confidence → review queue |
+| **OpenF1 + FastF1 v2** | **Built** (blocked on time) | `flag`, `positions`, lap join wired but need session timestamp |
+| **Lap / session timestamp** | **Open** | PDF `time` is document clock — ~1.5% valid offsets; critical path |
+| **`flag`**, **positions**, **`sector` targets** | **Open** | Depend on session timestamp + turn maps |
+| **`severity` in CSV** | **Open** | Suggestions in review queue only; manual promotion |
+| **Seasons 2020–2024** | **Open** | FIA WAF / manual PDF backfill |
+| **Re-run flatten + V2** | **Open** | Parquet still pre-enrichment |
+| **Season-specific PDF templates** | Future | Parser maintenance per era |
+| **NLP sidecar on `raw_text`** | Future → §2 | Beyond rule-based `text_fields.py` |
 
 ---
 
@@ -108,7 +114,7 @@ From feature spec §33 Version 4 and `project_spec` Phase 6+.
 
 **Goal:** Represent physical circumstances of the incident; feed tabular NN or multimodal fusion.
 
-**Dependency:** Incident time alignment (`lap` / session timestamp) — currently 0% fill.
+**Dependency:** Incident **session** time alignment — enrichment modules exist but only ~1.5% of rows have valid `session_offset_seconds` (PDF document clock vs on-track time).
 
 ---
 
@@ -201,7 +207,7 @@ From `project_spec` directory layout — planned but not present.
 
 When choosing what to build next:
 
-1. **Data volume** — seasons 2020–2024, fix multi-driver rows, point-in-time standings, lap/time  
+1. **Data volume** — seasons 2020–2024, fix PDF session timestamps (lap/flag), multi-driver rows, re-run flatten + V2  
 2. **Normative iteration** — Fact text + rules for `other` / collisions (low engineering risk)  
 3. **NLP on steward text** — uses existing interim JSON; complements tabular V1  
 4. **Re-train tabular models** — with richer data; retry V2 features + opponent history  

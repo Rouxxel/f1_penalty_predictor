@@ -9,6 +9,7 @@ import pandas as pd
 
 from fia_ml.data.config import PipelineConfig
 from fia_ml.data.enrichment.common import load_meta
+from fia_ml.data.enrichment.quality_gates import merge_enrichment_into_quality, write_enrichment_reports
 from fia_ml.data.schema import MULTI_VALUE_COLUMNS, SCHEMA_COLUMNS
 from fia_ml.paths import ensure_dir
 from fia_ml.utils import secure_file_io as sio
@@ -85,7 +86,22 @@ def build_review_queue(df: pd.DataFrame, cfg: PipelineConfig, meta: dict[str, di
         if float(meta_row.get("parse_confidence", 1)) < min_conf:
             reasons.append("low_parse_confidence")
         if not str(row.get("severity", "")).strip():
-            reasons.append("missing_severity")
+            severity_suggestion = meta_row.get("severity_suggestion")
+            if severity_suggestion not in (None, ""):
+                reasons.append(f"severity_suggestion:{severity_suggestion}")
+            else:
+                reasons.append("missing_severity")
+        if not str(row.get("driver_at_fault", "")).strip():
+            fault_confidence = float(meta_row.get("driver_at_fault_confidence", 0) or 0)
+            fault_suggestion = str(meta_row.get("driver_at_fault_suggestion", "")).strip()
+            if fault_suggestion and fault_confidence > 0:
+                reasons.append(f"driver_at_fault_suggestion:{fault_suggestion}")
+            else:
+                reasons.append("missing_driver_at_fault")
+        elif float(meta_row.get("driver_at_fault_confidence", 1) or 1) < float(
+            cfg.enrichment_settings.driver_at_fault_min_confidence
+        ):
+            reasons.append("low_driver_at_fault_confidence")
         if str(row.get("session", "")).lower() == "race" and not str(row.get("lap", "")).strip():
             reasons.append("missing_lap")
         if not str(row.get("round", "")).strip():
@@ -107,7 +123,13 @@ def column_fill_rates(df: pd.DataFrame) -> dict[str, float]:
     return rates
 
 
-def validate_and_export(df: pd.DataFrame, cfg: PipelineConfig) -> tuple[Path, Path, dict[str, Any]]:
+def validate_and_export(
+    df: pd.DataFrame,
+    cfg: PipelineConfig,
+    *,
+    timestamp_stats: dict[str, Any] | None = None,
+    provenance_summary: dict[str, Any] | None = None,
+) -> tuple[Path, Path, dict[str, Any]]:
     df = compute_derived_fields(df)
     errors = validate_schema(df)
     errors.extend(validate_rows(df))
@@ -134,6 +156,13 @@ def validate_and_export(df: pd.DataFrame, cfg: PipelineConfig) -> tuple[Path, Pa
         "validation_errors": errors,
         "column_fill_rates": column_fill_rates(processed),
     }
+    enrichment_report = write_enrichment_reports(
+        processed,
+        cfg,
+        timestamp_stats=timestamp_stats,
+        provenance_summary=provenance_summary,
+    )
+    quality = merge_enrichment_into_quality(quality, enrichment_report)
     report_dir = ensure_dir(cfg.path("reports"))
     sio.write_json(report_dir / f"data_quality_{cfg.season}.json", quality)
     return processed_path, review_path, quality

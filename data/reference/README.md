@@ -57,7 +57,7 @@ Per-season championship data keyed by year string (e.g. `"2019"`).
 | `champion`, `constructors_champion`, `constructors_subchampion` | Season champions |
 | `url` | Source link (e.g. Wikipedia season page) |
 
-**Note:** Standings in `seasons.json` are season totals (not point-in-time per round). Ergast fallback can fill gaps when reference data is missing.
+**Note:** Standings in `seasons.json` are season totals (not point-in-time per round). With `configs/enrichment.yaml` → `overwrite_reference_standings: true`, Ergast round N−1 overwrites standings during `--stage enrich`.
 
 ### `incident_type_keywords.json`
 
@@ -67,8 +67,13 @@ Keyword lists per incident type slug. Used during **build** (not enrich) to clas
 
 When you run `--stage enrich`, the pipeline applies sources in this order:
 
-1. **`reference_enrich.py`** — local JSON files (primary)
-2. **`ergast.py`** — API fallback for cells still empty (`ergast_fallback_enabled` in config)
-3. **`fastf1_enrich.py`** — lap at incident time, weather, safety car (`lap`, `track_conditions`, etc.)
+1. **`reference_enrich.py`** — circuit, country, driver profiles (standings deferred to Ergast)
+2. **`ergast.py`** — round N−1 driver/constructor standings, calendar, car→driver
+3. **`timestamp.py`** — PDF `time` → `session_offset_seconds` (interim meta)
+4. **`openf1.py`** — 2023+: lap, flag, sector, positions (cached under `data/raw/race_data/openf1_cache/`)
+5. **`fastf1_enrich.py`** — all seasons: lap/weather/SC; fills gaps OpenF1 missed
+6. **`superlicense.py`** — rolling `superlicense_points_before_incident`
+7. **`text_fields.py`** — `driver_at_fault` + severity suggestions
+8. **`provenance.py`** — writes `data/interim/enrichment_meta/{season}.json`
 
-Columns still expected to be manual or unimplemented: `severity`, `flag`, `positions_of_involved parties`, `superlicense_points_before_incident`.
+Columns still sparse or manual: `severity` (review queue), `lap`/`flag`/`positions` (blocked by PDF session timestamps). See [`current_gaps.md`](../../current_gaps.md).

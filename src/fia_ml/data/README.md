@@ -57,21 +57,19 @@ python dataset/scripts/run_pipeline.py --stage all --season 2020
 
 See [`dataset/scripts/README.md`](../../../dataset/scripts/README.md) for Playwright setup and manual PDF workflows.
 
-### Incomplete enrichment columns
+### Enrichment status
 
-Several columns in `processed_{season}.csv` are empty or only partially filled. Full detail: [`enrichment/README.md`](enrichment/README.md#future-improvements).
+Hybrid enrichment pipeline is **implemented** (`configs/enrichment.yaml`). Order: reference → Ergast → timestamp → OpenF1 → FastF1 → superlicense → text fields → provenance → quality gates.
 
 | Priority | Column(s) | Gap |
 |----------|-----------|-----|
-| High | `lap`, `lap_remaining`, `completion_percentage` | FastF1 time→lap alignment not working (0% fill) |
-| High | Multi-driver rows | `driver_standings`, `nationalities`, etc. misaligned when `drivers` has 2+ values |
-| Medium | `positions_of_involved parties`, `flag` | Not implemented in FastF1 enricher |
-| Medium | `superlicense_points_before_incident` | Rolling penalty history not implemented |
-| Medium | Standings columns | Season totals used; point-in-time (round N−1) not implemented |
-| Low | `severity` | Manual review only — fill via `review_queue_{season}.csv` |
-| Low | `construct_standings`, `construct_points` | ~55–68% fill on existing seasons |
+| High | `lap`, `flag`, `positions_of_involved parties` | Modules wired; **PDF session timestamps** invalid (~1.5% offset rate) |
+| High | Multi-driver rows | Per-driver `**` columns misaligned on `car_*` placeholder incidents |
+| Medium | `sector` | 48% (2019) / 3% (2025) — below quality-gate targets |
+| Medium | `severity` | Review-queue suggestions only; 0% in CSV |
+| Low | 2025 standings | 78% Ergast round N−1 provenance (target 90%) |
 
-These gaps do **not** block model training on penalty classification; they are tracked for future enrichment work.
+Round N−1 standings, superlicense rolling, and weather/SC are largely filled. Full detail: [`enrichment/README.md`](enrichment/README.md) · open gaps: [`current_gaps.md`](../../../current_gaps.md).
 
 ---
 
@@ -98,7 +96,7 @@ flowchart TD
     end
 
     subgraph stage4["Stage 4 — enrich"]
-        EN["enrichment/\nreference → Ergast → FastF1"]
+        EN["enrichment/\nreference → Ergast → timestamp\n→ OpenF1 → FastF1 → SL → text"]
     end
 
     subgraph stage5["Stage 5 — validate"]
@@ -325,7 +323,7 @@ Primary config: [`configs/data.yaml`](../../../configs/data.yaml)
 - `document_include_patterns` / `document_exclude_patterns` — which PDFs to download
 - `paths` — raw PDFs, interim JSON, CSV output, caches
 - `scraper.rate_limit_seconds` — delay between PDF downloads (raise if FIA blocks you)
-- `enrichment` — Ergast/FastF1 URLs and fallback flags
+- `enrichment` — Ergast/FastF1 URLs and fallback flags (see also `configs/enrichment.yaml`)
 
 Reference data (manually curated, read-only): `data/reference/` — see `data/reference/README.md`.
 
@@ -343,6 +341,8 @@ dataset/csv/review_queue_2020.csv      # Regenerated on validate (optional to ke
 reports/tables/data_quality_2020.json
 data/raw/race_data/ergast/2020/        # Ergast API cache
 data/raw/race_data/fastf1_cache/       # FastF1 session cache
+data/raw/race_data/openf1_cache/       # OpenF1 API cache (2023+)
+data/interim/enrichment_meta/          # Per-field provenance sidecars
 ```
 
 ```mermaid
@@ -379,7 +379,7 @@ flowchart LR
 
 ## Related docs
 
-- [`dataset/scripts/README.md`](../../../dataset/scripts/README.md) — CLI usage, dataset coverage, enrichment gaps
+- [`dataset/scripts/README.md`](../../../dataset/scripts/README.md) — CLI usage, dataset coverage, enrichment status
 - [`dataset/README.md`](../../../dataset/README.md) — CLI folder overview
 - [`documentation/dataset_generation_runbook.md`](../../../documentation/dataset_generation_runbook.md) — operator runbook
 - [`DATASET_GENERATION_PLAN.md`](../../../DATASET_GENERATION_PLAN.md) — full implementation plan

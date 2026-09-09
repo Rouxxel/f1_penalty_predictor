@@ -1,0 +1,4 @@
+standings:
+  overwrite_reference_standings: false
+timestamp:
+  max_match_error_seconds: 30
