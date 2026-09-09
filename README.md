@@ -33,6 +33,21 @@ FIA PDFs  →  dataset pipeline  →  incidents.parquet
 
 For the full gap registry (missing columns, blockers, success criteria): [`current_gaps.md`](current_gaps.md).
 
+### Data corpus limitation (2019 + 2025 only)
+
+**All current artifacts reflect a two-season corpus.** Dataset generation, enrichment, flatten/`prepare`, V1/V2 training, normative evaluation, and reports were run using **2019 and 2025 only**. Seasons **2020–2024** are listed in [`configs/data.yaml`](configs/data.yaml) but have no `processed_{season}.csv` — FIA download is blocked (403/WAF) unless PDFs are added manually.
+
+When 2020–2024 become available, **downstream work must be re-run** on the expanded corpus (not a one-click refresh today):
+
+| Step | What to re-run |
+|------|----------------|
+| Dataset | [`dataset/scripts/run_pipeline.py`](dataset/scripts/run_pipeline.py) per new season (`--stage all`, or `parse` → `build` → `enrich` → `validate` if PDFs are already on disk) |
+| ML features | `python -m fia_ml.training.run_training --stage prepare` (and `features_v2` for V2) — update `inputs.seasons` / splits in [`configs/xgboost.yaml`](configs/xgboost.yaml) / [`configs/xgboost_v2.yaml`](configs/xgboost_v2.yaml) |
+| Models | `--stage train` / `evaluate` (and ablation for V2) |
+| Normative | `python -m fia_ml.normative.run_normative` on refreshed `incidents.parquet` |
+
+Step-by-step backfill commands, manual PDF layout, and WAF troubleshooting: [`dataset/scripts/README.md`](dataset/scripts/README.md) (sections **Current dataset coverage** and **Missing seasons — how to backfill later**). The pipeline is **season-agnostic** — no code changes are required for new years once PDFs exist; configs and training splits need updating.
+
 ---
 
 ## Quick start
