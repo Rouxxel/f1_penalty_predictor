@@ -1,12 +1,28 @@
 #!/usr/bin/env python3
 """Run the full FIA penalty predictor pipeline from the project root.
 
-Example:
-    python main.py --dry-run                # preview only (safe default)
-    python main.py --run --skip-download    # execute (PDFs already on disk)
-    python main.py --run --from v1          # ML only (dataset artifacts exist)
+Bare ``python main.py`` prints help and exits without running anything.
+Pass ``--run`` to execute, or ``--dry-run`` to preview the plan only.
 
-Bare `python main.py` prints help and exits without running anything.
+Examples:
+
+    # See the plan without running anything
+    python main.py --dry-run
+
+    # Full run (downloads PDFs from FIA — slow, may hit WAF)
+    python main.py --run
+
+    # Recommended when PDFs already exist under data/raw/fia/
+    python main.py --run --skip-download
+
+    # Partial runs
+    python main.py --run --dataset-only
+    python main.py --run --from v1              # skip dataset if CSVs/parquet exist
+    python main.py --run --skip-v2 --skip-nlp   # dataset + V1 + normative only
+    python main.py --run --no-fusion            # skip NLP fusion step
+
+Phase order: dataset -> V1 tabular -> V2 tabular -> NLP -> normative.
+Implementation: ``src/fia_ml/orchestration/run_all.py``.
 """
 
 from __future__ import annotations
