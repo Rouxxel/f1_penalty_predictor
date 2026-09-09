@@ -494,8 +494,6 @@ Filter by `round` or `circuit` within a season file — do not split into per-we
 - Pipeline must be idempotent: re-running on the same inputs produces the same output.
 - Parser should be modular by document era if FIA format shifts between seasons.
 
-Future detail: **Dataset Generation Implementation Plan** (separate document).
-
 ---
 
 ## 5. ML Model Pipelines
@@ -615,7 +613,6 @@ Features that require temporal filtering:
 - Build PDF parser + Ergast enrichment pipeline
 - Validate and manually review 1 season (~150–300 incident rows)
 - Deliverable: `dataset/csv/processed_{season}.csv`
-- **Next doc:** Dataset Generation Implementation Plan
 
 ### Phase 2 — Baseline Model
 - Flatten raw CSV → one-row-per-driver-investigation
@@ -624,7 +621,6 @@ Features that require temporal filtering:
 - Train XGBoost on tabular features
 - Evaluate with accuracy, macro-F1, confusion matrix
 - Deliverable: Working V1 model in `ml_models/xgboost/`
-- **Next doc:** Model Training Implementation Plan
 
 ### Phase 3 — Feature Engineering
 - Add derived features (standings differences, completion %, same_team)
@@ -700,17 +696,3 @@ Features that require temporal filtering:
 - The normative model provides a defensible alternative ruling
 - The deviation analysis identifies non-trivial patterns in FIA decision-making
 
----
-
-## 12. Future Implementation Plans
-
-This specification defines architecture and schema. Step-by-step build instructions will live in separate plans:
-
-| Document | Status | Covers |
-|---|---|---|
-| Dataset Generation Implementation Plan | Not started | `download.py`, `parsing.py`, `enrichment.py`, validation, CSV output |
-| Model Training Implementation Plan | Not started | Flattening, encoding, temporal split, XGBoost baseline |
-| Feature Engineering Implementation Plan | Not started | Derived features, precedent stats, leakage tests |
-| Normative Rules Implementation Plan | Not started | Rule engine, deviation analysis |
-
-When requesting implementation, reference the relevant plan name and phase from §8.

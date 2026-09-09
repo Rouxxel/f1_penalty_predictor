@@ -79,15 +79,6 @@ Set `PYTHONPATH=src` if imports fail outside a virtualenv, or run modules as sho
 | [`documentation/f1_dataset_example.csv`](documentation/f1_dataset_example.csv) | Canonical dataset schema (column reference) |
 | [`documentation/dataset_generation_runbook.md`](documentation/dataset_generation_runbook.md) | Operational runbook for dataset generation |
 
-### Implementation plans (step-by-step build guides)
-
-| Plan | Scope |
-|------|-------|
-| [`DATASET_GENERATION_PLAN.md`](DATASET_GENERATION_PLAN.md) | FIA PDF download → parse → enrich → `processed_{season}.csv` |
-| [`MODEL_TRAINING_PLAN.md`](MODEL_TRAINING_PLAN.md) | Flatten, encode, temporal split, baselines, XGBoost V1 |
-| [`FEATURE_ENGINEERING_PLAN.md`](FEATURE_ENGINEERING_PLAN.md) | V2 features (history, precedent, championship), ablation, `xgboost_v2` |
-| [`NORMATIVE_RULES_PLAN.md`](NORMATIVE_RULES_PLAN.md) | Rule engine, batch predict, FIA vs normative deviation analysis |
-
 ### Module & pipeline docs
 
 | Document | Description |
@@ -219,10 +210,6 @@ f1_penalty_predictor/
 │   ├── training/             # Baselines, XGBoost, ablation, evaluation
 │   └── normative/            # Rule engine, compare, report
 ├── tests/                    # Unit and integration tests
-├── DATASET_GENERATION_PLAN.md
-├── MODEL_TRAINING_PLAN.md
-├── FEATURE_ENGINEERING_PLAN.md
-├── NORMATIVE_RULES_PLAN.md
 └── current_gaps.md           # Gap registry
 ```
 

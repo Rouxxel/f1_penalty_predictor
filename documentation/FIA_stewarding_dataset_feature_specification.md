@@ -1526,15 +1526,3 @@ The goal is not to build the model with the most columns.
 
 The goal is to build a dataset that represents the incident as faithfully as possible, and then determine experimentally which information actually helps predict the FIA's decision.
 
----
-
-## 35. Planned Implementation Documents
-
-| Plan | Purpose |
-|---|---|
-| Dataset Generation Implementation Plan | End-to-end: FIA URL → CSV |
-| Model Training Implementation Plan | Flatten, encode, train, evaluate |
-| Feature Engineering Implementation Plan | Derived + precedent features |
-| Normative Rules Implementation Plan | Rule engine + deviation analysis |
-
-Request these from the project assistant when ready to implement each phase.

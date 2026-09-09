@@ -4,7 +4,7 @@
 
 **Authoritative vision docs:** [`f1_project.md`](f1_project.md) · [`project_spec.md`](project_spec.md) · [`FIA_stewarding_dataset_feature_specification.md`](FIA_stewarding_dataset_feature_specification.md)
 
-**Note:** Some sections in `project_spec.md` and `f1_project.md` still say implementation plans are “not started.” Those plans have since been executed for dataset generation, V1/V2 tabular training, and the normative engine. This file reflects **current** future intent.
+**Note:** Dataset generation, V1/V2 tabular training, and the normative engine are built. This file reflects **current** future intent.
 
 ---
 
@@ -29,7 +29,7 @@ The feature spec defines a **version ladder**. Versions below that are not yet i
 |---------|--------|----------------|
 | **V1** | Tabular ML (structured features + XGBoost) | Built |
 | **V2 (spec)** | NLP on FIA report text (BERT / DistilBERT) | **Not built** — `ml_models/nlp/` is empty |
-| **V3** | Embedding / similarity precedent retrieval (FAISS, sentence transformers) | **Not built** — simplified groupby precedent only (V2 FE plan) |
+| **V3** | Embedding / similarity precedent retrieval (FAISS, sentence transformers) | **Not built** — simplified groupby precedent only (V2 features) |
 | **V4** | Telemetry (speed, braking, gaps, positions from FastF1) | **Not built** |
 | **V5** | Visual / CNN (onboard frames, replay stills) + multimodal fusion | **Not built** — `ml_models/cnn/` is empty |
 
@@ -39,22 +39,20 @@ Normative rules sit **alongside** the ML track (comparison layer), not as a vers
 
 ## 1. Dataset & enrichment (future)
 
-From [`DATASET_GENERATION_PLAN.md`](../DATASET_GENERATION_PLAN.md), [`dataset_generation_runbook.md`](dataset_generation_runbook.md), and feature spec §5–§13.
+Hybrid enrichment stack: OpenF1 (2023+) + FastF1 (2019–2022), timestamp alignment, provenance sidecar, standings fix, rolling superlicense points, text-field assist. Runbook: [`dataset_generation_runbook.md`](dataset_generation_runbook.md) · open gaps: [`current_gaps.md`](../current_gaps.md) §1–§4.
 
-| Feature | Description | Blocker / dependency |
-|---------|-------------|----------------------|
-| **Seasons 2020–2024** | Full corpus across regulation eras | FIA WAF / manual PDF backfill |
-| **Point-in-time standings** | Round N−1 driver/constructor standings | Enrichment logic + `test_enrichment_ergast.py` |
-| **Lap / time alignment** | `lap`, `lap_remaining`, `completion_percentage` | FastF1 session timeline + PDF time parsing |
-| **`flag`** | Race control state at incident | FastF1 race control messages |
-| **`positions_of_involved parties`** | On-track positions at incident time | FastF1 timing data |
-| **`sector`** | Turn → sector mapping | `circuits.json` + better 2025 coverage |
-| **`superlicense_points_before_incident`** | Rolling SL points before incident | Ergast / dataset rolling logic |
-| **`severity`** | Manual incident severity label | Review queue labeling |
-| **`driver_at_fault`** | Reliable fault attribution | Stronger Fact/Reason NLP or manual review |
-| **Season-specific PDF templates** | Parser variants by era | Parser maintenance |
-| **NLP sidecar on `raw_text`** | Structured fields from free text | See §2 NLP |
-| **Enrichment tests** | `test_enrichment_ergast.py`, `test_enrichment_fastf1.py` | — |
+| Feature | Tier | Notes |
+|---------|-----------|-------|
+| **Point-in-time standings** | A | Ergast round N−1; stop reference season-end overwrite |
+| **Lap / time alignment** | A | `timestamp.py` + OpenF1/FastF1 lap join |
+| **`flag`**, **positions** | A | Race-control / timing at incident timestamp |
+| **`sector`** | A | Turn lookup + OpenF1 RC sector |
+| **`superlicense_points_before_incident`** | B | Rolling from prior FIA decisions in corpus |
+| **`driver_at_fault`**, **`severity`** | B | Rule-based assist + review queue; full NLP → §2 |
+| **Seasons 2020–2024** | Parallel | FIA WAF / manual PDF backfill — enrich once CSVs exist |
+| **Season-specific PDF templates** | C | Parser maintenance per era |
+| **NLP sidecar on `raw_text`** | §2 | Structured fields from free text — not Tier A enrichment |
+| **Enrichment tests** | A | `test_enrichment_ergast.py`, `test_enrichment_fastf1.py`, `test_enrichment_openf1.py` |
 
 ---
 
@@ -138,7 +136,7 @@ Incident text / features → Sentence Transformer → vector DB (FAISS / ChromaD
 
 ## 6. Tabular ML enhancements
 
-From [`MODEL_TRAINING_PLAN.md`](../MODEL_TRAINING_PLAN.md), [`FEATURE_ENGINEERING_PLAN.md`](../FEATURE_ENGINEERING_PLAN.md), and feature spec.
+From feature spec and current V1/V2 training pipeline.
 
 | Feature | Description |
 |---------|-------------|
@@ -147,7 +145,7 @@ From [`MODEL_TRAINING_PLAN.md`](../MODEL_TRAINING_PLAN.md), [`FEATURE_ENGINEERIN
 | **Leave-one-season-out CV** | Small-data evaluation mode |
 | **Better categorical encoding** | Native categorical / target encoding vs ordinal |
 | **Hyperparameter tuning** | After feature set stabilizes |
-| **Opponent history (Group F)** | Deferred in FE plan V2.1 |
+| **Opponent history (Group F)** | Deferred in V2 feature engineering |
 | **Severity-based precedent key** | `(incident_type, severity, session)` after manual `severity` labels |
 | **SHAP / deeper explainability** | Beyond gain-based importance |
 | **Multimodal tabular + text** | Early fusion experiments before full V5 |

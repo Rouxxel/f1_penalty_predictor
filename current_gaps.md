@@ -13,8 +13,7 @@
 | §5–§6 | **Current models** — limitations on today’s V1/V2 (not “plans to implement”) |
 | §7 | **Normative rules** — coverage and iteration (engine already runs) |
 
-Plans with active gap work: [`DATASET_GENERATION_PLAN.md`](DATASET_GENERATION_PLAN.md) (§1–§4), [`NORMATIVE_RULES_PLAN.md`](NORMATIVE_RULES_PLAN.md) (§7).  
-Built tabular pipelines: [`README.md`](README.md) · fill rates: [`reports/tables/data_quality_{season}.json`](reports/tables/).
+Pipeline docs: [`README.md`](README.md) · dataset runbook: [`documentation/dataset_generation_runbook.md`](documentation/dataset_generation_runbook.md) · fill rates: [`reports/tables/data_quality_{season}.json`](reports/tables/).
 
 ---
 

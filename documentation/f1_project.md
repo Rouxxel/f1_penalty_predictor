@@ -244,8 +244,6 @@ Once enough data is collected:
 - Start with XGBoost or LightGBM
 - Evaluate with accuracy, macro-F1, confusion matrix
 
-Future implementation plan: **Model Training Plan** (to be written separately).
-
 ---
 
 ## Step 7 — Build Rule-Based Model
@@ -262,8 +260,6 @@ This can be:
 
 This represents the normative “by-the-book” system.
 
-Future implementation plan: **Normative Rules Engine Plan** (to be written separately).
-
 ---
 
 ## Step 8 — Compare Both Models
@@ -279,18 +275,7 @@ This becomes the main analytical output of the project.
 
 ---
 
-## Planned Implementation Documents
-
-The following documents will be generated as separate implementation plans (not yet written):
-
-| Plan | Scope |
-|---|---|
-| **Dataset Generation Plan** | Scraper, PDF parser, enrichment, validation, CSV output |
-| **Model Training Plan** | Encoding, temporal split, XGBoost baseline, evaluation |
-| **Feature Engineering Plan** | Derived features, precedent stats, leakage tests |
-| **Normative Model Plan** | Rule encoding, deviation analysis |
-
-This file (`f1_project.md`) and the two companion specs define *what* and *why*. Implementation plans will define *how* step-by-step.
+This file (`f1_project.md`) and the two companion specs define *what* and *why*. Step-by-step pipeline detail lives in [`README.md`](../README.md), [`dataset_generation_runbook.md`](dataset_generation_runbook.md), and module READMEs under `src/fia_ml/`.
 
 ---
 
