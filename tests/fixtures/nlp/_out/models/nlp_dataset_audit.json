@@ -1,0 +1,40 @@
+{
+  "text_profile": "fact_offence",
+  "seasons": {
+    "2019": {
+      "labeled_incident_rows": 1,
+      "flattened_rows": 1,
+      "rows_with_text": 1,
+      "missing_meta": 0,
+      "missing_document_id": 0,
+      "missing_interim_doc": 0,
+      "text_build_errors": 0,
+      "misaligned_skipped": 0,
+      "missing_interim_incident_ids": [],
+      "text_build_error_incident_ids": []
+    },
+    "2025": {
+      "labeled_incident_rows": 1,
+      "flattened_rows": 1,
+      "rows_with_text": 1,
+      "missing_meta": 0,
+      "missing_document_id": 0,
+      "missing_interim_doc": 0,
+      "text_build_errors": 0,
+      "misaligned_skipped": 0,
+      "missing_interim_incident_ids": [],
+      "text_build_error_incident_ids": []
+    }
+  },
+  "totals": {
+    "labeled_incident_rows": 2,
+    "flattened_rows": 2,
+    "rows_with_text": 2,
+    "missing_meta": 0,
+    "missing_document_id": 0,
+    "missing_interim_doc": 0,
+    "text_build_errors": 0,
+    "misaligned_skipped": 0,
+    "join_rate": 1.0
+  }
+}

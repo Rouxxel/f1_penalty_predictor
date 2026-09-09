@@ -634,11 +634,11 @@ Features that require temporal filtering:
 - Compare normative output vs FIA actual decisions
 - Deliverable: Rule engine + deviation analysis report
 
-### Phase 5 — NLP Integration (V2)
-- Extract raw FIA report text as separate dataset
-- Fine-tune DistilBERT on report text → penalty classification
-- Compare text-only vs tabular-only vs combined
-- Deliverable: NLP model in `ml_models/nlp/`
+### Phase 5 — NLP Integration (V2) — **implemented (2026-09)**
+- Extract raw FIA report text as separate dataset (`src/fia_ml/nlp/`, `data/processed/nlp_*.jsonl`)
+- Fine-tune DistilBERT on Fact+Offence text → `penalty_severity` (`configs/bert.yaml`, `run_nlp_training`)
+- Compare text-only vs tabular-only vs fused (`evaluate_nlp.py`, `fusion_nlp.py`, optional `--fusion`)
+- Deliverable: NLP artifacts in `ml_models/nlp/` — **trained** 2026-09-09; val macro-F1 0.642 vs V1 0.402 (see [`reports/model_reports/nlp_training_report_2026-09-09.md`](../reports/model_reports/nlp_training_report_2026-09-09.md))
 
 ### Phase 6+ — Future (Telemetry, Visual)
 - FastF1 integration for speed/braking data

@@ -1,0 +1,26 @@
+{
+  "method": "concat_logits",
+  "merged_validation_rows": 3,
+  "nlp_validation_rows": 3,
+  "tabular_validation_rows": 3,
+  "metrics": {
+    "nlp_only": {
+      "macro_f1": 1.0,
+      "accuracy": 1.0,
+      "weighted_f1": 1.0
+    },
+    "tabular_only": {
+      "macro_f1": 1.0,
+      "accuracy": 1.0,
+      "weighted_f1": 1.0
+    },
+    "fused": {
+      "macro_f1": 1.0,
+      "accuracy": 1.0,
+      "weighted_f1": 1.0
+    }
+  },
+  "best_single_modality": "nlp_only",
+  "beats_best_single_modality": true,
+  "evaluated_at": "2026-09-09"
+}

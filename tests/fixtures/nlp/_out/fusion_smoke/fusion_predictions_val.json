@@ -1,0 +1,23 @@
+[
+  {
+    "row_id": "r1",
+    "penalty_severity": 0,
+    "pred_nlp": 0,
+    "pred_tabular": 0,
+    "pred_fused": 0
+  },
+  {
+    "row_id": "r2",
+    "penalty_severity": 1,
+    "pred_nlp": 1,
+    "pred_tabular": 1,
+    "pred_fused": 1
+  },
+  {
+    "row_id": "r3",
+    "penalty_severity": 2,
+    "pred_nlp": 2,
+    "pred_tabular": 2,
+    "pred_fused": 2
+  }
+]

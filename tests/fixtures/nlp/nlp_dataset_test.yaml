@@ -1,10 +1,7 @@
-# NLP / spec V2 training configuration (DistilBERT penalty classifier)
-# See NLP_IMPLEMENTATION_PLAN.md
-
 paths:
-  csv_input_glob: dataset/csv/processed_*.csv
-  interim_docs: data/interim/extracted_documents
-  meta_glob: dataset/csv/raw_incidents_{season}.meta.json
+  csv_input_glob: tests/fixtures/nlp/processed_*.csv
+  interim_docs: tests/fixtures/nlp/extracted_documents
+  meta_glob: tests/fixtures/nlp/raw_incidents_{season}.meta.json
   processed: data/processed
   models: ml_models/nlp
   reports: reports
@@ -20,7 +17,7 @@ splits:
   test_season: null
 
 text:
-  profile: fact_offence          # fact_only | fact_offence | leaky_full (debug only)
+  profile: fact_offence
   include_metadata: true
   max_length: 512
   truncation: longest_first

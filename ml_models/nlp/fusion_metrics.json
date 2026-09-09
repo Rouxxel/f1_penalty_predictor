@@ -1,0 +1,26 @@
+{
+  "method": "concat_logits",
+  "merged_validation_rows": 144,
+  "nlp_validation_rows": 154,
+  "tabular_validation_rows": 144,
+  "metrics": {
+    "nlp_only": {
+      "macro_f1": 0.6482819248557122,
+      "accuracy": 0.8333333333333334,
+      "weighted_f1": 0.8117538763393596
+    },
+    "tabular_only": {
+      "macro_f1": 0.40152958152958157,
+      "accuracy": 0.5277777777777778,
+      "weighted_f1": 0.551586099086099
+    },
+    "fused": {
+      "macro_f1": 0.6319539378749905,
+      "accuracy": 0.8055555555555556,
+      "weighted_f1": 0.7861604769499506
+    }
+  },
+  "best_single_modality": "nlp_only",
+  "beats_best_single_modality": false,
+  "evaluated_at": "2026-09-09"
+}
