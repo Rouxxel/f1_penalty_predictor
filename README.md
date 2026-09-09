@@ -142,13 +142,29 @@ flowchart TD
 | Command | Effect |
 |---------|--------|
 | `python main.py` | Help only; no execution |
-| `python main.py --dry-run` | Print phase plan |
+| `python main.py --dry-run` | Print phase plan and prerequisite checks |
 | `python main.py --run` | Full run including FIA PDF download |
 | `python main.py --run --skip-download` | Dataset parse onward (PDFs on disk) |
+| `python main.py --run --only v1` | **Single phase** — V1 tabular only |
+| `python main.py --run --only v2` | **Single phase** — V2 tabular only |
+| `python main.py --run --only nlp` | **Single phase** — NLP only |
+| `python main.py --run --only normative` | **Single phase** — normative only |
+| `python main.py --run --from v1` | V1 through normative (not dataset alone) |
 | `python main.py --run --dataset-only` | Dataset phase only |
-| `python main.py --run --from v1` | Skip dataset; start at V1 training |
-| `python main.py --run --skip-v2 --skip-nlp` | Dataset + V1 + normative |
 | `python main.py --run --no-fusion` | Skip NLP late-fusion step |
+
+**Prerequisites** (checked before each phase runs; missing files block with an error):
+
+| Phase | Requires |
+|-------|----------|
+| `dataset` | Nothing (download needs FIA access) |
+| `v1` | `dataset/csv/processed_{season}.csv` |
+| `v2` | `data/processed/incidents.parquet` (from V1 prepare) |
+| `nlp` | Processed CSVs + `data/interim/extracted_documents/{season}/` |
+| `nlp` + fusion | Above + `ml_models/xgboost/predictions_val.json` |
+| `normative` | `data/processed/incidents.parquet` only — **NLP is not required** |
+
+Use `--dry-run` to see which prerequisites are missing before a long run.
 
 ---
 
