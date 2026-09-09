@@ -1,0 +1,1 @@
+[{"row_id": "r1", "penalty_severity": 0, "proba_no_penalty": 0.7, "proba_minor": 0.2, "proba_major": 0.1}, {"row_id": "r2", "penalty_severity": 1, "proba_no_penalty": 0.35, "proba_minor": 0.55, "proba_major": 0.1}, {"row_id": "r3", "penalty_severity": 2, "proba_no_penalty": 0.1, "proba_minor": 0.2, "proba_major": 0.7}]
