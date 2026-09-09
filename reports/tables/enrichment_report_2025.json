@@ -1,0 +1,69 @@
+{
+  "season": 2025,
+  "metrics": {
+    "lap_race_fill_rate": 0.0,
+    "flag_race_fill_rate": 0.0,
+    "positions_with_drivers_fill_rate": 0.0,
+    "sector_fill_rate": 0.0291,
+    "superlicense_before_fill_rate": 0.811,
+    "ergast_standings_provenance_rate": 0.7784,
+    "timestamp_audit": {
+      "rows": 343,
+      "parsed_rate": 1.0,
+      "offset_rate": 0.0146,
+      "methods": {
+        "document_clock": 343
+      }
+    },
+    "provenance_summary": {},
+    "superlicense_before_given_prior_sl_rate": 1.0,
+    "rows_with_prior_superlicense": 127
+  },
+  "gates": [
+    {
+      "id": "lap_race",
+      "actual": 0.0,
+      "target": 0.5,
+      "passed": false,
+      "detail": ""
+    },
+    {
+      "id": "flag_race",
+      "actual": 0.0,
+      "target": 0.5,
+      "passed": false,
+      "detail": ""
+    },
+    {
+      "id": "positions_with_drivers",
+      "actual": 0.0,
+      "target": 0.4,
+      "passed": false,
+      "detail": ""
+    },
+    {
+      "id": "sector",
+      "actual": 0.0291,
+      "target": 0.5,
+      "passed": false,
+      "detail": ""
+    },
+    {
+      "id": "ergast_standings_round_n_minus_1",
+      "actual": 0.7784,
+      "target": 0.9,
+      "passed": false,
+      "detail": ""
+    },
+    {
+      "id": "superlicense_before_given_prior_sl",
+      "actual": 1.0,
+      "target": 0.8,
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "gates_passed": 1,
+  "gates_total": 6,
+  "all_passed": false
+}
