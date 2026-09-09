@@ -1,0 +1,26 @@
+# Enrichment pipeline settings (loaded alongside configs/data.yaml).
+# See DATA_ENRICHMENT_PLAN.md.
+
+standings:
+  prefer_ergast_round_n_minus_1: true
+  overwrite_reference_standings: true
+
+timestamp:
+  max_match_error_seconds: 45
+  qualifying_lap_fallback: session_median  # none | session_median
+
+openf1:
+  base_url: https://api.openf1.org/v1
+  enabled_from_season: 2023
+  cache_dir: data/raw/race_data/openf1_cache
+
+fastf1:
+  enabled: true
+  validate_openf1_from_season: 2023
+
+text_fields:
+  driver_at_fault_min_confidence: 0.7
+  write_severity_suggestions_to_review_queue: true
+
+superlicense:
+  rolling_by: driver  # sum superlicense_points_added for prior incidents same season
