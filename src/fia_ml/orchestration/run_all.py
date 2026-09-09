@@ -49,6 +49,10 @@ PHASE_ORDER = [
 ]
 
 
+class PrerequisiteError(RuntimeError):
+    """Raised when a pipeline phase is missing required upstream artifacts."""
+
+
 def _default_seasons(v1_cfg: TrainingConfig) -> list[int]:
     seasons = v1_cfg.inputs.get("seasons")
     if seasons:
@@ -127,14 +131,83 @@ def _run_normative(
     return {"predict": predict_result, "compare": compare_result}
 
 
+def _check_phase_prerequisites(
+    phase: PipelinePhase,
+    *,
+    seasons: list[int],
+    nlp_fusion: bool,
+    normative_config: Path,
+) -> list[str]:
+    """Return missing artifact paths relative to project root (empty if satisfied)."""
+    missing: list[str] = []
+    processed_dir = PROJECT_ROOT / "data" / "processed"
+
+    if phase == PipelinePhase.V1:
+        for season in seasons:
+            csv_path = PROJECT_ROOT / "dataset" / "csv" / f"processed_{season}.csv"
+            if not csv_path.exists():
+                missing.append(csv_path.relative_to(PROJECT_ROOT).as_posix())
+
+    elif phase == PipelinePhase.V2:
+        incidents = processed_dir / "incidents.parquet"
+        if not incidents.exists():
+            missing.append(incidents.relative_to(PROJECT_ROOT).as_posix())
+
+    elif phase == PipelinePhase.NLP:
+        for season in seasons:
+            csv_path = PROJECT_ROOT / "dataset" / "csv" / f"processed_{season}.csv"
+            if not csv_path.exists():
+                missing.append(csv_path.relative_to(PROJECT_ROOT).as_posix())
+            interim_dir = PROJECT_ROOT / "data" / "interim" / "extracted_documents" / str(season)
+            if not interim_dir.exists() or not any(interim_dir.glob("*.json")):
+                missing.append(f"data/interim/extracted_documents/{season}/ (run dataset parse)")
+        if nlp_fusion:
+            v1_preds = PROJECT_ROOT / "ml_models" / "xgboost" / "predictions_val.json"
+            if not v1_preds.exists():
+                missing.append(v1_preds.relative_to(PROJECT_ROOT).as_posix())
+
+    elif phase == PipelinePhase.NORMATIVE:
+        norm_cfg = NormativeConfig.from_yaml(normative_config)
+        rel = norm_cfg.paths.get("incidents", "data/processed/incidents.parquet")
+        incidents = PROJECT_ROOT / rel
+        if not incidents.exists():
+            missing.append(incidents.relative_to(PROJECT_ROOT).as_posix())
+
+    return missing
+
+
+def _validate_prerequisites(
+    phases: list[PipelinePhase],
+    *,
+    seasons: list[int],
+    nlp_fusion: bool,
+    normative_config: Path,
+) -> None:
+    for phase in phases:
+        missing = _check_phase_prerequisites(
+            phase,
+            seasons=seasons,
+            nlp_fusion=nlp_fusion,
+            normative_config=normative_config,
+        )
+        if missing:
+            lines = "\n".join(f"  - {path}" for path in missing)
+            raise PrerequisiteError(
+                f"Cannot run phase '{phase.value}': missing prerequisite artifact(s):\n{lines}"
+            )
+
+
 def _phases_to_run(
     *,
+    only: PipelinePhase | None,
     start_from: PipelinePhase | None,
     skip_v2: bool,
     skip_nlp: bool,
     skip_normative: bool,
     dataset_only: bool,
 ) -> list[PipelinePhase]:
+    if only is not None:
+        return [only]
     if dataset_only:
         return [PipelinePhase.DATASET]
 
@@ -169,6 +242,7 @@ def run_full_pipeline(
     skip_normative: bool = False,
     nlp_fusion: bool = True,
     dataset_only: bool = False,
+    only: PipelinePhase | None = None,
     start_from: PipelinePhase | None = None,
     dry_run: bool = False,
 ) -> dict[str, Any]:
@@ -176,6 +250,7 @@ def run_full_pipeline(
     v1_cfg = TrainingConfig.from_yaml(v1_config)
     resolved_seasons = seasons or _default_seasons(v1_cfg)
     phases = _phases_to_run(
+        only=only,
         start_from=start_from,
         skip_v2=skip_v2,
         skip_nlp=skip_nlp,
@@ -189,8 +264,25 @@ def run_full_pipeline(
         "skip_download": skip_download,
         "nlp_fusion": nlp_fusion,
     }
+    prerequisites = {
+        phase.value: _check_phase_prerequisites(
+            phase,
+            seasons=resolved_seasons,
+            nlp_fusion=nlp_fusion,
+            normative_config=normative_config,
+        )
+        for phase in phases
+        if phase != PipelinePhase.DATASET
+    }
     if dry_run:
-        return {"status": "dry_run", "plan": plan}
+        return {"status": "dry_run", "plan": plan, "prerequisites": prerequisites}
+
+    _validate_prerequisites(
+        phases,
+        seasons=resolved_seasons,
+        nlp_fusion=nlp_fusion,
+        normative_config=normative_config,
+    )
 
     os.environ.setdefault("USE_TF", "0")
 
@@ -272,10 +364,15 @@ def build_parser() -> argparse.ArgumentParser:
         help="Run only the dataset generation pipeline",
     )
     parser.add_argument(
+        "--only",
+        choices=[phase.value for phase in PipelinePhase],
+        help="Run a single phase only (prerequisite artifacts are checked)",
+    )
+    parser.add_argument(
         "--from",
         dest="start_from",
         choices=[phase.value for phase in PipelinePhase],
-        help="Start from this phase (assumes earlier outputs already exist)",
+        help="Start from this phase and run it plus all later phases",
     )
     parser.add_argument(
         "--dry-run",
@@ -302,18 +399,28 @@ def main(argv: list[str] | None = None) -> int:
         )
         return 2
 
+    if args.only and args.start_from:
+        parser.error("Use either --only or --from, not both.")
+
+    only = PipelinePhase(args.only) if args.only else None
     start_from = PipelinePhase(args.start_from) if args.start_from else None
-    results = run_full_pipeline(
-        seasons=args.seasons,
-        skip_download=args.skip_download,
-        skip_v2=args.skip_v2,
-        skip_nlp=args.skip_nlp,
-        skip_normative=args.skip_normative,
-        nlp_fusion=not args.no_fusion,
-        dataset_only=args.dataset_only,
-        start_from=start_from,
-        dry_run=args.dry_run,
-    )
+    try:
+        results = run_full_pipeline(
+            seasons=args.seasons,
+            skip_download=args.skip_download,
+            skip_v2=args.skip_v2,
+            skip_nlp=args.skip_nlp,
+            skip_normative=args.skip_normative,
+            nlp_fusion=not args.no_fusion,
+            dataset_only=args.dataset_only,
+            only=only,
+            start_from=start_from,
+            dry_run=args.dry_run,
+        )
+    except PrerequisiteError as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
+
     print(json.dumps(results, indent=2, default=str))
     return 0
 
