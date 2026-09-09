@@ -58,9 +58,11 @@ Step-by-step backfill commands, manual PDF layout, and WAF troubleshooting: [`da
 # From project root
 pip install -r requirements.txt
 
-# Full pipeline (dataset → V1 → V2 → NLP → normative)
-python main.py --dry-run                        # preview only (bare main.py does nothing)
-python main.py --run --skip-download            # execute when PDFs are on disk
+# End-to-end orchestrator (main.py) — bare `python main.py` does nothing; pass --run to execute
+python main.py --dry-run
+python main.py --run --skip-download
+python main.py --run --from v1
+python main.py --run --skip-v2 --skip-nlp
 
 # Run tests
 python -m pytest
@@ -90,6 +92,63 @@ python -m fia_ml.normative.run_normative `
 ```
 
 Set `PYTHONPATH=src` if imports fail outside a virtualenv, or run modules as shown above from the project root.
+
+### End-to-end orchestrator (`main.py`)
+
+`main.py` chains all pipelines in order. **Security default:** bare `python main.py` prints help and exits; you must pass `--run` to execute (or `--dry-run` to preview).
+
+```mermaid
+flowchart TD
+    START(["python main.py --run"]) --> DS
+
+    subgraph dataset ["1. Dataset (per season)"]
+        DS["download"] --> PARSE["parse"]
+        PARSE --> BUILD["build"]
+        BUILD --> ENRICH["enrich"]
+        ENRICH --> VALIDATE["validate"]
+    end
+
+    VALIDATE --> V1P
+
+    subgraph v1 ["2. V1 tabular"]
+        V1P["prepare"] --> V1T["train baselines + XGBoost"]
+        V1T --> V1E["evaluate"]
+    end
+
+    V1E --> V2F
+
+    subgraph v2 ["3. V2 tabular"]
+        V2F["features_v2"] --> V2T["train XGBoost"]
+        V2T --> V2E["evaluate"]
+    end
+
+    V2E --> NLP
+
+    subgraph nlp ["4. NLP text model"]
+        NLPP["prepare text dataset"] --> NLPT["train DistilBERT"]
+        NLPT --> NLPE["evaluate"]
+        NLPE --> FUSE["fusion vs V1 optional"]
+    end
+
+    FUSE --> NORM
+
+    subgraph normative ["5. Normative rules"]
+        NORM["predict on incidents.parquet"] --> COMP["deviation report vs FIA + ML"]
+    end
+
+    COMP --> DONE(["artifacts in ml_models/ and reports/"])
+```
+
+| Command | Effect |
+|---------|--------|
+| `python main.py` | Help only; no execution |
+| `python main.py --dry-run` | Print phase plan |
+| `python main.py --run` | Full run including FIA PDF download |
+| `python main.py --run --skip-download` | Dataset parse onward (PDFs on disk) |
+| `python main.py --run --dataset-only` | Dataset phase only |
+| `python main.py --run --from v1` | Skip dataset; start at V1 training |
+| `python main.py --run --skip-v2 --skip-nlp` | Dataset + V1 + normative |
+| `python main.py --run --no-fusion` | Skip NLP late-fusion step |
 
 ---
 
