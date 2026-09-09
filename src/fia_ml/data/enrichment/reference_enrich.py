@@ -16,6 +16,16 @@ from fia_ml.data.enrichment.common import (
 )
 from fia_ml.data.reference_data import build_event_name_to_circuit_map, load_circuits, load_drivers, load_seasons, load_teams
 
+STANDINGS_COLUMNS = frozenset(
+    {
+        "driver_standings",
+        "driver_points",
+        "construct_standings",
+        "construct_points",
+        "respective_teams",
+    }
+)
+
 
 def _driver_years_in_sport(driver_id: str, season_year: int, drivers: dict[str, Any]) -> str:
     profile = drivers.get(driver_id)
@@ -40,6 +50,8 @@ def _fill_driver_fields(
     team_pos: dict[str, int],
     team_pts: dict[str, int],
     teams: dict[str, Any],
+    *,
+    include_standings: bool = True,
 ) -> dict[str, str]:
     nationalities: list[str] = []
     d_standings: list[str] = []
@@ -51,26 +63,46 @@ def _fill_driver_fields(
 
     for driver_id in driver_ids:
         if driver_id.startswith("car_"):
+            nationalities.append("")
+            if include_standings:
+                d_standings.append("")
+                d_points.append("")
+                team_slugs.append("")
+                c_standings.append("")
+                c_points.append("")
+            years.append("")
             continue
 
         profile = drivers.get(driver_id, {})
         nationality = profile.get("nationality", "")
-        if nationality:
-            nationalities.append(slugify_nationality(str(nationality)))
+        nationalities.append(slugify_nationality(str(nationality)) if nationality else "")
 
-        if driver_id in driver_pos:
-            d_standings.append(str(driver_pos[driver_id]))
-        if driver_id in driver_pts:
-            d_points.append(str(driver_pts[driver_id]))
+        if include_standings:
+            if driver_id in driver_pos:
+                d_standings.append(str(driver_pos[driver_id]))
+            else:
+                d_standings.append("")
+            if driver_id in driver_pts:
+                d_points.append(str(driver_pts[driver_id]))
+            else:
+                d_points.append("")
 
-        team_id = driver_team.get(driver_id, "")
-        if team_id:
-            canonical_team = resolve_team_id(team_id, teams)
-            team_slugs.append(canonical_team)
-            if canonical_team in team_pos:
-                c_standings.append(str(team_pos[canonical_team]))
-            if canonical_team in team_pts:
-                c_points.append(str(team_pts[canonical_team]))
+            team_id = driver_team.get(driver_id, "")
+            if team_id:
+                canonical_team = resolve_team_id(team_id, teams)
+                team_slugs.append(canonical_team)
+                if canonical_team in team_pos:
+                    c_standings.append(str(team_pos[canonical_team]))
+                else:
+                    c_standings.append("")
+                if canonical_team in team_pts:
+                    c_points.append(str(team_pts[canonical_team]))
+                else:
+                    c_points.append("")
+            else:
+                team_slugs.append("")
+                c_standings.append("")
+                c_points.append("")
 
         years.append(_driver_years_in_sport(driver_id, season_year, drivers))
 
@@ -109,6 +141,7 @@ def enrich_with_reference(df: pd.DataFrame, cfg: PipelineConfig) -> pd.DataFrame
     team_pos = {entry["id"]: index + 1 for index, entry in enumerate(team_standings)}
     team_pts = {entry["id"]: entry.get("total_points", "") for entry in team_standings}
     top_four = ",".join(entry["id"] for entry in driver_standings[:4])
+    defer_standings_to_ergast = cfg.enrichment_settings.overwrite_reference_standings
 
     out = df.copy()
     meta = load_meta(cfg)
@@ -140,7 +173,7 @@ def enrich_with_reference(df: pd.DataFrame, cfg: PipelineConfig) -> pd.DataFrame
             if session == "race" and total_laps not in (None, "") and is_blank(row.get("full_laps")):
                 out.at[idx, "full_laps"] = str(total_laps)
 
-        if is_blank(row.get("current_top_4_drivers")) and top_four:
+        if not defer_standings_to_ergast and is_blank(row.get("current_top_4_drivers")) and top_four:
             out.at[idx, "current_top_4_drivers"] = top_four
 
         driver_ids = [part.strip() for part in str(row.get("drivers", "")).split(",") if part.strip()]
@@ -157,8 +190,11 @@ def enrich_with_reference(df: pd.DataFrame, cfg: PipelineConfig) -> pd.DataFrame
             team_pos,
             team_pts,
             teams,
+            include_standings=not defer_standings_to_ergast,
         )
         for column, value in filled.items():
+            if defer_standings_to_ergast and column in STANDINGS_COLUMNS:
+                continue
             if value and is_blank(row.get(column)):
                 out.at[idx, column] = value
 
