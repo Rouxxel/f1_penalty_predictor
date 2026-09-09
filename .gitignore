@@ -18,6 +18,10 @@ __pycache__/
 ergast/
 fastf1_cache/
 review_queue_*.csv
+# NLP training artifacts (regenerate via run_nlp_training)
+ml_models/nlp/checkpoints/
+ml_models/nlp/model/
+data/processed/nlp_*.jsonl
 
 # Distribution / packaging
 .Python
