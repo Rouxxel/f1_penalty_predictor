@@ -30,7 +30,7 @@ Examples:
     python main.py --run --dataset-only
     python main.py --run --skip-v2 --skip-nlp   # dataset + v1 + normative only
 
-Phase order:
+Recommended Phase order:
 
     dataset -> V1 tabular -> V2 tabular -> NLP -> normative
 
@@ -43,6 +43,16 @@ Prerequisites (dataset assumed for all downstream phases):
       ``ml_models/xgboost/predictions_val.json`` (V1) — use ``--no-fusion`` to skip
     - normative: ``data/processed/incidents.parquet`` only (not NLP); uses V1
       predictions when present, but they are optional
+
+Prerequisite map::
+
+    dataset
+      │
+      ├── v1  ← processed_{season}.csv
+      │     ├── v2  ← incidents.parquet
+      │     └── normative  ← incidents.parquet (V1 preds optional)
+      └── nlp  ← processed CSV + interim JSON
+            └── fusion ──► v1  ← predictions_val.json (--no-fusion skips)
 
 Implementation: ``src/fia_ml/orchestration/run_all.py``.
 """
