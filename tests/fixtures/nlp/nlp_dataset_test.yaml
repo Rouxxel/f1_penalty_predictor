@@ -1,0 +1,50 @@
+paths:
+  csv_input_glob: tests/fixtures/nlp/processed_*.csv
+  interim_docs: tests/fixtures/nlp/extracted_documents
+  meta_glob: tests/fixtures/nlp/raw_incidents_{season}.meta.json
+  processed: data/processed
+  models: ml_models/nlp
+  reports: reports
+  target_mapping: configs/target_mapping.yaml
+
+inputs:
+  seasons: [2019, 2025]
+
+splits:
+  mode: temporal
+  train_seasons: [2019]
+  validation_season: 2025
+  test_season: null
+
+text:
+  profile: fact_offence
+  include_metadata: true
+  max_length: 512
+  truncation: longest_first
+
+model:
+  backbone: distilbert-base-uncased
+  num_labels: 3
+  dropout: 0.2
+  freeze_backbone_epochs: 0
+
+training:
+  batch_size: 8
+  learning_rate: 2.0e-5
+  weight_decay: 0.01
+  epochs: 8
+  warmup_ratio: 0.1
+  early_stopping_patience: 3
+  class_weight: inverse_frequency
+  seed: 42
+  fp16: false
+
+evaluation:
+  primary_metric: macro_f1
+  compare_to_v1: ml_models/xgboost/metrics.json
+  min_macro_f1: 0.35
+
+fusion:
+  enabled: false
+  method: concat_logits
+  tabular_predictions: ml_models/xgboost/predictions_val.json
