@@ -58,6 +58,10 @@ Step-by-step backfill commands, manual PDF layout, and WAF troubleshooting: [`da
 # From project root
 pip install -r requirements.txt
 
+# Full pipeline (dataset → V1 → V2 → NLP → normative)
+python main.py --dry-run                        # preview only (bare main.py does nothing)
+python main.py --run --skip-download            # execute when PDFs are on disk
+
 # Run tests
 python -m pytest
 
