@@ -6,98 +6,52 @@ Fills empty columns in `raw_incidents_{season}.csv` after the **build** stage. I
 
 ---
 
-## Future improvements
+## Open gaps
 
-Tracked gaps between the target schema ([`documentation/f1_dataset_example.csv`](../../../documentation/f1_dataset_example.csv)) and what the enrichers fill today. Observed fill rates are from `reports/tables/data_quality_{season}.json` on the 2019 and 2025 runs.
+Measured on 2019 + 2025 after full enrichment run (2026-09-09). Registry: [`current_gaps.md`](../../../current_gaps.md).
 
 ### Missing seasons
 
-| Season | Enrichment status | Blocker |
-|--------|-------------------|---------|
-| 2019 | Enriched + validated | — |
-| 2020–2024 | **No data** | FIA PDF download blocked (403/WAF) at `download` stage |
-| 2025 | Enriched + validated | — |
+| Season | Status |
+|--------|--------|
+| 2019, 2025 | Enriched + validated |
+| 2020–2024 | No CSVs — FIA WAF blocks download; modules run once PDFs exist |
 
-No enrichment code changes are needed for missing seasons — run the pipeline once PDFs exist:
+### Fill rates vs targets
 
-```bash
-python dataset/scripts/run_pipeline.py --stage enrich --season 2020
-python dataset/scripts/run_pipeline.py --stage validate --season 2020
-```
+| Column | 2019 | 2025 | Status |
+|--------|------|------|--------|
+| `driver_standings` / points (round N−1) | 96% | 78% | **Built** — 2019 passes 90% gate; 2025 below target |
+| `superlicense_points_before_incident` | 99% | 81% | **Built** |
+| `full_laps`, weather, `safety_car` | 90% | 89% | **Built** |
+| `driver_at_fault` | 25% | 25% | **Built** (rule assist + review queue) |
+| `lap`, `flag`, `positions_of_involved parties` | 0–2% | 0% | **Blocked** — PDF `time` is document clock, not session time |
+| `sector` | 48% | 3% | Below gate (70% / 50%) |
+| `severity` | 0% | 0% | Suggestions in review queue only |
+| Multi-driver `**` columns | — | — | ~20 misaligned rows/season (`car_*` placeholders) |
 
-### Columns not yet enriched (or only partially)
-
-```mermaid
-flowchart TD
-    subgraph done["Implemented and filling"]
-        D1["round · circuit · country"]
-        D2["drivers · nationalities · teams"]
-        D3["full_laps · weather · safety_car"]
-        D4["driver/construct standings partial"]
-    end
-
-    subgraph future["Future work"]
-        F1["lap · lap_remaining · completion_%"]
-        F2["positions_of_involved parties"]
-        F3["flag"]
-        F4["superlicense_points_before_incident"]
-        F5["point-in-time standings round N-1"]
-        F6["multi-driver column alignment"]
-        F7["severity manual review"]
-    end
-
-    done --> CSV["processed_{season}.csv"]
-    future -.-> CSV
-```
-
-| Column | Status | 2019 fill | 2025 fill | Planned fix |
-|--------|--------|-----------|-----------|-------------|
-| `lap` | Broken / not aligning | 0% | 0% | Parse PDF `time` reliably; map to FastF1 session timeline |
-| `lap_remaining` | Derived from `lap` | 0% | 0% | Auto-computed in `validation.py` once `lap` works |
-| `completion_percentage` | Derived from `lap` | 0% | 0% | Auto-computed in `validation.py` once `lap` works |
-| `positions_of_involved parties` | **Not implemented** | 0% | 0% | FastF1 running positions at incident lap/time |
-| `flag` | **Not implemented** | 0% | 0% | FastF1 race control messages (yellow/red/etc.) |
-| `superlicense_points_before_incident` | **Not implemented** | 0% | 0% | Rolling sum of `superlicense_points_added` from prior incidents per driver |
-| `severity` | **Manual only** | 0% | 0% | Human labels via `review_queue_{season}.csv` |
-| `driver_standings`, `driver_points`, `nationalities`, `years_in_sport` | Partial on **multi-driver** rows | 99%* | 75%* | Per-driver Ergast/reference lookup when `num_drivers > 1` |
-| `construct_standings`, `construct_points` | Partial | 55% | 68% | Ergast constructor standings per round |
-| `driver_standings`, `driver_points` (timing) | Approximate | 99% | 75% | Replace season totals with **round N−1** point-in-time standings |
-| `driver_at_fault` | Weak heuristics | 5% | 4% | Improve PDF Reason/Fact parsing |
-| `sector` | Partial (turn→sector map) | 48% | 3% | Expand `circuits.json` corner/sector maps |
-
-\*Overall fill rate is high, but validation reports **misaligned multi-value lengths** on two-driver incidents (~19 rows in 2019, ~21 in 2025).
-
-### Suggested implementation order
-
-1. **Multi-driver column alignment** — fix validation errors on two-car incidents
-2. **`lap` / time alignment** — unlocks `lap_remaining` and `completion_percentage`
-3. **Point-in-time standings** — Ergast round N−1 instead of season totals from `seasons.json`
-4. **`positions_of_involved parties` + `flag`** — additional FastF1 session features
-5. **`superlicense_points_before_incident`** — dataset-internal rolling feature
-6. **`severity`** — manual review workflow (ongoing)
+Quality gates: `reports/tables/enrichment_report_{season}.json` · provenance: `data/interim/enrichment_meta/{season}.json`.
 
 ---
 
 ## Enrichment flow
 
-Enrichment runs in a **fixed order**. Reference data is applied first; Ergast and FastF1 only fill cells that are still empty (`fill_gaps_only=True`).
+Fixed order in `pipeline.py`. Config: `configs/enrichment.yaml` (loaded via `--enrichment-config`).
 
 ```mermaid
 flowchart TD
-    IN["raw_incidents_{season}.csv\n+ raw_incidents_{season}.meta.json"]
+    IN["raw_incidents_{season}.csv\n+ meta.json"]
 
-    IN --> REF["1 · reference_enrich.py\ndata/reference/*.json"]
-    REF --> GAP1{"Empty cells\nremaining?"}
-
-    GAP1 -->|yes| ERG["2 · ergast.py\nErgast API + cache"]
-    GAP1 -->|no| FF
-    ERG --> GAP2{"Empty cells\nremaining?"}
-
-    GAP2 -->|yes| FF["3 · fastf1_enrich.py\nFastF1 sessions + cache"]
-    GAP2 -->|no| OUT
-    FF --> OUT["raw_incidents_{season}.csv\n(enriched in place)"]
-
-    OUT --> VAL["validation.py\n--stage validate"]
+    IN --> REF["1 · reference_enrich"]
+    REF --> ERG["2 · ergast — round N−1 standings"]
+    ERG --> TS["3 · timestamp — session_offset_seconds"]
+    TS --> OF1["4a · openf1 — 2023+"]
+    OF1 --> FF["4b · fastf1_enrich — all seasons"]
+    FF --> SL["5 · superlicense"]
+    SL --> TXT["6 · text_fields"]
+    TXT --> PROV["7 · provenance → enrichment_meta"]
+    PROV --> OUT["raw_incidents updated"]
+    OUT --> VAL["8 · validation + quality_gates"]
     VAL --> PROC["processed_{season}.csv"]
     VAL --> REV["review_queue_{season}.csv"]
 ```
@@ -128,17 +82,20 @@ flowchart LR
         F4["full_laps fallback"]
     end
 
-    subgraph manual["Manual / not yet"]
-        M1["severity"]
-        M2["superlicense_points_before_incident"]
-        M3["positions_of_involved parties"]
-        M4["flag"]
+    subgraph openf1["OpenF1 2023+"]
+        O1["lap · flag · sector"]
+        O2["positions"]
+    end
+
+    subgraph blocked["Blocked on timestamp"]
+        B1["lap · flag · positions\nwhen offset invalid"]
     end
 
     ref --> CSV["incident rows"]
     ergast --> CSV
+    openf1 --> CSV
     fastf1 --> CSV
-    manual -.-> CSV
+    blocked -.-> CSV
 ```
 
 ---
@@ -184,19 +141,26 @@ sequenceDiagram
     participant CLI as run_pipeline.py
     participant REF as reference_enrich
     participant ERG as ergast
+    participant TS as timestamp
+    participant OF1 as openf1
     participant FF as fastf1_enrich
+    participant SL as superlicense
+    participant TXT as text_fields
+    participant PROV as provenance
     participant VAL as validation
     participant CSV as raw_incidents_*.csv
     participant OUT as processed_*.csv
 
     CLI->>REF: enrich_with_reference()
-    REF->>CSV: fill from data/reference/
-    CLI->>ERG: enrich_with_ergast() [if enabled]
-    ERG->>CSV: fill gaps only
-    CLI->>FF: enrich_with_fastf1() [if enabled]
-    FF->>CSV: fill gaps only
-    CLI->>VAL: validate()
-    VAL->>OUT: write processed + review_queue
+    CLI->>ERG: enrich_with_ergast()
+    CLI->>TS: enrich_timestamps()
+    CLI->>OF1: enrich_with_openf1()
+    CLI->>FF: enrich_with_fastf1()
+    CLI->>SL: enrich_superlicense_points()
+    CLI->>TXT: enrich_text_fields()
+    CLI->>PROV: write_enrichment_meta()
+    CLI->>VAL: validate_and_export() + quality_gates
+    VAL->>OUT: processed + review_queue
 ```
 
 ---
@@ -209,20 +173,20 @@ Loads verified local files from `data/reference/`:
 
 | File | Columns filled |
 |------|----------------|
-| `seasons.json` | `round`, `rounds`, `num_teams`, `current_top_4_drivers`, driver/constructor standings & points |
+| `seasons.json` | `round`, `rounds`, `num_teams` (standings deferred to Ergast when `overwrite_reference_standings: true`) |
 | `circuits.json` | `circuit`, `country`, `first_season`, `full_laps` (race sessions via `total_laps`) |
 | `drivers.json` | `nationalities`, `years_in_sport` (from `debut`) |
 | `teams.json` | Resolves `legacy_ids` when matching constructor slugs |
 
 Uses `event_name` on each circuit to map FIA event titles (e.g. `"Abu Dhabi Grand Prix"`) to calendar rounds in `seasons.json`.
 
-**Limitation:** standings in `seasons.json` are **season totals**, not point-in-time per round.
+Standings in `seasons.json` are season totals; Ergast round N−1 overwrites them when configured in `configs/enrichment.yaml`.
 
 ---
 
-### `ergast.py` — API fallback
+### `ergast.py` — calendar + round N−1 standings
 
-Runs only when `enrichment.ergast_fallback_enabled: true` in `configs/data.yaml` (default).
+Runs when `enrichment.ergast_fallback_enabled: true` in `configs/data.yaml` (default).
 
 ```mermaid
 flowchart TD
@@ -235,15 +199,26 @@ flowchart TD
     STORE --> FILL
 ```
 
-Fills **gaps** left by reference enrichment:
-
 - `round`, `circuit`, `country` from Ergast calendar
 - Car number → driver slug via race results
-- Standings, nationalities, points when reference data is missing
+- **Round N−1** driver/constructor standings, nationalities, teams (overwrites reference when configured)
+- Per-driver alignment for multi-value `**` columns
 
 ---
 
-### `fastf1_enrich.py` — session context
+### `timestamp.py` — incident time
+
+Parses PDF `time` into `session_offset_seconds` (written to interim meta). **Current blocker:** most PDFs yield document-header clock, not on-track session time (~1.5% valid offsets).
+
+---
+
+### `openf1.py` — 2023+ race state
+
+OpenF1 API with cache at `data/raw/race_data/openf1_cache/`. Session index: `openf1_sessions_{season}.json` in cache dir. Fills `lap`, `flag`, `sector`, `positions_of_involved parties`, `full_laps` when timestamp + session keys resolve.
+
+---
+
+### `fastf1_enrich.py` — session context (all seasons)
 
 Uses [FastF1](https://github.com/theOehrly/FastF1) with cache at `data/raw/race_data/fastf1_cache/`.
 
@@ -256,20 +231,39 @@ flowchart TD
     SESS --> FL["full_laps if still empty"]
 ```
 
-Fills (gap-only unless reference did not set the field):
-
 | Column | Source |
 |--------|--------|
-| `full_laps` | Session lap count (if not set from `circuits.json`) |
-| `lap` | Incident time → lap number (race sessions only) |
+| `full_laps` | Session lap count |
+| `lap` | `session_offset_seconds` → lap number |
+| `flag`, `positions_of_involved parties`, `sector` | Race control + timing at offset (gap-fill; won't overwrite OpenF1 on 2023+) |
 | `track_conditions`, `weather_conditions` | Session weather |
 | `safety_car` | Race control messages (SC / VSC / none) |
 
-**Not implemented yet:** `positions_of_involved parties`, `flag`.
+First run per season is **slow**; cache at `data/raw/race_data/fastf1_cache/`.
 
-First run per season is **slow** (downloads session data per round). Later runs use the cache.
+---
 
-`lap` often stays empty when PDF `time` fields are malformed — those rows appear in `review_queue_{season}.csv`.
+### `superlicense.py` — rolling penalty points
+
+`superlicense_points_before_incident` = sum of prior `superlicense_points_added` per driver in season (temporal order by round → date → incident_id).
+
+---
+
+### `text_fields.py` — fault + severity assist
+
+Rule-based `driver_at_fault` (CSV write if confidence ≥ 0.7) and `severity` suggestions (review queue + meta only).
+
+---
+
+### `provenance.py` — field-level metadata
+
+Writes `data/interim/enrichment_meta/{season}.json` with source, round used, match error per enriched field.
+
+---
+
+### `quality_gates.py` — fill-rate targets
+
+Evaluated during `--stage validate`. Merges into `reports/tables/data_quality_{season}.json` and writes `reports/tables/enrichment_report_{season}.json`.
 
 ---
 
@@ -282,49 +276,14 @@ First run per season is **slow** (downloads session data per round). Later runs 
 
 ---
 
-## Columns still manual / unimplemented
+## Config
 
-See [Future improvements](#future-improvements) for the full table with fill rates and planned fixes. Summary:
+**`configs/enrichment.yaml`** — standings overwrite, timestamp tolerance, OpenF1/FastF1 toggles, text-field confidence, quality-gate targets.
 
-| Column | Why empty today |
-|--------|-----------------|
-| `severity` | Subjective — fill via review queue |
-| `superlicense_points_before_incident` | Rolling penalty history not built |
-| `positions_of_involved parties` | Planned FastF1 feature |
-| `flag` | Not implemented |
-| `lap`, `lap_remaining`, `completion_percentage` | PDF time → FastF1 lap alignment failing |
+**`configs/data.yaml`** — API cache paths, `ergast_fallback_enabled`, `fastf1_cache_enabled`.
 
----
-
-## Config flags (`configs/data.yaml`)
-
-```yaml
-enrichment:
-  ergast_base_url: "https://api.jolpi.ca/ergast/f1"
-  ergast_fallback_url: "https://ergast.com/api/f1"
-  ergast_fallback_enabled: true   # set false to use reference JSON only
-  fastf1_cache_enabled: true
-```
-
-To skip external APIs entirely (reference JSON only):
-
-```yaml
-enrichment:
-  ergast_fallback_enabled: false
-  fastf1_cache_enabled: false
-```
-
-You will lose lap-at-incident-time, weather, and safety-car fields unless added elsewhere.
-
-```mermaid
-flowchart LR
-    subgraph modes["Enrichment modes"]
-        FULL["Default\nreference + Ergast + FastF1"]
-        REFONLY["Reference only\nergast_fallback_enabled: false\nfastf1_cache_enabled: false"]
-    end
-
-    FULL --> RICH["Highest column fill rate\nrequires network + cache"]
-    REFONLY --> LIGHT["Fast, offline-friendly\nmany session columns empty"]
+```bash
+python dataset/scripts/run_pipeline.py --enrichment-config configs/enrichment.yaml --stage enrich --season 2025
 ```
 
 ---
@@ -335,7 +294,12 @@ flowchart LR
 from fia_ml.data.enrichment import (
     enrich_with_reference,
     enrich_with_ergast,
+    enrich_timestamps,
+    enrich_with_openf1,
     enrich_with_fastf1,
+    enrich_superlicense_points,
+    enrich_text_fields,
+    write_enrichment_meta,
 )
 ```
 

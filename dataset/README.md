@@ -63,4 +63,5 @@ python dataset/scripts/run_pipeline.py --stage validate  --season 2020
 ## Further reading
 
 - [`src/fia_ml/data/README.md`](../src/fia_ml/data/README.md) — full pipeline docs, stage diagrams, module reference
-- [`src/fia_ml/data/enrichment/README.md`](../src/fia_ml/data/enrichment/README.md) — enrichment cascade and column sources
+- [`src/fia_ml/data/enrichment/README.md`](../src/fia_ml/data/enrichment/README.md) — enrichment cascade, fill rates, open gaps
+- [`../current_gaps.md`](../current_gaps.md) — open dataset / model gaps registry

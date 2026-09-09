@@ -97,30 +97,28 @@ FIA blocking troubleshooting:
 
 ---
 
-## Enrichment gaps (future improvements)
+## Enrichment
 
-Several schema columns are **not fully enriched** yet. Existing `processed_*.csv` files are usable for model training but these columns need future work. Details: [`src/fia_ml/data/enrichment/README.md`](../../src/fia_ml/data/enrichment/README.md).
+Full hybrid stack is wired (`configs/enrichment.yaml`). Re-enrich without re-downloading:
 
-| Column | Status | Planned source |
-|--------|--------|----------------|
-| `lap`, `lap_remaining`, `completion_percentage` | **0% fill** — time→lap alignment not working | FastF1 session timeline |
-| `positions_of_involved parties` | **Not implemented** | FastF1 running positions at incident lap |
-| `flag` | **Not implemented** | FastF1 race control messages |
-| `superlicense_points_before_incident` | **Not implemented** | Rolling sum from prior penalties in dataset |
-| `severity` | **Manual only** (0% fill) | Human review via `review_queue_{season}.csv` |
-| `driver_standings`, `driver_points` (multi-driver rows) | **Partial** — misaligned when `drivers` has 2+ values | Per-driver Ergast lookup |
-| `construct_standings`, `construct_points` | **~55–68% fill** | Ergast point-in-time constructor standings |
-| Standings (all drivers) | **Season totals**, not round N−1 | Ergast point-in-time standings per round |
+```bash
+python dataset/scripts/run_pipeline.py --stage enrich --season 2019 --season 2025
+python dataset/scripts/run_pipeline.py --stage validate --season 2019 --season 2025
+```
 
-Observed fill rates from `reports/tables/data_quality_{season}.json`:
+Open gaps (lap/flag/positions, multi-driver rows, 2020–2024 seasons): [`current_gaps.md`](../../current_gaps.md) · module detail: [`src/fia_ml/data/enrichment/README.md`](../../src/fia_ml/data/enrichment/README.md).
+
+Observed fill rates (`reports/tables/data_quality_{season}.json`, post-enrichment 2026-09-09):
 
 | Column | 2019 | 2025 |
 |--------|------|------|
-| `lap` | 0% | 0% |
-| `full_laps` | 88% | 69% |
-| `safety_car` / weather | 82% | 62% |
+| `driver_standings` (round N−1) | 96% | 78% |
+| `superlicense_points_before_incident` | 99% | 81% |
+| `full_laps` / weather / `safety_car` | 90% | 89% |
+| `lap` | 1.5% | 0.3% |
+| `flag` / `positions_of_involved parties` | 0% | 0% |
 | `severity` | 0% | 0% |
-| `drivers` | 99% | 82% |
+| `driver_at_fault` (rule assist) | 25% | 25% |
 
 ---
 
@@ -158,7 +156,9 @@ dataset/csv/raw_incidents_{season}.csv
 dataset/csv/raw_incidents_{season}.meta.json
 dataset/csv/processed_{season}.csv          # primary training input
 dataset/csv/review_queue_{season}.csv       # regenerated on validate
-reports/tables/data_quality_{season}.json   # column fill rates
+reports/tables/data_quality_{season}.json   # column fill rates + enrichment gates
+reports/tables/enrichment_report_{season}.json
+data/interim/enrichment_meta/{season}.json
 ```
 
 ---

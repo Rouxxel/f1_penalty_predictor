@@ -23,6 +23,7 @@ FIA PDFs  →  dataset pipeline  →  incidents.parquet
 | Area | Status | Notes |
 |------|--------|-------|
 | Dataset generation | **Operational** | 2019 + 2025 seasons (546 raw incidents → 234 driver-rows for ML) |
+| Data enrichment | **Implemented** (partial fill) | Full pipeline wired (`configs/enrichment.yaml`); lap/flag/positions blocked by PDF timestamps — see [`current_gaps.md`](current_gaps.md) |
 | Model training (V1) | **Complete** | Validation macro-F1 **0.402** (train 2019 / val 2025) |
 | Feature engineering (V2) | **Complete** | Validation macro-F1 **0.381** — did not beat V1 on this corpus |
 | Normative rule engine | **Operational** | 17 rules; deviation report generated |
@@ -85,7 +86,7 @@ Set `PYTHONPATH=src` if imports fail outside a virtualenv, or run modules as sho
 |----------|-------------|
 | [`dataset/scripts/README.md`](dataset/scripts/README.md) | Dataset CLI, season coverage, WAF/backfill notes |
 | [`src/fia_ml/data/README.md`](src/fia_ml/data/README.md) | Dataset generation library (`download`, `parsing`, `enrichment`, `validation`) |
-| [`src/fia_ml/data/enrichment/README.md`](src/fia_ml/data/enrichment/README.md) | Ergast + FastF1 enrichment detail |
+| [`src/fia_ml/data/enrichment/README.md`](src/fia_ml/data/enrichment/README.md) | Enrichment cascade (reference → Ergast → timestamp → OpenF1 → FastF1 → SL → text) |
 | [`data/reference/README.md`](data/reference/README.md) | Static reference data (circuits, mappings) |
 | [`dataset/README.md`](dataset/README.md) | Generated CSV layout |
 
@@ -98,6 +99,7 @@ Set `PYTHONPATH=src` if imports fail outside a virtualenv, or run modules as sho
 | [`reports/model_reports/v1_training_report_2026-08-24.md`](reports/model_reports/v1_training_report_2026-08-24.md) | V1 training write-up |
 | [`reports/model_reports/v2_feature_engineering_report_2026-08-25.md`](reports/model_reports/v2_feature_engineering_report_2026-08-25.md) | V2 ablation + selection write-up |
 | [`reports/normative/deviation_summary_2026-08-25.md`](reports/normative/deviation_summary_2026-08-25.md) | FIA vs normative deviation analysis |
+| [`reports/model_reports/enrichment_improvement_2026-09-09.md`](reports/model_reports/enrichment_improvement_2026-09-09.md) | Post-enrichment quality gates (2019 + 2025) |
 
 ---
 
@@ -171,6 +173,8 @@ Config: [`configs/xgboost_v2.yaml`](configs/xgboost_v2.yaml) · Features: [`conf
 | Ablation + feature selection | `reports/ablation_results.json`, `reports/selection_report_v2.json` |
 | Normative deviation CSVs + figures | `reports/normative/` |
 | Per-season data quality | `reports/tables/data_quality_{season}.json` |
+| Enrichment quality gates | `reports/tables/enrichment_report_{season}.json` |
+| Enrichment provenance | `data/interim/enrichment_meta/{season}.json` |
 
 ---
 
@@ -194,7 +198,7 @@ f1_penalty_predictor/
 ├── configs/                  # YAML configs (data, training, features, normative rules)
 ├── data/
 │   ├── raw/fia/              # Downloaded FIA PDFs
-│   ├── interim/              # Parsed document JSON
+│   ├── interim/              # Parsed docs, enrichment_meta sidecars
 │   ├── processed/            # Parquet for ML and normative engine
 │   └── reference/            # Circuits, static lookups
 ├── dataset/
@@ -219,7 +223,8 @@ f1_penalty_predictor/
 
 | File | Purpose |
 |------|---------|
-| [`configs/data.yaml`](configs/data.yaml) | Dataset pipeline (seasons, paths, enrichment) |
+| [`configs/data.yaml`](configs/data.yaml) | Dataset pipeline (seasons, paths, API cache dirs) |
+| [`configs/enrichment.yaml`](configs/enrichment.yaml) | Enrichment sources, confidence thresholds, quality-gate targets |
 | [`configs/target_mapping.yaml`](configs/target_mapping.yaml) | Raw `penalty` string → 3-class `penalty_severity` |
 | [`configs/xgboost.yaml`](configs/xgboost.yaml) | V1 training splits and hyperparameters |
 | [`configs/xgboost_v2.yaml`](configs/xgboost_v2.yaml) | V2 training (feature version, ablation hooks) |
@@ -233,7 +238,7 @@ f1_penalty_predictor/
 
 ## What's next
 
-**Gaps (existing systems):** [`current_gaps.md`](current_gaps.md) — seasons 2020–2024, column fill, normative `manual_review` rate, V2 vs V1 limitations.
+**Gaps (existing systems):** [`current_gaps.md`](current_gaps.md) — seasons 2020–2024, PDF session timestamps (lap/flag), normative `manual_review` rate, V2 vs V1 limitations.
 
 **Future capabilities:** [`documentation/FUTURE_FEATURES.md`](documentation/FUTURE_FEATURES.md) — NLP on steward text, **CNN** on incident video, telemetry, embedding-based precedent, multimodal fusion.
 

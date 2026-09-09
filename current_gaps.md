@@ -9,11 +9,11 @@
 
 | Section | Topic |
 |---------|--------|
-| §1–§4 | **Dataset** — seasons, columns, enrichment, row quality |
+| §1–§4 | **Dataset** — seasons, columns, enrichment blockers, row quality |
 | §5–§6 | **Current models** — limitations on today’s V1/V2 (not “plans to implement”) |
 | §7 | **Normative rules** — coverage and iteration (engine already runs) |
 
-Pipeline docs: [`README.md`](README.md) · dataset runbook: [`documentation/dataset_generation_runbook.md`](documentation/dataset_generation_runbook.md) · fill rates: [`reports/tables/data_quality_{season}.json`](reports/tables/).
+Pipeline docs: [`README.md`](README.md) · enrichment detail: [`src/fia_ml/data/enrichment/README.md`](src/fia_ml/data/enrichment/README.md) · fill rates: [`reports/tables/data_quality_{season}.json`](reports/tables/data_quality_{season}.json) · quality gates: [`reports/tables/enrichment_report_{season}.json`](reports/tables/enrichment_report_{season}.json).
 
 ---
 
@@ -38,51 +38,44 @@ Pipeline docs: [`README.md`](README.md) · dataset runbook: [`documentation/data
 | Train / val only | 90 train (2019) / 144 val (2025) — no held-out **test** season |
 | Flatten loss | 546 raw incidents → 234 driver-rows; summons-only, unmapped penalties, ~40 misaligned multi-driver incidents skipped |
 | Distribution shift | 2019 train → 2025 val spans 6 years |
+| **Parquet not refreshed** | `data/processed/*.parquet` still built from pre-enrichment CSVs — re-run `prepare` → `features_v2` after enrichment stabilizes |
 
 ---
 
 ## 2. Columns below target
 
-Fill rates from `data_quality_2019.json` and `data_quality_2025.json`. Only columns that are missing, sparse, or below plan targets.
+Fill rates from `reports/tables/data_quality_{season}.json` (post-enrichment run, 2026-09-09). Only columns that are missing, sparse, or below plan targets.
 
-### Race progression
+### Race progression (critical path)
 
-| Column | 2019 | 2025 | Planned fix |
-|--------|------|------|-------------|
-| `lap` | 0% | 0% | PDF `time` → FastF1 session timeline |
-| `lap_remaining` | 0% | 0% | `validation.py` once `lap` works |
-| `completion_percentage` | 0% | 0% | Same — blocks V2 `race_stage` |
-| `full_laps` | 88% | 69% | `circuits.json` + FastF1 |
+| Column | 2019 | 2025 | Blocker |
+|--------|------|------|---------|
+| `lap` | 1.5% | 0.3% | PDF `time` parses as **document clock**, not session time — only ~1.5% valid `session_offset_seconds` |
+| `lap_remaining` | 1.5% | 0.3% | Derived in `validation.py` once `lap` works |
+| `completion_percentage` | 1.5% | 0.3% | Same — blocks V2 `race_stage` |
+| `flag` | 0% | 0% | Needs valid session timestamp for OpenF1/FastF1 race-control join |
+| `positions_of_involved parties` | 0% | 0% | Same |
 
-**Target not met:** FastF1 lap/time for > 50% of race incidents (actual: 0%).
+**Target not met:** > 50% race-session `lap` / `flag` fill (actual: ~0–4%).
 
 ### Environmental / race control
 
-| Column | 2019 | 2025 | Planned fix |
-|--------|------|------|-------------|
-| `flag` | 0% | 0% | FastF1 race control messages |
-| `safety_car` | 82% | 62% | FastF1 race control |
-| `track_conditions` | 82% | 62% | FastF1 session weather |
-| `weather_conditions` | 82% | 62% | FastF1 session weather |
-| `sector` | 48% | 3% | Turn→sector in `circuits.json` |
-
-**Target not met:** weather + SC/VSC for > 70% of race-session incidents on 2025 (62%).
+| Column | 2019 | 2025 | Notes |
+|--------|------|------|-------|
+| `sector` | 48% | 3% | Turn→sector map + RC sector need timestamp; 2019 below 70% target |
+| `full_laps` | 90% | 89% | FastF1 + circuits — acceptable |
+| `safety_car` / weather | 90% | 89% | FastF1 session-level — acceptable |
 
 ### Incident & driver fields
 
 | Column | 2019 | 2025 | Notes |
 |--------|------|------|-------|
-| `severity` | 0% | 0% | Manual via `review_queue_{season}.csv` |
-| `positions_of_involved parties` | 0% | 0% | FastF1 positions at incident time |
-| `drivers` | 99% | 82% | Ergast fallback when PDF lacks driver |
-| `nationalities` | 99% | 75% | Multi-driver misalignment |
-| `driver_standings` | 99% | 75% | Season totals, not round N−1 |
-| `driver_points` | 99% | 75% | Same |
-| `construct_standings` | 55% | 68% | Incomplete |
-| `construct_points` | 55% | 68% | Incomplete |
-| `years_in_sport` | 99% | 75% | Multi-driver misalignment |
-| `superlicense_points_before_incident` | 0% | 0% | Not implemented in enricher |
-| `driver_at_fault` | 5% | 4% | Weak PDF heuristics |
+| `severity` | 0% | 0% | Suggestions in review queue only; CSV column not auto-filled |
+| `driver_standings` / `driver_points` | 96% | 78% | Ergast round N−1 wired; **2025 below 90% gate** (unresolved driver slugs) |
+| `construct_standings` / `construct_points` | 96% | 78% | Same |
+| `drivers` | 99% | 81% | Ergast car-number fallback |
+| `nationalities` / `years_in_sport` | 96–99% | 77% | **Multi-driver misalignment** on `car_*` placeholder rows |
+| `driver_at_fault` | 25% | 25% | Rule-based assist; low-confidence rows → review queue |
 | `penalty` | 91% | 92% | Target > 95% |
 | `first_season` | 100% | 90% | Degraded on 2025 |
 
@@ -92,24 +85,22 @@ Fill rates from `data_quality_2019.json` and `data_quality_2025.json`. Only colu
 
 | Gap | Detail |
 |-----|--------|
-| **Standings timing** | `reference_enrich.py` uses season-end totals; Ergast round N−1 only fills empty cells |
-| **`superlicense_points_before_incident`** | Specified in plan — not implemented |
-| **`test_enrichment_ergast.py`** | Not created |
-| **`test_enrichment_fastf1.py`** | Not created |
-| **Point-in-time standings test** | Not created |
-| **PDF `raw_text` NLP** | Interim JSON exists; no NLP pipeline |
-| **Review queue** | 20 (2019) + 37 (2025) rows — low confidence, missing `severity`/`lap` |
+| **PDF session timestamps** | `timestamp.py` parses all rows via `document_clock`; ~1.5% map to session offset — blocks lap/flag/positions despite OpenF1 + FastF1 v2 being wired |
+| **Multi-driver alignment** | ~20 incidents/season: `drivers` has 2 values but per-driver `**` columns have length 1 (often `car_*` placeholder) |
+| **Review queue** | 20 (2019) + 37 (2025) rows — low confidence, missing `severity`/`lap`, text-field suggestions |
 | **FIA WAF** | Blocks automated download for 2020–2024 |
-| **Multi-car dedup** | Ambiguous cases → review queue |
+| **Season backfill** | Enrichment modules are season-agnostic; need PDFs for 2020–2024 |
+| **Downstream refresh** | Re-run flatten + V2 feature build not done since enrichment — `race_stage`, championship features still use old parquet |
 
 ### Suggested fix order
 
-1. Multi-driver column alignment
-2. `lap` / time → unlocks `lap_remaining`, `completion_percentage`, `race_stage`
-3. Point-in-time standings (Ergast round N−1)
-4. `positions_of_involved parties` + `flag`
-5. `superlicense_points_before_incident`
-6. `severity` (manual labeling)
+1. **Session timestamp extraction** — move off document header clock; unlock lap/flag/positions
+2. **Multi-driver column alignment** — per-driver Ergast fields for `car_*` rows
+3. **2025 standings coverage** — driver slug ↔ car number gaps
+4. **`sector`** — expand turn maps + timestamp-dependent RC sector
+5. **`severity`** — manual promotion from review queue
+6. **Seasons 2020–2024** — PDF backfill when WAF allows
+7. **Re-run `prepare` → `features_v2`** — consume enriched CSVs
 
 ---
 
@@ -117,7 +108,7 @@ Fill rates from `data_quality_2019.json` and `data_quality_2025.json`. Only colu
 
 | Issue | Impact |
 |-------|--------|
-| Multi-driver misalignment | ~19 (2019) + ~21 (2025) incidents skipped on flatten |
+| Multi-driver misalignment | ~19 (2019) + ~20 (2025) incidents flagged in validation; skipped on flatten |
 | Two-season corpus | Precedent/history cannot use 2020–2024; 6-year val shift |
 | Class 2 (major) sparse | ~14 val support; recall ~21% (V1 report) |
 
@@ -134,7 +125,7 @@ Fill rates from `data_quality_2019.json` and `data_quality_2025.json`. Only colu
 | **Ordinal encoding** | Nominal fields (`session`, `circuit`) use `OrdinalEncoder` |
 | **Small train set** | 90 rows |
 | **Class 2 (major)** | Weak precision/recall on validation |
-| **Columns dropped at encode** | `flag`, `severity`, `lap`, `lap_remaining`, `completion_percentage`, `opponent_*`, `standing_difference`, `points_difference`, `superlicense_points_before_incident` — no train observations |
+| **Columns dropped at encode** | `flag`, `severity`, `lap`, `lap_remaining`, `completion_percentage`, `opponent_*`, `standing_difference`, `points_difference`, `superlicense_points_before_incident` — sparse or no train observations in current parquet |
 
 ---
 
@@ -144,8 +135,8 @@ Fill rates from `data_quality_2019.json` and `data_quality_2025.json`. Only colu
 |-----|--------|
 | **V2 macro-F1 < V1** | 0.381 vs 0.402 on validation — V2 did not beat V1 |
 | **Precedent hurt ablation** | Exp D −0.075 macro-F1 vs C — sparse groups, two-season corpus |
-| **`race_stage` unusable** | 0% `completion_percentage` fill |
-| **Championship features** | `points_gap_to_leader`, `title_contender` use season totals not round N−1 |
+| **`race_stage` unusable** | ~0% `completion_percentage` fill in current parquet |
+| **Championship features** | `points_gap_to_leader`, `title_contender` use stale parquet (pre round N−1 enrichment) |
 | **`severity` unlabeled** | Cannot activate `(incident_type, severity, session)` precedent key |
 | **Precedent fallback** | 32% of rows use global prior (`precedent_count < 3`) |
 | **Opponent history (Group F)** | Deferred |
@@ -177,11 +168,12 @@ Fill rates from `data_quality_2019.json` and `data_quality_2025.json`. Only colu
 ### Data
 - [ ] Seasons **2020–2024**
 - [ ] Third season for **test** split
+- [ ] Fix **PDF session timestamps** (lap / flag / positions blocker)
 - [ ] Fix **multi-driver misalignment** (~40 incidents)
 - [ ] Clear **review queue** (57 rows)
-- [ ] `lap`, `flag`, `severity`, `positions_of_involved parties`, `superlicense_points_before_incident`, `sector`
-- [ ] Point-in-time **standings** (round N−1)
-- [ ] `test_enrichment_ergast.py` + point-in-time standings test
+- [ ] `lap`, `flag`, `severity`, `positions_of_involved parties`, `sector` fill targets
+- [ ] **2025** round N−1 standings coverage (≥ 90%)
+- [ ] Re-run **flatten + V2 features** on enriched CSVs
 
 ### Modeling
 - [ ] Held-out **test** season
@@ -202,6 +194,9 @@ Fill rates from `data_quality_2019.json` and `data_quality_2025.json`. Only colu
 |------|----------------------|
 | `dataset/csv/review_queue_{season}.csv` | Manual review backlog |
 | `reports/tables/data_quality_{season}.json` | Column fill rates |
+| `reports/tables/enrichment_report_{season}.json` | Quality-gate pass/fail vs targets |
+| `data/interim/enrichment_meta/{season}.json` | Per-field enrichment provenance |
+| `configs/enrichment.yaml` | Source priority, thresholds, quality targets |
 | `data/interim/extracted_documents/{season}/` | Fact text for normative rules |
 | `configs/normative_rules.yaml` | Rule iteration |
 | `configs/features.yaml` | Precedent key / feature toggles |
