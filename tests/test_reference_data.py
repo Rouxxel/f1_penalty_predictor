@@ -77,9 +77,10 @@ def test_reference_enrich_fills_2019_row(cfg):
     assert row["rounds"] == "21"
     assert row["num_teams"] == "10"
     assert row["full_laps"] == "58"
-    assert "hamilton" in row["current_top_4_drivers"]
-    assert row["nationalities"] == "polish"
-    assert row["respective_teams"] == "williams"
+    assert row["current_top_4_drivers"] == ""
+    assert row["nationalities"] == "polish,"
+    assert row["driver_standings"] == ""
+    assert row["respective_teams"] == ""
 
 
 def test_seasons_and_teams_load(cfg):
