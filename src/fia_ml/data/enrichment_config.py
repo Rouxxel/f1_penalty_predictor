@@ -18,6 +18,7 @@ class EnrichmentConfig:
     fastf1: dict[str, Any] = field(default_factory=dict)
     text_fields: dict[str, Any] = field(default_factory=dict)
     superlicense: dict[str, Any] = field(default_factory=dict)
+    quality_targets: dict[str, Any] = field(default_factory=dict)
 
     @classmethod
     def from_yaml(cls, config_path: Path | None = None) -> EnrichmentConfig:
@@ -32,6 +33,7 @@ class EnrichmentConfig:
             fastf1=dict(raw.get("fastf1", {})),
             text_fields=dict(raw.get("text_fields", {})),
             superlicense=dict(raw.get("superlicense", {})),
+            quality_targets=dict(raw.get("quality_targets", {})),
         )
 
     def resolve_path(self, rel: str) -> Path:
