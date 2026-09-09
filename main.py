@@ -30,8 +30,20 @@ Examples:
     python main.py --run --dataset-only
     python main.py --run --skip-v2 --skip-nlp   # dataset + v1 + normative only
 
-Phase order: dataset -> V1 tabular -> V2 tabular -> NLP -> normative.
-Normative requires V1 prepare (incidents.parquet), not NLP.
+Phase order:
+
+    dataset -> V1 tabular -> V2 tabular -> NLP -> normative
+
+Prerequisites (dataset assumed for all downstream phases):
+
+    - V1: ``dataset/csv/processed_{season}.csv`` per configured season
+    - V2: ``data/processed/incidents.parquet`` (V1 prepare)
+    - NLP: ``processed_{season}.csv``, interim JSON under
+      ``data/interim/extracted_documents/{season}/``; fusion also needs
+      ``ml_models/xgboost/predictions_val.json`` (V1) — use ``--no-fusion`` to skip
+    - normative: ``data/processed/incidents.parquet`` only (not NLP); uses V1
+      predictions when present, but they are optional
+
 Implementation: ``src/fia_ml/orchestration/run_all.py``.
 """
 
