@@ -57,6 +57,9 @@ class NlpTrainingConfig:
     def training_seed(self) -> int:
         return int(self.training.get("seed", 42))
 
+    def model_dir(self) -> Path:
+        return self.path("models")
+
     @classmethod
     def from_yaml(cls, config_path: Path | None = None) -> NlpTrainingConfig:
         path = config_path or DEFAULT_NLP_CONFIG
