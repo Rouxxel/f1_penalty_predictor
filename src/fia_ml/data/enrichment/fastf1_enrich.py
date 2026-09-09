@@ -122,8 +122,17 @@ def enrich_with_fastf1(
         except Exception:  # noqa: BLE001
             pass
 
-        incident_time = _parse_time_to_seconds(str(meta_row.get("time", "")))
-        if incident_time and session == "race" and (is_blank(row.get("lap")) or not fill_gaps_only):
+        incident_time = meta_row.get("session_offset_seconds")
+        if incident_time is None:
+            incident_time = _parse_time_to_seconds(str(meta_row.get("time", "")))
+        else:
+            try:
+                incident_time = float(incident_time)
+            except (TypeError, ValueError):
+                incident_time = _parse_time_to_seconds(str(meta_row.get("time", "")))
+        if incident_time is not None and incident_time >= 0 and session == "race" and (
+            is_blank(row.get("lap")) or not fill_gaps_only
+        ):
             try:
                 laps = event_obj.laps
                 for _, lap_row in laps.iterrows():

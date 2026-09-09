@@ -9,7 +9,7 @@ import pandas as pd
 
 from fia_ml.data.config import PipelineConfig
 from fia_ml.data.download import download_season
-from fia_ml.data.enrichment import enrich_with_ergast, enrich_with_fastf1, enrich_with_reference
+from fia_ml.data.enrichment import enrich_timestamps, enrich_with_ergast, enrich_with_fastf1, enrich_with_reference
 from fia_ml.data.incident_builder import build_from_interim, build_incidents
 from fia_ml.data.parsing import parse_all_documents
 from fia_ml.data.validation import validate_and_export
@@ -78,6 +78,8 @@ def run_pipeline(cfg: PipelineConfig, stage: Stage = Stage.ALL) -> dict:
     if stage in {Stage.ALL, Stage.ENRICH}:
         df = enrich_with_reference(df, cfg)
         df = enrich_with_ergast(df, cfg, fill_gaps_only=True)
+        df, timestamp_stats = enrich_timestamps(df, cfg)
+        results["timestamp_audit"] = timestamp_stats
         df = enrich_with_fastf1(df, cfg, fill_gaps_only=True)
         raw_path = cfg.path("csv_out") / f"raw_incidents_{cfg.season}.csv"
         df.to_csv(raw_path, index=False)
