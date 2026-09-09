@@ -31,7 +31,7 @@ The feature spec defines a **version ladder**. Versions below that are not yet i
 |---------|--------|----------------|
 | **V1** | Tabular ML (structured features + XGBoost) | Built |
 | **V2 (spec)** | NLP on FIA report text (BERT / DistilBERT) | **Built** (pipeline) — weights pending; see §2 |
-| **V3** | Embedding / similarity precedent retrieval (FAISS, sentence transformers) | **Not built** — simplified groupby precedent only (V2 features) |
+| **V3** | Embedding / similarity precedent retrieval | **Deferred** — groupby precedent only today (`precedent_*` in V2); see §5 |
 | **V4** | Telemetry (speed, braking, gaps, positions from FastF1) | **Not built** |
 | **V5** | Visual / CNN (onboard frames, replay stills) + multimodal fusion | **Not built** — `ml_models/cnn/` is empty |
 
@@ -131,25 +131,49 @@ From feature spec §33 Version 4 and `project_spec` Phase 6+.
 
 ---
 
-## 5. Precedent & similarity (spec “Version 3”)
+## 5. Precedent & similarity (spec “Version 3”) — deferred
 
 From feature spec §12 (embedding precedent) and `project_spec` §5.3.
 
-**Current approach:** Groupby precedent rates (`precedent_*` in V2 features) — implemented, limited by small corpus.
+**Decision (2026-09):** Embedding-based precedent retrieval is **not on the critical path**. Defer production implementation until the corpus and ablation evidence justify it. Research spec: [`v3.md`](../v3.md).
 
-**Future approach:**
+### What exists today
+
+Groupby precedent rates (`precedent_*` in `src/fia_ml/features/precedent.py`, V2 features) — implemented but **hurt validation** on the two-season corpus (ablation −0.075 macro-F1 vs history-only). DistilBERT on the same `fact_offence` text already reaches **0.642** macro-F1, so semantic retrieval may largely duplicate NLP (see `v3.md` H3).
+
+### Corpus reality
+
+| Estimate | Detail |
+|----------|--------|
+| **Today** | ~234 flattened driver-rows (2019 + 2025); ~90 train |
+| **After 2019–2025 backfill** | ~700–900 flattened rows (2020–2021 had fewer races — COVID) |
+| **~2000 incidents** | Unlikely before **~2028** at current F1 incident rates |
+
+The old “~2000 incidents” guideline from `project_spec` §6 remains a **hypothesis**, not a hard gate — but even optimistic backfill does not reach it soon.
+
+### Revisit gates
+
+| Stage | Gate | Action |
+|-------|------|--------|
+| **Research script** | ≥500 labeled flattened rows **and** thesis needs an H3 redundancy check | Optional standalone brute-force prototype (`v3.md` Steps 1–8); no FAISS/Chroma/orchestration |
+| **Feature integration** | Brute-force beats groupby precedent **and** adds signal on top of NLP on a temporal split | Add V3 feature group to tabular pipeline; keep groupby for ablation |
+| **Infrastructure** | ≥1000 rows **and** brute-force too slow or live “similar cases” API needed | Consider FAISS / ChromaDB |
+
+Until a gate is met, treat V3 as a **future explainability layer** (“what did FIA do in similar cases?”) alongside the normative engine — not a predictor priority.
+
+### Future architecture (when justified)
 
 ```text
-Incident text / features → Sentence Transformer → vector DB (FAISS / ChromaDB)
-                                                      → top-K similar historical cases
+Incident text (Fact + Offence) → embedding → strict historical filter → top-K
                                                       → precedent probability features
+                                                      → optional “similar cases” audit UI
 ```
 
 | Item | Notes |
 |------|-------|
-| **Threshold** | Spec suggests revisiting when **~2000+** incidents |
-| **Technologies** | Sentence Transformers, FAISS, ChromaDB |
-| **Deliverables** | Similarity search API, enriched precedent features, explainability UI |
+| **Start with** | NumPy brute-force cosine — not FAISS/Chroma (`v3.md` Phase 1) |
+| **Later** | FAISS / ChromaDB only if corpus size or API needs require it |
+| **Negative result** | Valid outcome — document redundancy with NLP and skip infrastructure |
 
 ---
 
@@ -197,7 +221,7 @@ From feature spec §27–§28, §34.
 | **Nationality bias ablation** | Train with/without nationality features; compare metrics |
 | **Fairness reporting** | By driver nationality, team, circuit — research interpretability |
 | **Deviation storytelling** | Season/circuit/session clusters in normative vs FIA reports |
-| **Precedent explainability** | “Similar historical cases” for stewards research UI |
+| **Precedent explainability** | “Similar historical cases” for stewards research UI — deferred with V3 (§5); normative deviation reports cover part of this today |
 
 ---
 
@@ -223,11 +247,11 @@ When choosing what to build next:
 
 1. **Data volume** — seasons 2020–2024, fix PDF session timestamps (lap/flag), multi-driver rows, re-run flatten + V2  
 2. **Normative iteration** — Fact text + rules for `other` / collisions (low engineering risk)  
-3. **NLP train on corpus** — run `run_nlp_training` on interim JSON; compare vs V1; optional fusion report  
-4. **Re-train tabular models** — with richer data; retry V2 features + opponent history  
-5. **Embedding precedent (V3)** — when incident count &gt; ~2000  
-6. **Telemetry (V4)** — after incident timestamp alignment works  
-7. **CNN / multimodal (V5)** — after video metadata pipeline exists  
+3. **NLP** — re-train when backfill lands; improve class 2 recall; fusion only if it beats NLP-only  
+4. **Re-train tabular models** — with richer data; retry V2 history features (not groupby precedent until corpus grows)  
+5. **Telemetry (V4)** — after incident timestamp alignment works  
+6. **CNN / multimodal (V5)** — after video metadata pipeline exists  
+7. **Embedding precedent (V3)** — **deferred** until revisit gates in §5 (~2027–2028 realistic for infrastructure; optional research script earlier)  
 
 ---
 
@@ -236,5 +260,6 @@ When choosing what to build next:
 | File | Role |
 |------|------|
 | [`current_gaps.md`](../current_gaps.md) | Open gaps on **existing** systems |
+| [`v3.md`](../v3.md) | V3 research spec and revisit gates (deferred) |
 | [`README.md`](../README.md) | What is built and where artifacts live |
 | [`DL_MODEL_TRANSFER_LEARNING.md`](../DL_MODEL_TRANSFER_LEARNING.md) | CNN / transfer-learning study guide (external projects) |

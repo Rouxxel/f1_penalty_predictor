@@ -1,6 +1,6 @@
 # Current Gaps Registry
 
-> **Last updated:** 2026-09-09  
+> **Last updated:** 2026-09-10  
 > **Purpose:** Open gaps on **existing** pipelines — missing data, unmet targets, modeling limitations.  
 > **Future capabilities** (CNN, telemetry, embedding precedent, multimodal): [`documentation/FUTURE_FEATURES.md`](documentation/FUTURE_FEATURES.md)  
 > **Schema:** [`documentation/f1_dataset_example.csv`](documentation/f1_dataset_example.csv)
@@ -11,6 +11,7 @@
 |---------|--------|
 | §1–§4 | **Dataset** — seasons, columns, enrichment blockers, row quality |
 | §5–§6 | **Current models** — limitations on today’s V1/V2/NLP (not “plans to implement”) |
+| §6b | **V3 embedding precedent** — explicitly deferred (not a current gap to fix) |
 | §7 | **Normative rules** — coverage and iteration (engine already runs) |
 
 Pipeline docs: [`README.md`](README.md) · enrichment detail: [`src/fia_ml/data/enrichment/README.md`](src/fia_ml/data/enrichment/README.md) · fill rates: [`reports/tables/data_quality_{season}.json`](reports/tables/data_quality_{season}.json) · quality gates: [`reports/tables/enrichment_report_{season}.json`](reports/tables/enrichment_report_{season}.json).
@@ -159,6 +160,21 @@ Reports: `reports/model_reports/nlp_training_report_2026-09-09.md`, `nlp_compari
 | **Hyperparameter tuning** | Not done |
 | **`races_since_last_*`** | Same-season only; `NaN` when prior event was previous season |
 
+### V3 embedding precedent — deferred (not a blocking gap)
+
+Embedding-based similarity retrieval (spec V3) is **intentionally not implemented**. Rationale:
+
+| Factor | Detail |
+|--------|--------|
+| **Corpus** | ~234 flattened rows today; ~700–900 after 2019–2025 backfill; ~2000 unlikely before ~2028 |
+| **Groupby precedent** | Already hurts macro-F1 (−0.075 ablation) on current data |
+| **NLP overlap** | DistilBERT on `fact_offence` at 0.642 macro-F1 may subsume semantic precedent signal |
+| **Priority** | Data backfill, enrichment, NLP, and normative rules have higher ROI |
+
+**Action now:** None required. **Optional:** standalone brute-force research script per [`v3.md`](v3.md) if thesis needs an H3 redundancy experiment.
+
+**Revisit when:** gates in [`documentation/FUTURE_FEATURES.md`](documentation/FUTURE_FEATURES.md) §5 (≥500 rows for research script; ≥1000 + positive ablation for infrastructure).
+
 ---
 
 ## 7. Normative rules
@@ -196,6 +212,7 @@ Reports: `reports/model_reports/nlp_training_report_2026-09-09.md`, `nlp_compari
 - [ ] Opponent history (Group F)
 - [ ] Improve V2 or accept V1 as primary model until more data
 - [x] **NLP** — train/evaluate on interim JSON; beats V1 on macro-F1; fusion report (concat_logits does not beat NLP-only)
+- [x] **V3 embedding precedent** — deferred; see §6b and `v3.md` (not blocking)
 
 ### Normative
 - [ ] Reduce `manual_review` rate
@@ -217,5 +234,6 @@ Reports: `reports/model_reports/nlp_training_report_2026-09-09.md`, `nlp_compari
 | `configs/bert.yaml` | NLP text profile, training, fusion settings |
 | `ml_models/nlp/nlp_dataset_audit.json` | Incident → interim document join coverage |
 | `configs/normative_rules.yaml` | Rule iteration |
-| `configs/features.yaml` | Precedent key / feature toggles |
+| `configs/features.yaml` | Precedent key / feature toggles (groupby only; V3 deferred) |
+| `v3.md` | Embedding precedent research spec and revisit gates |
 | `ml_models/preprocessor_xgboost_v2.meta.json` | Encode-time column drops |
