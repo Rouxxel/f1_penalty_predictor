@@ -107,7 +107,11 @@ def test_enrich_timestamps_returns_audit(mock_save):
             }
         }
         with patch("fia_ml.data.enrichment.timestamp.sio.read_json", return_value=[mock_load.return_value["inc_1"]]):
-            _, audit = enrich_timestamps(df, cfg)
+            with patch(
+                "fia_ml.data.enrichment.timestamp.load_weekend_schedule",
+                return_value={"date": "2019-12-01", "time": "17:10:00Z"},
+            ):
+                _, audit = enrich_timestamps(df, cfg)
     assert audit["rows"] == 1
     assert audit["parsed_rate"] == 1.0
     assert audit["offset_rate"] == 1.0
