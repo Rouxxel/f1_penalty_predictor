@@ -3,19 +3,19 @@
 ## Summary
 
 - Fusion method: `concat_logits`
-- Merged validation rows: 3
-- NLP validation rows: 3
-- Tabular validation rows: 3
+- Merged validation rows: 144
+- NLP validation rows: 154
+- Tabular validation rows: 144
 - Best single modality: **nlp_only**
-- Fusion beats best single modality: **YES**
+- Fusion beats best single modality: **NO**
 
 ## Validation macro-F1 (merged rows)
 
 | Model | Macro-F1 | Accuracy |
 |-------|----------|----------|
-| NLP text-only | 1.000 | 1.000 |
-| V1 tabular-only | 1.000 | 1.000 |
-| Fused (concat_logits) | 1.000 | 1.000 |
+| NLP text-only | 0.648 | 0.833 |
+| V1 tabular-only | 0.402 | 0.528 |
+| Fused (concat_logits) | 0.632 | 0.806 |
 
 ## Notes
 
