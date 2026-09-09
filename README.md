@@ -166,6 +166,8 @@ flowchart TD
 
 Use `--dry-run` to see which prerequisites are missing before a long run.
 
+**Re-running phases:** If outputs for a phase already exist, you are prompted `Run it again? [Y/N]` before it executes (default **N**). Use `--force` to skip prompts when retraining after backfilling new seasons (e.g. 2020–2024).
+
 ---
 
 ## Documentation

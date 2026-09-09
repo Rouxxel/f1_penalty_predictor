@@ -3,6 +3,8 @@
 
 Bare ``python main.py`` prints help and exits without running anything.
 Pass ``--run`` to execute, or ``--dry-run`` to preview the plan only.
+If a phase already completed, you are prompted ``Run it again? [Y/N]``.
+Use ``--force`` to skip prompts (e.g. after backfilling 2020-2024 data).
 
 Examples:
 
@@ -14,6 +16,9 @@ Examples:
 
     # Recommended when PDFs already exist under data/raw/fia/
     python main.py --run --skip-download
+
+    # Re-train everything after new seasons (no prompts)
+    python main.py --run --skip-download --force
 
     # Single phase (prerequisites checked before run)
     python main.py --run --only v1
