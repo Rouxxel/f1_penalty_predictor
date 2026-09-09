@@ -9,6 +9,7 @@ import pandas as pd
 
 from fia_ml.data.config import PipelineConfig
 from fia_ml.data.enrichment.common import load_meta
+from fia_ml.data.enrichment.quality_gates import merge_enrichment_into_quality, write_enrichment_reports
 from fia_ml.data.schema import MULTI_VALUE_COLUMNS, SCHEMA_COLUMNS
 from fia_ml.paths import ensure_dir
 from fia_ml.utils import secure_file_io as sio
@@ -122,7 +123,13 @@ def column_fill_rates(df: pd.DataFrame) -> dict[str, float]:
     return rates
 
 
-def validate_and_export(df: pd.DataFrame, cfg: PipelineConfig) -> tuple[Path, Path, dict[str, Any]]:
+def validate_and_export(
+    df: pd.DataFrame,
+    cfg: PipelineConfig,
+    *,
+    timestamp_stats: dict[str, Any] | None = None,
+    provenance_summary: dict[str, Any] | None = None,
+) -> tuple[Path, Path, dict[str, Any]]:
     df = compute_derived_fields(df)
     errors = validate_schema(df)
     errors.extend(validate_rows(df))
@@ -149,6 +156,13 @@ def validate_and_export(df: pd.DataFrame, cfg: PipelineConfig) -> tuple[Path, Pa
         "validation_errors": errors,
         "column_fill_rates": column_fill_rates(processed),
     }
+    enrichment_report = write_enrichment_reports(
+        processed,
+        cfg,
+        timestamp_stats=timestamp_stats,
+        provenance_summary=provenance_summary,
+    )
+    quality = merge_enrichment_into_quality(quality, enrichment_report)
     report_dir = ensure_dir(cfg.path("reports"))
     sio.write_json(report_dir / f"data_quality_{cfg.season}.json", quality)
     return processed_path, review_path, quality

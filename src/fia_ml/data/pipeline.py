@@ -106,7 +106,12 @@ def run_pipeline(cfg: PipelineConfig, stage: Stage = Stage.ALL) -> dict:
         if df is None:
             raw_path = cfg.path("csv_out") / f"raw_incidents_{cfg.season}.csv"
             df = pd.read_csv(raw_path)
-        processed_path, review_path, quality = validate_and_export(df, cfg)
+        processed_path, review_path, quality = validate_and_export(
+            df,
+            cfg,
+            timestamp_stats=results.get("timestamp_audit"),
+            provenance_summary=results.get("provenance"),
+        )
         results["processed_csv"] = str(processed_path)
         results["review_csv"] = str(review_path)
         results["quality"] = quality
