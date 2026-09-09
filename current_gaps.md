@@ -1,629 +1,209 @@
 # Current Gaps Registry
 
-> **Last updated:** 2026-08-25 (normative comparison & reporting)  
-> **Purpose:** Single registry of missing data, incomplete columns, unmet plan success criteria, and deferred work across the project.  
-> **Authoritative schema:** [`documentation/f1_dataset_example.csv`](documentation/f1_dataset_example.csv)
+> **Last updated:** 2026-09-09  
+> **Purpose:** Open gaps on **existing** pipelines — missing data, unmet targets, modeling limitations.  
+> **Future capabilities** (CNN, NLP, telemetry, multimodal): [`documentation/FUTURE_FEATURES.md`](documentation/FUTURE_FEATURES.md)  
+> **Schema:** [`documentation/f1_dataset_example.csv`](documentation/f1_dataset_example.csv)
 
-### Source documents
+### What this file covers
 
-| Document | Scope |
-|----------|--------|
-| [`DATASET_GENERATION_PLAN.md`](DATASET_GENERATION_PLAN.md) | FIA PDF → `processed_{season}.csv` |
-| [`MODEL_TRAINING_PLAN.md`](MODEL_TRAINING_PLAN.md) | Flatten, encode, V1 XGBoost |
-| [`FEATURE_ENGINEERING_PLAN.md`](FEATURE_ENGINEERING_PLAN.md) | V2 features, ablation, `xgboost_v2` |
-| [`NORMATIVE_RULES_PLAN.md`](NORMATIVE_RULES_PLAN.md) | Rule engine (not started) |
-| [`dataset/scripts/README.md`](dataset/scripts/README.md) | CLI + live season status |
-| [`src/fia_ml/data/README.md`](src/fia_ml/data/README.md) | Pipeline modules |
-| [`src/fia_ml/data/enrichment/README.md`](src/fia_ml/data/enrichment/README.md) | Enrichment detail |
-| [`reports/tables/data_quality_{season}.json`](reports/tables/) | Column fill rates |
-| [`ml_models/preprocessor_xgboost_v2.meta.json`](ml_models/preprocessor_xgboost_v2.meta.json) | Encode-time column drops |
+| Section | Topic |
+|---------|--------|
+| §1–§4 | **Dataset** — seasons, columns, enrichment, row quality |
+| §5–§6 | **Current models** — limitations on today’s V1/V2 (not “plans to implement”) |
+| §7 | **Normative rules** — coverage and iteration (engine already runs) |
+
+Plans with active gap work: [`DATASET_GENERATION_PLAN.md`](DATASET_GENERATION_PLAN.md) (§1–§4), [`NORMATIVE_RULES_PLAN.md`](NORMATIVE_RULES_PLAN.md) (§7).  
+Built tabular pipelines: [`README.md`](README.md) · fill rates: [`reports/tables/data_quality_{season}.json`](reports/tables/).
 
 ---
 
-## 1. Season & row coverage
+## 1. Seasons & rows
 
-### Missing seasons (dataset generation)
+### Missing seasons
 
-| Season | `processed_{season}.csv` | Rows | Status |
-|--------|--------------------------|------|--------|
-| **2019** | Yes | 203 | Ready |
-| **2020** | No | — | **Missing** — FIA download blocked (403 / WAF) |
-| **2021** | No | — | **Missing** — FIA download blocked |
-| **2022** | No | — | **Missing** — FIA download blocked |
-| **2023** | No | — | **Missing** — FIA download blocked |
-| **2024** | No | — | **Missing** — FIA download blocked |
-| **2025** | Yes | 343 | Ready |
+| Season | Status |
+|--------|--------|
+| **2020** | No `processed_2020.csv` — FIA download blocked (403 / WAF) |
+| **2021** | No `processed_2021.csv` — FIA download blocked |
+| **2022** | No `processed_2022.csv` — FIA download blocked |
+| **2023** | No `processed_2023.csv` — FIA download blocked |
+| **2024** | No `processed_2024.csv` — FIA download blocked |
 
-**Available:** 546 raw incident rows (2019 + 2025).
+**Backfill:** `python dataset/scripts/run_pipeline.py --stage all --season 2020` or manual PDFs under `data/raw/fia/{season}/`. See [`dataset/scripts/README.md`](dataset/scripts/README.md).
 
-### Row loss between raw CSV and model training
-
-| Stage | Count | Gap |
-|-------|-------|-----|
-| Raw incidents (2019 + 2025) | 546 | — |
-| After flatten + mapped penalty | 234 driver-rows | Summons-only / unmapped penalties excluded; ~19–21 misaligned multi-driver incidents **skipped** per season |
-| Train split (2019) | 90 | Small single-season train set |
-| Validation split (2025) | 144 | No held-out test season |
-
-**Backfill:** `python dataset/scripts/run_pipeline.py --stage all --season 2020` or manual PDFs under `data/raw/fia/{season}/`. See [`dataset/scripts/README.md`](dataset/scripts/README.md) for Playwright/WAF troubleshooting.
-
----
-
-## 2. Raw schema columns — fill status
-
-Fill rates from `data_quality_2019.json` and `data_quality_2025.json`.
-
-| Symbol | Meaning |
-|--------|---------|
-| ✅ | ≥ 90% fill on both seasons |
-| ⚠️ | Partial / degraded on at least one season |
-| ❌ | 0% or not implemented |
-| 🏷️ | Label / leakage — excluded from model **X** |
-| ✋ | Manual review required |
-
-### Race progression
-
-| Column | 2019 | 2025 | Status | Planned fix (`DATASET_GENERATION_PLAN` §4b) |
-|--------|------|------|--------|---------------------------------------------|
-| `lap` | 0% | 0% | ❌ | PDF `time` → FastF1 session timeline |
-| `lap_remaining` | 0% | 0% | ❌ | `validation.py` once `lap` works |
-| `completion_percentage` | 0% | 0% | ❌ | Same |
-| `full_laps` | 88% | 69% | ⚠️ | `circuits.json` + FastF1; gaps on non-race sessions |
-
-**Plan target:** FastF1 lap/time for **> 50%** of race incidents — **not met (0%)**.  
-**Downstream:** V2 `race_stage` empty until `completion_percentage` is filled.
-
-### Environmental / race control
-
-| Column | 2019 | 2025 | Status | Planned fix |
-|--------|------|------|--------|-------------|
-| `flag` | 0% | 0% | ❌ | FastF1 race control messages |
-| `safety_car` | 82% | 62% | ⚠️ | FastF1 race control |
-| `track_conditions` | 82% | 62% | ⚠️ | FastF1 session weather |
-| `weather_conditions` | 82% | 62% | ⚠️ | FastF1 session weather |
-| `sector` | 48% | 3% | ❌ | Turn→sector in `circuits.json`; very sparse in 2025 |
-
-**Plan target:** weather + SC/VSC for **> 70%** of race-session incidents — **2019 met, 2025 below (62%)**.
-
-### Incident classification
-
-| Column | 2019 | 2025 | Status | Notes |
-|--------|------|------|--------|-------|
-| `incident_type` | 100% | 100% | ✅ | PDF keyword classifier |
-| `severity` | 0% | 0% | ✋ ❌ | Manual via `review_queue_{season}.csv` |
-| `positions_of_involved parties` | 0% | 0% | ❌ | FastF1 positions at incident time |
-| `incident_classification` | 100% | 100% | 🏷️ | Leakage risk — blocked from **X** |
-
-### Drivers & teams (multi-value `**` columns)
-
-| Column | 2019 | 2025 | Status | Notes |
-|--------|------|------|--------|-------|
-| `drivers` | 99% | 82% | ⚠️ | Ergast car-number fallback when PDF lacks driver |
-| `nationalities` | 99% | 75% | ⚠️ | `drivers.json` + Ergast |
-| `respective_teams` | 100% | 98% | ✅ | |
-| `driver_standings` | 99% | 75% | ⚠️ | See **standings timing** below; multi-driver misalignment |
-| `driver_points` | 99% | 75% | ⚠️ | Same |
-| `construct_standings` | 55% | 68% | ⚠️ | Ergast constructor standings; incomplete |
-| `construct_points` | 55% | 68% | ⚠️ | Same |
-| `years_in_sport` | 99% | 75% | ⚠️ | `drivers.json` debut year |
-| `superlicense_points_before_incident` | 0% | 0% | ❌ | Planned: rolling sum in Ergast/dataset (`DATASET_GENERATION_PLAN` §4a) |
-| `current_top_4_drivers` | 100% | 100% | ✅ | Blocked from **X** (raw string); was `top_4_driver` booleans — **removed** as redundant |
-
-### Labels (never model features)
-
-| Column | 2019 | 2025 | Status | Notes |
-|--------|------|------|--------|-------|
-| `penalty` | 91% | 92% | 🏷️ | Plan target **> 95%** for Decision/Offence — **slightly below** |
-| `penalty_severity` | derived | derived | 🏷️ | 3-class target |
-| `driver_at_fault` | 5% | 4% | 🏷️ | Weak PDF heuristics |
-| `superlicense_points_added` | 15% | 11% | 🏷️ | Outcome field |
-| `mentioned_article` | 90% | 92% | 🏷️ | |
-| `investigation` | 100% | 100% | 🏷️ | |
-
-### Context columns (generally well filled)
-
-| Column | 2019 | 2025 | Status |
-|--------|------|------|--------|
-| `circuit`, `country`, `round`, `season`, `rounds`, `num_teams` | 100% | 100% | ✅ |
-| `first_season` | 100% | 90% | ⚠️ |
-| `session` | 90% | 91% | ✅ |
-| `num_drivers` | 100% | 100% | ✅ |
-
----
-
-## 3. Dataset pipeline gaps (`DATASET_GENERATION_PLAN.md`)
-
-### Enrichment architecture gap (reference vs Ergast)
+### Row coverage limits
 
 | Issue | Detail |
 |-------|--------|
-| **Standings timing** | `reference_enrich.py` fills from `seasons.json` **season-end totals** first. Ergast fallback *can* use round N−1 (`ergast.py` `standings_round = round - 1`) but only for **empty** cells (`fill_gaps_only=True`). Most rows keep season totals. |
-| **Point-in-time test** | Plan requires automated test: “British GP round N must not include British GP results” — **not implemented** (`test_enrichment_ergast.py` missing). |
-| **Ergast `superlicense_points_before_incident`** | Specified in plan §4a — **not implemented** in any enricher. |
-| **Enrichment order** | Reference → Ergast → FastF1 is implemented; reference data dominates standings. |
-
-### Parsing & incident-building gaps
-
-| Issue | Status | Notes |
-|-------|--------|-------|
-| `parse_confidence` in review queue | ⚠️ Partial | Flagged when `< 0.7` in `validation.py`; 20 + 37 review rows |
-| PDF `raw_text` NLP sidecar | ❌ | Stored in interim JSON; no NLP pipeline (`project_spec` §5.4) |
-| Season-specific PDF templates | ⚠️ Unknown | Plan mentions parser templates by era — single parser today |
-| Multi-car dedup ambiguity | ⚠️ | Conservative linking; ambiguous cases → review queue |
-| `driver_at_fault` extraction | ❌ | 4–5% fill; Reason/Fact heuristics weak |
-| Correction doc superseding | ✅ | Implemented in `incident_builder.py` |
-| FIA HTML / WAF changes | ⚠️ Ongoing | 403 blocks 2020–2024; selectors may break |
-
-### Missing tests (planned in `DATASET_GENERATION_PLAN.md`)
-
-| Planned test file | Status |
-|-------------------|--------|
-| `test_enrichment_ergast.py` | ❌ Not created |
-| `test_enrichment_fastf1.py` | ❌ Not created |
-| Point-in-time standings test | ❌ Not created |
-| `test_download.py` | ✅ Exists |
-| `test_parsing.py` | ✅ Exists |
-| `test_incident_builder.py` | ✅ Exists |
-| `test_validation.py` | ✅ Exists |
-
-### Dataset plan success criteria vs actual
-
-| Criterion | Target | Actual | Met? |
-|-----------|--------|--------|------|
-| Incident rows per season | 150+ | 203 / 343 | ✅ |
-| Label columns filled (Decision/Offence) | > 95% | ~91–92% `penalty` | ⚠️ |
-| Ergast point-in-time standings | Verified by test | Season totals dominate | ❌ |
-| FastF1 weather/SC (race) | > 70% | 82% / 62% | ⚠️ |
-| FastF1 lap/time | > 50% | 0% | ❌ |
-| Seasons 2020–2024 | Pipeline ready | No CSVs | ❌ |
-| Idempotent re-runs | Identical output | Implemented | ✅ |
+| Train / val only | 90 train (2019) / 144 val (2025) — no held-out **test** season |
+| Flatten loss | 546 raw incidents → 234 driver-rows; summons-only, unmapped penalties, ~40 misaligned multi-driver incidents skipped |
+| Distribution shift | 2019 train → 2025 val spans 6 years |
 
 ---
 
-## 4. Data quality issues (non-column)
+## 2. Columns below target
 
-| Issue | 2019 | 2025 | Impact |
-|-------|------|------|--------|
-| Multi-driver column misalignment | ~19 incidents | ~21 incidents | Flatten **skips** row; loses training data |
-| Review queue rows | 20 | 37 | Manual backlog (`severity`, `lap`, low confidence) |
-| Summons-only / unmapped penalty | some | some | Excluded from training pool |
-| Two-season temporal gap | — | — | Train 2019 → val 2025 is a 6-year distribution shift |
-| Class imbalance (major penalties) | — | — | Class 2: ~14 val support; recall ~21% (V1 report) |
+Fill rates from `data_quality_2019.json` and `data_quality_2025.json`. Only columns that are missing, sparse, or below plan targets.
 
-### Suggested enrichment fix order
+### Race progression
 
-1. Multi-driver column alignment (per-driver Ergast lookup)
-2. `lap` / time alignment → unlocks `lap_remaining`, `completion_percentage`, `race_stage`
-3. Point-in-time standings (prefer Ergast round N−1 over `seasons.json` totals)
-4. `positions_of_involved parties` + `flag`
-5. `superlicense_points_before_incident` (dataset-internal rolling)
-6. `severity` (manual review)
+| Column | 2019 | 2025 | Planned fix |
+|--------|------|------|-------------|
+| `lap` | 0% | 0% | PDF `time` → FastF1 session timeline |
+| `lap_remaining` | 0% | 0% | `validation.py` once `lap` works |
+| `completion_percentage` | 0% | 0% | Same — blocks V2 `race_stage` |
+| `full_laps` | 88% | 69% | `circuits.json` + FastF1 |
 
----
+**Target not met:** FastF1 lap/time for > 50% of race incidents (actual: 0%).
 
-## 5. Model training gaps (`MODEL_TRAINING_PLAN.md`)
+### Environmental / race control
 
-### Pipeline status
+| Column | 2019 | 2025 | Planned fix |
+|--------|------|------|-------------|
+| `flag` | 0% | 0% | FastF1 race control messages |
+| `safety_car` | 82% | 62% | FastF1 race control |
+| `track_conditions` | 82% | 62% | FastF1 session weather |
+| `weather_conditions` | 82% | 62% | FastF1 session weather |
+| `sector` | 48% | 3% | Turn→sector in `circuits.json` |
 
-| Component | Status |
-|-----------|--------|
-| Prepare / flatten / encode / split | ✅ |
-| Baselines (majority + session-stratified) | ✅ |
-| XGBoost V1 + early stopping | ✅ |
-| Evaluation + training report | ✅ |
-| Held-out **test** season | ❌ `test_season: null` |
-| LightGBM drop-in (`tabular_classifier.py`) | ❌ Not built |
-| `test_training_smoke.py` | ❌ Not created (covered partially by `test_training_scaffold.py`, `test_xgboost.py`) |
-| Leave-one-season-out CV (small-data mode) | ❌ Not implemented |
+**Target not met:** weather + SC/VSC for > 70% of race-session incidents on 2025 (62%).
 
-### V1 success criteria vs actual
+### Incident & driver fields
 
-| Criterion | Status | Notes |
-|-----------|--------|-------|
-| End-to-end `processed_*.csv` → `ml_models/xgboost/` | ✅ | |
-| Flattened parquet, no multi-value cells | ✅ | 234 rows in `incidents.parquet` |
-| Leakage audit passes | ✅ | Automated in evaluate + tests |
-| Temporal split verified | ✅ | 2019 train / 2025 val |
-| Macro-F1 > 0.40 | ✅ | **0.402** (after redundant-feature cleanup) |
-| Macro-F1 > baseline + **0.10** | ⚠️ | +0.135 vs majority ✅; +0.043 vs session baseline ❌ |
-| Training report + figures | ✅ | `reports/model_reports/v1_training_report_*.md` |
-| Reproducible metrics (seed=42) | ✅ | |
-
-### Modeling & encoding gaps
-
-| Gap | Notes |
-|-----|-------|
-| **Ordinal encoding** for categoricals | `session`, `circuit`, etc. use `OrdinalEncoder` — not ideal for nominal categories; no native XGBoost categorical |
-| **High missingness drop** | Columns with > 30% missing excluded (`positions_of_involved parties`, etc.) |
-| **Small train set** | 90 rows — overfitting risk; shallow trees mitigate but limits performance |
-| **Removed redundant V1 features** | `is_race_session`, `is_qualifying`, `top_4_driver`, `top_4_opponent` removed intentionally (schema-aligned); plan text still lists them |
-| **Class 2 (major) weak** | Precision ~0.17, recall ~0.21 on validation (V1 report) |
-
-### V2 preprocessor encode drops (2019 train slice)
-
-64 columns in `feature_columns` → **49** in `output_columns` (`preprocessor_xgboost_v2.meta.json`) after fixing `encoding.py` to include V2 feature sets (was 26 before fix).
-
-| Status | Columns |
-|--------|---------|
-| ✅ Now encoded (V2) | `precedent_*`, `career_*`, `incidents_last_*`, `penalties_last_*`, `races_since_*`, `round_progress`, `points_gap_to_leader`, `points_available_remaining`, `title_contender`, `construct_title_contender`, `is_first_round`, `is_last_round`, `race_stage` |
-| ❌ Still dropped (no train observations) | `flag`, `severity`, `lap`, `lap_remaining`, `completion_percentage`, `opponent_*`, `standing_difference`, `points_difference`, `points_gap_to_opponent`, `superlicense_points_before_incident` |
-
-**Fixed in Phase D:** `encoding.py` previously only mapped V1 categorical/numeric/boolean sets, silently dropping all V2 engineered columns at fit time.
+| Column | 2019 | 2025 | Notes |
+|--------|------|------|-------|
+| `severity` | 0% | 0% | Manual via `review_queue_{season}.csv` |
+| `positions_of_involved parties` | 0% | 0% | FastF1 positions at incident time |
+| `drivers` | 99% | 82% | Ergast fallback when PDF lacks driver |
+| `nationalities` | 99% | 75% | Multi-driver misalignment |
+| `driver_standings` | 99% | 75% | Season totals, not round N−1 |
+| `driver_points` | 99% | 75% | Same |
+| `construct_standings` | 55% | 68% | Incomplete |
+| `construct_points` | 55% | 68% | Incomplete |
+| `years_in_sport` | 99% | 75% | Multi-driver misalignment |
+| `superlicense_points_before_incident` | 0% | 0% | Not implemented in enricher |
+| `driver_at_fault` | 5% | 4% | Weak PDF heuristics |
+| `penalty` | 91% | 92% | Target > 95% |
+| `first_season` | 100% | 90% | Degraded on 2025 |
 
 ---
 
-## 6. Feature engineering gaps (`FEATURE_ENGINEERING_PLAN.md`)
+## 3. Dataset pipeline
 
-### Implementation phases
-
-| Phase | Status | Deliverable |
-|-------|--------|-------------|
-| A — Scaffolding | ✅ | `configs/features.yaml`, `xgboost_v2.yaml`, CLI stages |
-| B — Race + championship | ✅ | `race.py`, `driver.py` |
-| C — History | ✅ | `history.py` + `test_history_rolling.py` |
-| D — Precedent | ✅ | `precedent.py` + `test_precedent_temporal.py` |
-| E — Selection + ablation | ✅ | `selection.py`, `ablation.py`, `reports/ablation_results.json` |
-| F — Re-train + report | ✅ | `ml_models/xgboost_v2/`, `v2_feature_engineering_report_*.md` |
-
-### V2 feature groups — implementation vs usability
-
-| Group | Code | Usability blocker |
-|-------|------|-------------------|
-| A — `race_stage`, `round_progress`, … | ✅ | `race_stage` needs `completion_percentage` (0% fill) |
-| B — `points_gap_to_leader`, `title_contender`, … | ✅ | Leader/gap uses standings that are season totals, not round N−1 |
-| C — career + rolling history | ✅ | Works from labels; limited by 2 seasons + small train |
-| D — `precedent_*` | ✅ | Active key `(incident_type, session)` — see §6.1 |
-| F — opponent history (optional) | ❌ | Deferred to V2.1 ablation |
-
-### 6.1 Phase D — precedent implementation notes
-
-**Implemented:** `src/fia_ml/features/precedent.py` with temporal strict-prior filtering (same rule as history: same-season round `<` only).
-
-| Feature | Definition |
-|---------|------------|
-| `precedent_count` | Prior incidents matching active similarity key |
-| `precedent_no_penalty_rate` | Share with `penalty_severity == 0` among priors |
-| `precedent_minor_penalty_rate` | Share with `penalty_severity == 1` |
-| `precedent_major_penalty_rate` | Share with `penalty_severity == 2` |
-
-**Active similarity key:** `(incident_type, session)` via `active_similarity_key` in `configs/features.yaml`.  
-**Reason:** `severity` is 0% filled — the planned `(incident_type, severity, session)` key is configured but **dormant** until manual labeling.
-
-**Fallback:** When `precedent_count < min_precedent_count` (3), rates impute to the **global** temporally-prior distribution (all incident types/sessions).
-
-**Coverage on 234 driver-rows (post-flatten):**
-
-| Metric | Value |
-|--------|-------|
-| `precedent_count == 0` | 43 rows (18%) |
-| `precedent_count < 3` (uses global prior for rates) | 75 rows (32%) |
-| `precedent_count >= 3` (group-specific rates) | 159 rows (68%) |
-| NaN rate columns | 3 rows (first incidents with no global prior) |
-
-**Remaining precedent gaps:**
-
-| Gap | Impact |
+| Gap | Detail |
 |-----|--------|
-| `severity` unlabeled | Cannot activate `(incident_type, severity, session)` key — coarser groups |
-| Two-season corpus (2019 + 2025 only) | 2025 rows cannot see 2020–2024 precedents; 6-year distribution shift |
-| Sparse `incident_type` × `session` cells | 32% of rows fall back to global prior |
-| `circuit` in precedent key | Ablation-only; not active (risk of overfitting) |
-| Cross-season precedent | 2019 incidents **do** count as priors for 2025 (strict temporal order) |
+| **Standings timing** | `reference_enrich.py` uses season-end totals; Ergast round N−1 only fills empty cells |
+| **`superlicense_points_before_incident`** | Specified in plan — not implemented |
+| **`test_enrichment_ergast.py`** | Not created |
+| **`test_enrichment_fastf1.py`** | Not created |
+| **Point-in-time standings test** | Not created |
+| **PDF `raw_text` NLP** | Interim JSON exists; no NLP pipeline |
+| **Review queue** | 20 (2019) + 37 (2025) rows — low confidence, missing `severity`/`lap` |
+| **FIA WAF** | Blocks automated download for 2020–2024 |
+| **Multi-car dedup** | Ambiguous cases → review queue |
 
-### Critical blocker for severity-based precedent (deferred)
+### Suggested fix order
 
-Precedent similarity key `(incident_type, severity, session)` per original plan requires **`severity` manual labeling** (0% fill). Switch `active_similarity_key` in `configs/features.yaml` once `severity` is populated.
-
-| Precedent column | Status |
-|------------------|--------|
-| `precedent_count` | ✅ |
-| `precedent_no_penalty_rate` | ✅ |
-| `precedent_minor_penalty_rate` | ✅ |
-| `precedent_major_penalty_rate` | ✅ |
-
-### 6.2 Phase E — selection & ablation results
-
-**Implemented:** `src/fia_ml/features/selection.py` (missing-rate + correlation + importance prune), `src/fia_ml/training/ablation.py` (experiments A–E), integrated into `build_features_v2.py`.
-
-**Selection steps (on 2019 train):**
-1. Drop columns with >40% missing
-2. Correlation prune (|r| > 0.95) — drop lower mutual-information column
-3. Preliminary XGBoost → drop bottom 20% encoded features by gain
-
-**Ablation macro-F1 (validation 2025):**
-
-| Exp | Features | macro-F1 | Δ vs prev |
-|-----|----------|----------|-----------|
-| A | V1 baseline | **0.430** | — |
-| B | + race/championship | 0.388 | −0.042 |
-| C | + history | 0.423 | **+0.035** |
-| D | + precedent | 0.349 | −0.075 |
-| E | + selection prune | 0.371 | +0.022 |
-
-**Key findings:**
-- **History group (C)** is the only step meeting the +0.03 macro-F1 ablation target (+0.035 over B).
-- **Precedent (D)** hurts validation (−0.075) — likely sparse groups + two-season corpus + 6-year shift.
-- **Selection (E)** recovers some loss vs D (+0.022) but **full V2 still below V1** (0.371 vs 0.430).
-- V1 ablation baseline (0.430) exceeds prior V1 trained report (0.402) — ablation retrains in-memory with current encode pipeline; small differences expected.
-
-**Artifacts:**
-- `reports/ablation_results.json`
-- `reports/selection_report_v2.json`
-- `train_v2.parquet` now has **21** post-selection encoded features (down from 49 pre-prune)
-
-**Remaining Phase E gaps:**
-
-| Gap | Notes |
-|-----|-------|
-| V2 does not beat V1 | Valid negative result — document in Phase F report |
-| Correlation prune on small train (90 rows) | Aggressive drops (e.g. `round`, `season`, `driver_standing`) — may over-prune |
-| `race_stage` dropped at missing step | 0% `completion_percentage` fill |
-
-### 6.3 Phase F — final V2 model & report
-
-**Trained:** `ml_models/xgboost_v2/model.json` on pruned `train_v2.parquet` (25 encoded features).
-
-| Model | Validation macro-F1 | Best iteration |
-|-------|---------------------|----------------|
-| V1 XGBoost (saved) | **0.402** | 30 |
-| V2 XGBoost (final) | 0.381 | 18 |
-
-**V2 does not beat V1** (−0.021). Documented as valid negative result — small train set (90 rows), two-season gap (2019→2025), precedent group hurt ablation, aggressive selection on sparse columns.
-
-**Artifacts:**
-- `reports/model_reports/v2_feature_engineering_report_2026-08-25.md`
-- `reports/figures/v1_vs_v2_macro_f1.png`
-- `reports/figures/feature_importance_v2_top25.png`
-- `reports/figures/confusion_matrix_v2_val.png`
-- `ml_models/xgboost_v2/feature_importance.json`
-
-**FE plan success criteria (final):**
-
-| Criterion | Result |
-|-----------|--------|
-| `features_v2.parquet` with Groups A–E | ✅ |
-| Temporal leakage tests | ✅ |
-| Ablation A–E | ✅ |
-| V2 macro-F1 ≥ V1 | ❌ 0.381 vs 0.402 |
-| Engineered group +0.03 step | ✅ History (C) +0.035 |
-| Engineered in top-15 importance | ✅ (precedent/history features present) |
-| `v2_feature_engineering_report_{date}.md` | ✅ |
-
-| Planned | Status |
-|---------|--------|
-| `test_history_rolling.py` | ✅ |
-| `test_precedent_temporal.py` | ✅ (6 tests) |
-| `test_selection.py` | ✅ (3 tests) |
-| Extended leakage audit (precedent/history) in `leakage_filter.py` | ⚠️ Partial — precedent columns registered in `V2_NUMERIC_FEATURES`; no dedicated audit helper |
-| Ablation experiments A–E | ✅ |
-| `ablation_results.json` | ✅ `reports/ablation_results.json` |
-| `reports/figures/v1_vs_v2_macro_f1.png` | ✅ |
-| `reports/figures/feature_importance_v2_top25.png` | ✅ |
-| `v2_feature_engineering_report_{date}.md` | ✅ |
-
-### FE success criteria vs actual
-
-| Criterion | Status |
-|-----------|--------|
-| `features_v2.parquet` with Groups A–E columns | ✅ A–D engineered; E selection applied at build |
-| Temporal leakage tests (history + precedent) | ✅ |
-| Ablation A–E in `ablation_results.json` | ✅ |
-| V2 macro-F1 ≥ V1 | ❌ 0.381 vs 0.402 (documented) |
-| Engineered group +0.03 macro-F1 step | ✅ History (C) +0.035 |
-| Engineered features in top-15 importance | ✅ |
-
-### Known V2 design limitations
-
-| Limitation | Notes |
-|------------|-------|
-| `races_since_last_penalty` / `races_since_last_incident` | Same-season only; `NaN` when last event was prior season |
-| `is_final_laps` | Intentionally **not** implemented (redundant with `race_stage.final_laps`) |
-| `selection.py` correlation + importance prune | ✅ Phase E |
-| `circuit` in precedent key | Configured for ablation only; risk of sparse groups |
+1. Multi-driver column alignment
+2. `lap` / time → unlocks `lap_remaining`, `completion_percentage`, `race_stage`
+3. Point-in-time standings (Ergast round N−1)
+4. `positions_of_involved parties` + `flag`
+5. `superlicense_points_before_incident`
+6. `severity` (manual labeling)
 
 ---
 
-## 7. Normative rules (`NORMATIVE_RULES_PLAN.md`)
+## 4. Data quality (non-column)
 
-### Implementation phases
+| Issue | Impact |
+|-------|--------|
+| Multi-driver misalignment | ~19 (2019) + ~21 (2025) incidents skipped on flatten |
+| Two-season corpus | Precedent/history cannot use 2020–2024; 6-year val shift |
+| Class 2 (major) sparse | ~14 val support; recall ~21% (V1 report) |
 
-| Phase | Status | Deliverable |
-|-------|--------|-------------|
-| A — Rule schema & loader | ✅ | `configs/normative_rules.yaml`, `configs/normative.yaml`, `rules_loader.py`, `--validate-rules` CLI |
-| B — Condition engine | ✅ | `conditions.py` + `test_conditions.py` (16 tests) |
-| C — Escalation pre-pass | ✅ | `escalation.py` + `test_escalation_temporal.py` (7 tests) |
-| D — Rule engine + batch predict | ✅ | `rule_engine.py`, `predict.py`, 17 rules, `incidents_with_normative.parquet` |
-| E — Comparison & reporting | ✅ | `compare.py`, `report.py`, deviation report |
-| F — Review & iteration | ❌ **Next** | Manual review of top deviations |
+---
 
-### Phase A deliverables (done)
+## 5. Model training
 
-| Artifact | Status |
-|----------|--------|
-| `configs/normative_rules.yaml` | ✅ v1.0.0, 7 assumptions, **10 starter rules** + default catch-all |
-| `configs/normative.yaml` | ✅ escalation/comparison/unmatched settings |
-| `src/fia_ml/normative/schema.py` | ✅ dataclass schema + validation |
-| `src/fia_ml/normative/rules_loader.py` | ✅ load + SHA-256 content hash |
-| `src/fia_ml/normative/run_normative.py` | ✅ `--validate-rules` works |
-| Module stubs | ✅ `escalation`, `rule_engine`, `predict`, `compare`, `report` (conditions ✅) |
-| `tests/normative/test_rules_loader.py` | ✅ 6 tests passing |
+| Gap | Detail |
+|-----|--------|
+| **No test season** | `test_season: null` in `configs/xgboost.yaml` |
+| **LightGBM** | `tabular_classifier.py` not built |
+| **Leave-one-season-out CV** | Not implemented |
+| **Macro-F1 vs session baseline** | +0.043 improvement — below +0.10 plan target |
+| **Ordinal encoding** | Nominal fields (`session`, `circuit`) use `OrdinalEncoder` |
+| **Small train set** | 90 rows |
+| **Class 2 (major)** | Weak precision/recall on validation |
+| **Columns dropped at encode** | `flag`, `severity`, `lap`, `lap_remaining`, `completion_percentage`, `opponent_*`, `standing_difference`, `points_difference`, `superlicense_points_before_incident` — no train observations |
 
-**Validate:** `python -m fia_ml.normative.run_normative --validate-rules`
+---
 
-### Phase B deliverables (done)
+## 6. Feature engineering
 
-| Capability | Status |
-|------------|--------|
-| `conditions.py` — `evaluate_conditions()` | ✅ |
-| Implicit `eq`, `session_in`, `fact_contains_any`, `gte`/`lt`/`eq`/`in`/`contains` | ✅ |
-| Nested `and` / `or`, `default: true`, AND semantics on leaf keys | ✅ |
-| `normalize_session()` for race/qualifying/sprint/practice | ✅ |
-| `tests/normative/test_conditions.py` | ✅ 16 tests |
+| Gap | Detail |
+|-----|--------|
+| **V2 macro-F1 < V1** | 0.381 vs 0.402 on validation — V2 did not beat V1 |
+| **Precedent hurt ablation** | Exp D −0.075 macro-F1 vs C — sparse groups, two-season corpus |
+| **`race_stage` unusable** | 0% `completion_percentage` fill |
+| **Championship features** | `points_gap_to_leader`, `title_contender` use season totals not round N−1 |
+| **`severity` unlabeled** | Cannot activate `(incident_type, severity, session)` precedent key |
+| **Precedent fallback** | 32% of rows use global prior (`precedent_count < 3`) |
+| **Opponent history (Group F)** | Deferred |
+| **Extended leakage audit** | No dedicated helper for precedent/history columns |
+| **Hyperparameter tuning** | Not done |
+| **`races_since_last_*`** | Same-season only; `NaN` when prior event was previous season |
 
-### Phase C deliverables (done)
+---
 
-| Counter column | Window | Source (default `fia_history`) |
-|----------------|--------|--------------------------------|
-| `driver_track_limits_last_5_races` | 5 rounds | Prior `incident_type == track_limits` |
-| `driver_collisions_last_5_races` | 5 rounds | Prior `incident_type == collision` |
-| `driver_penalties_last_5_races` | 5 rounds | Prior `penalty_severity > 0` |
-| `driver_warnings_last_10_races` | 10 rounds | Prior warning/reprimand in `penalty` text |
-
-**Temporal rule:** strict prior only (same-season round `<`; same-round rows excluded).  
-**Modes:** `fia_history` (default) | `normative_history` (uses `normative_penalty_*` columns).  
-**Tests:** `tests/normative/test_escalation_temporal.py` — 7 tests passing.
-
-### Rule engine & batch predict (done)
-
-| Artifact | Status |
-|----------|--------|
-| `rule_engine.py` | ✅ Priority-ordered first-match evaluation |
-| `predict.py` | ✅ Escalation + fact join + normative columns |
-| `configs/normative_rules.yaml` | ✅ **17 rules** (≥15 target met) |
-| `data/processed/incidents_with_normative.parquet` | ✅ 234 rows |
-| `ml_models/normative/rules_version.json` | ✅ Content hash tracked |
-| `ml_models/normative/predictions.json` | ✅ row_id → normative outcome |
-| `tests/normative/test_rule_engine.py` | ✅ 5 tests |
-| `tests/normative/test_collision_rules.py` | ✅ 3 tests |
-
-**Run:** `python -m fia_ml.normative.run_normative --input data/processed/incidents.parquet`
-
-**First full-dataset run (234 rows):**
-
-| Metric | Value |
-|--------|-------|
-| `manual_review` rate | **59.8%** (target ≤20% — not met) |
-| Top matched rules | `other_unclassified` (128), `pit_lane_general` (45), `track_limits_first_offence` (15) |
-| Fact text joined from interim JSON | 0 rows (interim dirs empty in repo) |
-
-### Comparison & reporting (done)
-
-| Artifact | Status |
-|----------|--------|
-| `compare.py` | ✅ Agreement, Cohen's kappa, confusion matrix, breakdowns, optional ML |
-| `report.py` | ✅ Markdown summary, CSV breakdowns, figures |
-| `run_normative.py` | ✅ `--compare`, `--report-dir`, `--ml-predictions` |
-| `tests/normative/test_compare.py` | ✅ 4 tests |
-| `reports/normative/deviation_summary_2026-08-25.md` | ✅ |
-| `ml_models/normative/evaluation_metrics.json` | ✅ |
-
-**Run:**
-```bash
-python -m fia_ml.normative.run_normative \
-  --input data/processed/incidents_with_normative.parquet \
-  --compare \
-  --ml-predictions ml_models/xgboost_v2/predictions_val.json \
-  --report-dir reports/normative/
-```
-
-**First deviation analysis (234 rows):**
-
-| Metric | Value |
-|--------|-------|
-| FIA vs normative agreement | **52.6%** |
-| Cohen's kappa | **0.223** |
-| FIA harsher rate | **41.5%** (mean deviation −0.45) |
-| Normative harsher rate | **6.0%** |
-| Agreement excl. `manual_review` | **79.8%** (94 matched rows) |
-| Highest disagreement type | `other` (70.3%) |
-| ML overlap (val set, 144 rows) | FIA–ML 47.2%, normative–ML 60.4% |
-
-### Normative gaps & blockers
+## 7. Normative rules
 
 | Gap | Impact | Planned fix |
 |-----|--------|-------------|
-| **`manual_review` rate 59.8%** | Success criterion ≤20% unmet | Expand rules for `other` (128 rows); join Fact text from extracted PDFs |
-| **`fact` text not populated** | `fact_contains_any` rules rarely fire (12 collisions → `collision_unclassified`) | Populate `data/interim/extracted_documents/{season}/` via dataset pipeline |
-| **`incident_type: other` dominates** (128/234) | Routed to `other_unclassified` → `manual_review` | Improve incident classifier or add keyword sub-rules |
-| **Collision fact rules unused** | No advantage/racing/reckless matches without Fact | Depends on fact join |
-| **No fixture file** `tests/fixtures/normative_incidents.json` | Synthetic regression set missing | Add 20–30 labeled rows |
-| **`normative_history` ablation** | Needs second-pass with normative outcomes | Iterative predict when comparing modes |
-| **Session string corruption (2025)** | Some rows have garbage `session` values | Dataset cleanup |
+| **`manual_review` rate 59.8%** | Target ≤20% unmet | Expand rules; reduce `other` incidents |
+| **`incident_type: other`** (128/234) | → `other_unclassified` → `manual_review` | Better classifier or sub-rules |
+| **Fact text empty** | `fact_contains_any` rules don't fire | Populate `data/interim/extracted_documents/{season}/` |
+| **Collision rules unused** | 12 collisions → `collision_unclassified` | Depends on Fact join |
+| **Top deviations not reviewed** | Rule iteration not started | Manual review + YAML updates |
+| **`normative_history` ablation** | Not run | Second-pass with normative escalation outcomes |
+| **Fixture file** | `tests/fixtures/normative_incidents.json` missing | 20–30 synthetic labeled rows |
+| **Session corruption (2025)** | Garbage `session` strings on some rows | Dataset cleanup |
 
-### Success criteria vs actual (plan §393–404)
-
-| Criterion | Status |
-|-----------|--------|
-| ≥15 documented rules | ✅ 17 rules |
-| Deterministic run on full `incidents.parquet` | ✅ |
-| ≥80% rows matched (≤20% `manual_review`) | ❌ 59.8% `manual_review` |
-| Deviation report + breakdowns | ✅ |
-| Unit tests (loader, conditions, escalation, engine, compare) | ✅ 41 tests |
-| Non-trivial deviation shown | ✅ FIA harsher on 41.5% of rows; `other` type 70% disagreement |
-| Top deviation cases reviewed | ❌ Next in plan |
-| `rules_version.json` tracks hash | ✅ |
-
-Depends on point-in-time history (V2 Groups C/D logic reusable in Phase C escalation).
+**Deviation snapshot (234 rows):** FIA vs normative agreement 52.6%; FIA harsher 41.5%; highest disagreement on `other` (70.3%). Report: `reports/normative/deviation_summary_2026-08-25.md`.
 
 ---
 
-## 8. Deferred / out-of-scope
+## 8. Open checklist
 
-| Item | Plan | Notes |
-|------|------|-------|
-| NLP / BERT on `raw_text` | `project_spec` V2 | Interim JSON exists; no training pipeline |
-| Embedding / FAISS precedent search | Feature spec §6 | Deferred until ~2000+ incidents |
-| Normative rules engine | `NORMATIVE_RULES_PLAN.md` | Rule engine + batch predict done — see §7 |
-| Opponent history (Group F) | `FEATURE_ENGINEERING_PLAN.md` V2.1 | Ablation-gated |
-| Nationality bias ablation | Feature spec §28 | Optional |
-| Track characteristic features | Feature spec | Not in current CSV schema |
-| Telemetry / multimodal | `project_spec` | Out of scope |
-| Hyperparameter tuning (V2) | `FEATURE_ENGINEERING_PLAN.md` | After feature set locked |
-
----
-
-## 9. Master checklist — fill / fix after core ML work
-
-### Seasons & rows
-- [ ] Seasons **2020–2024** (full pipeline or manual PDFs)
-- [ ] Third season for **test** split (e.g. hold out 2024)
-- [ ] Fix **multi-driver misalignment** (~40 incidents total)
-- [ ] Clear **review queue** (57 rows combined)
-
-### High-priority columns
-- [ ] `lap` → unlocks `lap_remaining`, `completion_percentage`, `race_stage`
-- [ ] `severity` (manual) → enables `(incident_type, severity, session)` precedent key
-- [ ] `flag`
-- [ ] `positions_of_involved parties`
-- [ ] `superlicense_points_before_incident`
-- [ ] `sector` (especially 2025 — 3% fill)
-- [ ] Point-in-time **standings** (round N−1, not season totals)
-- [ ] `construct_standings`, `construct_points` (raise from ~55–68%)
-- [ ] Multi-driver `driver_standings`, `nationalities`, `years_in_sport`
-
-### Feature engineering & training
-- [x] Phase D — `precedent.py` (fallback key without `severity` active)
-- [x] Phase E — `selection.py`, ablation A–E
-- [x] Phase F — train `xgboost_v2`, v1 vs v2 report
-- [x] Fix V2 columns dropped at encode (`encoding.py` V2 feature sets)
+### Data
+- [ ] Seasons **2020–2024**
+- [ ] Third season for **test** split
+- [ ] Fix **multi-driver misalignment** (~40 incidents)
+- [ ] Clear **review queue** (57 rows)
+- [ ] `lap`, `flag`, `severity`, `positions_of_involved parties`, `superlicense_points_before_incident`, `sector`
+- [ ] Point-in-time **standings** (round N−1)
 - [ ] `test_enrichment_ergast.py` + point-in-time standings test
 
-### Normative rules
-- [x] Schema, loader, `--validate-rules` CLI
-- [x] Condition evaluator + tests
-- [x] Escalation counters + temporal tests
-- [x] Rule engine, 17 rules, `incidents_with_normative.parquet`
-- [x] Comparison & deviation report (`compare.py`, `report.py`)
-- [ ] Manual review of top deviations + rule iteration
-- [ ] Deviation comparison + report (`compare.py`, `report.py`)
+### Modeling
+- [ ] Held-out **test** season
+- [ ] LightGBM, leave-one-season-out CV (optional)
+- [ ] Opponent history (Group F)
+- [ ] Improve V2 or accept V1 as primary model until more data
+
+### Normative
+- [ ] Reduce `manual_review` rate
+- [ ] Populate Fact text from parsed PDFs
 - [ ] Manual review of top deviations + rule iteration
 
 ---
 
-## 10. Related artifacts
+## 9. Key artifact paths
 
-| Path | Purpose |
-|------|---------|
+| Path | Use when fixing gaps |
+|------|----------------------|
 | `dataset/csv/review_queue_{season}.csv` | Manual review backlog |
-| `reports/tables/data_quality_{season}.json` | Per-column fill rates + validation errors |
-| `data/interim/extracted_documents/{season}/` | Parsed PDF JSON + `raw_text` (NLP-ready) |
-| `configs/data.yaml` | Scraper + enrichment toggles |
-| `configs/features.yaml` | V2 feature thresholds |
-| `reports/ablation_results.json` | Ablation A–E macro-F1 |
-| `reports/model_reports/v2_feature_engineering_report_*.md` | V1 vs V2 comparison + selection rationale |
-| `ml_models/xgboost_v2/` | Final V2 model artifacts |
-| `configs/xgboost.yaml` / `xgboost_v2.yaml` | Training splits + paths |
-| `current_gaps.md` | This file |
-| `configs/normative.yaml` / `normative_rules.yaml` | Normative engine config + rule set |
-| `ml_models/normative/` | Rules version + per-row normative predictions |
-| `data/processed/incidents_with_normative.parquet` | Incidents + normative outcome columns |
+| `reports/tables/data_quality_{season}.json` | Column fill rates |
+| `data/interim/extracted_documents/{season}/` | Fact text for normative rules |
+| `configs/normative_rules.yaml` | Rule iteration |
+| `configs/features.yaml` | Precedent key / feature toggles |
+| `ml_models/preprocessor_xgboost_v2.meta.json` | Encode-time column drops |

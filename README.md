@@ -98,11 +98,12 @@ Set `PYTHONPATH=src` if imports fail outside a virtualenv, or run modules as sho
 | [`data/reference/README.md`](data/reference/README.md) | Static reference data (circuits, mappings) |
 | [`dataset/README.md`](dataset/README.md) | Generated CSV layout |
 
-### Results & gap tracking
+### Results, gaps & roadmap
 
 | Document | Description |
 |----------|-------------|
-| [`current_gaps.md`](current_gaps.md) | Living registry of missing data, unmet criteria, and deferred work |
+| [`current_gaps.md`](current_gaps.md) | Open gaps on **existing** pipelines (data quality, normative coverage, model limitations) |
+| [`documentation/FUTURE_FEATURES.md`](documentation/FUTURE_FEATURES.md) | **Not built yet** — NLP, CNN, telemetry, embeddings, multimodal |
 | [`reports/model_reports/v1_training_report_2026-08-24.md`](reports/model_reports/v1_training_report_2026-08-24.md) | V1 training write-up |
 | [`reports/model_reports/v2_feature_engineering_report_2026-08-25.md`](reports/model_reports/v2_feature_engineering_report_2026-08-25.md) | V2 ablation + selection write-up |
 | [`reports/normative/deviation_summary_2026-08-25.md`](reports/normative/deviation_summary_2026-08-25.md) | FIA vs normative deviation analysis |
@@ -245,13 +246,9 @@ f1_penalty_predictor/
 
 ## What's next
 
-- Manual review of top normative deviations and rule iteration ([`NORMATIVE_RULES_PLAN.md`](NORMATIVE_RULES_PLAN.md))
-- Expand rules / improve `incident_type: other` coverage to reduce `manual_review` rate
-- Populate Fact text from `data/interim/extracted_documents/` for fact-triggered collision rules
-- Backfill seasons 2020–2024 when PDFs are available
-- Add a held-out test season once a third season is in the corpus
+**Gaps (existing systems):** [`current_gaps.md`](current_gaps.md) — seasons 2020–2024, column fill, normative `manual_review` rate, V2 vs V1 limitations.
 
-See [`current_gaps.md`](current_gaps.md) for the full backlog.
+**Future capabilities:** [`documentation/FUTURE_FEATURES.md`](documentation/FUTURE_FEATURES.md) — NLP on steward text, **CNN** on incident video, telemetry, embedding-based precedent, multimodal fusion.
 
 ---
 
