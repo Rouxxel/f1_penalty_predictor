@@ -2,7 +2,7 @@
 
 > **Last updated:** 2026-09-09  
 > **Purpose:** Open gaps on **existing** pipelines — missing data, unmet targets, modeling limitations.  
-> **Future capabilities** (CNN, NLP, telemetry, multimodal): [`documentation/FUTURE_FEATURES.md`](documentation/FUTURE_FEATURES.md)  
+> **Future capabilities** (CNN, telemetry, embedding precedent, multimodal): [`documentation/FUTURE_FEATURES.md`](documentation/FUTURE_FEATURES.md)  
 > **Schema:** [`documentation/f1_dataset_example.csv`](documentation/f1_dataset_example.csv)
 
 ### What this file covers
@@ -10,7 +10,7 @@
 | Section | Topic |
 |---------|--------|
 | §1–§4 | **Dataset** — seasons, columns, enrichment blockers, row quality |
-| §5–§6 | **Current models** — limitations on today’s V1/V2 (not “plans to implement”) |
+| §5–§6 | **Current models** — limitations on today’s V1/V2/NLP (not “plans to implement”) |
 | §7 | **Normative rules** — coverage and iteration (engine already runs) |
 
 Pipeline docs: [`README.md`](README.md) · enrichment detail: [`src/fia_ml/data/enrichment/README.md`](src/fia_ml/data/enrichment/README.md) · fill rates: [`reports/tables/data_quality_{season}.json`](reports/tables/data_quality_{season}.json) · quality gates: [`reports/tables/enrichment_report_{season}.json`](reports/tables/enrichment_report_{season}.json).
@@ -127,6 +127,21 @@ Fill rates from `reports/tables/data_quality_{season}.json` (post-enrichment run
 | **Class 2 (major)** | Weak precision/recall on validation |
 | **Columns dropped at encode** | `flag`, `severity`, `lap`, `lap_remaining`, `completion_percentage`, `opponent_*`, `standing_difference`, `points_difference`, `superlicense_points_before_incident` — sparse or no train observations in current parquet |
 
+### NLP text model (spec V2)
+
+Trained on 2019+2025 interim JSON (2026-09-09): **val macro-F1 0.642** (154 rows) vs V1 **0.402** (144 merged rows). Artifacts in `ml_models/nlp/`.
+
+| Gap | Detail |
+|-----|--------|
+| **Class 2 (major) recall** | 12.5% on validation (2/16 correct) — major penalties still hard |
+| **Val row count mismatch** | NLP 154 vs V1 144 validation rows — inner join used for fusion |
+| **Fusion below NLP-only** | `concat_logits` macro-F1 0.632 < NLP-only 0.648 on merged rows — use text-only for now |
+| **Interim doc join** | 100% join on labeled rows after parse; 112 misaligned multi-driver rows skipped (same as tabular) |
+| **Summons-only rows** | Excluded (no offence text) |
+| **HF runtime** | Set `USE_TF=0` and `PYTHONPATH=src` on Windows if TensorFlow conflicts; `numpy>=1.26,<2` recommended |
+
+Reports: `reports/model_reports/nlp_training_report_2026-09-09.md`, `nlp_comparison_2026-09-09.md`.
+
 ---
 
 ## 6. Feature engineering
@@ -180,6 +195,7 @@ Fill rates from `reports/tables/data_quality_{season}.json` (post-enrichment run
 - [ ] LightGBM, leave-one-season-out CV (optional)
 - [ ] Opponent history (Group F)
 - [ ] Improve V2 or accept V1 as primary model until more data
+- [x] **NLP** — train/evaluate on interim JSON; beats V1 on macro-F1; fusion report (concat_logits does not beat NLP-only)
 
 ### Normative
 - [ ] Reduce `manual_review` rate
@@ -197,7 +213,9 @@ Fill rates from `reports/tables/data_quality_{season}.json` (post-enrichment run
 | `reports/tables/enrichment_report_{season}.json` | Quality-gate pass/fail vs targets |
 | `data/interim/enrichment_meta/{season}.json` | Per-field enrichment provenance |
 | `configs/enrichment.yaml` | Source priority, thresholds, quality targets |
-| `data/interim/extracted_documents/{season}/` | Fact text for normative rules |
+| `data/interim/extracted_documents/{season}/` | Fact text for normative rules and NLP dataset join |
+| `configs/bert.yaml` | NLP text profile, training, fusion settings |
+| `ml_models/nlp/nlp_dataset_audit.json` | Incident → interim document join coverage |
 | `configs/normative_rules.yaml` | Rule iteration |
 | `configs/features.yaml` | Precedent key / feature toggles |
 | `ml_models/preprocessor_xgboost_v2.meta.json` | Encode-time column drops |

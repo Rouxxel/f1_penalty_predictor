@@ -26,6 +26,7 @@ FIA PDFs  →  dataset pipeline  →  incidents.parquet
 | Data enrichment | **Implemented** (partial fill) | Full pipeline wired (`configs/enrichment.yaml`); lap/flag/positions blocked by PDF timestamps — see [`current_gaps.md`](current_gaps.md) |
 | Model training (V1) | **Complete** | Validation macro-F1 **0.402** (train 2019 / val 2025) |
 | Feature engineering (V2) | **Complete** | Validation macro-F1 **0.381** — did not beat V1 on this corpus |
+| NLP text model (spec V2) | **Complete** | DistilBERT on Fact+Offence; val macro-F1 **0.642** (train 2019 / val 2025, 154 rows) — beats V1 tabular (0.402) |
 | Normative rule engine | **Operational** | 17 rules; deviation report generated |
 | Normative rule coverage | **Incomplete** | 59.8% of rows routed to `manual_review` (target ≤20%) |
 | Seasons 2020–2024 | **Missing** | FIA download blocked; manual PDF backfill possible |
@@ -35,7 +36,7 @@ For the full gap registry (missing columns, blockers, success criteria): [`curre
 
 ### Data corpus limitation (2019 + 2025 only)
 
-**All current artifacts reflect a two-season corpus.** Dataset generation, enrichment, flatten/`prepare`, V1/V2 training, normative evaluation, and reports were run using **2019 and 2025 only**. Seasons **2020–2024** are listed in [`configs/data.yaml`](configs/data.yaml) but have no `processed_{season}.csv` — FIA download is blocked (403/WAF) unless PDFs are added manually.
+**All current artifacts reflect a two-season corpus.** Dataset generation, enrichment, flatten/`prepare`, V1/V2 training, normative evaluation, NLP dataset joins, and reports were designed for **2019 and 2025 only**. Seasons **2020–2024** are listed in [`configs/data.yaml`](configs/data.yaml) but have no `processed_{season}.csv` — FIA download is blocked (403/WAF) unless PDFs are added manually.
 
 When 2020–2024 become available, **downstream work must be re-run** on the expanded corpus (not a one-click refresh today):
 
@@ -44,6 +45,7 @@ When 2020–2024 become available, **downstream work must be re-run** on the exp
 | Dataset | [`dataset/scripts/run_pipeline.py`](dataset/scripts/run_pipeline.py) per new season (`--stage all`, or `parse` → `build` → `enrich` → `validate` if PDFs are already on disk) |
 | ML features | `python -m fia_ml.training.run_training --stage prepare` (and `features_v2` for V2) — update `inputs.seasons` / splits in [`configs/xgboost.yaml`](configs/xgboost.yaml) / [`configs/xgboost_v2.yaml`](configs/xgboost_v2.yaml) |
 | Models | `--stage train` / `evaluate` (and ablation for V2) |
+| NLP text model | `python -m fia_ml.training.run_nlp_training --config configs/bert.yaml --stage all` (optional `--fusion`) |
 | Normative | `python -m fia_ml.normative.run_normative` on refreshed `incidents.parquet` |
 
 Step-by-step backfill commands, manual PDF layout, and WAF troubleshooting: [`dataset/scripts/README.md`](dataset/scripts/README.md) (sections **Current dataset coverage** and **Missing seasons — how to backfill later**). The pipeline is **season-agnostic** — no code changes are required for new years once PDFs exist; configs and training splits need updating.
@@ -67,6 +69,10 @@ python -m fia_ml.training.run_training --config configs/xgboost.yaml
 
 # V2 features + training + ablation
 python -m fia_ml.training.run_training --config configs/xgboost_v2.yaml --stage all
+
+# NLP text model (prepare → train → evaluate; optional late fusion vs V1)
+python -m fia_ml.training.run_nlp_training --config configs/bert.yaml --stage all
+python -m fia_ml.training.run_nlp_training --config configs/bert.yaml --stage evaluate --fusion
 
 # Normative rules — apply rules to incidents
 python -m fia_ml.normative.run_normative --input data/processed/incidents.parquet
@@ -110,11 +116,13 @@ Set `PYTHONPATH=src` if imports fail outside a virtualenv, or run modules as sho
 | Document | Description |
 |----------|-------------|
 | [`current_gaps.md`](current_gaps.md) | Open gaps on **existing** pipelines (data quality, normative coverage, model limitations) |
-| [`documentation/FUTURE_FEATURES.md`](documentation/FUTURE_FEATURES.md) | **Not built yet** — NLP, CNN, telemetry, embeddings, multimodal |
+| [`documentation/FUTURE_FEATURES.md`](documentation/FUTURE_FEATURES.md) | **Not built yet** — CNN, telemetry, embeddings, full multimodal |
 | [`reports/model_reports/v1_training_report_2026-08-24.md`](reports/model_reports/v1_training_report_2026-08-24.md) | V1 training write-up |
 | [`reports/model_reports/v2_feature_engineering_report_2026-08-25.md`](reports/model_reports/v2_feature_engineering_report_2026-08-25.md) | V2 ablation + selection write-up |
 | [`reports/normative/deviation_summary_2026-08-25.md`](reports/normative/deviation_summary_2026-08-25.md) | FIA vs normative deviation analysis |
 | [`reports/model_reports/enrichment_improvement_2026-09-09.md`](reports/model_reports/enrichment_improvement_2026-09-09.md) | Post-enrichment quality gates (2019 + 2025) |
+| [`reports/model_reports/nlp_training_report_2026-09-09.md`](reports/model_reports/nlp_training_report_2026-09-09.md) | NLP DistilBERT training write-up |
+| [`reports/model_reports/nlp_comparison_2026-09-09.md`](reports/model_reports/nlp_comparison_2026-09-09.md) | NLP vs V1 tabular fusion comparison |
 
 ---
 
@@ -125,7 +133,9 @@ Set `PYTHONPATH=src` if imports fail outside a virtualenv, or run modules as sho
 | Majority baseline | macro-F1 | 0.267 |
 | Session-stratified baseline | macro-F1 | 0.359 |
 | **XGBoost V1** | macro-F1 | **0.402** |
+| **NLP DistilBERT** (Fact+Offence) | macro-F1 | **0.642** |
 | XGBoost V2 (history + selection) | macro-F1 | 0.381 |
+| NLP + V1 fusion (`concat_logits`, 144 merged rows) | macro-F1 | 0.632 |
 | Normative vs FIA (all 234 rows) | agreement | 52.6% |
 | Normative vs FIA (excl. `manual_review`) | agreement | 79.8% |
 | Normative vs ML (144-row val overlap) | agreement | 60.4% |
@@ -160,6 +170,23 @@ Config: [`configs/xgboost.yaml`](configs/xgboost.yaml)
 
 Config: [`configs/xgboost_v2.yaml`](configs/xgboost_v2.yaml) · Features: [`configs/features.yaml`](configs/features.yaml)
 
+### NLP text model (spec V2 — DistilBERT)
+
+Leakage-safe default: **Fact + Offence** text only (Decision/Reason excluded). Same train 2019 / val 2025 split as V1.
+
+| Artifact | Path |
+|----------|------|
+| Model + tokenizer | `ml_models/nlp/model/`, `ml_models/nlp/tokenizer/` |
+| Validation metrics | `ml_models/nlp/metrics.json` |
+| Validation predictions | `ml_models/nlp/predictions_val.json` |
+| Dataset audit (join coverage) | `ml_models/nlp/nlp_dataset_audit.json` |
+| Fusion comparison (optional) | `ml_models/nlp/fusion_metrics.json`, `reports/model_reports/nlp_comparison_{date}.md` |
+| Cached text splits | `data/processed/nlp_train.jsonl`, `nlp_validation.jsonl` |
+
+Config: [`configs/bert.yaml`](configs/bert.yaml) · Code: `src/fia_ml/nlp/`, `src/fia_ml/training/train_nlp.py`, `evaluate_nlp.py`, `fusion_nlp.py`
+
+Training report: [`reports/model_reports/nlp_training_report_2026-09-09.md`](reports/model_reports/nlp_training_report_2026-09-09.md) · Fusion comparison: [`reports/model_reports/nlp_comparison_2026-09-09.md`](reports/model_reports/nlp_comparison_2026-09-09.md)
+
 ### Baselines
 
 | Artifact | Path |
@@ -183,7 +210,7 @@ Config: [`configs/xgboost_v2.yaml`](configs/xgboost_v2.yaml) · Features: [`conf
 
 | Output | Path |
 |--------|------|
-| V1 / V2 training reports | `reports/model_reports/` |
+| V1 / V2 / NLP training reports | `reports/model_reports/` |
 | Confusion matrices, feature importance, V1 vs V2 chart | `reports/figures/` |
 | Ablation + feature selection | `reports/ablation_results.json`, `reports/selection_report_v2.json` |
 | Normative deviation CSVs + figures | `reports/normative/` |
@@ -201,6 +228,7 @@ Config: [`configs/xgboost_v2.yaml`](configs/xgboost_v2.yaml) · Features: [`conf
 | Incidents + normative outcomes | `data/processed/incidents_with_normative.parquet` |
 | V1 / V2 encoded features | `data/processed/features.parquet`, `features_v2.parquet` |
 | Train / validation splits | `train.parquet`, `validation.parquet`, `train_v2.parquet`, `validation_v2.parquet` |
+| NLP text splits (JSONL) | `nlp_train.jsonl`, `nlp_validation.jsonl` |
 
 Source CSVs: `dataset/csv/processed_{season}.csv`
 
@@ -225,8 +253,9 @@ f1_penalty_predictor/
 ├── src/fia_ml/
 │   ├── data/                 # Dataset generation pipeline
 │   ├── preprocessing/        # Flatten, encode, leakage filter
+│   ├── nlp/                  # Text dataset join, leakage-safe templates, labels
 │   ├── features/             # V2 feature groups (history, precedent, race, …)
-│   ├── training/             # Baselines, XGBoost, ablation, evaluation
+│   ├── training/             # Baselines, XGBoost, NLP, ablation, evaluation
 │   └── normative/            # Rule engine, compare, report
 ├── tests/                    # Unit and integration tests
 └── current_gaps.md           # Gap registry
@@ -243,6 +272,7 @@ f1_penalty_predictor/
 | [`configs/target_mapping.yaml`](configs/target_mapping.yaml) | Raw `penalty` string → 3-class `penalty_severity` |
 | [`configs/xgboost.yaml`](configs/xgboost.yaml) | V1 training splits and hyperparameters |
 | [`configs/xgboost_v2.yaml`](configs/xgboost_v2.yaml) | V2 training (feature version, ablation hooks) |
+| [`configs/bert.yaml`](configs/bert.yaml) | NLP text model (text profile, DistilBERT, fusion) |
 | [`configs/features.yaml`](configs/features.yaml) | V2 feature group toggles |
 | [`configs/normative.yaml`](configs/normative.yaml) | Normative engine runtime settings |
 | [`configs/normative_rules.yaml`](configs/normative_rules.yaml) | Human-authored stewarding rules |
@@ -253,9 +283,9 @@ f1_penalty_predictor/
 
 ## What's next
 
-**Gaps (existing systems):** [`current_gaps.md`](current_gaps.md) — seasons 2020–2024, PDF session timestamps (lap/flag), normative `manual_review` rate, V2 vs V1 limitations.
+**Gaps (existing systems):** [`current_gaps.md`](current_gaps.md) — seasons 2020–2024, PDF session timestamps (lap/flag), normative `manual_review` rate, V2 vs V1 limitations, NLP corpus/join coverage.
 
-**Future capabilities:** [`documentation/FUTURE_FEATURES.md`](documentation/FUTURE_FEATURES.md) — NLP on steward text, **CNN** on incident video, telemetry, embedding-based precedent, multimodal fusion.
+**Future capabilities:** [`documentation/FUTURE_FEATURES.md`](documentation/FUTURE_FEATURES.md) — **CNN** on incident video, telemetry, embedding-based precedent (V3), full multimodal fusion (V5).
 
 ---
 

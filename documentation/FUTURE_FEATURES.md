@@ -16,6 +16,7 @@
 | Data enrichment (hybrid stack) | `configs/enrichment.yaml`, `src/fia_ml/data/enrichment/`, `data/interim/enrichment_meta/` |
 | V1 tabular model | `ml_models/xgboost/` |
 | V2 tabular model + ablation | `ml_models/xgboost_v2/` |
+| NLP text model (spec V2) | `ml_models/nlp/` — val macro-F1 **0.642** (2026-09-09); beats V1 tabular on 2025 |
 | Normative rule engine + deviation report | `configs/normative_rules.yaml`, `ml_models/normative/`, `reports/normative/` |
 
 See [`README.md`](../README.md) for paths and metrics.
@@ -29,7 +30,7 @@ The feature spec defines a **version ladder**. Versions below that are not yet i
 | Version | Focus | Status in repo |
 |---------|--------|----------------|
 | **V1** | Tabular ML (structured features + XGBoost) | Built |
-| **V2 (spec)** | NLP on FIA report text (BERT / DistilBERT) | **Not built** — `ml_models/nlp/` is empty |
+| **V2 (spec)** | NLP on FIA report text (BERT / DistilBERT) | **Built** (pipeline) — weights pending; see §2 |
 | **V3** | Embedding / similarity precedent retrieval (FAISS, sentence transformers) | **Not built** — simplified groupby precedent only (V2 features) |
 | **V4** | Telemetry (speed, braking, gaps, positions from FastF1) | **Not built** |
 | **V5** | Visual / CNN (onboard frames, replay stills) + multimodal fusion | **Not built** — `ml_models/cnn/` is empty |
@@ -58,26 +59,38 @@ Runbook: [`dataset_generation_runbook.md`](dataset_generation_runbook.md) · ope
 | **Seasons 2020–2024** | **Open** | FIA WAF / manual PDF backfill |
 | **Re-run flatten + V2** | **Open** | Parquet still pre-enrichment |
 | **Season-specific PDF templates** | Future | Parser maintenance per era |
-| **NLP sidecar on `raw_text`** | Future → §2 | Beyond rule-based `text_fields.py` |
+| **NLP sidecar on `raw_text`** | **Built** | DistilBERT classifier — §2 |
 
 ---
 
-## 2. NLP / text models (spec “Version 2”)
+## 2. NLP / text models (spec “Version 2”) — built
 
 From [`project_spec.md`](project_spec.md) §5.2, §8 Phase 5, and feature spec §5.4, §33 Version 2.
 
-**Goal:** Classify penalties from FIA steward **report text** (Fact, Reason, Decision), not only tabular fields.
+**Goal:** Classify penalties from FIA steward **report text** (Fact + Offence by default; Decision/Reason excluded for leakage safety).
 
-| Item | Planned detail |
-|------|----------------|
-| **Input** | `data/interim/extracted_documents/{season}/*.json` → `raw_text`, `parsed_fields` |
-| **Models** | DistilBERT, BERT, or RoBERTa fine-tuned for 3-class `penalty_severity` |
-| **Artifacts** | `ml_models/nlp/`, `configs/bert.yaml` (spec — not created) |
-| **Code** | `src/fia_ml/models/nlp_model.py` (spec — not created) |
-| **Experiments** | Text-only vs tabular-only vs fused features |
-| **Notebook** | `06_nlp_experiments.ipynb` (spec — not in repo) |
+| Item | Status |
+|------|--------|
+| **Input** | `data/interim/extracted_documents/{season}/*.json` joined via `raw_incidents_{season}.meta.json` |
+| **Default text profile** | `fact_offence` — Fact + Offence + session metadata |
+| **Model** | DistilBERT (`distilbert-base-uncased`) → 3-class `penalty_severity` |
+| **Config** | [`configs/bert.yaml`](../configs/bert.yaml) |
+| **Code** | `src/fia_ml/nlp/`, `src/fia_ml/models/nlp_model.py`, `train_nlp.py`, `evaluate_nlp.py`, `fusion_nlp.py` |
+| **CLI** | `python -m fia_ml.training.run_nlp_training --config configs/bert.yaml --stage all` |
+| **Artifacts** | `ml_models/nlp/model/`, `tokenizer/`, `metrics.json`, `predictions_val.json`, `nlp_dataset_audit.json` |
+| **Fusion (optional)** | `concat_logits` or `stack_xgb` vs V1 tabular — `--fusion` or `fusion.enabled: true` |
+| **Tests** | `tests/test_nlp_*.py` (config, leakage, dataset join, evaluate, fusion; CPU smoke) |
 
-**Also helps:** normative `fact_contains_any` rules, `incident_type` refinement for `other` rows, `driver_at_fault` extraction.
+**Trained (2026-09-09):** 90 train / 154 val rows; macro-F1 **0.642** vs V1 **0.402**; fusion `concat_logits` **0.632** (does not beat NLP-only). Class 2 recall remains weak (12.5%).
+
+**Still optional:**
+
+- Exploratory notebook `06_nlp_experiments.ipynb` — not in repo
+- Re-train when 2020–2024 seasons are backfilled
+
+**Also helps:** normative `fact_contains_any` rules, `incident_type` refinement for `other` rows — shared interim JSON path.
+
+Open limitations: [`current_gaps.md`](../current_gaps.md) §5 (NLP).
 
 ---
 
@@ -154,7 +167,7 @@ From feature spec and current V1/V2 training pipeline.
 | **Opponent history (Group F)** | Deferred in V2 feature engineering |
 | **Severity-based precedent key** | `(incident_type, severity, session)` after manual `severity` labels |
 | **SHAP / deeper explainability** | Beyond gain-based importance |
-| **Multimodal tabular + text** | Early fusion experiments before full V5 |
+| **Multimodal tabular + text** | Late fusion (`fusion_nlp.py`) implemented; early/embedding fusion still future |
 
 **Modeling limitations on current data** (small train set, V2 &lt; V1, class 2 weakness) are tracked in [`current_gaps.md`](../current_gaps.md) §5–§6 — fixable with more data and the items above.
 
@@ -194,7 +207,8 @@ From `project_spec` directory layout — planned but not present.
 
 | Item | Spec path |
 |------|-----------|
-| `configs/bert.yaml`, `configs/cnn.yaml` | NLP / CNN training configs |
+| `configs/bert.yaml` | NLP training config (**created**) |
+| `configs/cnn.yaml` | CNN training config (future) |
 | `notebooks/01`–`08` | Exploration notebooks |
 | `experiments/experiment_003_nlp/` | Experiment tracking |
 | `data/raw/telemetry/` | Telemetry raw store |
@@ -209,7 +223,7 @@ When choosing what to build next:
 
 1. **Data volume** — seasons 2020–2024, fix PDF session timestamps (lap/flag), multi-driver rows, re-run flatten + V2  
 2. **Normative iteration** — Fact text + rules for `other` / collisions (low engineering risk)  
-3. **NLP on steward text** — uses existing interim JSON; complements tabular V1  
+3. **NLP train on corpus** — run `run_nlp_training` on interim JSON; compare vs V1; optional fusion report  
 4. **Re-train tabular models** — with richer data; retry V2 features + opponent history  
 5. **Embedding precedent (V3)** — when incident count &gt; ~2000  
 6. **Telemetry (V4)** — after incident timestamp alignment works  

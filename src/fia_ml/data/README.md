@@ -171,6 +171,8 @@ If FIA returns **403 Forbidden**, wait before retrying (rate limits after bulk d
 
 `--stage all` runs stages 1–5 in order for the selected season(s).
 
+**Downstream consumers of `extracted_documents/`:** normative `fact_contains_any` rules and the NLP text model (`run_nlp_training`) join `processed_{season}.csv` → `raw_incidents_{season}.meta.json` → per-document JSON. Sparse or missing parse output limits both tracks — see [`current_gaps.md`](../../../current_gaps.md) §5 and §7.
+
 ```mermaid
 flowchart LR
     S1["1 download"] --> S2["2 parse"]
