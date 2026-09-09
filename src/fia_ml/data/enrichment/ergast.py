@@ -12,6 +12,7 @@ import pandas as pd
 
 from fia_ml.data.config import PipelineConfig
 from fia_ml.data.enrichment.common import is_blank, load_meta, resolve_team_id, slugify_nationality
+from fia_ml.data.enrichment.provenance import EnrichmentProvenance
 from fia_ml.data.reference_data import load_teams
 from fia_ml.paths import ensure_dir
 from fia_ml.utils import secure_file_io as sio
@@ -241,7 +242,13 @@ def build_car_to_driver_map(results: list[dict[str, Any]]) -> dict[str, str]:
     return mapping
 
 
-def enrich_with_ergast(df: pd.DataFrame, cfg: PipelineConfig, *, fill_gaps_only: bool = True) -> pd.DataFrame:
+def enrich_with_ergast(
+    df: pd.DataFrame,
+    cfg: PipelineConfig,
+    *,
+    fill_gaps_only: bool = True,
+    provenance: EnrichmentProvenance | None = None,
+) -> pd.DataFrame:
     if df.empty:
         return df
     if not cfg.enrichment.get("ergast_fallback_enabled", True):
@@ -279,10 +286,16 @@ def enrich_with_ergast(df: pd.DataFrame, cfg: PipelineConfig, *, fill_gaps_only:
         if race_info:
             if is_blank(row.get("round")) or not fill_gaps_only:
                 out.at[idx, "round"] = str(round_num)
+                if provenance:
+                    provenance.record(incident_id, "round", "ergast", value=str(round_num))
             if is_blank(row.get("circuit")) or not fill_gaps_only:
                 out.at[idx, "circuit"] = race_info["circuit_id"]
+                if provenance:
+                    provenance.record(incident_id, "circuit", "ergast", value=race_info["circuit_id"])
             if is_blank(row.get("country")) or not fill_gaps_only:
                 out.at[idx, "country"] = race_info["country"]
+                if provenance:
+                    provenance.record(incident_id, "country", "ergast", value=race_info["country"])
 
         standings_round = max(round_num - 1, 0)
         driver_standings = load_driver_standings(cfg, standings_round)
@@ -310,6 +323,14 @@ def enrich_with_ergast(df: pd.DataFrame, cfg: PipelineConfig, *, fill_gaps_only:
                     overwrite_standings=overwrite_standings,
                 ):
                     out.at[idx, column] = value
+                    if provenance and overwrite_standings and value:
+                        provenance.record(
+                            incident_id,
+                            column,
+                            "ergast",
+                            value=value,
+                            round_used=standings_round,
+                        )
 
         top4 = [slugify_driver_id(s["Driver"]["driverId"]) for s in driver_standings[:4]]
         if _should_write_field(
@@ -319,5 +340,13 @@ def enrich_with_ergast(df: pd.DataFrame, cfg: PipelineConfig, *, fill_gaps_only:
             overwrite_standings=overwrite_standings,
         ):
             out.at[idx, "current_top_4_drivers"] = ",".join(top4)
+            if provenance and overwrite_standings and top4:
+                provenance.record(
+                    incident_id,
+                    "current_top_4_drivers",
+                    "ergast",
+                    value=",".join(top4),
+                    round_used=standings_round,
+                )
 
     return out

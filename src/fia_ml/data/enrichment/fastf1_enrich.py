@@ -10,6 +10,7 @@ from fia_ml.data.config import PipelineConfig
 from fia_ml.data.enrichment.common import is_blank, load_meta
 from fia_ml.data.enrichment.ergast import build_car_to_driver_map, load_race_results
 from fia_ml.data.enrichment.openf1 import normalize_flag, normalize_track_sector, resolve_driver_numbers
+from fia_ml.data.enrichment.provenance import EnrichmentProvenance
 from fia_ml.data.enrichment.timestamp import _round_for_row
 from fia_ml.paths import ensure_dir
 
@@ -186,6 +187,7 @@ def enrich_with_fastf1(
     cfg: PipelineConfig,
     *,
     fill_gaps_only: bool = True,
+    provenance: EnrichmentProvenance | None = None,
 ) -> pd.DataFrame:
     if df.empty or not cfg.enrichment_settings.fastf1_enabled:
         return df
@@ -236,7 +238,10 @@ def enrich_with_fastf1(
 
         try:
             if _should_write(row.get("full_laps"), fill_gaps_only) and laps is not None and len(laps) > 0:
-                out.at[idx, "full_laps"] = str(int(laps["LapNumber"].max()))
+                full_laps = str(int(laps["LapNumber"].max()))
+                out.at[idx, "full_laps"] = full_laps
+                if provenance:
+                    provenance.record(incident_id, "full_laps", "fastf1", value=full_laps, round=round_num)
         except Exception:  # noqa: BLE001
             pass
 
@@ -248,11 +253,19 @@ def enrich_with_fastf1(
                     rainfall = getattr(last, "Rainfall", False)
                     track = str(getattr(last, "TrackStatus", "Dry"))
                     if _should_write(row.get("track_conditions"), fill_gaps_only):
-                        out.at[idx, "track_conditions"] = (
-                            "wet" if rainfall or "wet" in track.lower() else "dry"
-                        )
+                        track_value = "wet" if rainfall or "wet" in track.lower() else "dry"
+                        out.at[idx, "track_conditions"] = track_value
+                        if provenance:
+                            provenance.record(
+                                incident_id, "track_conditions", "fastf1", value=track_value, round=round_num
+                            )
                     if _should_write(row.get("weather_conditions"), fill_gaps_only):
-                        out.at[idx, "weather_conditions"] = "rain" if rainfall else "sunny"
+                        weather_value = "rain" if rainfall else "sunny"
+                        out.at[idx, "weather_conditions"] = weather_value
+                        if provenance:
+                            provenance.record(
+                                incident_id, "weather_conditions", "fastf1", value=weather_value, round=round_num
+                            )
         except Exception:  # noqa: BLE001
             pass
 
@@ -261,6 +274,8 @@ def enrich_with_fastf1(
 
         if lap_hint and _should_write(row.get("lap"), fill_gaps_only):
             out.at[idx, "lap"] = str(lap_hint)
+            if provenance:
+                provenance.record(incident_id, "lap", "fastf1", value=str(lap_hint), via="lap_hint", round=round_num)
         elif (
             incident_seconds is not None
             and incident_seconds >= 0
@@ -271,6 +286,15 @@ def enrich_with_fastf1(
                 lap_number = lap_number_at_session_time(laps, incident_seconds)
                 if lap_number is not None:
                     out.at[idx, "lap"] = str(lap_number)
+                    if provenance:
+                        provenance.record(
+                            incident_id,
+                            "lap",
+                            "fastf1",
+                            value=str(lap_number),
+                            round=round_num,
+                            session_offset_seconds=incident_seconds,
+                        )
             except Exception:  # noqa: BLE001
                 pass
 
@@ -280,6 +304,17 @@ def enrich_with_fastf1(
                     flag = flag_at_session_time(messages, incident_seconds, tolerance)
                     if flag:
                         out.at[idx, "flag"] = flag
+                        if provenance:
+                            rc_row = nearest_race_control_row(messages, incident_seconds, tolerance)
+                            message = str(rc_row.get("Message", "")) if rc_row is not None else ""
+                            provenance.record(
+                                incident_id,
+                                "flag",
+                                "fastf1",
+                                value=flag,
+                                message=message,
+                                round=round_num,
+                            )
                 except Exception:  # noqa: BLE001
                     pass
 
@@ -288,6 +323,14 @@ def enrich_with_fastf1(
                     sector = sector_at_session_time(messages, incident_seconds, tolerance)
                     if sector:
                         out.at[idx, "sector"] = sector
+                        if provenance:
+                            provenance.record(
+                                incident_id,
+                                "sector",
+                                "fastf1",
+                                value=sector,
+                                round=round_num,
+                            )
                 except Exception:  # noqa: BLE001
                     pass
 
@@ -304,7 +347,16 @@ def enrich_with_fastf1(
                         tolerance,
                     )
                     if any(position_values):
-                        out.at[idx, "positions_of_involved parties"] = ",".join(position_values)
+                        joined = ",".join(position_values)
+                        out.at[idx, "positions_of_involved parties"] = joined
+                        if provenance:
+                            provenance.record(
+                                incident_id,
+                                "positions_of_involved parties",
+                                "fastf1",
+                                value=joined,
+                                round=round_num,
+                            )
                 except Exception:  # noqa: BLE001
                     pass
 
@@ -314,6 +366,14 @@ def enrich_with_fastf1(
                     state = safety_car_at_session_time(messages, incident_seconds, tolerance)
                     if state:
                         out.at[idx, "safety_car"] = state
+                        if provenance:
+                            provenance.record(
+                                incident_id,
+                                "safety_car",
+                                "fastf1",
+                                value=state,
+                                round=round_num,
+                            )
                 else:
                     sc_active = any("SAFETY CAR" in str(m).upper() for m in messages["Message"].astype(str))
                     vsc_active = any(

@@ -16,6 +16,7 @@ import requests
 from fia_ml.data.config import PipelineConfig
 from fia_ml.data.enrichment.common import is_blank, load_meta
 from fia_ml.data.enrichment.ergast import build_car_to_driver_map, load_race_results
+from fia_ml.data.enrichment.provenance import EnrichmentProvenance
 from fia_ml.data.enrichment.timestamp import _round_for_row
 from fia_ml.paths import ensure_dir
 from fia_ml.utils import secure_file_io as sio
@@ -206,6 +207,14 @@ def incident_datetime_utc(
 
 
 def lap_at_time(laps: list[dict[str, Any]], incident_dt: datetime) -> int | None:
+    lap_number, _ = lap_at_time_with_error(laps, incident_dt)
+    return lap_number
+
+
+def lap_at_time_with_error(
+    laps: list[dict[str, Any]],
+    incident_dt: datetime,
+) -> tuple[int | None, float | None]:
     best_lap = None
     best_start: datetime | None = None
     for lap in laps:
@@ -215,7 +224,9 @@ def lap_at_time(laps: list[dict[str, Any]], incident_dt: datetime) -> int | None
         if start <= incident_dt and (best_start is None or start > best_start):
             best_start = start
             best_lap = int(lap["lap_number"])
-    return best_lap
+    if best_lap is None or best_start is None:
+        return None, None
+    return best_lap, abs((incident_dt - best_start).total_seconds())
 
 
 def max_lap_number(laps: list[dict[str, Any]]) -> int | None:
@@ -265,7 +276,7 @@ def nearest_race_control_message(
     messages: list[dict[str, Any]],
     incident_dt: datetime,
     tolerance_seconds: float,
-) -> dict[str, Any] | None:
+) -> tuple[dict[str, Any] | None, float | None]:
     best = None
     best_diff = None
     for message in messages:
@@ -276,7 +287,7 @@ def nearest_race_control_message(
         if diff <= tolerance_seconds and (best_diff is None or diff < best_diff):
             best = message
             best_diff = diff
-    return best
+    return best, best_diff
 
 
 def positions_at_time(
@@ -320,6 +331,7 @@ def enrich_with_openf1(
     cfg: PipelineConfig,
     *,
     fill_gaps_only: bool = True,
+    provenance: EnrichmentProvenance | None = None,
 ) -> pd.DataFrame:
     if df.empty or cfg.season < cfg.enrichment_settings.openf1_enabled_from_season:
         return df
@@ -368,23 +380,51 @@ def enrich_with_openf1(
 
         if lap_hint and _should_write(True, row.get("lap"), fill_gaps_only):
             out.at[idx, "lap"] = str(lap_hint)
+            if provenance:
+                provenance.record(incident_id, "lap", "openf1", value=str(lap_hint), via="lap_hint")
         elif incident_dt is not None and _should_write(True, row.get("lap"), fill_gaps_only):
-            lap_number = lap_at_time(laps, incident_dt)
+            lap_number, match_error = lap_at_time_with_error(laps, incident_dt)
             if lap_number is not None:
                 out.at[idx, "lap"] = str(lap_number)
+                if provenance:
+                    provenance.record(
+                        incident_id,
+                        "lap",
+                        "openf1",
+                        value=str(lap_number),
+                        session_key=session_key,
+                        match_error_seconds=match_error,
+                    )
 
         if _should_write(True, row.get("full_laps"), fill_gaps_only):
             max_lap = max_lap_number(laps)
             if max_lap is not None:
                 out.at[idx, "full_laps"] = str(max_lap)
+                if provenance:
+                    provenance.record(
+                        incident_id,
+                        "full_laps",
+                        "openf1",
+                        value=str(max_lap),
+                        session_key=session_key,
+                    )
 
         if incident_dt is not None:
-            rc_message = nearest_race_control_message(race_control, incident_dt, tolerance)
+            rc_message, rc_error = nearest_race_control_message(race_control, incident_dt, tolerance)
             if rc_message:
                 if _should_write(True, row.get("flag"), fill_gaps_only):
                     flag = normalize_flag(rc_message.get("flag"), str(rc_message.get("message", "")))
                     if flag:
                         out.at[idx, "flag"] = flag
+                        if provenance:
+                            provenance.record(
+                                incident_id,
+                                "flag",
+                                "openf1",
+                                value=flag,
+                                message=str(rc_message.get("message", "")),
+                                match_error_seconds=rc_error,
+                            )
                 if _should_write(True, row.get("sector"), fill_gaps_only):
                     sector = normalize_track_sector(
                         rc_message.get("sector"),
@@ -392,10 +432,28 @@ def enrich_with_openf1(
                     )
                     if sector:
                         out.at[idx, "sector"] = sector
+                        if provenance:
+                            provenance.record(
+                                incident_id,
+                                "sector",
+                                "openf1",
+                                value=sector,
+                                message=str(rc_message.get("message", "")),
+                                match_error_seconds=rc_error,
+                            )
 
             if driver_numbers and _should_write(True, row.get("positions_of_involved parties"), fill_gaps_only):
                 position_values = positions_at_time(positions, driver_numbers, incident_dt, tolerance)
                 if any(position_values):
-                    out.at[idx, "positions_of_involved parties"] = ",".join(position_values)
+                    joined = ",".join(position_values)
+                    out.at[idx, "positions_of_involved parties"] = joined
+                    if provenance:
+                        provenance.record(
+                            incident_id,
+                            "positions_of_involved parties",
+                            "openf1",
+                            value=joined,
+                            session_key=session_key,
+                        )
 
     return out
