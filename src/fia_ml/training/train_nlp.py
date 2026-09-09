@@ -9,31 +9,13 @@ from typing import Any
 import numpy as np
 import torch
 from torch import nn
-from transformers import EarlyStoppingCallback, Trainer, TrainingArguments
 
-from fia_ml.models.nlp_model import NlpClassifierTrainer
 from fia_ml.nlp.dataset import NlpDatasetResult, build_nlp_dataset, persist_nlp_dataset
 from fia_ml.paths import PROJECT_ROOT, ensure_dir
 from fia_ml.preprocessing.target_mapping import load_target_mapping
 from fia_ml.training.metrics import compute_metrics
 from fia_ml.training.nlp_config import NlpTrainingConfig
 from fia_ml.utils import secure_file_io as sio
-
-
-class _WeightedTrainer(Trainer):
-    def __init__(self, class_weights: torch.Tensor | None, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.class_weights = class_weights
-
-    def compute_loss(self, model, inputs, return_outputs=False, **kwargs):
-        labels = inputs.pop("labels")
-        outputs = model(**inputs)
-        if self.class_weights is not None:
-            loss_fct = nn.CrossEntropyLoss(weight=self.class_weights)
-        else:
-            loss_fct = nn.CrossEntropyLoss()
-        loss = loss_fct(outputs.logits, labels)
-        return (loss, outputs) if return_outputs else loss
 
 
 def _label_names(mapping_path: Path) -> dict[int, str]:
@@ -91,6 +73,24 @@ def train_nlp(
         raise ValueError("Training split is empty — run prepare stage or fix interim document joins")
     if dataset.validation.empty:
         raise ValueError("Validation split is empty — check splits and dataset joins")
+
+    from fia_ml.models.nlp_model import NlpClassifierTrainer
+    from transformers import EarlyStoppingCallback, Trainer, TrainingArguments
+
+    class _WeightedTrainer(Trainer):
+        def __init__(self, class_weights: torch.Tensor | None, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            self.class_weights = class_weights
+
+        def compute_loss(self, model, inputs, return_outputs=False, **kwargs):
+            labels = inputs.pop("labels")
+            outputs = model(**inputs)
+            if self.class_weights is not None:
+                loss_fct = nn.CrossEntropyLoss(weight=self.class_weights)
+            else:
+                loss_fct = nn.CrossEntropyLoss()
+            loss = loss_fct(outputs.logits, labels)
+            return (loss, outputs) if return_outputs else loss
 
     train_cfg = cfg.training
     label_names = _label_names(cfg.target_mapping_path)
