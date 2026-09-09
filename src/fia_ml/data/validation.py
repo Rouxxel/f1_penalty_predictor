@@ -85,7 +85,22 @@ def build_review_queue(df: pd.DataFrame, cfg: PipelineConfig, meta: dict[str, di
         if float(meta_row.get("parse_confidence", 1)) < min_conf:
             reasons.append("low_parse_confidence")
         if not str(row.get("severity", "")).strip():
-            reasons.append("missing_severity")
+            severity_suggestion = meta_row.get("severity_suggestion")
+            if severity_suggestion not in (None, ""):
+                reasons.append(f"severity_suggestion:{severity_suggestion}")
+            else:
+                reasons.append("missing_severity")
+        if not str(row.get("driver_at_fault", "")).strip():
+            fault_confidence = float(meta_row.get("driver_at_fault_confidence", 0) or 0)
+            fault_suggestion = str(meta_row.get("driver_at_fault_suggestion", "")).strip()
+            if fault_suggestion and fault_confidence > 0:
+                reasons.append(f"driver_at_fault_suggestion:{fault_suggestion}")
+            else:
+                reasons.append("missing_driver_at_fault")
+        elif float(meta_row.get("driver_at_fault_confidence", 1) or 1) < float(
+            cfg.enrichment_settings.driver_at_fault_min_confidence
+        ):
+            reasons.append("low_driver_at_fault_confidence")
         if str(row.get("session", "")).lower() == "race" and not str(row.get("lap", "")).strip():
             reasons.append("missing_lap")
         if not str(row.get("round", "")).strip():
