@@ -24,3 +24,14 @@ text_fields:
 
 superlicense:
   rolling_by: driver  # sum superlicense_points_added for prior incidents same season
+
+quality_targets:
+  lap_race_min_fill_rate: 0.5
+  flag_race_min_fill_rate: 0.5
+  positions_with_drivers_min_fill_rate: 0.4
+  ergast_round_n_minus_1_rate: 0.9
+  superlicense_before_given_prior_sl_rate: 0.8
+  sector_min_fill_rate_by_season:
+    default: 0.5
+    "2019": 0.7
+    "2025": 0.5
