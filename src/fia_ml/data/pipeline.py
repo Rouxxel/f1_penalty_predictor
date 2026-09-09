@@ -14,6 +14,7 @@ from fia_ml.data.enrichment import (
     enrich_timestamps,
     enrich_with_ergast,
     enrich_with_fastf1,
+    enrich_superlicense_points,
     enrich_with_openf1,
     enrich_with_reference,
     write_enrichment_meta,
@@ -92,6 +93,7 @@ def run_pipeline(cfg: PipelineConfig, stage: Stage = Stage.ALL) -> dict:
         results["timestamp_audit"] = timestamp_stats
         df = enrich_with_openf1(df, cfg, fill_gaps_only=True, provenance=provenance)
         df = enrich_with_fastf1(df, cfg, fill_gaps_only=True, provenance=provenance)
+        df = enrich_superlicense_points(df, cfg, provenance=provenance)
         meta = load_meta(cfg)
         results["provenance"] = write_enrichment_meta(cfg, provenance, meta=meta)
         raw_path = cfg.path("csv_out") / f"raw_incidents_{cfg.season}.csv"
