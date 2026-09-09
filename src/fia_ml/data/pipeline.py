@@ -10,12 +10,15 @@ import pandas as pd
 from fia_ml.data.config import PipelineConfig
 from fia_ml.data.download import download_season
 from fia_ml.data.enrichment import (
+    EnrichmentProvenance,
     enrich_timestamps,
     enrich_with_ergast,
     enrich_with_fastf1,
     enrich_with_openf1,
     enrich_with_reference,
+    write_enrichment_meta,
 )
+from fia_ml.data.enrichment.common import load_meta
 from fia_ml.data.incident_builder import build_from_interim, build_incidents
 from fia_ml.data.parsing import parse_all_documents
 from fia_ml.data.validation import validate_and_export
@@ -82,12 +85,15 @@ def run_pipeline(cfg: PipelineConfig, stage: Stage = Stage.ALL) -> dict:
             df = pd.read_csv(raw_path) if raw_path.exists() else pd.DataFrame()
 
     if stage in {Stage.ALL, Stage.ENRICH}:
+        provenance = EnrichmentProvenance()
         df = enrich_with_reference(df, cfg)
-        df = enrich_with_ergast(df, cfg, fill_gaps_only=True)
+        df = enrich_with_ergast(df, cfg, fill_gaps_only=True, provenance=provenance)
         df, timestamp_stats = enrich_timestamps(df, cfg)
         results["timestamp_audit"] = timestamp_stats
-        df = enrich_with_openf1(df, cfg, fill_gaps_only=True)
-        df = enrich_with_fastf1(df, cfg, fill_gaps_only=True)
+        df = enrich_with_openf1(df, cfg, fill_gaps_only=True, provenance=provenance)
+        df = enrich_with_fastf1(df, cfg, fill_gaps_only=True, provenance=provenance)
+        meta = load_meta(cfg)
+        results["provenance"] = write_enrichment_meta(cfg, provenance, meta=meta)
         raw_path = cfg.path("csv_out") / f"raw_incidents_{cfg.season}.csv"
         df.to_csv(raw_path, index=False)
         results["enriched_rows"] = len(df)
