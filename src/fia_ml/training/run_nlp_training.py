@@ -15,6 +15,7 @@ if str(SRC_ROOT) not in sys.path:
     sys.path.insert(0, str(SRC_ROOT))
 
 from fia_ml.training.evaluate_nlp import evaluate_nlp
+from fia_ml.training.fusion_nlp import run_fusion_nlp
 from fia_ml.training.nlp_config import NlpTrainingConfig
 from fia_ml.training.train_nlp import prepare_nlp_data, train_nlp
 
@@ -61,12 +62,9 @@ def main(argv: list[str] | None = None) -> int:
         results["train"] = train_nlp(cfg)
 
     if stage in {Stage.ALL, Stage.EVALUATE}:
-        if args.fusion:
-            results["fusion"] = {
-                "skipped": True,
-                "reason": "Late fusion is not implemented yet; run evaluate without --fusion",
-            }
         results["evaluate"] = evaluate_nlp(cfg)
+        if args.fusion or bool(cfg.fusion.get("enabled")):
+            results["fusion"] = run_fusion_nlp(cfg)
 
     print(json.dumps(results, indent=2, default=str))
     return 0

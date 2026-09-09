@@ -10,6 +10,7 @@ from fia_ml.paths import DEFAULT_NLP_CONFIG, PROJECT_ROOT
 from fia_ml.utils import secure_file_io as sio
 
 ALLOWED_TEXT_PROFILES = frozenset({"fact_only", "fact_offence", "leaky_full"})
+ALLOWED_FUSION_METHODS = frozenset({"concat_logits", "stack_xgb"})
 
 
 @dataclass(frozen=True)
@@ -90,3 +91,9 @@ class NlpTrainingConfig:
             raise ValueError("text.max_length must be >= 32")
         if self.num_labels < 2:
             raise ValueError("model.num_labels must be >= 2")
+        fusion_method = str(self.fusion.get("method", "concat_logits"))
+        if fusion_method not in ALLOWED_FUSION_METHODS:
+            raise ValueError(
+                f"Invalid fusion.method '{fusion_method}'. "
+                f"Allowed: {sorted(ALLOWED_FUSION_METHODS)}"
+            )
