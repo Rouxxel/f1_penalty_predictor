@@ -26,6 +26,7 @@ def test_enrichment_config_loads_defaults():
     assert ec.fastf1_enabled is True
     assert ec.driver_at_fault_min_confidence == 0.7
     assert ec.superlicense_rolling_by == "driver"
+    assert ec.quality_targets["lap_race_min_fill_rate"] == 0.5
 
 
 def test_enrichment_config_missing_file_returns_defaults():

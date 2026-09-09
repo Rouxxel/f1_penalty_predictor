@@ -50,6 +50,23 @@ def _verstappen_standing(position: str, points: str) -> dict:
     }
 
 
+def test_standing_position_accepts_position_text():
+    standing = {
+        "positionText": "5",
+        "points": "10",
+        "Driver": {"driverId": "grosjean", "nationality": "French"},
+        "Constructors": [{"constructorId": "haas"}],
+    }
+    fields = build_per_driver_standing_fields(
+        ["romain_grosjean"],
+        [standing],
+        [],
+        {},
+    )
+    assert fields["driver_standings"] == "5"
+    assert fields["driver_points"] == "10"
+
+
 def test_resolve_driver_standing_matches_slug_and_ergast_id():
     lookup = {
         "hamilton": _hamilton_standing("2", "150"),
