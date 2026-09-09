@@ -4,6 +4,7 @@ from fia_ml.data.enrichment.ergast import enrich_with_ergast
 from fia_ml.data.enrichment.fastf1_enrich import enrich_with_fastf1
 from fia_ml.data.enrichment.openf1 import enrich_with_openf1
 from fia_ml.data.enrichment.provenance import EnrichmentProvenance, write_enrichment_meta
+from fia_ml.data.enrichment.quality_gates import evaluate_quality_gates, write_enrichment_reports
 from fia_ml.data.enrichment.reference_enrich import enrich_with_reference
 from fia_ml.data.enrichment.superlicense import enrich_superlicense_points
 from fia_ml.data.enrichment.text_fields import enrich_text_fields
@@ -19,4 +20,6 @@ __all__ = [
     "enrich_text_fields",
     "EnrichmentProvenance",
     "write_enrichment_meta",
+    "evaluate_quality_gates",
+    "write_enrichment_reports",
 ]

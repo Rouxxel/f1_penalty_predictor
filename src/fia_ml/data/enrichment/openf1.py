@@ -72,9 +72,15 @@ def fetch_openf1(
 
 
 def load_sessions_for_year(cfg: PipelineConfig) -> list[dict[str, Any]]:
-    index_path = cfg.path("reference") / f"openf1_sessions_{cfg.season}.json"
+    index_path = ensure_dir(cfg.enrichment_settings.openf1_cache_dir) / f"openf1_sessions_{cfg.season}.json"
     if index_path.exists():
         cached = sio.read_json(index_path)
+        if isinstance(cached, list):
+            return cached
+
+    legacy_path = cfg.path("reference") / f"openf1_sessions_{cfg.season}.json"
+    if legacy_path.exists():
+        cached = sio.read_json(legacy_path)
         if isinstance(cached, list):
             return cached
 

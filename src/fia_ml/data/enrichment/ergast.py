@@ -133,6 +133,11 @@ def _build_driver_standing_lookup(driver_standings: list[dict[str, Any]]) -> dic
     return lookup
 
 
+def _standing_position(standing: dict[str, Any]) -> str:
+    value = standing.get("position", standing.get("positionText", ""))
+    return str(value) if value not in (None, "") else ""
+
+
 def resolve_driver_standing(
     driver_slug: str,
     driver_lookup: dict[str, dict[str, Any]],
@@ -185,16 +190,16 @@ def build_per_driver_standing_fields(
 
         driver = standing["Driver"]
         nationalities.append(slugify_nationality(str(driver.get("nationality", ""))))
-        d_standings.append(str(standing["position"]))
-        d_points.append(str(standing["points"]))
+        d_standings.append(_standing_position(standing))
+        d_points.append(str(standing.get("points", "")))
 
         constructor_id = slugify_constructor_id(standing["Constructors"][0]["constructorId"])
         team_slug = resolve_team_id(constructor_id, teams)
         team_slugs.append(team_slug)
         constructor_standing = constructor_lookup.get(constructor_id)
         if constructor_standing:
-            c_standings.append(str(constructor_standing["position"]))
-            c_points.append(str(constructor_standing["points"]))
+            c_standings.append(_standing_position(constructor_standing))
+            c_points.append(str(constructor_standing.get("points", "")))
         else:
             c_standings.append("")
             c_points.append("")
