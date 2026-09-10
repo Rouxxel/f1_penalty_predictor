@@ -366,7 +366,7 @@ f1_penalty_predictor/
 
 **Gaps (existing systems):** [`current_gaps.md`](current_gaps.md) — seasons 2020–2024, PDF session timestamps (lap/flag), normative `manual_review` rate, V2 vs V1 limitations, NLP corpus/join coverage.
 
-**Future capabilities:** [`documentation/FUTURE_FEATURES.md`](documentation/FUTURE_FEATURES.md) — **CNN** on incident video, telemetry, embedding-based precedent (V3), full multimodal fusion (V5).
+**Future capabilities:** [`documentation/FUTURE_FEATURES.md`](documentation/FUTURE_FEATURES.md) — **CNN** (V5), embedding precedent (V3, deferred), car telemetry (V4 Track B, deferred). **Active enrichment:** V4 Track A session timestamps (`v4_research.md`) — unlocks lap/flag/positions on 2019 + 2025 without 2020–2024.
 
 ---
 

@@ -32,7 +32,7 @@ The feature spec defines a **version ladder**. Versions below that are not yet i
 | **V1** | Tabular ML (structured features + XGBoost) | Built |
 | **V2 (spec)** | NLP on FIA report text (BERT / DistilBERT) | **Built** (pipeline) — weights pending; see §2 |
 | **V3** | Embedding / similarity precedent retrieval | **Deferred** — groupby precedent only today (`precedent_*` in V2); see §5 |
-| **V4** | Telemetry (speed, braking, gaps, positions from FastF1) | **Not built** |
+| **V4** | Telemetry (speed, braking, gaps, positions from FastF1) | **Deferred** — Track A (timestamps) open in §1; Track B (car telemetry) §4 |
 | **V5** | Visual / CNN (onboard frames, replay stills) + multimodal fusion | **Not built** — `ml_models/cnn/` is empty |
 
 Normative rules sit **alongside** the ML track (comparison layer), not as a version number — engine is built; rule **coverage** gaps are in [`current_gaps.md`](../current_gaps.md) §7.
@@ -53,7 +53,7 @@ Runbook: [`dataset_generation_runbook.md`](dataset_generation_runbook.md) · ope
 | **Quality gates** | **Built** | Merged into `data_quality_{season}.json` |
 | **`driver_at_fault` assist** | **Built** (partial) | Rule-based; ~25% fill; low-confidence → review queue |
 | **OpenF1 + FastF1 v2** | **Built** (blocked on time) | `flag`, `positions`, lap join wired but need session timestamp |
-| **Lap / session timestamp** | **Open** | PDF `time` is document clock — ~1.5% valid offsets; critical path |
+| **Lap / session timestamp (V4 Track A)** | **Open — active** | PDF `time` is document clock — ~1.5% valid offsets; unlocks lap/flag/positions **and** is prerequisite for V4 telemetry; see [`v4_research.md`](../v4_research.md) |
 | **`flag`**, **positions**, **`sector` targets** | **Open** | Depend on session timestamp + turn maps |
 | **`severity` in CSV** | **Open** | Suggestions in review queue only; manual promotion |
 | **Seasons 2020–2024** | **Open** | FIA WAF / manual PDF backfill |
@@ -115,19 +115,59 @@ From [`project_spec.md`](project_spec.md) §5.1 (`ml_models/cnn/`), §8 Phase 6+
 
 ---
 
-## 4. Telemetry (spec “Version 4”)
+## 4. Telemetry (spec “Version 4”) — deferred (Track B)
 
 From feature spec §33 Version 4 and `project_spec` Phase 6+.
 
+**Decision (2026-09):** Car-level telemetry ML (`telemetry.py`, `configs/telemetry.yaml`, orchestration) is **not on the critical path**. Defer until timeline gates pass **and** enough seasons exist for a meaningful ablation. Research spec: [`v4_research.md`](../v4_research.md).
+
+V4 splits into two tracks — do not conflate them:
+
+| Track | Scope | Status |
+|-------|--------|--------|
+| **Track A — timeline alignment** | `session_offset_seconds`, lap/flag/positions joins | **Active** — enrichment gap in §1; runnable on 2019 + 2025 without 2020–2024 |
+| **Track B — car telemetry features** | speed, brake, throttle, gap aggregates → XGBoost | **Deferred** — needs Track A + revisit gates below |
+
+### What exists today
+
+FastF1 enrichment (`fastf1_enrich.py`) loads `telemetry=False` — weather, laps, and race-control only. OpenF1 (2023+) is wired for flag/positions but blocked by the same ~1.5% timestamp rate. DistilBERT NLP at **0.642** macro-F1 is the current best predictor; telemetry must show incremental signal on joined rows to justify build-out.
+
+### Why defer Track B (especially without 2020–2024)
+
+| Factor | Detail |
+|--------|--------|
+| **Timeline gate** | ~1.5% valid `session_offset_seconds` — G0 not passed |
+| **Two seasons only** | ~234 flattened rows; collisions/track-limits are a small subset — ablation would be inconclusive |
+| **Missing 2020–2024** | Cannot validate join strategy across eras (2019 FastF1-only vs 2023+ OpenF1) or build collision sample size |
+| **NLP overlap** | Text may already encode “heavy braking collision” — same redundancy risk as V3 |
+| **Track A still wins** | Fixing timestamps improves `lap`, `flag`, `positions` for V1/V2 even if telemetry ML never ships |
+
+### Revisit gates (Track B)
+
+| Stage | Gate | Action |
+|-------|------|--------|
+| **Track A complete** | ≥50% race incidents with high-confidence temporal anchors (`v4_research.md` Gate A) | Continue enrichment; optional 5–10 manual car_data sanity joins |
+| **V4 population** | ≥50% of collision/track-limit incidents with usable driver/session/telemetry join (Gate B) | Run join audit → `reports/v4/telemetry_join_audit.md` |
+| **Predictive signal** | Telemetry aggregates beat V1/NLP on joined rows (Gate G5) | `ADOPT` or `COLLISION-SPECIFIC` per `v4_research.md` §46 |
+| **Infrastructure** | Positive ablation **and** cache/scale needs (Gate G6) | `telemetry.py`, `processed_telemetry/`, FastF1 `telemetry=True` at scale |
+
+Until gates pass: no `src/fia_ml/features/telemetry.py`, no V4 orchestration phase. Negative results (timeline not ready, no ML signal) are valid outcomes.
+
+### Future architecture (when justified)
+
+```text
+FIA incident → timeline reconstruction → confidence → session + driver join
+                                                      → telemetry window (±2s / ±5s)
+                                                      → small interpretable feature set → ablation
+```
+
 | Signal | Source |
 |--------|--------|
-| Speed, braking, throttle, steering | FastF1 car data |
+| Speed, braking, throttle, steering | FastF1 / OpenF1 car data |
 | Gap, relative speed, track position | FastF1 timing + telemetry |
 | Aggregated session features | `data/interim/processed_telemetry/` (spec layout) |
 
-**Goal:** Represent physical circumstances of the incident; feed tabular NN or multimodal fusion.
-
-**Dependency:** Incident **session** time alignment — enrichment modules exist but only ~1.5% of rows have valid `session_offset_seconds` (PDF document clock vs on-track time).
+**Start with:** `timestamp_alignment_report.md` and manual join validation — not `telemetry.py`.
 
 ---
 
@@ -237,7 +277,7 @@ From `project_spec` directory layout — planned but not present.
 | `experiments/experiment_003_nlp/` | Experiment tracking |
 | `data/raw/telemetry/` | Telemetry raw store |
 | `data/raw/video_metadata/` | Frame metadata for CNN |
-| `src/fia_ml/features/telemetry.py` | Telemetry feature module |
+| `src/fia_ml/features/telemetry.py` | Telemetry feature module (**deferred** — §4 Track B) |
 
 ---
 
@@ -245,13 +285,14 @@ From `project_spec` directory layout — planned but not present.
 
 When choosing what to build next:
 
-1. **Data volume** — seasons 2020–2024, fix PDF session timestamps (lap/flag), multi-driver rows, re-run flatten + V2  
-2. **Normative iteration** — Fact text + rules for `other` / collisions (low engineering risk)  
-3. **NLP** — re-train when backfill lands; improve class 2 recall; fusion only if it beats NLP-only  
-4. **Re-train tabular models** — with richer data; retry V2 history features (not groupby precedent until corpus grows)  
-5. **Telemetry (V4)** — after incident timestamp alignment works  
+1. **V4 Track A — session timestamps** — audit/fix alignment on 2019 + 2025; unlocks lap/flag/positions (does not need 2020–2024)  
+2. **Data volume** — seasons 2020–2024 backfill, multi-driver rows, re-run flatten + V2  
+3. **Normative iteration** — Fact text + rules for `other` / collisions (low engineering risk)  
+4. **NLP** — re-train when backfill lands; improve class 2 recall; fusion only if it beats NLP-only  
+5. **Re-train tabular models** — with richer data; retry V2 history features (not groupby precedent until corpus grows)  
 6. **CNN / multimodal (V5)** — after video metadata pipeline exists  
-7. **Embedding precedent (V3)** — **deferred** until revisit gates in §5 (~2027–2028 realistic for infrastructure; optional research script earlier)  
+7. **V4 Track B — telemetry ML** — **deferred** until §4 gates (timeline + seasons + positive ablation)  
+8. **Embedding precedent (V3)** — **deferred** until revisit gates in §5 (~2027–2028 realistic; optional research script earlier)  
 
 ---
 
@@ -261,5 +302,6 @@ When choosing what to build next:
 |------|------|
 | [`current_gaps.md`](../current_gaps.md) | Open gaps on **existing** systems |
 | [`v3.md`](../v3.md) | V3 research spec and revisit gates (deferred) |
+| [`v4_research.md`](../v4_research.md) | V4 research spec — Track A active, Track B deferred |
 | [`README.md`](../README.md) | What is built and where artifacts live |
 | [`DL_MODEL_TRANSFER_LEARNING.md`](../DL_MODEL_TRANSFER_LEARNING.md) | CNN / transfer-learning study guide (external projects) |

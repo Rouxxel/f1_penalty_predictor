@@ -12,6 +12,7 @@
 | §1–§4 | **Dataset** — seasons, columns, enrichment blockers, row quality |
 | §5–§6 | **Current models** — limitations on today’s V1/V2/NLP (not “plans to implement”) |
 | §6b | **V3 embedding precedent** — explicitly deferred (not a current gap to fix) |
+| §6c | **V4 telemetry ML** — deferred; **V4 Track A timestamps** — active enrichment gap (§3) |
 | §7 | **Normative rules** — coverage and iteration (engine already runs) |
 
 Pipeline docs: [`README.md`](README.md) · enrichment detail: [`src/fia_ml/data/enrichment/README.md`](src/fia_ml/data/enrichment/README.md) · fill rates: [`reports/tables/data_quality_{season}.json`](reports/tables/data_quality_{season}.json) · quality gates: [`reports/tables/enrichment_report_{season}.json`](reports/tables/enrichment_report_{season}.json).
@@ -86,7 +87,7 @@ Fill rates from `reports/tables/data_quality_{season}.json` (post-enrichment run
 
 | Gap | Detail |
 |-----|--------|
-| **PDF session timestamps** | `timestamp.py` parses all rows via `document_clock`; ~1.5% map to session offset — blocks lap/flag/positions despite OpenF1 + FastF1 v2 being wired |
+| **PDF session timestamps (V4 Track A)** | `timestamp.py` parses most rows via `document_clock`; ~1.5% map to session offset — blocks lap/flag/positions and any future car telemetry; **active priority** on 2019 + 2025 (no 2020–2024 required); see [`v4_research.md`](v4_research.md) |
 | **Multi-driver alignment** | ~20 incidents/season: `drivers` has 2 values but per-driver `**` columns have length 1 (often `car_*` placeholder) |
 | **Review queue** | 20 (2019) + 37 (2025) rows — low confidence, missing `severity`/`lap`, text-field suggestions |
 | **FIA WAF** | Blocks automated download for 2020–2024 |
@@ -175,6 +176,22 @@ Embedding-based similarity retrieval (spec V3) is **intentionally not implemente
 
 **Revisit when:** gates in [`documentation/FUTURE_FEATURES.md`](documentation/FUTURE_FEATURES.md) §5 (≥500 rows for research script; ≥1000 + positive ablation for infrastructure).
 
+### V4 telemetry ML — deferred (Track B; not a blocking gap)
+
+Car-level telemetry features (spec V4, `telemetry.py`) are **intentionally not implemented**. Rationale:
+
+| Factor | Detail |
+|--------|--------|
+| **Timeline** | ~1.5% valid `session_offset_seconds` — G0 not passed (`v4_research.md`) |
+| **Two seasons** | ~234 rows; collision/track-limit subset too small for reliable ablation |
+| **No 2020–2024** | Cannot build join coverage or cross-era validation until PDF backfill |
+| **NLP baseline** | DistilBERT at 0.642 macro-F1 — telemetry must prove incremental signal |
+| **Track A separate** | Timestamp research is an **enrichment** gap (§3), not V4 ML — still worth doing now |
+
+**Action now (Track B):** None required. **Optional:** 5–10 manual car_data joins after Track A improves, for G3 sanity check only.
+
+**Revisit when:** Track A gate (≥50% race incidents with confident anchors) **and** 2020–2024 backfill **and** Gate B join audit on collision/track-limit rows — see [`documentation/FUTURE_FEATURES.md`](documentation/FUTURE_FEATURES.md) §4.
+
 ---
 
 ## 7. Normative rules
@@ -199,7 +216,7 @@ Embedding-based similarity retrieval (spec V3) is **intentionally not implemente
 ### Data
 - [ ] Seasons **2020–2024**
 - [ ] Third season for **test** split
-- [ ] Fix **PDF session timestamps** (lap / flag / positions blocker)
+- [ ] Fix **PDF session timestamps** (V4 Track A — lap / flag / positions; active on 2019 + 2025)
 - [ ] Fix **multi-driver misalignment** (~40 incidents)
 - [ ] Clear **review queue** (57 rows)
 - [ ] `lap`, `flag`, `severity`, `positions_of_involved parties`, `sector` fill targets
@@ -213,6 +230,8 @@ Embedding-based similarity retrieval (spec V3) is **intentionally not implemente
 - [ ] Improve V2 or accept V1 as primary model until more data
 - [x] **NLP** — train/evaluate on interim JSON; beats V1 on macro-F1; fusion report (concat_logits does not beat NLP-only)
 - [x] **V3 embedding precedent** — deferred; see §6b and `v3.md` (not blocking)
+- [x] **V4 telemetry ML** — deferred (Track B); see §6c and `v4_research.md` (not blocking)
+- [ ] **V4 Track A** — timestamp alignment audit/report (enrichment; not deferred)
 
 ### Normative
 - [ ] Reduce `manual_review` rate
@@ -236,4 +255,6 @@ Embedding-based similarity retrieval (spec V3) is **intentionally not implemente
 | `configs/normative_rules.yaml` | Rule iteration |
 | `configs/features.yaml` | Precedent key / feature toggles (groupby only; V3 deferred) |
 | `v3.md` | Embedding precedent research spec and revisit gates |
+| `v4_research.md` | V4 research spec — Track A (timestamps) vs Track B (telemetry ML) |
+| `src/fia_ml/data/enrichment/timestamp.py` | Session offset parsing (V4 Track A) |
 | `ml_models/preprocessor_xgboost_v2.meta.json` | Encode-time column drops |
