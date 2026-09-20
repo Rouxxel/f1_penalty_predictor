@@ -30,6 +30,27 @@ Examples:
     python main.py --run --dataset-only
     python main.py --run --skip-v2 --skip-nlp   # dataset + v1 + normative only
 
+    # One season through the orchestrator (includes download unless --skip-download)
+    python main.py --run --season 2020
+    python main.py --run --season 2019 --season 2025 --skip-download
+
+Dataset CLI (download / build CSVs for a season — see dataset/scripts/README.md):
+
+    # Download FIA PDFs only
+    python dataset/scripts/run_pipeline.py --stage download --season 2020
+
+    # Full dataset pipeline for one season
+    python dataset/scripts/run_pipeline.py --stage all --season 2020
+
+    # Multiple seasons
+    python dataset/scripts/run_pipeline.py --stage all --season 2019 --season 2025
+
+    # PDFs already under data/raw/fia/{season}/ — skip download
+    python dataset/scripts/run_pipeline.py --stage parse --season 2020
+    python dataset/scripts/run_pipeline.py --stage build --season 2020
+    python dataset/scripts/run_pipeline.py --stage enrich --season 2020
+    python dataset/scripts/run_pipeline.py --stage validate --season 2020
+
 Recommended Phase order:
 
     dataset -> V1 tabular -> V2 tabular -> NLP -> normative
