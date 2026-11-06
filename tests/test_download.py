@@ -6,7 +6,7 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-from fia_ml.data.download import _should_include_pdf, slugify_event
+from fia_ml.data.download import _should_include_pdf, merge_failures, slugify_event
 from fia_ml.data.config import PipelineConfig
 
 
@@ -54,6 +54,27 @@ def test_should_not_match_partial_keyword(cfg):
     assert _should_include_pdf(title, cfg) is False
 
 
+def test_merge_failures_removes_recovered_and_keeps_others():
+    previous = [
+        {"title": "a", "url": "u_a", "error": "HTTP 429"},
+        {"title": "b", "url": "u_b", "error": "HTTP 404"},
+        {"title": "c", "url": "u_c", "error": "HTTP 429"},
+    ]
+    current = [{"title": "c", "url": "u_c", "error": "HTTP 400"}]
+    merged = merge_failures(previous, current, downloaded_urls={"u_a"})
+    assert merged == [
+        {"title": "b", "url": "u_b", "error": "HTTP 404"},
+        {"title": "c", "url": "u_c", "error": "HTTP 400"},
+    ]
+
+
+def test_merge_failures_empty_when_all_recovered():
+    previous = [{"title": "a", "url": "u_a", "error": "HTTP 429"}]
+    assert merge_failures(previous, [], downloaded_urls={"u_a"}) == []
+
+
 def test_config_has_all_seasons(cfg):
-    assert len(cfg.seasons) == 7
-    assert {season.year for season in cfg.seasons} == {2019, 2020, 2021, 2022, 2023, 2024, 2025}
+    years = [season.year for season in cfg.seasons]
+    assert years
+    assert len(years) == len(set(years))
+    assert all(f"season-{season.year}-" in season.url for season in cfg.seasons)

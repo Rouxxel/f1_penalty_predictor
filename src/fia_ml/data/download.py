@@ -137,6 +137,21 @@ def make_document_id(season: int, event_slug: str, title: str) -> str:
     return f"{season}_{event_slug}_{digest}"
 
 
+def merge_failures(
+    previous: list[dict[str, str]],
+    current: list[dict[str, str]],
+    downloaded_urls: set[str],
+) -> list[dict[str, str]]:
+    """Drop previously failed URLs that are now downloaded; current failures win."""
+    current_urls = {item["url"] for item in current}
+    kept = [
+        item
+        for item in previous
+        if item["url"] not in downloaded_urls and item["url"] not in current_urls
+    ]
+    return kept + current
+
+
 def download_season(cfg: PipelineConfig) -> list[DocumentEntry]:
     season = cfg.season
     raw_root = ensure_dir(cfg.path("raw_fia") / str(season))
@@ -201,6 +216,11 @@ def download_season(cfg: PipelineConfig) -> list[DocumentEntry]:
         client.close()
 
     sio.write_json(manifest_path, [entry.__dict__ for entry in entries])
-    if failures:
-        sio.write_json(raw_root / "download_failures.json", failures)
+    failures_path = raw_root / "download_failures.json"
+    previous_failures = sio.read_json(failures_path) if failures_path.exists() else []
+    merged_failures = merge_failures(
+        previous_failures, failures, {entry.url for entry in entries}
+    )
+    if merged_failures or failures_path.exists():
+        sio.write_json(failures_path, merged_failures)
     return entries
