@@ -65,11 +65,13 @@ def _is_blocked_html(html: str, url: str) -> bool:
     lowered = html.lower()
     if "/documents/" not in url:
         return False
-    if "facebook.com/fia" in lowered:
-        return True
-    if "maintenance" in lowered and 'value="/documents/championships/fia-formula-one-world-championship-14/season/' not in html:
-        return True
-    return False
+    has_document_content = (
+        'value="/documents/championships/fia-formula-one-world-championship-14/season/' in html
+        or "decision-document/" in lowered
+    )
+    if has_document_content:
+        return False
+    return "maintenance" in lowered or "facebook.com/fia" in lowered
 
 
 class RequestsFiaClient:
@@ -130,14 +132,23 @@ class RequestsFiaClient:
         return self._fetch_html_direct(url, referer=referer)
 
     def download_bytes(self, url: str, *, referer: str | None = None) -> bytes:
-        response = self.session.get(
-            url,
-            headers=_browser_headers(self.cfg, referer=referer),
-            timeout=int(_scraper(self.cfg).get("timeout_seconds", 60)),
-        )
-        response.raise_for_status()
-        _rate_limit(self.cfg)
-        return response.content
+        scraper = _scraper(self.cfg)
+        retries = int(scraper.get("max_retries", 3))
+        last_error: Exception | None = None
+        for attempt in range(retries):
+            try:
+                response = self.session.get(
+                    url,
+                    headers=_browser_headers(self.cfg, referer=referer),
+                    timeout=int(scraper.get("timeout_seconds", 60)),
+                )
+                response.raise_for_status()
+                _rate_limit(self.cfg)
+                return response.content
+            except Exception as exc:  # noqa: BLE001 - retry loop
+                last_error = exc
+                time.sleep(2 ** (attempt + 1))
+        raise RuntimeError(f"Failed to download {url}: {last_error}") from last_error
 
     def close(self) -> None:
         self.session.close()
@@ -224,20 +235,30 @@ class PlaywrightFiaClient:
     def download_bytes(self, url: str, *, referer: str | None = None) -> bytes:
         self._ensure_started()
         assert self._context is not None
-        response = self._context.request.get(
-            url,
-            headers=_browser_headers(self.cfg, referer=referer),
-        )
-        if not response.ok:
-            raise RuntimeError(f"Failed to download {url}: HTTP {response.status}")
-        _rate_limit(self.cfg)
-        return response.body()
+        retries = int(_scraper(self.cfg).get("max_retries", 3))
+        last_error: Exception | None = None
+        for attempt in range(retries):
+            try:
+                response = self._context.request.get(
+                    url,
+                    headers=_browser_headers(self.cfg, referer=referer),
+                )
+                if not response.ok:
+                    raise RuntimeError(f"HTTP {response.status}")
+                _rate_limit(self.cfg)
+                return response.body()
+            except Exception as exc:  # noqa: BLE001 - retry loop
+                last_error = exc
+                time.sleep(2 ** (attempt + 1))
+        raise RuntimeError(f"Failed to download {url}: {last_error}") from last_error
 
     def close(self) -> None:
-        if self._context is not None:
-            self._context.close()
-        if self._browser is not None:
-            self._browser.close()
+        for closer in (self._context, self._browser):
+            if closer is not None:
+                try:
+                    closer.close()
+                except Exception:  # noqa: BLE001 - browser may already be gone
+                    pass
         if self._playwright is not None:
             self._playwright.stop()
 
