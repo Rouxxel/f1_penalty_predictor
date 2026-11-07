@@ -10,15 +10,13 @@ paths:
 
 # Seasons to load (null = discover all processed_*.csv in dataset/csv/)
 inputs:
-  seasons: [2019, 2025]
+  seasons: [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026]
 
 splits:
   mode: temporal
-  # With only 2019 + 2025 available: train on 2019, validate on 2025.
-  # Add test_season when a third held-out season exists (e.g. 2024).
-  train_seasons: [2019]
-  validation_season: 2025
-  test_season: null
+  train_seasons: [2019, 2020, 2021, 2022, 2023]
+  validation_season: [2024]
+  test_season: [2025]
 
 model:
   objective: multi:softprob

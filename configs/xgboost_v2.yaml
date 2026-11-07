@@ -12,13 +12,13 @@ paths:
   features_config: configs/features.yaml
 
 inputs:
-  seasons: [2019, 2025]
+  seasons: [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026]
 
 splits:
   mode: temporal
-  train_seasons: [2019]
-  validation_season: 2025
-  test_season: null
+  train_seasons: [2019, 2020, 2021, 2022, 2023]
+  validation_season: [2024]
+  test_season: [2025]
 
 features:
   incidents_file: incidents.parquet
