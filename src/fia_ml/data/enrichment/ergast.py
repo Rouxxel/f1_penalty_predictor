@@ -24,8 +24,18 @@ def _fetch_json(url: str, cfg: PipelineConfig) -> dict[str, Any]:
         url,
         headers={"User-Agent": scraper.get("user_agent", "f1-penalty-predictor/1.0")},
     )
-    with urllib.request.urlopen(req, timeout=60) as response:
-        return json.loads(response.read().decode("utf-8"))
+    max_retries = int(cfg.enrichment.get("ergast_max_retries", 5))
+    for attempt in range(max_retries + 1):
+        try:
+            with urllib.request.urlopen(req, timeout=60) as response:
+                return json.loads(response.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            if exc.code not in (429, 503) or attempt == max_retries:
+                raise
+            retry_after = exc.headers.get("Retry-After", "") if exc.headers else ""
+            delay = float(retry_after) if retry_after.isdigit() else min(2 ** (attempt + 1), 60)
+            time.sleep(delay)
+    raise RuntimeError("unreachable")  # pragma: no cover
 
 
 def fetch_with_cache(relative_path: str, cfg: PipelineConfig) -> dict[str, Any]:
@@ -44,7 +54,7 @@ def fetch_with_cache(relative_path: str, cfg: PipelineConfig) -> dict[str, Any]:
         try:
             payload = _fetch_json(url, cfg)
             sio.write_json(cache_file, payload)
-            time.sleep(0.5)
+            time.sleep(float(cfg.enrichment.get("ergast_request_delay_seconds", 1.0)))
             return payload
         except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
             last_error = exc

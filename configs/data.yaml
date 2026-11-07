@@ -74,6 +74,8 @@ enrichment:
   ergast_base_url: "https://api.jolpi.ca/ergast/f1"
   ergast_fallback_url: "https://ergast.com/api/f1"
   ergast_fallback_enabled: true
+  ergast_request_delay_seconds: 1.0   # pause between uncached Jolpica calls (limit ~4/s burst, 500/h)
+  ergast_max_retries: 5               # retries on HTTP 429/503, honouring Retry-After
   fastf1_cache_enabled: true
 
 validation:
