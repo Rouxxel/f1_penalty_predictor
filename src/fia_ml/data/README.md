@@ -298,6 +298,17 @@ flowchart TD
     SKIP --> LOOP
 ```
 
+### Failures, retries and manual PDFs
+
+On each `download` run for a season, in order:
+
+1. PDFs placed by hand in `data/raw/fia/{season}/<event_folder>/` are added to `manifest.json`.
+2. Entries in `download_failures.json` are retried directly from their recorded URL.
+3. If any still fail (or there is no failure history), the season pages are scanned for missing PDFs.
+4. Remaining failures are written back to `download_failures.json`.
+
+FIA hrefs can contain `&amp;` or a bare `%` (e.g. `107%.pdf`), which are invalid URLs. They are normalised before download, and on HTTP 400/404 alternate spellings of the URL are tried before a file is recorded as failed.
+
 ---
 
 ## Module reference
