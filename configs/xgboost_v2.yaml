@@ -17,8 +17,8 @@ inputs:
 splits:
   mode: temporal
   train_seasons: [2019, 2020, 2021, 2022, 2023]
-  validation_season: [2024]
-  test_season: [2025]
+  validation_season: 2024
+  test_season: [2025, 2026]
 
 features:
   incidents_file: incidents.parquet
