@@ -81,17 +81,16 @@ def _temporal_split_nlp(
         empty = pd.DataFrame(columns=df.columns)
         return empty, empty, None
 
-    train_seasons = {int(s) for s in splits.get("train_seasons", [])}
-    val_season = splits.get("validation_season")
-    test_season = splits.get("test_season")
-    if val_season is not None:
-        val_season = int(val_season)
-    if test_season is not None:
-        test_season = int(test_season)
+    from fia_ml.preprocessing.splitting import as_season_list
 
-    train_df = df[df["season"].astype(int).isin(train_seasons)].copy()
-    val_df = df[df["season"].astype(int) == val_season].copy() if val_season is not None else pd.DataFrame()
-    test_df = df[df["season"].astype(int) == test_season].copy() if test_season is not None else None
+    train_seasons = set(as_season_list(splits.get("train_seasons")))
+    val_seasons = as_season_list(splits.get("validation_season"))
+    test_seasons = as_season_list(splits.get("test_season"))
+
+    season_col = df["season"].astype(int)
+    train_df = df[season_col.isin(train_seasons)].copy()
+    val_df = df[season_col.isin(val_seasons)].copy() if val_seasons else pd.DataFrame()
+    test_df = df[season_col.isin(test_seasons)].copy() if test_seasons else None
     return train_df, val_df, test_df
 
 

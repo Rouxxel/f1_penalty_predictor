@@ -7,32 +7,38 @@ from typing import Any
 import pandas as pd
 
 
+def as_season_list(value: Any) -> list[int]:
+    """Normalise a config value (None, one season, or a list of seasons) to a list of ints."""
+    if value is None:
+        return []
+    if isinstance(value, (list, tuple, set)):
+        return [int(s) for s in value]
+    return [int(value)]
+
+
 def temporal_split(
     df: pd.DataFrame,
     splits: dict[str, Any],
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame | None]:
-    """Split flattened rows by season. Never random."""
-    train_seasons = {int(s) for s in splits.get("train_seasons", [])}
-    val_season = splits.get("validation_season")
-    test_season = splits.get("test_season")
+    """Split flattened rows by season. Never random.
 
-    if val_season is not None:
-        val_season = int(val_season)
-    if test_season is not None:
-        test_season = int(test_season)
+    ``validation_season`` and ``test_season`` accept a single season or a list.
+    """
+    train_seasons = set(as_season_list(splits.get("train_seasons")))
+    val_seasons = as_season_list(splits.get("validation_season"))
+    test_seasons = as_season_list(splits.get("test_season"))
 
     seasons = set(df["season"].dropna().astype(int).unique())
     assigned: dict[int, str] = {}
-    for s in train_seasons:
-        assigned[s] = "train"
-    if val_season is not None:
-        if val_season in assigned:
-            raise ValueError(f"Season {val_season} appears in multiple splits")
-        assigned[val_season] = "validation"
-    if test_season is not None:
-        if test_season in assigned:
-            raise ValueError(f"Season {test_season} appears in multiple splits")
-        assigned[test_season] = "test"
+    for name, group in (
+        ("train", train_seasons),
+        ("validation", val_seasons),
+        ("test", test_seasons),
+    ):
+        for s in group:
+            if s in assigned:
+                raise ValueError(f"Season {s} appears in multiple splits")
+            assigned[s] = name
 
     unassigned = seasons - set(assigned.keys())
     if unassigned:
@@ -41,29 +47,26 @@ def temporal_split(
             "Update configs/xgboost.yaml splits."
         )
 
-    train_df = df[df["season"].astype(int).isin(train_seasons)].copy()
-    val_df = df[df["season"].astype(int) == val_season].copy() if val_season is not None else pd.DataFrame()
-    test_df = (
-        df[df["season"].astype(int) == test_season].copy()
-        if test_season is not None
-        else None
-    )
+    season_col = df["season"].astype(int)
+    train_df = df[season_col.isin(train_seasons)].copy()
+    val_df = df[season_col.isin(val_seasons)].copy() if val_seasons else pd.DataFrame()
+    test_df = df[season_col.isin(test_seasons)].copy() if test_seasons else None
 
     if train_df.empty:
         raise ValueError("Training split is empty — check train_seasons in config")
-    if val_season is not None and val_df.empty:
-        raise ValueError(f"Validation split for season {val_season} is empty")
+    if val_seasons and val_df.empty:
+        raise ValueError(f"Validation split for season(s) {val_seasons} is empty")
 
     return train_df, val_df, test_df
 
 
 def verify_no_season_overlap(splits: dict[str, Any]) -> None:
-    train = {int(s) for s in splits.get("train_seasons", [])}
-    val = splits.get("validation_season")
-    test = splits.get("test_season")
-    if val is not None and int(val) in train:
+    train = set(as_season_list(splits.get("train_seasons")))
+    val = set(as_season_list(splits.get("validation_season")))
+    test = set(as_season_list(splits.get("test_season")))
+    if val & train:
         raise ValueError("validation_season overlaps train_seasons")
-    if test is not None and int(test) in train:
+    if test & train:
         raise ValueError("test_season overlaps train_seasons")
-    if val is not None and test is not None and int(val) == int(test):
-        raise ValueError("validation_season equals test_season")
+    if val & test:
+        raise ValueError("validation_season overlaps test_season")
