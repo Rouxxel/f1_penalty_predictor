@@ -15,7 +15,7 @@ openf1:
   cache_dir: data/raw/race_data/openf1_cache
 
 fastf1:
-  enabled: false
+  enabled: true
   validate_openf1_from_season: 2024
 
 text_fields:
