@@ -15,6 +15,8 @@ __pycache__/
 2024/
 2025/
 2026/
+!tests/fixtures/nlp/extracted_documents/2019/
+!tests/fixtures/nlp/extracted_documents/2025/
 ergast/
 fastf1_cache/
 review_queue_*.csv
@@ -22,6 +24,11 @@ review_queue_*.csv
 ml_models/nlp/checkpoints/
 ml_models/nlp/model/
 data/processed/nlp_*.jsonl
+data/interim/enrichment_meta/*
+data/processed/*
+dataset/csv/*
+reports/*
+ml_models/*
 
 # Distribution / packaging
 .Python
