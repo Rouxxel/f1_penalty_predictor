@@ -67,6 +67,10 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
+# Scratch output written by the test suite (recreated on every run)
+tests/_tmp_*/
+tests/fixtures/nlp/_out/
+tests/fixtures/orchestration_empty/
 
 # Translations
 *.mo
