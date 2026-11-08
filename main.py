@@ -91,7 +91,8 @@ if str(SRC_ROOT) not in sys.path:
 
 os.environ.setdefault("USE_TF", "0")
 
-from fia_ml.orchestration.run_all import main
+# Must follow the sys.path / USE_TF setup above, so it cannot sit at the top of the module.
+from fia_ml.orchestration.run_all import main  # pylint: disable=wrong-import-position
 
 if __name__ == "__main__":
     raise SystemExit(main())
