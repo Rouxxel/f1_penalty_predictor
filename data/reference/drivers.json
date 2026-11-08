@@ -74,7 +74,7 @@
         "nationality": "Italian",
         "nationality_code": "ITA",
         "nationality_flag": "🇮🇹",
-        "world_championships": 0,
+        "world_championships": 1,
         "birth_date": "2006-08-25",
         "birth_place": "Bologna, Italy",
         "debut": "2025",
@@ -517,5 +517,29 @@
                 "relationship": "Father"
             }
         ]
+    },
+    "ryo_hirakawa": {
+        "id": "ryo_hirakawa",
+        "name": "Ryo Hirakawa",
+        "nationality": "Japanese",
+        "nationality_code": "JPN",
+        "nationality_flag": "🇯🇵",
+        "world_championships": 0,
+        "birth_date": "1994-03-07",
+        "birth_place": "Hiroshima, Japan",
+        "debut": "2026",
+        "relevant_relatives": []
+    },
+    "rafael_camara": {
+        "id": "rafael_camara",
+        "name": "Rafael Câmara",
+        "nationality": "Brazilian",
+        "nationality_code": "BRA",
+        "nationality_flag": "🇧🇷",
+        "world_championships": 0,
+        "birth_date": "2005-05-05",
+        "birth_place": "Recife, Brazil",
+        "debut": "2026",
+        "relevant_relatives": []
     }
 }
