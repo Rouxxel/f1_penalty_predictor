@@ -1,475 +1,952 @@
 [
   {
-    "row_id": "2025_race_5fd5abdd32_lewis_hamilton",
-    "incident_id": "2025_race_5fd5abdd32",
+    "row_id": "2024_practice_b8bd5b5f60_valtteri_bottas",
+    "incident_id": "2024_practice_b8bd5b5f60",
+    "penalty": "reprimand",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_30c664de7e_lewis_hamilton",
+    "incident_id": "2024_practice_30c664de7e",
+    "penalty": "warning",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_30c664de7e_car_2",
+    "incident_id": "2024_practice_30c664de7e",
+    "penalty": "warning",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_03088876e5_kevin_magnussen",
+    "incident_id": "2024_race_03088876e5",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_30b196e534_sergio_perez",
+    "incident_id": "2024_race_30b196e534",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_6e7cfbf9ac_kevin_magnussen",
+    "incident_id": "2024_race_6e7cfbf9ac",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_6e7cfbf9ac_car_23",
+    "incident_id": "2024_race_6e7cfbf9ac",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_9e44547ed8_lando_norris",
+    "incident_id": "2024_race_9e44547ed8",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_d24e0c7f16_yuki_tsunoda",
+    "incident_id": "2024_race_d24e0c7f16",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_qualifying_1af48f803e_pierre_gasly",
+    "incident_id": "2024_qualifying_1af48f803e",
+    "penalty": "reprimand",
+    "session": "qualifying",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_qualifying_9b7e252c82_sergio_perez",
+    "incident_id": "2024_qualifying_9b7e252c82",
+    "penalty": "drop_of_3_grid_positions_for_the_next_race_in_which_the_driver_participates.",
+    "session": "qualifying",
+    "penalty_severity": 2,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_qualifying_9b7e252c82_car_27",
+    "incident_id": "2024_qualifying_9b7e252c82",
+    "penalty": "drop_of_3_grid_positions_for_the_next_race_in_which_the_driver_participates.",
+    "session": "qualifying",
+    "penalty_severity": 2,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_race_06a7dcf7ce_pierre_gasly",
+    "incident_id": "2024_race_06a7dcf7ce",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_0f29343ca3_fernando_alonso",
+    "incident_id": "2024_race_0f29343ca3",
+    "penalty": "20s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_1d4c25a75d_valtteri_bottas",
+    "incident_id": "2024_race_1d4c25a75d",
+    "penalty": "the_competitor_(kick_sauber_f1_team)_is_fined_€5,000.",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_dc98c0b2a9_lance_stroll",
+    "incident_id": "2024_practice_dc98c0b2a9",
+    "penalty": "the_competitor_(aston_martin_aramco_cognizant_f1_team)_is_fined_€100.",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_qualifying_2bbebf7c02_george_russell",
+    "incident_id": "2024_qualifying_2bbebf7c02",
+    "penalty": "the_competitor_(mercedes-amg_petronas_f1_team)_is_fined_€5,000.",
+    "session": "qualifying",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_race_9e65a70628_george_russell",
+    "incident_id": "2024_race_9e65a70628",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_9e65a70628_car_81",
+    "incident_id": "2024_race_9e65a70628",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_e7b26dcca0_daniel_ricciardo",
+    "incident_id": "2024_race_e7b26dcca0",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_fa084c2a5a_lance_stroll",
+    "incident_id": "2024_race_fa084c2a5a",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_qualifying_b8f513cad2_nico_hulkenberg",
+    "incident_id": "2024_qualifying_b8f513cad2",
+    "penalty": "reprimand",
+    "session": "qualifying",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_qualifying_d31f9ca8e7_fernando_alonso",
+    "incident_id": "2024_qualifying_d31f9ca8e7",
+    "penalty": "no_further_action",
+    "session": "qualifying",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_race_06411115d4_alexander_albon",
+    "incident_id": "2024_race_06411115d4",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_06411115d4_car_10",
+    "incident_id": "2024_race_06411115d4",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_0ce776154c_daniel_ricciardo",
+    "incident_id": "2024_race_0ce776154c",
+    "penalty": "drop_of_3_grid_positions_for_the_next_race_in_which_the_driver_participates._2_p",
+    "session": "race",
+    "penalty_severity": 2,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_0ce776154c_car_27",
+    "incident_id": "2024_race_0ce776154c",
+    "penalty": "drop_of_3_grid_positions_for_the_next_race_in_which_the_driver_participates._2_p",
+    "session": "race",
+    "penalty_severity": 2,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_3f89fa251e_lance_stroll",
+    "incident_id": "2024_race_3f89fa251e",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_3f89fa251e_car_27",
+    "incident_id": "2024_race_3f89fa251e",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_54e4a68796_kevin_magnussen",
+    "incident_id": "2024_race_54e4a68796",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_54e4a68796_car_22",
+    "incident_id": "2024_race_54e4a68796",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_9ce38aa437_logan_sargeant",
+    "incident_id": "2024_race_9ce38aa437",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_9ce38aa437_car_27",
+    "incident_id": "2024_race_9ce38aa437",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_d71639e735_pierre_gasly",
+    "incident_id": "2024_race_d71639e735",
+    "penalty": "the_competitor_(bwt_alpine_f1_team)_is_fined_€10,000.",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_e053ddae3f_lance_stroll",
+    "incident_id": "2024_race_e053ddae3f",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_e053ddae3f_car_3",
+    "incident_id": "2024_race_e053ddae3f",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_sprint_6a606d2a98_fernando_alonso",
+    "incident_id": "2024_sprint_6a606d2a98",
+    "penalty": "10s_time_penalty",
+    "session": "sprint",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_1cd6ca3114_lance_stroll",
+    "incident_id": "2024_practice_1cd6ca3114",
+    "penalty": "the_competitor_(aston_martin_aramco_f1_team)_is_fined_€400.",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_qualifying_277cd0f663_valtteri_bottas",
+    "incident_id": "2024_qualifying_277cd0f663",
+    "penalty": "drop_of_3_grid_positions_for_the_next_sprint_session_in_which_the_driver_partici",
+    "session": "qualifying",
+    "penalty_severity": 2,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_qualifying_341860700f_pierre_gasly",
+    "incident_id": "2024_qualifying_341860700f",
+    "penalty": "no_further_action",
+    "session": "qualifying",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_qualifying_4bf742d27c_zhou_guanyu",
+    "incident_id": "2024_qualifying_4bf742d27c",
+    "penalty": "reprimand",
+    "session": "qualifying",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_qualifying_af38745a2b_lewis_hamilton",
+    "incident_id": "2024_qualifying_af38745a2b",
+    "penalty": "no_further_action",
+    "session": "qualifying",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_qualifying_c3e0ae4612_zhou_guanyu",
+    "incident_id": "2024_qualifying_c3e0ae4612",
+    "penalty": "warning",
+    "session": "qualifying",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_race_0c531973ee_lance_stroll",
+    "incident_id": "2024_race_0c531973ee",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_62d266ce41_kevin_magnussen",
+    "incident_id": "2024_race_62d266ce41",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_62d266ce41_car_2",
+    "incident_id": "2024_race_62d266ce41",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_83d41fe9e0_carlos_sainz",
+    "incident_id": "2024_race_83d41fe9e0",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_83d41fe9e0_car_81",
+    "incident_id": "2024_race_83d41fe9e0",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_ce43046330_kevin_magnussen",
+    "incident_id": "2024_race_ce43046330",
+    "penalty": "20s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_sprint_11a6e70915_lando_norris",
+    "incident_id": "2024_sprint_11a6e70915",
+    "penalty": "reprimand",
+    "session": "sprint",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_sprint_1fae105bbb_lance_stroll",
+    "incident_id": "2024_sprint_1fae105bbb",
+    "penalty": "no_further_action",
+    "session": "sprint",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_sprint_22756873a3_kevin_magnussen",
+    "incident_id": "2024_sprint_22756873a3",
+    "penalty": "no_further_action",
+    "session": "sprint",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_sprint_28fb0c0d2b_lewis_hamilton",
+    "incident_id": "2024_sprint_28fb0c0d2b",
+    "penalty": "20s_time_penalty",
+    "session": "sprint",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_sprint_3ce2883427_kevin_magnussen",
+    "incident_id": "2024_sprint_3ce2883427",
+    "penalty": "10s_time_penalty",
+    "session": "sprint",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_sprint_544a1b47fb_lewis_hamilton",
+    "incident_id": "2024_sprint_544a1b47fb",
+    "penalty": "no_further_action",
+    "session": "sprint",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_sprint_9dc826f0f4_kevin_magnussen",
+    "incident_id": "2024_sprint_9dc826f0f4",
+    "penalty": "5s_time_penalty",
+    "session": "sprint",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_sprint_b528842983_fernando_alonso",
+    "incident_id": "2024_sprint_b528842983",
+    "penalty": "no_further_action",
+    "session": "sprint",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_sprint_c55116922b_esteban_ocon",
+    "incident_id": "2024_sprint_c55116922b",
+    "penalty": "10s_time_penalty",
+    "session": "sprint",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_sprint_c55116922b_car_16",
+    "incident_id": "2024_sprint_c55116922b",
+    "penalty": "10s_time_penalty",
+    "session": "sprint",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_142dddc93c_sergio_perez",
+    "incident_id": "2024_practice_142dddc93c",
+    "penalty": "the_competitor_(oracle_red_bull_racing)_is_fined_€1,000.",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_23e468695d_lance_stroll",
+    "incident_id": "2024_practice_23e468695d",
+    "penalty": "the_competitor_(aston_martin_aramco_f1_team)_is_fined_€100.",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_492064fbd1_sergio_perez",
+    "incident_id": "2024_practice_492064fbd1",
+    "penalty": "no_further_action",
+    "session": "practice",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_492064fbd1_car_16",
+    "incident_id": "2024_practice_492064fbd1",
+    "penalty": "no_further_action",
+    "session": "practice",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_8090e84621_yuki_tsunoda",
+    "incident_id": "2024_practice_8090e84621",
+    "penalty": "reprimand",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_a25c651724_daniel_ricciardo",
+    "incident_id": "2024_practice_a25c651724",
+    "penalty": "the_competitor_(visa_cash_app_rb_formula_one_team)_is_fined_€5,000.",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_qualifying_66a94f015b_oscar_piastri",
+    "incident_id": "2024_qualifying_66a94f015b",
+    "penalty": "drop_of_3_grid_positions_for_the_next_race_in_which_the_driver_participates.",
+    "session": "qualifying",
+    "penalty_severity": 2,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_qualifying_66a94f015b_car_20",
+    "incident_id": "2024_qualifying_66a94f015b",
+    "penalty": "drop_of_3_grid_positions_for_the_next_race_in_which_the_driver_participates.",
+    "session": "qualifying",
+    "penalty_severity": 2,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_race_42fbaec292_alexander_albon",
+    "incident_id": "2024_race_42fbaec292",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_43fec4dadd_alexander_albon",
+    "incident_id": "2024_race_43fec4dadd",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024__6730e7838d_kevin_magnussen",
+    "incident_id": "2024__6730e7838d",
+    "penalty": "disqualification",
+    "session": "",
+    "penalty_severity": 2,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_af26bcacea_lando_norris",
+    "incident_id": "2024_practice_af26bcacea",
+    "penalty": "reprimand",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_e8970e5a73_max_verstappen",
+    "incident_id": "2024_practice_e8970e5a73",
+    "penalty": "warning",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_e8b124b524_lance_stroll",
+    "incident_id": "2024_practice_e8b124b524",
+    "penalty": "the_competitor_(aston_martin_aramco_f1_team)_is_fined_€100.",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_ef804d9856_valtteri_bottas",
+    "incident_id": "2024_practice_ef804d9856",
+    "penalty": "the_competitor_(stake_f1_team_kick_sauber)_is_fined_€1,000",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_qualifying_488ad7ef78_carlos_sainz",
+    "incident_id": "2024_qualifying_488ad7ef78",
+    "penalty": "no_further_action",
+    "session": "qualifying",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_qualifying_488ad7ef78_car_23",
+    "incident_id": "2024_qualifying_488ad7ef78",
+    "penalty": "no_further_action",
+    "session": "qualifying",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_qualifying_a971463f7c_nico_hulkenberg",
+    "incident_id": "2024_qualifying_a971463f7c",
+    "penalty": "no_further_action",
+    "session": "qualifying",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_qualifying_a971463f7c_car_31",
+    "incident_id": "2024_qualifying_a971463f7c",
+    "penalty": "no_further_action",
+    "session": "qualifying",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_qualifying_c97bdc0733_nico_hulkenberg",
+    "incident_id": "2024_qualifying_c97bdc0733",
+    "penalty": "disqualification",
+    "session": "qualifying",
+    "penalty_severity": 2,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_race_9052120e58_esteban_ocon",
+    "incident_id": "2024_race_9052120e58",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_9052120e58_car_10",
+    "incident_id": "2024_race_9052120e58",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_b69d6f0ae7_charles_leclerc",
+    "incident_id": "2024_practice_b69d6f0ae7",
+    "penalty": "the_competitor_(scuderia_ferrari)_is_fined_€5,000.",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_qualifying_59a39357cb_max_verstappen",
+    "incident_id": "2024_qualifying_59a39357cb",
+    "penalty": "no_further_action",
+    "session": "qualifying",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_race_0d4d22e5ff_lando_norris",
+    "incident_id": "2024_race_0d4d22e5ff",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_18b37ca3ab_oscar_piastri",
+    "incident_id": "2024_race_18b37ca3ab",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_354e3f57a7_george_russell",
+    "incident_id": "2024_race_354e3f57a7",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_b2b0a8fc0d_daniel_ricciardo",
+    "incident_id": "2024_race_b2b0a8fc0d",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_b7978548bb_yuki_tsunoda",
+    "incident_id": "2024_race_b7978548bb",
+    "penalty": "the_competitor_(visa_cash_app_rb_f1_team)_is_fined_€10,000.",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_dea17b8718_sergio_perez",
+    "incident_id": "2024_race_dea17b8718",
+    "penalty": "the_competitor_(oracle_red_bull_racing)_is_fined_€25,000._additionally,_a_drop_o",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024__00e004b036_lance_stroll",
+    "incident_id": "2024__00e004b036",
+    "penalty": "reprimand",
+    "session": "",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_99b8b90d7b_charles_leclerc",
+    "incident_id": "2024_practice_99b8b90d7b",
+    "penalty": "reprimand",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_ffa40ce622_lance_stroll",
+    "incident_id": "2024_practice_ffa40ce622",
+    "penalty": "reprimand",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_qualifying_d31f160bad_logan_sargeant",
+    "incident_id": "2024_qualifying_d31f160bad",
+    "penalty": "drop_of_3_grid_positions_for_the_next_race_in_which_the_driver_participates.",
+    "session": "qualifying",
+    "penalty_severity": 2,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_qualifying_d31f160bad_car_18",
+    "incident_id": "2024_qualifying_d31f160bad",
+    "penalty": "drop_of_3_grid_positions_for_the_next_race_in_which_the_driver_participates.",
+    "session": "qualifying",
+    "penalty_severity": 2,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_race_03d822212c_nico_hulkenberg",
+    "incident_id": "2024_race_03d822212c",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_62af236d96_kevin_magnussen",
+    "incident_id": "2024_race_62af236d96",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_b30a0e20c3_yuki_tsunoda",
+    "incident_id": "2024_race_b30a0e20c3",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024__37712fb0d5_nico_hulkenberg",
+    "incident_id": "2024__37712fb0d5",
+    "penalty": "10s_time_penalty",
+    "session": "",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024__37712fb0d5_car_14",
+    "incident_id": "2024__37712fb0d5",
+    "penalty": "10s_time_penalty",
+    "session": "",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024__c889b146a4_max_verstappen",
+    "incident_id": "2024__c889b146a4",
     "penalty": "no_penalty_is_applied.",
-    "session": "race",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_b5f6435097_fernando_alonso",
-    "incident_id": "2025_race_b5f6435097",
-    "penalty": "no_penalty_applied.",
-    "session": "race",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_eb67e9e849_yuki_tsunoda",
-    "incident_id": "2025_race_eb67e9e849",
-    "penalty": "no_penalty_applied.",
-    "session": "race",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_f0690b4134_alexander_albon",
-    "incident_id": "2025_race_f0690b4134",
-    "penalty": "no_penalty_applied.",
-    "session": "race",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_qualifying_35b9057129_charles_leclerc",
-    "incident_id": "2025_qualifying_35b9057129",
-    "penalty": "no_further_action",
-    "session": "qualifying",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 2
-  },
-  {
-    "row_id": "2025_qualifying_b3f1fae208_lance_stroll",
-    "incident_id": "2025_qualifying_b3f1fae208",
-    "penalty": "no_further_action",
-    "session": "qualifying",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 2
-  },
-  {
-    "row_id": "2025_race_1c61ec4aa3_jack_doohan",
-    "incident_id": "2025_race_1c61ec4aa3",
-    "penalty": "10s_time_penalty",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_47adfa78e4_lewis_hamilton",
-    "incident_id": "2025_race_47adfa78e4",
-    "penalty": "disqualification",
-    "session": "race",
-    "penalty_severity": 2,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_cc93c50b96_charles_leclerc",
-    "incident_id": "2025_race_cc93c50b96",
-    "penalty": "disqualification",
-    "session": "race",
-    "penalty_severity": 2,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_fe3c37f387_pierre_gasly",
-    "incident_id": "2025_race_fe3c37f387",
-    "penalty": "disqualification",
-    "session": "race",
-    "penalty_severity": 2,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_reconnaissance laps_1b31146e31_yuki_tsunoda",
-    "incident_id": "2025_reconnaissance laps_1b31146e31",
-    "penalty": "warning",
-    "session": "reconnaissance laps",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_reconnaissance laps_59c4255ddc_gabriel_bortoleto",
-    "incident_id": "2025_reconnaissance laps_59c4255ddc",
-    "penalty": "warning",
-    "session": "reconnaissance laps",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_reconnaissance laps_686f546ac2_nico_hulkenberg",
-    "incident_id": "2025_reconnaissance laps_686f546ac2",
-    "penalty": "warning",
-    "session": "reconnaissance laps",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_practice_086e12fa1a_lewis_hamilton",
-    "incident_id": "2025_practice_086e12fa1a",
-    "penalty": "warning",
-    "session": "practice",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_practice_26e0437873_lance_stroll",
-    "incident_id": "2025_practice_26e0437873",
-    "penalty": "warning",
-    "session": "practice",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_practice_9819f8d6fd_max_verstappen",
-    "incident_id": "2025_practice_9819f8d6fd",
-    "penalty": "warning",
-    "session": "practice",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_practice_a8bedd4480_kimi_antonelli",
-    "incident_id": "2025_practice_a8bedd4480",
-    "penalty": "the_competitor_(mercedes-amg_petronas_f1_team)_is_fined_€100.",
-    "session": "practice",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_practice_d16cc7cbaf_carlos_sainz",
-    "incident_id": "2025_practice_d16cc7cbaf",
-    "penalty": "the_competitor_(atlassian_williams_racing)_is_fined_€1000",
-    "session": "practice",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_practice_e49476c23b_oscar_piastri",
-    "incident_id": "2025_practice_e49476c23b",
-    "penalty": "warning",
-    "session": "practice",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_99eaef2c74_carlos_sainz",
-    "incident_id": "2025_race_99eaef2c74",
-    "penalty": "the_driver_carlos_sainz_is_fined_€20,000_of_which_€10,000_is_suspended_for_a_per",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_qualifying_b715030d8d_kimi_antonelli",
-    "incident_id": "2025_qualifying_b715030d8d",
-    "penalty": "drop_of_1_grid_position_for_the_next_race_in_which_the_driver_participates.",
-    "session": "qualifying",
-    "penalty_severity": 2,
-    "pred_majority": 1,
-    "pred_session_stratified": 2
-  },
-  {
-    "row_id": "2025_qualifying_d6f37adaf4_george_russell",
-    "incident_id": "2025_qualifying_d6f37adaf4",
-    "penalty": "drop_of_1_grid_position_for_the_next_race_in_which_the_driver_participates.",
-    "session": "qualifying",
-    "penalty_severity": 2,
-    "pred_majority": 1,
-    "pred_session_stratified": 2
-  },
-  {
-    "row_id": "2025_race_2fa76babc1_nico_hulkenberg",
-    "incident_id": "2025_race_2fa76babc1",
-    "penalty": "disqualification",
-    "session": "race",
-    "penalty_severity": 2,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_3b9d36df15_george_russell",
-    "incident_id": "2025_race_3b9d36df15",
-    "penalty": "no_penalty_is_applied.",
-    "session": "race",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_9fc679b982_jack_doohan",
-    "incident_id": "2025_race_9fc679b982",
-    "penalty": "5s_time_penalty",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_bfbdf59dc3_lando_norris",
-    "incident_id": "2025_race_bfbdf59dc3",
-    "penalty": "5s_time_penalty",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_practice_28d185945a_liam_lawson",
-    "incident_id": "2025_practice_28d185945a",
-    "penalty": "warning",
-    "session": "practice",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_practice_adadfa0914_jack_doohan",
-    "incident_id": "2025_practice_adadfa0914",
-    "penalty": "reprimand",
-    "session": "practice",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_87481469bc_max_verstappen",
-    "incident_id": "2025_race_87481469bc",
-    "penalty": "5s_time_penalty",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_e8b86bf1da_liam_lawson",
-    "incident_id": "2025_race_e8b86bf1da",
-    "penalty": "10s_time_penalty",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_practice_1316885435_lando_norris",
-    "incident_id": "2025_practice_1316885435",
-    "penalty": "warning",
-    "session": "practice",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_practice_74af3f4433_jack_doohan",
-    "incident_id": "2025_practice_74af3f4433",
-    "penalty": "the_competitor_(bwt_alpine_f1_team)_is_fined_€1000.",
-    "session": "practice",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_qualifying_00eda94900_alexander_albon",
-    "incident_id": "2025_qualifying_00eda94900",
-    "penalty": "reprimand",
-    "session": "qualifying",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 2
-  },
-  {
-    "row_id": "2025_qualifying_c42375cbb7_max_verstappen",
-    "incident_id": "2025_qualifying_c42375cbb7",
-    "penalty": "reprimand",
-    "session": "qualifying",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 2
-  },
-  {
-    "row_id": "2025_race_87de1e0c1f_carlos_sainz",
-    "incident_id": "2025_race_87de1e0c1f",
-    "penalty": "warning",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_904cd2d106_lewis_hamilton",
-    "incident_id": "2025_race_904cd2d106",
-    "penalty": "no_further_action",
-    "session": "race",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_9b8bbec2bd_yuki_tsunoda",
-    "incident_id": "2025_race_9b8bbec2bd",
-    "penalty": "5s_time_penalty",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_cea4e321ba_carlos_sainz",
-    "incident_id": "2025_race_cea4e321ba",
-    "penalty": "no_further_action",
-    "session": "race",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_e2d10b6306_pierre_gasly",
-    "incident_id": "2025_race_e2d10b6306",
-    "penalty": "warning",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_reconnaissance laps_90437e24a0_charles_leclerc",
-    "incident_id": "2025_reconnaissance laps_90437e24a0",
-    "penalty": "reprimand",
-    "session": "reconnaissance laps",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_sprint_75ac16b051_alexander_albon",
-    "incident_id": "2025_sprint_75ac16b051",
-    "penalty": "5s_time_penalty",
-    "session": "sprint",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_sprint_7743cd6bdb_oliver_bearman",
-    "incident_id": "2025_sprint_7743cd6bdb",
-    "penalty": "5s_time_penalty",
-    "session": "sprint",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_sprint_ef07e7bf5b_max_verstappen",
-    "incident_id": "2025_sprint_ef07e7bf5b",
-    "penalty": "10s_time_penalty",
-    "session": "sprint",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_practice_167e1ac8dc_franco_colapinto",
-    "incident_id": "2025_practice_167e1ac8dc",
-    "penalty": "the_competitor_(bwt_alpine_f1_team)_is_fined_€600",
-    "session": "practice",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_practice_9fde774e39_carlos_sainz",
-    "incident_id": "2025_practice_9fde774e39",
-    "penalty": "the_competitor_(atlassian_williams_racing)_is_fined_€1000.",
-    "session": "practice",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_practice_e6a853b940_charles_leclerc",
-    "incident_id": "2025_practice_e6a853b940",
-    "penalty": "the_competitor_(scuderia_ferrari_hp)_is_fined_€5,000.",
-    "session": "practice",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_qualifying_9db1bf5b10_franco_colapinto",
-    "incident_id": "2025_qualifying_9db1bf5b10",
-    "penalty": "drop_of_1_grid_position_for_the_next_race_in_which_the_driver_participates.",
-    "session": "qualifying",
-    "penalty_severity": 2,
-    "pred_majority": 1,
-    "pred_session_stratified": 2
-  },
-  {
-    "row_id": "2025_practice_9290f33fa0_yuki_tsunoda",
-    "incident_id": "2025_practice_9290f33fa0",
-    "penalty": "no_further_action",
-    "session": "practice",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_ec3972128f_george_russell",
-    "incident_id": "2025_race_ec3972128f",
-    "penalty": "drive_through",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_reconnaissance laps_077979f88e_oliver_bearman",
-    "incident_id": "2025_reconnaissance laps_077979f88e",
-    "penalty": "the_competitor_(moneygram_haas_f1_team)_is_fined_€5,000.",
-    "session": "reconnaissance laps",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025__e0ad7a5a2a_franco_colapinto",
-    "incident_id": "2025__e0ad7a5a2a",
-    "penalty": "no_further_action",
     "session": "",
     "penalty_severity": 0,
     "pred_majority": 1,
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025_qualifying_a40f2b52df_lance_stroll",
-    "incident_id": "2025_qualifying_a40f2b52df",
-    "penalty": "warning",
+    "row_id": "2024_qualifying_796472b2e9_nico_hulkenberg",
+    "incident_id": "2024_qualifying_796472b2e9",
+    "penalty": "reprimand",
     "session": "qualifying",
     "penalty_severity": 1,
     "pred_majority": 1,
     "pred_session_stratified": 2
   },
   {
-    "row_id": "2025_race_2803835084_alexander_albon",
-    "incident_id": "2025_race_2803835084",
+    "row_id": "2024_qualifying_9909f4ddc3_nico_hulkenberg",
+    "incident_id": "2024_qualifying_9909f4ddc3",
+    "penalty": "no_further_action",
+    "session": "qualifying",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_qualifying_a432c22c54_max_verstappen",
+    "incident_id": "2024_qualifying_a432c22c54",
+    "penalty": "no_further_action",
+    "session": "qualifying",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_qualifying_c373657cb6_yuki_tsunoda",
+    "incident_id": "2024_qualifying_c373657cb6",
+    "penalty": "the_driver_(yuki_tsunoda)_is_fined_€40,000_of_which_€20,000_is_suspended_for_the",
+    "session": "qualifying",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_qualifying_df198159d9_lewis_hamilton",
+    "incident_id": "2024_qualifying_df198159d9",
+    "penalty": "the_competitor_(mercedes-amg_petronas_f1_team)_is_fined_€5,000.",
+    "session": "qualifying",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_race_0b2a7d3770_max_verstappen",
+    "incident_id": "2024_race_0b2a7d3770",
     "penalty": "10s_time_penalty",
     "session": "race",
     "penalty_severity": 1,
@@ -477,8 +954,17 @@
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025_race_86a8de9cbc_max_verstappen",
-    "incident_id": "2025_race_86a8de9cbc",
+    "row_id": "2024_race_0b2a7d3770_car_4",
+    "incident_id": "2024_race_0b2a7d3770",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_123a9f424a_max_verstappen",
+    "incident_id": "2024_race_123a9f424a",
     "penalty": "no_further_action",
     "session": "race",
     "penalty_severity": 0,
@@ -486,8 +972,35 @@
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025_race_a28cb3cf51_oliver_bearman",
-    "incident_id": "2025_race_a28cb3cf51",
+    "row_id": "2024_race_26b79e661f_alexander_albon",
+    "incident_id": "2024_race_26b79e661f",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_4a18e558d2_lewis_hamilton",
+    "incident_id": "2024_race_4a18e558d2",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_661793e588_lando_norris",
+    "incident_id": "2024_race_661793e588",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_ad4c00c6c2_fernando_alonso",
+    "incident_id": "2024_race_ad4c00c6c2",
     "penalty": "10s_time_penalty",
     "session": "race",
     "penalty_severity": 1,
@@ -495,8 +1008,26 @@
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025_practice_23bf117035_george_russell",
-    "incident_id": "2025_practice_23bf117035",
+    "row_id": "2024_race_ad4c00c6c2_car_24",
+    "incident_id": "2024_race_ad4c00c6c2",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_c4ef0cf9d2_lewis_hamilton",
+    "incident_id": "2024_race_c4ef0cf9d2",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_68287c65d3_isack_hadjar",
+    "incident_id": "2024_practice_68287c65d3",
     "penalty": "warning",
     "session": "practice",
     "penalty_severity": 1,
@@ -504,26 +1035,161 @@
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025_practice_286f2e9bbe_george_russell",
-    "incident_id": "2025_practice_286f2e9bbe",
-    "penalty": "the_competitor_(mercedes-_amg_petronas_f1_team)_is_fined_€100.",
+    "row_id": "2024_practice_68287c65d3_car_4",
+    "incident_id": "2024_practice_68287c65d3",
+    "penalty": "warning",
     "session": "practice",
     "penalty_severity": 1,
     "pred_majority": 1,
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025_practice_8e527d0178_george_russell",
-    "incident_id": "2025_practice_8e527d0178",
-    "penalty": "the_competitor_(mercedes-_amg_petronas_f1_team)_is_fined_€100.",
+    "row_id": "2024_practice_8e4719e58e_daniel_ricciardo",
+    "incident_id": "2024_practice_8e4719e58e",
+    "penalty": "reprimand",
     "session": "practice",
     "penalty_severity": 1,
     "pred_majority": 1,
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025_practice_bd8bb5b770_alexander_albon",
-    "incident_id": "2025_practice_bd8bb5b770",
+    "row_id": "2024_practice_f1a748be0c_lance_stroll",
+    "incident_id": "2024_practice_f1a748be0c",
+    "penalty": "warning",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_f1a748be0c_car_16",
+    "incident_id": "2024_practice_f1a748be0c",
+    "penalty": "warning",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_qualifying_083e52b228_fernando_alonso",
+    "incident_id": "2024_qualifying_083e52b228",
+    "penalty": "no_penalty_is_applied.",
+    "session": "qualifying",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_qualifying_623bacc31e_lance_stroll",
+    "incident_id": "2024_qualifying_623bacc31e",
+    "penalty": "reprimand",
+    "session": "qualifying",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_reconnaissance laps_a300719870_max_verstappen",
+    "incident_id": "2024_reconnaissance laps_a300719870",
+    "penalty": "the_competitor_(oracle_red_bull_racing)_is_fined_€100.",
+    "session": "reconnaissance laps",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_reconnaissance laps_bedf1e046b_max_verstappen",
+    "incident_id": "2024_reconnaissance laps_bedf1e046b",
+    "penalty": "the_competitor_(oracle_red_bull_racing)_is_fined_€100.",
+    "session": "reconnaissance laps",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_reconnaissance laps_bfca1320d5_alexander_albon",
+    "incident_id": "2024_reconnaissance laps_bfca1320d5",
+    "penalty": "the_competitor_(williams_racing)_is_fined_€100.",
+    "session": "reconnaissance laps",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_reconnaissance laps_c0871f39a3_alexander_albon",
+    "incident_id": "2024_reconnaissance laps_c0871f39a3",
+    "penalty": "the_competitor_(williams_racing)_is_fined_€100.",
+    "session": "reconnaissance laps",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_0dae61ed95_max_verstappen",
+    "incident_id": "2024_race_0dae61ed95",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_426e1d4d77_max_verstappen",
+    "incident_id": "2024_race_426e1d4d77",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_qualifying_1f31dbbdd3_zhou_guanyu",
+    "incident_id": "2024_qualifying_1f31dbbdd3",
+    "penalty": "drop_of_3_grid_positions_for_the_next_race_in_which_the_driver_participates.",
+    "session": "qualifying",
+    "penalty_severity": 2,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_qualifying_1f31dbbdd3_car_1",
+    "incident_id": "2024_qualifying_1f31dbbdd3",
+    "penalty": "drop_of_3_grid_positions_for_the_next_race_in_which_the_driver_participates.",
+    "session": "qualifying",
+    "penalty_severity": 2,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_race_fc7eea9fda_george_russell",
+    "incident_id": "2024_race_fc7eea9fda",
+    "penalty": "disqualification",
+    "session": "race",
+    "penalty_severity": 2,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_4e5e28df01_alexander_albon",
+    "incident_id": "2024_practice_4e5e28df01",
+    "penalty": "the_competitor_(williams_racing)_is_fined_€5,000.",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_92205ed431_zhou_guanyu",
+    "incident_id": "2024_practice_92205ed431",
+    "penalty": "the_competitor_(stake_f1_team_kick_sauber)_is_fined_€5,000.",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_a06dd478c0_logan_sargeant",
+    "incident_id": "2024_practice_a06dd478c0",
     "penalty": "the_competitor_(williams_racing)_is_fined_€100.",
     "session": "practice",
     "penalty_severity": 1,
@@ -531,341 +1197,35 @@
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025_practice_f5be4d9825_oscar_piastri",
-    "incident_id": "2025_practice_f5be4d9825",
-    "penalty": "the_competitor_(mclaren_formula_1_team)_is_fined_€100.",
-    "session": "practice",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_qualifying_d04cd4e2c9_esteban_ocon",
-    "incident_id": "2025_qualifying_d04cd4e2c9",
+    "row_id": "2024_practice_ae4906e56c_nico_hulkenberg",
+    "incident_id": "2024_practice_ae4906e56c",
     "penalty": "reprimand",
-    "session": "qualifying",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 2
-  },
-  {
-    "row_id": "2025_race_6bad943deb_charles_leclerc",
-    "incident_id": "2025_race_6bad943deb",
-    "penalty": "warning",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_8b3d73c775_oliver_bearman",
-    "incident_id": "2025_race_8b3d73c775",
-    "penalty": "warning",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_8e9a2110ef_pierre_gasly",
-    "incident_id": "2025_race_8e9a2110ef",
-    "penalty": "warning",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_979577b1ba_lance_stroll",
-    "incident_id": "2025_race_979577b1ba",
-    "penalty": "10s_time_penalty",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_ae260109fd_oscar_piastri",
-    "incident_id": "2025_race_ae260109fd",
-    "penalty": "warning",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_b5ad11cdbb_esteban_ocon",
-    "incident_id": "2025_race_b5ad11cdbb",
-    "penalty": "warning",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_b96c3cf34d_carlos_sainz",
-    "incident_id": "2025_race_b96c3cf34d",
-    "penalty": "warning",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_ce982b7c63_kimi_antonelli",
-    "incident_id": "2025_race_ce982b7c63",
-    "penalty": "warning",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_fd442945a1_esteban_ocon",
-    "incident_id": "2025_race_fd442945a1",
-    "penalty": "no_further_action",
-    "session": "race",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_practice_ec49a7ed48_kimi_antonelli",
-    "incident_id": "2025_practice_ec49a7ed48",
-    "penalty": "the_competitor_(mercedes-amg_petronas_f1_team)_is_fined_€100",
     "session": "practice",
     "penalty_severity": 1,
     "pred_majority": 1,
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025_qualifying_5f37cb3f9a_george_russell",
-    "incident_id": "2025_qualifying_5f37cb3f9a",
-    "penalty": "reprimand",
+    "row_id": "2024_qualifying_98bc453349_lewis_hamilton",
+    "incident_id": "2024_qualifying_98bc453349",
+    "penalty": "drop_of_3_grid_positions_for_the_next_race_in_which_the_driver_participates.",
     "session": "qualifying",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 2
-  },
-  {
-    "row_id": "2025_practice_9d7432e036_oliver_bearman",
-    "incident_id": "2025_practice_9d7432e036",
-    "penalty": "drop_of_10_grid_positions_for_the_next_race_in_which_the_driver_participates._4_",
-    "session": "practice",
     "penalty_severity": 2,
     "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_practice_e19dc7147a_carlos_sainz",
-    "incident_id": "2025_practice_e19dc7147a",
-    "penalty": "warning",
-    "session": "practice",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_8183cfadc1_oscar_piastri",
-    "incident_id": "2025_race_8183cfadc1",
-    "penalty": "10s_time_penalty",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_cb450c757a_oliver_bearman",
-    "incident_id": "2025_race_cb450c757a",
-    "penalty": "no_further_action",
-    "session": "race",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_f9c047be21_esteban_ocon",
-    "incident_id": "2025_race_f9c047be21",
-    "penalty": "no_further_action",
-    "session": "race",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_qualifying_720497309f_george_russell",
-    "incident_id": "2025_qualifying_720497309f",
-    "penalty": "reprimand",
-    "session": "qualifying",
-    "penalty_severity": 1,
-    "pred_majority": 1,
     "pred_session_stratified": 2
   },
   {
-    "row_id": "2025_qualifying_d0ea52fe74_yuki_tsunoda",
-    "incident_id": "2025_qualifying_d0ea52fe74",
-    "penalty": "reprimand",
+    "row_id": "2024_qualifying_98bc453349_car_11",
+    "incident_id": "2024_qualifying_98bc453349",
+    "penalty": "drop_of_3_grid_positions_for_the_next_race_in_which_the_driver_participates.",
     "session": "qualifying",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 2
-  },
-  {
-    "row_id": "2025_practice_bd1d70bba7_max_verstappen",
-    "incident_id": "2025_practice_bd1d70bba7",
-    "penalty": "warning",
-    "session": "practice",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_0cd1d2cfee_yuki_tsunoda",
-    "incident_id": "2025_race_0cd1d2cfee",
-    "penalty": "no_further_action",
-    "session": "race",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_d5c902fef9_max_verstappen",
-    "incident_id": "2025_race_d5c902fef9",
-    "penalty": "no_further_action",
-    "session": "race",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_e2e75856bb_nico_hulkenberg",
-    "incident_id": "2025_race_e2e75856bb",
-    "penalty": "5s_time_penalty",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_qualifying_86bcfdf0db_max_verstappen",
-    "incident_id": "2025_qualifying_86bcfdf0db",
-    "penalty": "no_further_action",
-    "session": "qualifying",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 2
-  },
-  {
-    "row_id": "2025_race_18061ca0b8_gabriel_bortoleto",
-    "incident_id": "2025_race_18061ca0b8",
-    "penalty": "no_further_action",
-    "session": "race",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_7a4594a0e3_lewis_hamilton",
-    "incident_id": "2025_race_7a4594a0e3",
-    "penalty": "drop_of_5_grid_positions_for_the_next_race_in_which_the_driver_participates._2_p",
-    "session": "race",
     "penalty_severity": 2,
     "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_9725a7c919_kimi_antonelli",
-    "incident_id": "2025_race_9725a7c919",
-    "penalty": "5s_time_penalty",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_ae7fa5c969_george_russell",
-    "incident_id": "2025_race_ae7fa5c969",
-    "penalty": "no_further_action",
-    "session": "race",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_e78303e300_charles_leclerc",
-    "incident_id": "2025_race_e78303e300",
-    "penalty": "no_further_action",
-    "session": "race",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_practice_466b84c243_oscar_piastri",
-    "incident_id": "2025_practice_466b84c243",
-    "penalty": "reprimand",
-    "session": "practice",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_practice_fafb92adb6_isack_hadjar",
-    "incident_id": "2025_practice_fafb92adb6",
-    "penalty": "warning",
-    "session": "practice",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_0386a77940_carlos_sainz",
-    "incident_id": "2025_race_0386a77940",
-    "penalty": "reprimand",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_7736d4c718_fernando_alonso",
-    "incident_id": "2025_race_7736d4c718",
-    "penalty": "warning",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_7a8d9562fd_lance_stroll",
-    "incident_id": "2025_race_7a8d9562fd",
-    "penalty": "warning",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_practice_e85d9a557e_oscar_piastri",
-    "incident_id": "2025_practice_e85d9a557e",
-    "penalty": "reprimand",
-    "session": "practice",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_qualifying_1cdd6c5aa9_kimi_antonelli",
-    "incident_id": "2025_qualifying_1cdd6c5aa9",
-    "penalty": "reprimand",
-    "session": "qualifying",
-    "penalty_severity": 1,
-    "pred_majority": 1,
     "pred_session_stratified": 2
   },
   {
-    "row_id": "2025_qualifying_88642087ac_esteban_ocon",
-    "incident_id": "2025_qualifying_88642087ac",
+    "row_id": "2024_qualifying_f8d528c8b5_alexander_albon",
+    "incident_id": "2024_qualifying_f8d528c8b5",
     "penalty": "disqualification",
     "session": "qualifying",
     "penalty_severity": 2,
@@ -873,8 +1233,8 @@
     "pred_session_stratified": 2
   },
   {
-    "row_id": "2025_race_77b82ec55d_fernando_alonso",
-    "incident_id": "2025_race_77b82ec55d",
+    "row_id": "2024_race_99de6779df_lance_stroll",
+    "incident_id": "2024_race_99de6779df",
     "penalty": "5s_time_penalty",
     "session": "race",
     "penalty_severity": 1,
@@ -882,26 +1242,8 @@
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025_race_fd4e2d5eaa_oscar_piastri",
-    "incident_id": "2025_race_fd4e2d5eaa",
-    "penalty": "5s_time_penalty",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_practice_23a0367aaf_charles_leclerc",
-    "incident_id": "2025_practice_23a0367aaf",
-    "penalty": "the_competitor_(scuderia_ferrari_hp)_is_fined_€10,000.",
-    "session": "practice",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_practice_e0f6c57c46_lewis_hamilton",
-    "incident_id": "2025_practice_e0f6c57c46",
+    "row_id": "2024_practice_6386bd5730_oscar_piastri",
+    "incident_id": "2024_practice_6386bd5730",
     "penalty": "no_further_action",
     "session": "practice",
     "penalty_severity": 0,
@@ -909,98 +1251,62 @@
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025_qualifying_2223fcdace_carlos_sainz",
-    "incident_id": "2025_qualifying_2223fcdace",
-    "penalty": "disqualification",
-    "session": "qualifying",
-    "penalty_severity": 2,
-    "pred_majority": 1,
-    "pred_session_stratified": 2
-  },
-  {
-    "row_id": "2025_qualifying_59229cbf80_nico_hulkenberg",
-    "incident_id": "2025_qualifying_59229cbf80",
+    "row_id": "2024_practice_6386bd5730_car_3",
+    "incident_id": "2024_practice_6386bd5730",
     "penalty": "no_further_action",
-    "session": "qualifying",
+    "session": "practice",
     "penalty_severity": 0,
     "pred_majority": 1,
-    "pred_session_stratified": 2
+    "pred_session_stratified": 1
   },
   {
-    "row_id": "2025_qualifying_814a90a8e0_yuki_tsunoda",
-    "incident_id": "2025_qualifying_814a90a8e0",
-    "penalty": "no_further_action",
-    "session": "qualifying",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 2
-  },
-  {
-    "row_id": "2025_qualifying_9c7c3c423d_alexander_albon",
-    "incident_id": "2025_qualifying_9c7c3c423d",
-    "penalty": "disqualification",
-    "session": "qualifying",
-    "penalty_severity": 2,
-    "pred_majority": 1,
-    "pred_session_stratified": 2
-  },
-  {
-    "row_id": "2025_qualifying_c47784592c_gabriel_bortoleto",
-    "incident_id": "2025_qualifying_c47784592c",
-    "penalty": "no_further_action",
-    "session": "qualifying",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 2
-  },
-  {
-    "row_id": "2025_qualifying_c9697feed6_george_russell",
-    "incident_id": "2025_qualifying_c9697feed6",
-    "penalty": "no_further_action",
-    "session": "qualifying",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 2
-  },
-  {
-    "row_id": "2025_race_b7b3d437d1_lewis_hamilton",
-    "incident_id": "2025_race_b7b3d437d1",
-    "penalty": "5s_time_penalty",
-    "session": "race",
+    "row_id": "2024_practice_e2b660dc72_kevin_magnussen",
+    "incident_id": "2024_practice_e2b660dc72",
+    "penalty": "the_competitor_(moneygram_haas_f1_team)_is_fined_€7,500.",
+    "session": "practice",
     "penalty_severity": 1,
     "pred_majority": 1,
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025_reconnaissance laps_660922d129_alexander_albon",
-    "incident_id": "2025_reconnaissance laps_660922d129",
-    "penalty": "reprimand",
-    "session": "reconnaissance laps",
+    "row_id": "2024_practice_e2b660dc72_car_55",
+    "incident_id": "2024_practice_e2b660dc72",
+    "penalty": "the_competitor_(moneygram_haas_f1_team)_is_fined_€7,500.",
+    "session": "practice",
     "penalty_severity": 1,
     "pred_majority": 1,
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025_qualifying_1613f68ae6_gabriel_bortoleto",
-    "incident_id": "2025_qualifying_1613f68ae6",
-    "penalty": "the_competitor_(stake_f1_team_kick_sauber)_is_fined_€100.",
+    "row_id": "2024_practice_f4e999472e_franco_colapinto",
+    "incident_id": "2024_practice_f4e999472e",
+    "penalty": "warning",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_qualifying_624546d845_oscar_piastri",
+    "incident_id": "2024_qualifying_624546d845",
+    "penalty": "the_competitor_(mclaren_formula_1_team)_is_fined_€10,000.",
     "session": "qualifying",
     "penalty_severity": 1,
     "pred_majority": 1,
     "pred_session_stratified": 2
   },
   {
-    "row_id": "2025_race_1e555b8b56_lewis_hamilton",
-    "incident_id": "2025_race_1e555b8b56",
-    "penalty": "no_further_action",
-    "session": "race",
-    "penalty_severity": 0,
+    "row_id": "2024_qualifying_624546d845_car_1",
+    "incident_id": "2024_qualifying_624546d845",
+    "penalty": "the_competitor_(mclaren_formula_1_team)_is_fined_€10,000.",
+    "session": "qualifying",
+    "penalty_severity": 1,
     "pred_majority": 1,
-    "pred_session_stratified": 1
+    "pred_session_stratified": 2
   },
   {
-    "row_id": "2025_race_21fef9744c_lewis_hamilton",
-    "incident_id": "2025_race_21fef9744c",
+    "row_id": "2024_race_15bb569049_nico_hulkenberg",
+    "incident_id": "2024_race_15bb569049",
     "penalty": "10s_time_penalty",
     "session": "race",
     "penalty_severity": 1,
@@ -1008,35 +1314,8 @@
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025_race_24f9314388_carlos_sainz",
-    "incident_id": "2025_race_24f9314388",
-    "penalty": "5s_time_penalty",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_e5441a1a28_carlos_sainz",
-    "incident_id": "2025_race_e5441a1a28",
-    "penalty": "drive_through",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_qualifying_3f65afabc7_lewis_hamilton",
-    "incident_id": "2025_qualifying_3f65afabc7",
-    "penalty": "reprimand",
-    "session": "qualifying",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 2
-  },
-  {
-    "row_id": "2025_race_3b08461816_yuki_tsunoda",
-    "incident_id": "2025_race_3b08461816",
+    "row_id": "2024_race_15bb569049_car_22",
+    "incident_id": "2024_race_15bb569049",
     "penalty": "10s_time_penalty",
     "session": "race",
     "penalty_severity": 1,
@@ -1044,26 +1323,224 @@
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025_sprint_062c330763_oliver_bearman",
-    "incident_id": "2025_sprint_062c330763",
+    "row_id": "2024_race_3e35b36b68_daniel_ricciardo",
+    "incident_id": "2024_race_3e35b36b68",
     "penalty": "5s_time_penalty",
-    "session": "sprint",
+    "session": "race",
     "penalty_severity": 1,
     "pred_majority": 1,
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025_sprint_1e220dbb2e_liam_lawson",
-    "incident_id": "2025_sprint_1e220dbb2e",
+    "row_id": "2024_race_3e35b36b68_car_27",
+    "incident_id": "2024_race_3e35b36b68",
     "penalty": "5s_time_penalty",
-    "session": "sprint",
+    "session": "race",
     "penalty_severity": 1,
     "pred_majority": 1,
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025__0cfe9aa8b5_gabriel_bortoleto",
-    "incident_id": "2025__0cfe9aa8b5",
+    "row_id": "2024_race_431c809f56_daniel_ricciardo",
+    "incident_id": "2024_race_431c809f56",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_7e19457cfb_kevin_magnussen",
+    "incident_id": "2024_race_7e19457cfb",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_7e19457cfb_car_10",
+    "incident_id": "2024_race_7e19457cfb",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_0085a83f68_sergio_perez",
+    "incident_id": "2024_practice_0085a83f68",
+    "penalty": "warning",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_0085a83f68_car_55",
+    "incident_id": "2024_practice_0085a83f68",
+    "penalty": "warning",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_5c4f9db426_charles_leclerc",
+    "incident_id": "2024_practice_5c4f9db426",
+    "penalty": "reprimand",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_a8a5d4f39c_carlos_sainz",
+    "incident_id": "2024_practice_a8a5d4f39c",
+    "penalty": "warning",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_a8a5d4f39c_car_11",
+    "incident_id": "2024_practice_a8a5d4f39c",
+    "penalty": "warning",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_qualifying_2908058d2b_alexander_albon",
+    "incident_id": "2024_qualifying_2908058d2b",
+    "penalty": "the_competitor_(williams_racing)_is_fined_€5,000.",
+    "session": "qualifying",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_qualifying_9ce50b2d1b_pierre_gasly",
+    "incident_id": "2024_qualifying_9ce50b2d1b",
+    "penalty": "disqualification",
+    "session": "qualifying",
+    "penalty_severity": 2,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_qualifying_ce4e0e4fbd_yuki_tsunoda",
+    "incident_id": "2024_qualifying_ce4e0e4fbd",
+    "penalty": "the_competitor_(visa_cash_app_rb_f1_tem)_is_fined_€400.",
+    "session": "qualifying",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_qualifying_db38532447_george_russell",
+    "incident_id": "2024_qualifying_db38532447",
+    "penalty": "reprimand",
+    "session": "qualifying",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_race_23d940d51c_pierre_gasly",
+    "incident_id": "2024_race_23d940d51c",
+    "penalty": "warning",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_2fe59d5f1d_nico_hulkenberg",
+    "incident_id": "2024_race_2fe59d5f1d",
+    "penalty": "warning",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_96dce41f07_esteban_ocon",
+    "incident_id": "2024_race_96dce41f07",
+    "penalty": "warning",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_9780430d9b_sergio_perez",
+    "incident_id": "2024_race_9780430d9b",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_9780430d9b_car_55",
+    "incident_id": "2024_race_9780430d9b",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_d14145a725_max_verstappen",
+    "incident_id": "2024_race_d14145a725",
+    "penalty": "warning",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_d84340f332_carlos_sainz",
+    "incident_id": "2024_race_d84340f332",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_d84340f332_car_11",
+    "incident_id": "2024_race_d84340f332",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_23ba1f1445_charles_leclerc",
+    "incident_id": "2024_practice_23ba1f1445",
+    "penalty": "the_competitor_(scuderia_ferrari)_is_fined_€5,000.",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_qualifying_da17c4b85e_carlos_sainz",
+    "incident_id": "2024_qualifying_da17c4b85e",
+    "penalty": "the_driver_is_fined_€25,000,_€12,500_of_which_is_suspended_for_the_remainder_of_",
+    "session": "qualifying",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024__b34610ab3c_alexander_albon_and_43_franco_colapinto",
+    "incident_id": "2024__b34610ab3c",
     "penalty": "no_further_action",
     "session": "",
     "penalty_severity": 0,
@@ -1071,44 +1548,8 @@
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025__2a8c2fbf5b_alexander_albon",
-    "incident_id": "2025__2a8c2fbf5b",
-    "penalty": "reprimand",
-    "session": "",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_practice_627629664b_lewis_hamilton",
-    "incident_id": "2025_practice_627629664b",
-    "penalty": "the_competitor_(scuderia_ferrari_hp)_is_fined_€100.",
-    "session": "practice",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_practice_f18f4f6fb4_charles_leclerc",
-    "incident_id": "2025_practice_f18f4f6fb4",
-    "penalty": "no_further_action",
-    "session": "practice",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_qualifying_2a4bee4713_kimi_antonelli",
-    "incident_id": "2025_qualifying_2a4bee4713",
-    "penalty": "no_further_action",
-    "session": "qualifying",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 2
-  },
-  {
-    "row_id": "2025_qualifying_6897d890dc_franco_colapinto",
-    "incident_id": "2025_qualifying_6897d890dc",
+    "row_id": "2024_qualifying_ad19157ffe_pierre_gasly",
+    "incident_id": "2024_qualifying_ad19157ffe",
     "penalty": "the_competitor_(bwt_alpine_f1_team)_is_fined_€5,000.",
     "session": "qualifying",
     "penalty_severity": 1,
@@ -1116,89 +1557,179 @@
     "pred_session_stratified": 2
   },
   {
-    "row_id": "2025_qualifying_6ecd5bc361_george_russell",
-    "incident_id": "2025_qualifying_6ecd5bc361",
-    "penalty": "no_further_action",
+    "row_id": "2024_qualifying_ad19157ffe_car_1",
+    "incident_id": "2024_qualifying_ad19157ffe",
+    "penalty": "the_competitor_(bwt_alpine_f1_team)_is_fined_€5,000.",
     "session": "qualifying",
-    "penalty_severity": 0,
+    "penalty_severity": 1,
     "pred_majority": 1,
     "pred_session_stratified": 2
   },
   {
-    "row_id": "2025_race_0b1acfcdd6_oscar_piastri",
-    "incident_id": "2025_race_0b1acfcdd6",
-    "penalty": "disqualification",
+    "row_id": "2024_race_131ffc35da_george_russell",
+    "incident_id": "2024_race_131ffc35da",
+    "penalty": "5s_time_penalty",
     "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_131ffc35da_car_77",
+    "incident_id": "2024_race_131ffc35da",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_4ad32e2815_lando_norris",
+    "incident_id": "2024_race_4ad32e2815",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_5952b5fa9b_yuki_tsunoda",
+    "incident_id": "2024_race_5952b5fa9b",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_5952b5fa9b_car_23",
+    "incident_id": "2024_race_5952b5fa9b",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_f61de1dee0_pierre_gasly",
+    "incident_id": "2024_race_f61de1dee0",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_sprint_2922ba6b14_kevin_magnussen",
+    "incident_id": "2024_sprint_2922ba6b14",
+    "penalty": "no_further_action",
+    "session": "sprint",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_sprint_2922ba6b14_car_22",
+    "incident_id": "2024_sprint_2922ba6b14",
+    "penalty": "no_further_action",
+    "session": "sprint",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_sprint_9a119fd659_yuki_tsunoda",
+    "incident_id": "2024_sprint_9a119fd659",
+    "penalty": "no_further_action",
+    "session": "sprint",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_sprint_9a119fd659_car_81",
+    "incident_id": "2024_sprint_9a119fd659",
+    "penalty": "no_further_action",
+    "session": "sprint",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_sprint_cc2202d6bc_lando_norris",
+    "incident_id": "2024_sprint_cc2202d6bc",
+    "penalty": "no_further_action",
+    "session": "sprint",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_sprint_f44dc3e3ff_oscar_piastri",
+    "incident_id": "2024_sprint_f44dc3e3ff",
+    "penalty": "5s_time_penalty",
+    "session": "sprint",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_sprint_f44dc3e3ff_car_10",
+    "incident_id": "2024_sprint_f44dc3e3ff",
+    "penalty": "5s_time_penalty",
+    "session": "sprint",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_11973b5b6c_oliver_bearman",
+    "incident_id": "2024_practice_11973b5b6c",
+    "penalty": "no_further_action",
+    "session": "practice",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_11973b5b6c_car_23",
+    "incident_id": "2024_practice_11973b5b6c",
+    "penalty": "no_further_action",
+    "session": "practice",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_768850b04c_robert_shwartzman",
+    "incident_id": "2024_practice_768850b04c",
+    "penalty": "drop_of_5_grid_positions_for_the_next_race_in_which_the_driver_participates.",
+    "session": "practice",
     "penalty_severity": 2,
     "pred_majority": 1,
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025_race_edf50412ee_lando_norris",
-    "incident_id": "2025_race_edf50412ee",
-    "penalty": "disqualification",
-    "session": "race",
-    "penalty_severity": 2,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_f03cb2a383_kimi_antonelli",
-    "incident_id": "2025_race_f03cb2a383",
-    "penalty": "5s_time_penalty",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_qualifying_215d55a367_carlos_sainz",
-    "incident_id": "2025_qualifying_215d55a367",
-    "penalty": "the_competitor_(atlassian_williams_racing)_is_fined_€5,000.",
-    "session": "qualifying",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 2
-  },
-  {
-    "row_id": "2025_qualifying_5c4a7afcf1_nico_hulkenberg",
-    "incident_id": "2025_qualifying_5c4a7afcf1",
-    "penalty": "no_penalty_is_applied.",
-    "session": "qualifying",
-    "penalty_severity": 0,
-    "pred_majority": 1,
-    "pred_session_stratified": 2
-  },
-  {
-    "row_id": "2025_race_026f71b45e_esteban_ocon",
-    "incident_id": "2025_race_026f71b45e",
-    "penalty": "5s_time_penalty",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_62c92389bb_lance_stroll",
-    "incident_id": "2025_race_62c92389bb",
-    "penalty": "5s_time_penalty",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_a5aee38466_isack_hadjar",
-    "incident_id": "2025_race_a5aee38466",
+    "row_id": "2024_practice_d47f4d6e42_alexander_albon",
+    "incident_id": "2024_practice_d47f4d6e42",
     "penalty": "no_further_action",
-    "session": "race",
+    "session": "practice",
     "penalty_severity": 0,
     "pred_majority": 1,
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025_race_cf275da23c_oliver_bearman",
-    "incident_id": "2025_race_cf275da23c",
+    "row_id": "2024_practice_d47f4d6e42_car_38",
+    "incident_id": "2024_practice_d47f4d6e42",
+    "penalty": "no_further_action",
+    "session": "practice",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_3e552b216b_max_verstappen",
+    "incident_id": "2024_race_3e552b216b",
     "penalty": "10s_time_penalty",
     "session": "race",
     "penalty_severity": 1,
@@ -1206,80 +1737,26 @@
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025_sprint_3b7e8062dd_yuki_tsunoda",
-    "incident_id": "2025_sprint_3b7e8062dd",
-    "penalty": "5s_time_penalty",
-    "session": "sprint",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_sprint_d31a83879b_kimi_antonelli",
-    "incident_id": "2025_sprint_d31a83879b",
-    "penalty": "5s_time_penalty",
-    "session": "sprint",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_from the garage and meet both drivers for a photo opportunity. the stewards require a report from the competitor, verifying that the proposal has been implemented. in view of the above, we have decided to suspend the majority of the penalty. the stewards competitors are reminded that they have the right to appeal certain decisions of the stewards, in accordance with article 15 of the fia international sporting code and chapter 4 of the fia judicial and disciplinary rules, within the applicable time limits. decisions of the stewards are taken independently of the fia and are based solely on the relevant regulations, guidelines and evidence presented. garry connelly mathieu remmerie derek warwick mohammed al hashmi_22e6c10aca_lance_stroll",
-    "incident_id": "2025_from the garage and meet both drivers for a photo opportunity. the stewards require a report from the competitor, verifying that the proposal has been implemented. in view of the above, we have decided to suspend the majority of the penalty. the stewards competitors are reminded that they have the right to appeal certain decisions of the stewards, in accordance with article 15 of the fia international sporting code and chapter 4 of the fia judicial and disciplinary rules, within the applicable time limits. decisions of the stewards are taken independently of the fia and are based solely on the relevant regulations, guidelines and evidence presented. garry connelly mathieu remmerie derek warwick mohammed al hashmi_22e6c10aca",
-    "penalty": "the_competitor_(aston_martin_aramco_f1_team)_is_fined_€25,000_of_which_€15,000_i",
-    "session": "from the garage and meet both drivers for a photo opportunity. the stewards require a report from the competitor, verifying that the proposal has been implemented. in view of the above, we have decided to suspend the majority of the penalty. the stewards competitors are reminded that they have the right to appeal certain decisions of the stewards, in accordance with article 15 of the fia international sporting code and chapter 4 of the fia judicial and disciplinary rules, within the applicable time limits. decisions of the stewards are taken independently of the fia and are based solely on the relevant regulations, guidelines and evidence presented. garry connelly mathieu remmerie derek warwick mohammed al hashmi",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_from the garage and meet both drivers for a photo opportunity. the stewards require a report from the competitor, verifying that the proposal has been implemented. in view of the above, we have decided to suspend the majority of the penalty. the stewards competitors are reminded that they have the right to appeal certain decisions of the stewards, in accordance with article 15 of the fia international sporting code and chapter 4 of the fia judicial and disciplinary rules, within the applicable time limits. decisions of the stewards are taken independently of the fia and are based solely on the relevant regulations, guidelines and evidence presented. garry connelly mathieu remmerie derek warwick mohammed al hashmi_95921b408e_fernando_alonso",
-    "incident_id": "2025_from the garage and meet both drivers for a photo opportunity. the stewards require a report from the competitor, verifying that the proposal has been implemented. in view of the above, we have decided to suspend the majority of the penalty. the stewards competitors are reminded that they have the right to appeal certain decisions of the stewards, in accordance with article 15 of the fia international sporting code and chapter 4 of the fia judicial and disciplinary rules, within the applicable time limits. decisions of the stewards are taken independently of the fia and are based solely on the relevant regulations, guidelines and evidence presented. garry connelly mathieu remmerie derek warwick mohammed al hashmi_95921b408e",
-    "penalty": "the_competitor_(aston_martin_aramco_f1_team)_is_fined_€25,000_of_which_€15,000_i",
-    "session": "from the garage and meet both drivers for a photo opportunity. the stewards require a report from the competitor, verifying that the proposal has been implemented. in view of the above, we have decided to suspend the majority of the penalty. the stewards competitors are reminded that they have the right to appeal certain decisions of the stewards, in accordance with article 15 of the fia international sporting code and chapter 4 of the fia judicial and disciplinary rules, within the applicable time limits. decisions of the stewards are taken independently of the fia and are based solely on the relevant regulations, guidelines and evidence presented. garry connelly mathieu remmerie derek warwick mohammed al hashmi",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_4a62dadce8_yuki_tsunoda",
-    "incident_id": "2025_race_4a62dadce8",
-    "penalty": "5s_time_penalty",
+    "row_id": "2024_race_71b86adeb8_franco_colapinto",
+    "incident_id": "2024_race_71b86adeb8",
+    "penalty": "10s_time_penalty",
     "session": "race",
     "penalty_severity": 1,
     "pred_majority": 1,
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025_race_6aa003e1ba_alexander_albon",
-    "incident_id": "2025_race_6aa003e1ba",
-    "penalty": "5s_time_penalty",
+    "row_id": "2024_race_71b86adeb8_car_30",
+    "incident_id": "2024_race_71b86adeb8",
+    "penalty": "10s_time_penalty",
     "session": "race",
     "penalty_severity": 1,
     "pred_majority": 1,
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025_race_81fccbe048_oliver_bearman",
-    "incident_id": "2025_race_81fccbe048",
-    "penalty": "5s_time_penalty",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_96753f1b90_pierre_gasly",
-    "incident_id": "2025_race_96753f1b90",
-    "penalty": "5s_time_penalty",
-    "session": "race",
-    "penalty_severity": 1,
-    "pred_majority": 1,
-    "pred_session_stratified": 1
-  },
-  {
-    "row_id": "2025_race_9cba4f40db_lando_norris",
-    "incident_id": "2025_race_9cba4f40db",
+    "row_id": "2024_race_7b080c3db2_sergio_perez",
+    "incident_id": "2024_race_7b080c3db2",
     "penalty": "no_further_action",
     "session": "race",
     "penalty_severity": 0,
@@ -1287,8 +1764,467 @@
     "pred_session_stratified": 1
   },
   {
-    "row_id": "2025_race_c6172fd4dd_lance_stroll",
-    "incident_id": "2025_race_c6172fd4dd",
+    "row_id": "2024_race_9402877569_sergio_perez",
+    "incident_id": "2024_race_9402877569",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_bf8d016553_sergio_perez",
+    "incident_id": "2024_race_bf8d016553",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_de799eb3a9_max_verstappen",
+    "incident_id": "2024_race_de799eb3a9",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024__94e0860059_pierre_gasly",
+    "incident_id": "2024__94e0860059",
+    "penalty": "no_further_action",
+    "session": "",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_5a7b91bc45_yuki_tsunoda",
+    "incident_id": "2024_race_5a7b91bc45",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_6f684148b1_nico_hulkenberg",
+    "incident_id": "2024_race_6f684148b1",
+    "penalty": "disqualification",
+    "session": "race",
+    "penalty_severity": 2,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_97efecf9c4_liam_lawson",
+    "incident_id": "2024_race_97efecf9c4",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_a304a25634_george_russell",
+    "incident_id": "2024_race_a304a25634",
+    "penalty": "the_competitor_(mercedes-amg_petronas_f1_team)_is_fined_€5,000.",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_a4050a0060_lando_norris",
+    "incident_id": "2024_race_a4050a0060",
+    "penalty": "reprimand",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_b3467de1af_oscar_piastri",
+    "incident_id": "2024_race_b3467de1af",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_b3467de1af_car_30",
+    "incident_id": "2024_race_b3467de1af",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_be98f0a4dc_oliver_bearman",
+    "incident_id": "2024_race_be98f0a4dc",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_be98f0a4dc_car_43",
+    "incident_id": "2024_race_be98f0a4dc",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_c05c8cc2e5_lewis_hamilton",
+    "incident_id": "2024_race_c05c8cc2e5",
+    "penalty": "the_competitor_(mercedes-amg_petronas_f1_team)_is_fined_€5,000.",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_c5eefc6e0f_charles_leclerc",
+    "incident_id": "2024_race_c5eefc6e0f",
+    "penalty": "the_driver_is_fined_€10,000,_€5,000_of_which_is_suspended_on_condition_that_ther",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_ebf277995d_george_russell",
+    "incident_id": "2024_race_ebf277995d",
+    "penalty": "reprimand",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_fa32499a8f_carlos_sainz",
+    "incident_id": "2024_race_fa32499a8f",
+    "penalty": "reprimand",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_reconnaissance laps_33a86d6190_yuki_tsunoda",
+    "incident_id": "2024_reconnaissance laps_33a86d6190",
+    "penalty": "the_competitor_(visa_cash_app_rb_f1_tem)_is_fined_€100.",
+    "session": "reconnaissance laps",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_sprint_6a91eb6fc3_max_verstappen",
+    "incident_id": "2024_sprint_6a91eb6fc3",
+    "penalty": "5s_time_penalty",
+    "session": "sprint",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_e28b1b81c8_fernando_alonso",
+    "incident_id": "2024_practice_e28b1b81c8",
+    "penalty": "the_competitor_(aston_martin_aramco_f1_team)_is_fined_€200.",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_6918de1cce_oscar_piastri",
+    "incident_id": "2024_race_6918de1cce",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024__d4182264dc_liam_lawson",
+    "incident_id": "2024__d4182264dc",
+    "penalty": "10s_time_penalty",
+    "session": "",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024__d4182264dc_car_77",
+    "incident_id": "2024__d4182264dc",
+    "penalty": "10s_time_penalty",
+    "session": "",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_qualifying_01d1c9ecdf_carlos_sainz",
+    "incident_id": "2024_qualifying_01d1c9ecdf",
+    "penalty": "the_competitor_(scuderia_ferrari)_is_fined_€5,000.",
+    "session": "qualifying",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_qualifying_01d1c9ecdf_car_44",
+    "incident_id": "2024_qualifying_01d1c9ecdf",
+    "penalty": "the_competitor_(scuderia_ferrari)_is_fined_€5,000.",
+    "session": "qualifying",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_qualifying_7e95b1a392_max_verstappen",
+    "incident_id": "2024_qualifying_7e95b1a392",
+    "penalty": "drop_of_1_grid_position_for_the_next_race_in_which_the_driver_participates._1_pe",
+    "session": "qualifying",
+    "penalty_severity": 2,
+    "pred_majority": 1,
+    "pred_session_stratified": 2
+  },
+  {
+    "row_id": "2024_race_03358239e1_lance_stroll",
+    "incident_id": "2024_race_03358239e1",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_03358239e1_car_23",
+    "incident_id": "2024_race_03358239e1",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_48a652ec68_lando_norris",
+    "incident_id": "2024_race_48a652ec68",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_575d4d1cf4_george_russell",
+    "incident_id": "2024_race_575d4d1cf4",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_6ac8f1c800_lewis_hamilton",
+    "incident_id": "2024_race_6ac8f1c800",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_9b2892a4a7_sergio_perez",
+    "incident_id": "2024_race_9b2892a4a7",
+    "penalty": "no_further_action",
+    "session": "race",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_f3d56f017e_lewis_hamilton",
+    "incident_id": "2024_race_f3d56f017e",
+    "penalty": "drive_through",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_fd2ed930d1_alexander_albon",
+    "incident_id": "2024_race_fd2ed930d1",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_fd2ed930d1_car_20",
+    "incident_id": "2024_race_fd2ed930d1",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_reconnaissance laps_9e697098cc_oscar_piastri",
+    "incident_id": "2024_reconnaissance laps_9e697098cc",
+    "penalty": "warning",
+    "session": "reconnaissance laps",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024__c9988431ad_valtteri_bottas",
+    "incident_id": "2024__c9988431ad",
+    "penalty": "10s_time_penalty",
+    "session": "",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024__c9988431ad_car_11",
+    "incident_id": "2024__c9988431ad",
+    "penalty": "10s_time_penalty",
+    "session": "",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_0eae77dee7_franco_colapinto",
+    "incident_id": "2024_practice_0eae77dee7",
+    "penalty": "drop_of_5_grid_positions_for_the_next_race_in_which_the_driver_participates.",
+    "session": "practice",
+    "penalty_severity": 2,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_5de52e1141_alexander_albon",
+    "incident_id": "2024_practice_5de52e1141",
+    "penalty": "drop_of_5_grid_positions_for_the_next_race_in_which_the_driver_participates.",
+    "session": "practice",
+    "penalty_severity": 2,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_d758467915_lewis_hamilton",
+    "incident_id": "2024_practice_d758467915",
+    "penalty": "no_further_action",
+    "session": "practice",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_d758467915_car_4",
+    "incident_id": "2024_practice_d758467915",
+    "penalty": "no_further_action",
+    "session": "practice",
+    "penalty_severity": 0,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_practice_dcaea61f2f_isack_hadjar",
+    "incident_id": "2024_practice_dcaea61f2f",
+    "penalty": "the_competitor_(oracle_red_bull_racing)_is_fined_€900.",
+    "session": "practice",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_1500bbf753_liam_lawson",
+    "incident_id": "2024_race_1500bbf753",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_3fdc98831e_max_verstappen",
+    "incident_id": "2024_race_3fdc98831e",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_3fdc98831e_car_81",
+    "incident_id": "2024_race_3fdc98831e",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_41b6bf9490_valtteri_bottas",
+    "incident_id": "2024_race_41b6bf9490",
+    "penalty": "drop_of_5_grid_positions_for_the_next_race_in_which_the_driver_participates._3_p",
+    "session": "race",
+    "penalty_severity": 2,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_41b6bf9490_car_20",
+    "incident_id": "2024_race_41b6bf9490",
+    "penalty": "drop_of_5_grid_positions_for_the_next_race_in_which_the_driver_participates._3_p",
+    "session": "race",
+    "penalty_severity": 2,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_44e8238d2c_car_43",
+    "incident_id": "2024_race_44e8238d2c",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_44e8238d2c_car_81",
+    "incident_id": "2024_race_44e8238d2c",
+    "penalty": "10s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_9e486f4024_zhou_guanyu",
+    "incident_id": "2024_race_9e486f4024",
+    "penalty": "5s_time_penalty",
+    "session": "race",
+    "penalty_severity": 1,
+    "pred_majority": 1,
+    "pred_session_stratified": 1
+  },
+  {
+    "row_id": "2024_race_bedbfd29f5_lance_stroll",
+    "incident_id": "2024_race_bedbfd29f5",
     "penalty": "5s_time_penalty",
     "session": "race",
     "penalty_severity": 1,

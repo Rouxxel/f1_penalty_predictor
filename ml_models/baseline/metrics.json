@@ -1,46 +1,46 @@
 {
-  "validation_rows": 144,
-  "train_rows": 90,
+  "validation_rows": 248,
+  "train_rows": 917,
   "majority_class": {
     "predicted_class": 1,
     "metrics": {
-      "accuracy": 0.6666666666666666,
-      "macro_f1": 0.26666666666666666,
-      "weighted_f1": 0.5333333333333334,
+      "accuracy": 0.6612903225806451,
+      "macro_f1": 0.26537216828478966,
+      "weighted_f1": 0.5264641403069213,
       "per_class": {
         "0": {
           "precision": 0.0,
           "recall": 0.0,
           "f1": 0.0,
-          "support": 34
+          "support": 59
         },
         "1": {
-          "precision": 0.6666666666666666,
+          "precision": 0.6612903225806451,
           "recall": 1.0,
-          "f1": 0.8,
-          "support": 96
+          "f1": 0.7961165048543689,
+          "support": 164
         },
         "2": {
           "precision": 0.0,
           "recall": 0.0,
           "f1": 0.0,
-          "support": 14
+          "support": 25
         }
       },
       "confusion_matrix": [
         [
           0,
-          34,
+          59,
           0
         ],
         [
           0,
-          96,
+          164,
           0
         ],
         [
           0,
-          14,
+          25,
           0
         ]
       ],
@@ -56,48 +56,49 @@
       "practice": 1,
       "qualifying": 2,
       "race": 1,
-      "reconnaissance laps": 1
+      "reconnaissance laps": 1,
+      "sprint": 1
     },
     "global_fallback": 1,
     "metrics": {
-      "accuracy": 0.625,
-      "macro_f1": 0.3593890386343217,
-      "weighted_f1": 0.5560796645702306,
+      "accuracy": 0.6451612903225806,
+      "macro_f1": 0.40625405475541715,
+      "weighted_f1": 0.5657482514848253,
       "per_class": {
         "0": {
           "precision": 0.0,
           "recall": 0.0,
           "f1": 0.0,
-          "support": 34
+          "support": 59
         },
         "1": {
-          "precision": 0.7241379310344828,
-          "recall": 0.875,
-          "f1": 0.7924528301886793,
-          "support": 96
+          "precision": 0.7142857142857143,
+          "recall": 0.8841463414634146,
+          "f1": 0.7901907356948229,
+          "support": 164
         },
         "2": {
-          "precision": 0.21428571428571427,
-          "recall": 0.42857142857142855,
-          "f1": 0.2857142857142857,
-          "support": 14
+          "precision": 0.3333333333333333,
+          "recall": 0.6,
+          "f1": 0.42857142857142855,
+          "support": 25
         }
       },
       "confusion_matrix": [
         [
           0,
-          24,
-          10
+          48,
+          11
         ],
         [
           0,
-          84,
-          12
+          145,
+          19
         ],
         [
           0,
-          8,
-          6
+          10,
+          15
         ]
       ],
       "labels": [

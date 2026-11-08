@@ -1,46 +1,46 @@
 {
-  "train_rows": 90,
-  "validation_rows": 144,
-  "best_iteration": 30,
+  "train_rows": 917,
+  "validation_rows": 248,
+  "best_iteration": 167,
   "validation_metrics": {
-    "accuracy": 0.5277777777777778,
-    "macro_f1": 0.40152958152958157,
-    "weighted_f1": 0.551586099086099,
+    "accuracy": 0.5685483870967742,
+    "macro_f1": 0.45614213878645654,
+    "weighted_f1": 0.5788999816162556,
     "per_class": {
       "0": {
-        "precision": 0.32558139534883723,
-        "recall": 0.4117647058823529,
-        "f1": 0.36363636363636365,
-        "support": 34
+        "precision": 0.3333333333333333,
+        "recall": 0.3728813559322034,
+        "f1": 0.352,
+        "support": 59
       },
       "1": {
-        "precision": 0.7468354430379747,
-        "recall": 0.6145833333333334,
-        "f1": 0.6742857142857143,
-        "support": 96
+        "precision": 0.7333333333333333,
+        "recall": 0.6707317073170732,
+        "f1": 0.7006369426751592,
+        "support": 164
       },
       "2": {
-        "precision": 0.13636363636363635,
-        "recall": 0.21428571428571427,
-        "f1": 0.16666666666666666,
-        "support": 14
+        "precision": 0.28125,
+        "recall": 0.36,
+        "f1": 0.3157894736842105,
+        "support": 25
       }
     },
     "confusion_matrix": [
       [
-        14,
-        13,
-        7
+        22,
+        31,
+        6
       ],
       [
-        25,
-        59,
-        12
+        37,
+        110,
+        17
       ],
       [
-        4,
         7,
-        3
+        9,
+        9
       ]
     ],
     "labels": [
@@ -48,12 +48,12 @@
       1,
       2
     ],
-    "log_loss": 0.9705789747222645
+    "log_loss": 0.8447301392040182
   },
-  "macro_f1": 0.40152958152958157,
+  "macro_f1": 0.45614213878645654,
   "baseline_comparison": {
-    "majority_macro_f1": 0.26666666666666666,
-    "session_stratified_macro_f1": 0.3593890386343217
+    "majority_macro_f1": 0.26537216828478966,
+    "session_stratified_macro_f1": 0.40625405475541715
   },
   "beats_majority_baseline": true,
   "beats_session_baseline": true
