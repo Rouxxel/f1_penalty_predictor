@@ -1,0 +1,322 @@
+{
+  "feature_version": "v2",
+  "train_rows": 925,
+  "validation_rows": 248,
+  "experiments": {
+    "A": {
+      "label": "V1 baseline",
+      "groups": [],
+      "apply_selection": false,
+      "n_raw_features": 40,
+      "n_encoded_features": 37,
+      "macro_f1": 0.4654021585056068,
+      "delta_vs_previous": null,
+      "best_iteration": 152,
+      "selection": null
+    },
+    "B": {
+      "label": "+ race/championship",
+      "groups": [
+        "championship",
+        "race"
+      ],
+      "apply_selection": false,
+      "n_raw_features": 49,
+      "n_encoded_features": 45,
+      "macro_f1": 0.4598108013173321,
+      "delta_vs_previous": -0.005591357188274693,
+      "best_iteration": 232,
+      "selection": null
+    },
+    "C": {
+      "label": "+ history",
+      "groups": [
+        "championship",
+        "history",
+        "race"
+      ],
+      "apply_selection": false,
+      "n_raw_features": 60,
+      "n_encoded_features": 56,
+      "macro_f1": 0.4369726989941483,
+      "delta_vs_previous": -0.022838102323183784,
+      "best_iteration": 287,
+      "selection": null
+    },
+    "D": {
+      "label": "+ precedent",
+      "groups": [
+        "championship",
+        "history",
+        "precedent",
+        "race"
+      ],
+      "apply_selection": false,
+      "n_raw_features": 64,
+      "n_encoded_features": 60,
+      "macro_f1": 0.4374186699541127,
+      "delta_vs_previous": 0.0004459709599644035,
+      "best_iteration": 73,
+      "selection": null
+    },
+    "E": {
+      "label": "full V2 + selection prune",
+      "groups": [
+        "championship",
+        "history",
+        "precedent",
+        "race"
+      ],
+      "apply_selection": true,
+      "n_raw_features": 19,
+      "n_encoded_features": 16,
+      "macro_f1": 0.4543777329985323,
+      "delta_vs_previous": 0.016959063044419576,
+      "best_iteration": 60,
+      "selection": {
+        "input_columns": [
+          "driver",
+          "opponent_team",
+          "incident_type",
+          "driver_team",
+          "opponent_nationality",
+          "weather_conditions",
+          "opponent",
+          "driver_nationality",
+          "track_conditions",
+          "circuit",
+          "severity",
+          "flag",
+          "sector",
+          "session",
+          "safety_car",
+          "country",
+          "same_team",
+          "first_season",
+          "driver_construct_standing",
+          "opponent_years_in_sport",
+          "standing_difference",
+          "lap",
+          "opponent_standing",
+          "num_teams",
+          "opponent_superlicense_points_before",
+          "opponent_points",
+          "points_difference",
+          "rounds",
+          "superlicense_points_before_incident",
+          "lap_remaining",
+          "num_drivers",
+          "completion_percentage",
+          "opponent_construct_points",
+          "round",
+          "season",
+          "opponent_construct_standing",
+          "full_laps",
+          "driver_construct_points",
+          "years_in_sport",
+          "driver_standing",
+          "race_stage",
+          "construct_title_contender",
+          "is_first_round",
+          "title_contender",
+          "is_last_round",
+          "career_penalties_per_100_races",
+          "incidents_last_3_races",
+          "incidents_last_5_races",
+          "points_gap_to_opponent",
+          "precedent_no_penalty_rate",
+          "career_incidents_per_100_races",
+          "races_since_last_incident",
+          "precedent_major_penalty_rate",
+          "career_incidents",
+          "career_penalties",
+          "precedent_count",
+          "points_available_remaining",
+          "penalties_last_5_races",
+          "round_progress",
+          "career_major_penalties",
+          "races_since_last_penalty",
+          "penalties_last_3_races",
+          "precedent_minor_penalty_rate",
+          "points_gap_to_leader"
+        ],
+        "kept_columns": [
+          "driver",
+          "incident_type",
+          "driver_team",
+          "weather_conditions",
+          "driver_nationality",
+          "track_conditions",
+          "circuit",
+          "session",
+          "country",
+          "first_season",
+          "full_laps",
+          "construct_title_contender",
+          "is_last_round",
+          "precedent_no_penalty_rate",
+          "precedent_major_penalty_rate",
+          "precedent_count",
+          "penalties_last_5_races",
+          "round_progress",
+          "precedent_minor_penalty_rate"
+        ],
+        "dropped_missing": [
+          "opponent_team",
+          "opponent_nationality",
+          "opponent",
+          "severity",
+          "flag",
+          "sector",
+          "safety_car",
+          "opponent_years_in_sport",
+          "standing_difference",
+          "lap",
+          "opponent_standing",
+          "opponent_superlicense_points_before",
+          "opponent_points",
+          "points_difference",
+          "lap_remaining",
+          "completion_percentage",
+          "opponent_construct_points",
+          "opponent_construct_standing",
+          "race_stage",
+          "points_gap_to_opponent"
+        ],
+        "dropped_correlation": [
+          {
+            "dropped": "same_team",
+            "kept": "first_season"
+          },
+          {
+            "dropped": "driver_construct_standing",
+            "kept": "same_team"
+          },
+          {
+            "dropped": "num_teams",
+            "kept": "same_team"
+          },
+          {
+            "dropped": "rounds",
+            "kept": "same_team"
+          },
+          {
+            "dropped": "superlicense_points_before_incident",
+            "kept": "same_team"
+          },
+          {
+            "dropped": "num_drivers",
+            "kept": "same_team"
+          },
+          {
+            "dropped": "round",
+            "kept": "same_team"
+          },
+          {
+            "dropped": "season",
+            "kept": "same_team"
+          },
+          {
+            "dropped": "driver_construct_points",
+            "kept": "same_team"
+          },
+          {
+            "dropped": "years_in_sport",
+            "kept": "same_team"
+          },
+          {
+            "dropped": "driver_standing",
+            "kept": "same_team"
+          },
+          {
+            "dropped": "is_first_round",
+            "kept": "same_team"
+          },
+          {
+            "dropped": "title_contender",
+            "kept": "same_team"
+          },
+          {
+            "dropped": "career_penalties_per_100_races",
+            "kept": "same_team"
+          },
+          {
+            "dropped": "incidents_last_3_races",
+            "kept": "same_team"
+          },
+          {
+            "dropped": "incidents_last_5_races",
+            "kept": "same_team"
+          },
+          {
+            "dropped": "career_incidents_per_100_races",
+            "kept": "same_team"
+          },
+          {
+            "dropped": "races_since_last_incident",
+            "kept": "same_team"
+          },
+          {
+            "dropped": "career_incidents",
+            "kept": "same_team"
+          },
+          {
+            "dropped": "career_penalties",
+            "kept": "same_team"
+          },
+          {
+            "dropped": "points_available_remaining",
+            "kept": "same_team"
+          },
+          {
+            "dropped": "career_major_penalties",
+            "kept": "same_team"
+          },
+          {
+            "dropped": "races_since_last_penalty",
+            "kept": "same_team"
+          },
+          {
+            "dropped": "penalties_last_3_races",
+            "kept": "same_team"
+          },
+          {
+            "dropped": "points_gap_to_leader",
+            "kept": "same_team"
+          }
+        ],
+        "importance": {
+          "dropped_importance": [
+            "cat__driver_nationality",
+            "cat__weather_conditions",
+            "cat__driver"
+          ],
+          "kept_encoded_columns": [
+            "cat__incident_type",
+            "cat__driver_team",
+            "cat__track_conditions",
+            "cat__circuit",
+            "cat__session",
+            "cat__country",
+            "num__first_season",
+            "num__full_laps",
+            "num__construct_title_contender",
+            "num__is_last_round",
+            "num__precedent_no_penalty_rate",
+            "num__precedent_major_penalty_rate",
+            "num__precedent_count",
+            "num__penalties_last_5_races",
+            "num__round_progress",
+            "num__precedent_minor_penalty_rate"
+          ],
+          "preliminary_macro_f1": 0.4454237007613373
+        },
+        "dropped_importance": [
+          "cat__driver_nationality",
+          "cat__weather_conditions",
+          "cat__driver"
+        ]
+      }
+    }
+  }
+}

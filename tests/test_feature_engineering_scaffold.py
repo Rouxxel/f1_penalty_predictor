@@ -132,6 +132,12 @@ def test_features_v2_stage_builds_parquet(v2_cfg: TrainingConfig) -> None:
     shutil.rmtree(work_dir)
 
 
-def test_ablation_stage_not_implemented(v2_cfg: TrainingConfig) -> None:
-    with pytest.raises(NotImplementedError):
-        run_ablation(v2_cfg)
+def test_v2_all_stage_runs_ablation_before_evaluate(v2_cfg: TrainingConfig) -> None:
+    """Ablation is implemented and part of `--stage all` for V2; evaluate consumes its output."""
+    from fia_ml.training.pipeline import _resolve_stages
+
+    assert callable(run_ablation)
+    stages = _resolve_stages(Stage.ALL, v2_cfg)
+    assert stages == [Stage.FEATURES_V2, Stage.TRAIN, Stage.ABLATION, Stage.EVALUATE]
+    v1_cfg = TrainingConfig.from_yaml()
+    assert Stage.ABLATION not in _resolve_stages(Stage.ALL, v1_cfg)

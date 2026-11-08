@@ -54,7 +54,9 @@ def _resolve_stages(stage: Stage, cfg: TrainingConfig) -> list[Stage]:
     if stage != Stage.ALL:
         return [stage]
     if cfg.feature_version == "v2":
-        return [Stage.FEATURES_V2, Stage.TRAIN, Stage.EVALUATE]
+        # Ablation must run before evaluate: evaluate reads reports/ablation_results.json
+        # for the report table and the V1-vs-V2 figure (it silently skips them if missing).
+        return [Stage.FEATURES_V2, Stage.TRAIN, Stage.ABLATION, Stage.EVALUATE]
     return [Stage.PREPARE, Stage.TRAIN, Stage.EVALUATE]
 
 
