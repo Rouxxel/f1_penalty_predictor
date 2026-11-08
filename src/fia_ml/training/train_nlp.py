@@ -31,6 +31,14 @@ def _class_weight_tensor(y_train: np.ndarray, strategy: str, num_labels: int) ->
     return torch.tensor(weights, dtype=torch.float32)
 
 
+def _remove_checkpoints(checkpoints_dir: Path, output_dir: Path) -> None:
+    """Delete HF Trainer checkpoints after training. Only ever removes output_dir/checkpoints."""
+    target = checkpoints_dir.resolve()
+    if target != (output_dir / "checkpoints").resolve() or not target.is_dir():
+        return
+    shutil.rmtree(target, ignore_errors=True)
+
+
 def _snapshot_config(cfg: NlpTrainingConfig, output_dir: Path) -> Path:
     source = PROJECT_ROOT / "configs" / "bert.yaml"
     dest = output_dir / "training_config_snapshot.yaml"
@@ -138,6 +146,9 @@ def train_nlp(
         warmup_ratio=float(train_cfg.get("warmup_ratio", 0.1)),
         eval_strategy="epoch",
         save_strategy="epoch",
+        # Keep only the best (and, if different, the latest) checkpoint on disk during
+        # training: each one holds weights + optimizer state (~770 MB for DistilBERT).
+        save_total_limit=1,
         load_best_model_at_end=True,
         metric_for_best_model="eval_loss",
         greater_is_better=False,
@@ -164,6 +175,15 @@ def train_nlp(
     trainer_bundle.save(output_dir)
     _snapshot_config(cfg, output_dir)
 
+    best_checkpoint = hf_trainer.state.best_model_checkpoint
+    keep_checkpoints = bool(train_cfg.get("keep_checkpoints", False))
+    if not keep_checkpoints:
+        # The best weights were loaded at the end of training and saved to model/ +
+        # tokenizer/, which is all evaluate/fusion read. Checkpoints only serve to resume
+        # an interrupted run, so drop them once training has succeeded.
+        _remove_checkpoints(checkpoints_dir, output_dir)
+        best_checkpoint = None
+
     y_pred = trainer_bundle.predict(dataset.validation["text"].tolist())
     y_proba = trainer_bundle.predict_proba(dataset.validation["text"].tolist())
     val_metrics = compute_metrics(y_val, y_pred, y_proba=y_proba)
@@ -175,7 +195,8 @@ def train_nlp(
         "validation_rows": len(dataset.validation),
         "validation_metrics": val_metrics,
         "macro_f1": val_metrics["macro_f1"],
-        "best_checkpoint": str(checkpoints_dir),
+        "best_checkpoint": best_checkpoint,
+        "final_model_dir": str(output_dir / "model"),
     }
     sio.write_json(output_dir / "metrics.json", metrics)
 

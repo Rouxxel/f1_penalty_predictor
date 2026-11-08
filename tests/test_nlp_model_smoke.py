@@ -69,3 +69,23 @@ def test_train_nlp_smoke(fixture_cfg):
     assert Path(result["metrics_path"]).exists()
     assert (out_dir / "model").exists()
     assert (out_dir / "tokenizer").exists()
+
+
+def test_remove_checkpoints_only_deletes_checkpoints_dir(tmp_path):
+    from fia_ml.training.train_nlp import _remove_checkpoints
+
+    output_dir = tmp_path / "nlp"
+    ckpt = output_dir / "checkpoints" / "checkpoint-116"
+    ckpt.mkdir(parents=True)
+    (ckpt / "optimizer.pt").write_bytes(b"x")
+    model_file = output_dir / "model" / "model.safetensors"
+    model_file.parent.mkdir(parents=True)
+    model_file.write_bytes(b"weights")
+
+    # A path that isn't output_dir/checkpoints is refused.
+    _remove_checkpoints(output_dir / "model", output_dir)
+    assert model_file.exists()
+
+    _remove_checkpoints(output_dir / "checkpoints", output_dir)
+    assert not (output_dir / "checkpoints").exists()
+    assert model_file.exists()
