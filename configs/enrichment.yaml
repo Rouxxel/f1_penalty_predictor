@@ -11,12 +11,12 @@ timestamp:
 
 openf1:
   base_url: https://api.openf1.org/v1
-  enabled_from_season: 2023
+  enabled_from_season: 2019
   cache_dir: data/raw/race_data/openf1_cache
 
 fastf1:
-  enabled: true
-  validate_openf1_from_season: 2023
+  enabled: false
+  validate_openf1_from_season: 2024
 
 text_fields:
   driver_at_fault_min_confidence: 0.7
