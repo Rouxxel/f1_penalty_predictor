@@ -11,7 +11,7 @@ timestamp:
 
 openf1:
   base_url: https://api.openf1.org/v1
-  enabled_from_season: 2019
+  enabled_from_season: 2023   # OpenF1 has no data before 2023 (API returns 404)
   cache_dir: data/raw/race_data/openf1_cache
 
 fastf1:
