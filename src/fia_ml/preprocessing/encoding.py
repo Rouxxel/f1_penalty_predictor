@@ -54,7 +54,11 @@ def _prepare_raw_features(df: pd.DataFrame, feature_columns: list[str]) -> pd.Da
         elif col in NUMERIC_FEATURES:
             out[col] = pd.to_numeric(out[col], errors="coerce")
         else:
-            out[col] = out[col].astype(str).replace({"": np.nan, "nan": np.nan})
+            # Opt in to pandas' future no-downcast behaviour, then downcast explicitly
+            # so the result matches the old ``replace`` output without a FutureWarning.
+            with pd.option_context("future.no_silent_downcasting", True):
+                cleaned = out[col].astype(str).replace({"": np.nan, "nan": np.nan})
+            out[col] = cleaned.infer_objects()
     return out
 
 
