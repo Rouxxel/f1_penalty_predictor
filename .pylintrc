@@ -1,0 +1,4 @@
+[MAIN]
+# Project uses a src/ layout: the fia_ml package lives in src/fia_ml.
+# Without this, pylint reports E0401 (import-error) for every "import fia_ml...".
+source-roots=src
