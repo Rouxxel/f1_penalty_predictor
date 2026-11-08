@@ -20,9 +20,10 @@ def test_nlp_config_loads_bert_yaml(cfg):
     assert cfg.backbone == "distilbert-base-uncased"
     assert cfg.num_labels == 3
     assert cfg.training_seed == 42
-    assert cfg.splits["train_seasons"] == [2019]
-    assert cfg.splits["validation_season"] == 2025
-    assert cfg.inputs["seasons"] == [2019, 2025]
+    assert cfg.splits["train_seasons"] == [2019, 2020, 2021, 2022, 2023]
+    assert cfg.splits["validation_season"] == 2024
+    assert cfg.splits["test_season"] == [2025, 2026]
+    assert cfg.inputs["seasons"] == list(range(2019, 2027))
 
 
 def test_nlp_config_paths_resolve(cfg):

@@ -25,8 +25,9 @@ def cfg() -> TrainingConfig:
 def test_training_config_loads(cfg: TrainingConfig) -> None:
     assert DEFAULT_TRAINING_CONFIG.exists()
     assert cfg.path("processed").name == "processed"
-    assert cfg.splits["train_seasons"] == [2019]
-    assert cfg.splits["validation_season"] == 2025
+    assert cfg.splits["train_seasons"] == [2019, 2020, 2021, 2022, 2023]
+    assert cfg.splits["validation_season"] == 2024
+    assert cfg.splits["test_season"] == [2025, 2026]
     assert cfg.model["num_class"] == 3
     assert cfg.random_state == 42
 
@@ -156,3 +157,24 @@ def test_prepare_stage_runs_on_fixture(cfg: TrainingConfig) -> None:
     assert (work_dir / "processed" / "train.parquet").exists()
 
     shutil.rmtree(work_dir)
+
+
+def test_temporal_split_accepts_season_lists() -> None:
+    import pandas as pd
+
+    from fia_ml.preprocessing.splitting import temporal_split, verify_no_season_overlap
+
+    splits = {
+        "train_seasons": [2019, 2020, 2021, 2022, 2023],
+        "validation_season": 2024,
+        "test_season": [2025, 2026],
+    }
+    verify_no_season_overlap(splits)
+    df = pd.DataFrame({"season": list(range(2019, 2027))})
+    train, val, test = temporal_split(df, splits)
+    assert sorted(train["season"]) == [2019, 2020, 2021, 2022, 2023]
+    assert list(val["season"]) == [2024]
+    assert sorted(test["season"]) == [2025, 2026]
+
+    with pytest.raises(ValueError):
+        verify_no_season_overlap({"train_seasons": [2025], "test_season": [2025, 2026]})

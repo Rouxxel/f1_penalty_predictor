@@ -27,7 +27,7 @@ def test_dry_run_default_plan():
         "nlp",
         "normative",
     ]
-    assert result["plan"]["seasons"] == [2019, 2025]
+    assert result["plan"]["seasons"] == list(range(2019, 2027))
     assert "already_ran" in result
 
 
@@ -118,6 +118,10 @@ def test_run_full_pipeline_skips_when_user_declines_rerun(monkeypatch):
         lambda phase, **kwargs: phase == PipelinePhase.V1,
     )
     monkeypatch.setattr("fia_ml.orchestration.run_all._run_v1", lambda _cfg: {"ok": True})
+    # Prerequisites depend on which processed CSVs exist on disk; not under test here.
+    monkeypatch.setattr(
+        "fia_ml.orchestration.run_all._validate_prerequisites", lambda *a, **k: None
+    )
 
     result = run_full_pipeline(
         only=PipelinePhase.V1,

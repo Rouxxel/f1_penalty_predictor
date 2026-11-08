@@ -115,6 +115,13 @@ def test_features_v2_stage_builds_parquet(v2_cfg: TrainingConfig) -> None:
     v2_cfg.paths["processed"] = str(processed)
     v2_cfg.paths["models"] = str(work_dir / "models")
     v2_cfg.paths["reports"] = str(work_dir / "reports")
+    # Fixture only has 2019 + 2025 rows; use a matching split instead of the live config.
+    v2_cfg.splits = {
+        "mode": "temporal",
+        "train_seasons": [2019],
+        "validation_season": 2025,
+        "test_season": None,
+    }
 
     result = build_features_v2(v2_cfg)
     assert result["train_rows"] == 1

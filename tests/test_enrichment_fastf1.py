@@ -116,3 +116,22 @@ def test_enrich_with_fastf1_fills_race_state(mock_meta, _mock_cache, mock_get_se
     assert row["flag"] == "yellow"
     assert row["sector"] == "2"
     assert row["positions_of_involved parties"] == "2,"
+
+
+def test_loaded_attr_returns_none_when_fastf1_data_not_loaded():
+    """Session.load() can partially fail; reading the missing part must not crash."""
+    from fastf1.exceptions import DataNotLoadedError
+
+    from fia_ml.data.enrichment.fastf1_enrich import _loaded_attr
+
+    class PartialSession:
+        weather_data = "loaded"
+
+        @property
+        def laps(self):
+            raise DataNotLoadedError("laps not loaded")
+
+    session = PartialSession()
+    assert _loaded_attr(session, "laps") is None
+    assert _loaded_attr(session, "race_control_messages") is None
+    assert _loaded_attr(session, "weather_data") == "loaded"
