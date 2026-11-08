@@ -146,3 +146,47 @@ def test_validate_prerequisites_raises(monkeypatch):
         assert "incidents.parquet" in str(exc)
     else:
         raise AssertionError("expected PrerequisiteError")
+
+
+def test_full_run_after_clean_is_not_blocked_by_outputs_of_earlier_phases(monkeypatch):
+    """After clean.py nothing exists; dataset/v1 in the same run produce later prerequisites."""
+    fake_root = ROOT / "tests" / "fixtures" / "orchestration_empty" / "no_artifacts"
+    fake_root.mkdir(parents=True, exist_ok=True)
+    monkeypatch.setattr("fia_ml.orchestration.run_all.PROJECT_ROOT", fake_root)
+    all_phases = [
+        PipelinePhase.DATASET,
+        PipelinePhase.V1,
+        PipelinePhase.V2,
+        PipelinePhase.NLP,
+        PipelinePhase.NORMATIVE,
+    ]
+    _validate_prerequisites(
+        all_phases,
+        seasons=[2019, 2025],
+        nlp_fusion=True,
+        normative_config=ROOT / "configs" / "normative.yaml",
+    )
+    # V1 alone (no dataset phase in the run) must still be rejected.
+    try:
+        _validate_prerequisites(
+            [PipelinePhase.V1],
+            seasons=[2019, 2025],
+            nlp_fusion=False,
+            normative_config=ROOT / "configs" / "normative.yaml",
+        )
+    except PrerequisiteError as exc:
+        assert "processed_2019.csv" in str(exc)
+    else:
+        raise AssertionError("expected PrerequisiteError")
+    # NLP after V1 but without dataset: CSVs still required, fusion preds come from V1.
+    try:
+        _validate_prerequisites(
+            [PipelinePhase.V1, PipelinePhase.NLP],
+            seasons=[2019],
+            nlp_fusion=True,
+            normative_config=ROOT / "configs" / "normative.yaml",
+        )
+    except PrerequisiteError as exc:
+        assert "phase 'v1'" in str(exc)
+    else:
+        raise AssertionError("expected PrerequisiteError")
