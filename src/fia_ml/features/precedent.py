@@ -84,6 +84,12 @@ def compute_precedent_features(df: pd.DataFrame, cfg: FeaturesConfig) -> pd.Data
 
     for idx in order:
         row = out.loc[idx]
+        if pd.isna(row["round"]):
+            # Without a round we can't tell which incidents came before; leave the
+            # precedent features empty and don't use this row as a precedent.
+            for col in PRECEDENT_OUTPUT_COLUMNS:
+                results[col].append(np.nan)
+            continue
         season = int(row["season"])
         round_num = int(row["round"])
         severity_class = _severity_class(float(row["_severity"]))

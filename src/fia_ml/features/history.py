@@ -43,6 +43,12 @@ def _history_for_driver(group: pd.DataFrame, windows: list[int]) -> pd.DataFrame
     prior_rows: list[dict[str, int | float]] = []
 
     for _, row in sorted_group.iterrows():
+        if pd.isna(row["round"]):
+            # No round (e.g. pre-season testing, unmatched event): ordering is unknown,
+            # so emit NaN history and keep the row out of later rows' history.
+            for col in HISTORY_OUTPUT_COLUMNS:
+                results[col].append(np.nan)
+            continue
         season = int(row["season"])
         round_num = int(row["round"])
         severity = float(row["_severity"])

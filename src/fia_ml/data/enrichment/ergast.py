@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import json
+import re
 import time
+import unicodedata
 import urllib.error
 import urllib.request
 from typing import Any
@@ -236,14 +238,60 @@ def _should_write_field(
     return is_blank(row_value) or not fill_gaps_only
 
 
+# Same race, different names between FIA documents and Ergast/Jolpica (varies by year,
+# e.g. 2021-22 Ergast "São Paulo"/"Mexico City" vs FIA "Brazilian"/"Mexican", reversed in 2026).
+# Normalised names; applied in both directions.
+_ALIAS_PAIRS: tuple[tuple[str, str], ...] = (
+    ("sao paulo", "brazilian"),
+    ("mexico city", "mexican"),
+)
+EVENT_NAME_ALIASES: dict[str, list[str]] = {}
+for _a, _b in _ALIAS_PAIRS:
+    EVENT_NAME_ALIASES.setdefault(_a, []).append(_b)
+    EVENT_NAME_ALIASES.setdefault(_b, []).append(_a)
+
+
+def _normalize_event_name(name: str) -> str:
+    """Lower-case, strip accents/punctuation and the 'Formula 1' / 'Grand Prix' noise words."""
+    text = unicodedata.normalize("NFKD", name).encode("ascii", "ignore").decode("ascii").lower()
+    text = re.sub(r"\bformula\s*(1|one)\b", " ", text)
+    text = text.replace("grand prix", " ")
+    text = re.sub(r"[^a-z0-9]+", " ", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
 def map_event_to_round(event: str, calendar: list[dict[str, Any]]) -> int | None:
+    """Map an FIA event name to an Ergast round.
+
+    Tries, in order: exact name, normalised name (accents, 'Formula 1', punctuation),
+    alias table, substring either way, then a unique shared word (e.g. FIA
+    "Barcelona-Catalunya Grand Prix" vs Ergast "Barcelona Grand Prix").
+    """
+    if not event:
+        return None
     for race in calendar:
         if race["race_name"].lower() == event.lower():
             return race["round"]
-    normalized = event.lower().replace("grand prix", "").strip()
-    for race in calendar:
-        if normalized in race["race_name"].lower():
-            return race["round"]
+
+    target = _normalize_event_name(event)
+    if not target:
+        return None
+    names = [(race["round"], _normalize_event_name(race["race_name"])) for race in calendar]
+
+    candidates = [target, *EVENT_NAME_ALIASES.get(target, [])]
+    for candidate in candidates:
+        for round_num, name in names:
+            if name == candidate:
+                return round_num
+    for candidate in candidates:
+        for round_num, name in names:
+            if name and (candidate in name or name in candidate):
+                return round_num
+
+    target_words = set(target.split())
+    shared = [round_num for round_num, name in names if target_words & set(name.split())]
+    if len(shared) == 1:
+        return shared[0]
     return None
 
 
