@@ -94,3 +94,22 @@ def test_shuffle_round_order_changes_history(features_cfg: FeaturesConfig) -> No
         ordered_out["penalties_last_3_races"].reset_index(drop=True),
         shuffled_out["penalties_last_3_races"].reset_index(drop=True),
     )
+
+
+def test_missing_round_does_not_crash_or_leak(features_cfg: FeaturesConfig) -> None:
+    """Rows without a round (e.g. unmatched event) get NaN history and are not counted."""
+    df = pd.DataFrame(
+        {
+            "incident_id": ["inc_a", "inc_nan", "inc_b"],
+            "driver": ["driver_a"] * 3,
+            "season": [2026, 2026, 2026],
+            "round": [1.0, float("nan"), 3.0],
+            "penalty_severity": [1, 1, 0],
+        }
+    )
+    out = compute_history_features(df, features_cfg)
+    nan_row = out[out["incident_id"] == "inc_nan"].iloc[0]
+    later = out[out["incident_id"] == "inc_b"].iloc[0]
+    assert pd.isna(nan_row["career_incidents"])
+    assert later["career_incidents"] == 1
+    assert later["career_penalties"] == 1

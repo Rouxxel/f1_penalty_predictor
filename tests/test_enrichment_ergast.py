@@ -196,3 +196,30 @@ def test_enrich_with_ergast_uses_round_n_minus_1(
     assert row["current_top_4_drivers"] == "hamilton"
     mock_driver_standings.assert_any_call(cfg, 7)
     assert not any(call.args[1] == 8 for call in mock_driver_standings.call_args_list)
+
+
+def test_map_event_to_round_handles_fia_vs_ergast_naming():
+    from fia_ml.data.enrichment.ergast import map_event_to_round
+
+    cal_2020 = [
+        {"round": 4, "race_name": "British Grand Prix"},
+        {"round": 5, "race_name": "70th Anniversary Grand Prix"},
+    ]
+    cal_2021 = [
+        {"round": 18, "race_name": "Mexico City Grand Prix"},
+        {"round": 19, "race_name": "São Paulo Grand Prix"},
+    ]
+    cal_2026 = [
+        {"round": 7, "race_name": "Barcelona Grand Prix"},
+        {"round": 14, "race_name": "Spanish Grand Prix"},
+        {"round": 20, "race_name": "Brazilian Grand Prix"},
+    ]
+    assert map_event_to_round("British Grand Prix", cal_2020) == 4
+    assert map_event_to_round("Formula 1 70th Anniversary Grand Prix", cal_2020) == 5
+    assert map_event_to_round("Mexican Grand Prix", cal_2021) == 18
+    assert map_event_to_round("Brazilian Grand Prix", cal_2021) == 19
+    assert map_event_to_round("Barcelona-Catalunya Grand Prix", cal_2026) == 7
+    assert map_event_to_round("Spanish Grand Prix", cal_2026) == 14
+    assert map_event_to_round("São Paulo Grand Prix", cal_2026) == 20
+    assert map_event_to_round("Pre-Season Testing", cal_2026) is None
+    assert map_event_to_round("", cal_2026) is None
