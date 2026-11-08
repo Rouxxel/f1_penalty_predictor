@@ -27,6 +27,19 @@ def _session_name(session: str) -> str:
     return mapping.get(session, session.upper()[:1])
 
 
+def _loaded_attr(session_obj: Any, name: str) -> Any:
+    """Return a FastF1 session attribute, or None if that part failed to load.
+
+    ``Session.load()`` does not raise when one data source fails (it logs e.g.
+    "Failed to load race control messages!"); reading the missing property then
+    raises ``DataNotLoadedError``, which ``getattr(..., default)`` does not catch.
+    """
+    try:
+        return getattr(session_obj, name)
+    except Exception:  # noqa: BLE001 - DataNotLoadedError and similar
+        return None
+
+
 def _parse_time_to_seconds(value: str) -> float | None:
     if not value:
         return None
@@ -229,8 +242,8 @@ def enrich_with_fastf1(
         if event_obj is None:
             continue
 
-        laps = getattr(event_obj, "laps", None)
-        messages = getattr(event_obj, "race_control_messages", None)
+        laps = _loaded_attr(event_obj, "laps")
+        messages = _loaded_attr(event_obj, "race_control_messages")
 
         if round_num not in driver_number_cache:
             driver_number_cache[round_num] = build_driver_number_map_from_ergast(cfg, round_num)
@@ -247,7 +260,7 @@ def enrich_with_fastf1(
 
         try:
             if is_blank(row.get("track_conditions")) or is_blank(row.get("weather_conditions")) or not fill_gaps_only:
-                weather = event_obj.weather_data
+                weather = _loaded_attr(event_obj, "weather_data")
                 if weather is not None and len(weather) > 0:
                     last = weather.iloc[-1]
                     rainfall = getattr(last, "Rainfall", False)
