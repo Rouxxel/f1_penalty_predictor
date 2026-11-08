@@ -84,7 +84,13 @@ def test_normative_prerequisites_do_not_require_nlp(monkeypatch):
     assert not any("nlp" in item.lower() for item in missing)
 
 
-def test_phase_already_ran_v1_when_metrics_exist():
+def test_phase_already_ran_v1_when_metrics_exist(monkeypatch):
+    # Self-contained: the real ml_models/ may be empty (e.g. after clean.py).
+    fake_root = ROOT / "tests" / "fixtures" / "orchestration_empty" / "with_v1_metrics"
+    metrics = fake_root / "ml_models" / "xgboost" / "metrics.json"
+    metrics.parent.mkdir(parents=True, exist_ok=True)
+    metrics.write_text("{}", encoding="utf-8")
+    monkeypatch.setattr("fia_ml.orchestration.run_all.PROJECT_ROOT", fake_root)
     assert _phase_already_ran(
         PipelinePhase.V1,
         seasons=[2019, 2025],

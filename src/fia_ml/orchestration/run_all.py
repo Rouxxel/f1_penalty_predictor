@@ -345,14 +345,19 @@ def run_full_pipeline(
         "skip_download": skip_download,
         "nlp_fusion": nlp_fusion,
     }
+    # Missing artifacts that no earlier phase of this run will create (same rule as the run itself).
     prerequisites = {
-        phase.value: _check_phase_prerequisites(
-            phase,
-            seasons=resolved_seasons,
-            nlp_fusion=nlp_fusion,
-            normative_config=normative_config,
-        )
-        for phase in phases
+        phase.value: [
+            path
+            for path in _check_phase_prerequisites(
+                phase,
+                seasons=resolved_seasons,
+                nlp_fusion=nlp_fusion,
+                normative_config=normative_config,
+            )
+            if _producing_phase(path) not in set(phases[:index])
+        ]
+        for index, phase in enumerate(phases)
         if phase != PipelinePhase.DATASET
     }
     already_ran = {
