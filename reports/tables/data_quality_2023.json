@@ -1,0 +1,168 @@
+{
+  "season": 2023,
+  "row_count": 238,
+  "review_count": 238,
+  "validation_errors": [
+    "Row 2 incident 2023_race_17d764da77 misaligned multi-value lengths: {'years_in_sport': 1, 'driver_standings': 1, 'superlicense_points_before_incident': 1, 'driver_points': 1, 'nationalities': 1, 'drivers': 2}",
+    "Row 4 incident 2023_race_fa455958f7 misaligned multi-value lengths: {'years_in_sport': 1, 'driver_standings': 1, 'superlicense_points_before_incident': 1, 'driver_points': 1, 'nationalities': 1, 'drivers': 2}",
+    "Row 5 incident 2023_qualifying_76b221cd4b misaligned multi-value lengths: {'years_in_sport': 1, 'driver_standings': 1, 'superlicense_points_before_incident': 1, 'driver_points': 1, 'nationalities': 1, 'drivers': 2}",
+    "Row 31 incident 2023_race_4b55eee0fc misaligned multi-value lengths: {'years_in_sport': 0, 'driver_standings': 0, 'superlicense_points_before_incident': 1, 'driver_points': 0, 'nationalities': 0, 'drivers': 2}",
+    "Row 42 incident 2023_sprint_300514b116 misaligned multi-value lengths: {'years_in_sport': 1, 'driver_standings': 1, 'superlicense_points_before_incident': 1, 'driver_points': 1, 'nationalities': 1, 'drivers': 2}",
+    "Row 44 incident 2023_qualifying_d6c6e7bc40 misaligned multi-value lengths: {'years_in_sport': 1, 'driver_standings': 1, 'superlicense_points_before_incident': 1, 'driver_points': 1, 'nationalities': 1, 'drivers': 2}",
+    "Row 65 incident 2023_sprint_09f3382264 misaligned multi-value lengths: {'years_in_sport': 1, 'driver_standings': 1, 'superlicense_points_before_incident': 1, 'driver_points': 1, 'nationalities': 1, 'drivers': 2}",
+    "Row 70 incident 2023_qualifying_e9c01304eb misaligned multi-value lengths: {'years_in_sport': 1, 'driver_standings': 1, 'superlicense_points_before_incident': 1, 'driver_points': 1, 'nationalities': 1, 'drivers': 2}",
+    "Row 80 incident 2023_qualifying_f538f15af9 misaligned multi-value lengths: {'years_in_sport': 0, 'driver_standings': 0, 'superlicense_points_before_incident': 1, 'driver_points': 0, 'nationalities': 0, 'drivers': 2}",
+    "Row 95 incident 2023_qualifying_f3cf52a9aa misaligned multi-value lengths: {'years_in_sport': 1, 'driver_standings': 1, 'superlicense_points_before_incident': 1, 'driver_points': 1, 'nationalities': 1, 'drivers': 2}",
+    "Row 96 incident 2023_qualifying_95100b57bf misaligned multi-value lengths: {'years_in_sport': 1, 'driver_standings': 1, 'superlicense_points_before_incident': 1, 'driver_points': 1, 'nationalities': 1, 'drivers': 2}",
+    "Row 97 incident 2023_qualifying_3f68fb691e misaligned multi-value lengths: {'years_in_sport': 1, 'driver_standings': 1, 'superlicense_points_before_incident': 1, 'driver_points': 1, 'nationalities': 1, 'drivers': 2}",
+    "Row 98 incident 2023_qualifying_5e86aed96c misaligned multi-value lengths: {'years_in_sport': 1, 'driver_standings': 1, 'superlicense_points_before_incident': 1, 'driver_points': 1, 'nationalities': 1, 'drivers': 2}",
+    "Row 102 incident 2023_practice_55e38da02e misaligned multi-value lengths: {'years_in_sport': 1, 'driver_standings': 1, 'superlicense_points_before_incident': 1, 'driver_points': 1, 'nationalities': 1, 'drivers': 2}",
+    "Row 109 incident 2023_race_76b4b05136 misaligned multi-value lengths: {'years_in_sport': 1, 'driver_standings': 0, 'superlicense_points_before_incident': 1, 'driver_points': 0, 'nationalities': 0, 'drivers': 2}",
+    "Row 113 incident 2023_qualifying_5bbf113b82 misaligned multi-value lengths: {'years_in_sport': 1, 'driver_standings': 1, 'superlicense_points_before_incident': 1, 'driver_points': 1, 'nationalities': 1, 'drivers': 2}",
+    "Row 114 incident 2023_qualifying_9caa034849 misaligned multi-value lengths: {'years_in_sport': 1, 'driver_standings': 1, 'superlicense_points_before_incident': 1, 'driver_points': 1, 'nationalities': 1, 'drivers': 2}",
+    "Row 116 incident 2023_practice_e85b6b1fed misaligned multi-value lengths: {'years_in_sport': 1, 'driver_standings': 1, 'superlicense_points_before_incident': 1, 'driver_points': 1, 'nationalities': 1, 'drivers': 2}",
+    "Row 120 incident 2023_qualifying_57664eb4a7 misaligned multi-value lengths: {'years_in_sport': 1, 'driver_standings': 1, 'superlicense_points_before_incident': 1, 'driver_points': 1, 'nationalities': 1, 'drivers': 2}",
+    "Row 129 incident 2023_race_ca281b1276 misaligned multi-value lengths: {'years_in_sport': 1, 'driver_standings': 1, 'superlicense_points_before_incident': 1, 'driver_points': 1, 'nationalities': 1, 'drivers': 2}"
+  ],
+  "column_fill_rates": {
+    "incident_id": 1.0,
+    "circuit": 1.0,
+    "country": 1.0,
+    "first_season": 0.8992,
+    "round": 1.0,
+    "season": 1.0,
+    "current_top_4_drivers": 0.9622,
+    "rounds": 1.0,
+    "num_teams": 1.0,
+    "lap": 0.042,
+    "lap_remaining": 0.042,
+    "full_laps": 0.6218,
+    "completion_percentage": 0.042,
+    "sector": 0.1723,
+    "flag": 0.0042,
+    "safety_car": 0.0,
+    "track_conditions": 0.0,
+    "weather_conditions": 0.0,
+    "session": 0.8739,
+    "incident_type": 1.0,
+    "severity": 0.0,
+    "positions_of_involved parties": 0.0084,
+    "num_drivers": 1.0,
+    "drivers": 0.9244,
+    "nationalities": 0.8193,
+    "respective_teams": 0.8697,
+    "driver_standings": 0.8193,
+    "driver_points": 0.8193,
+    "construct_standings": 0.8193,
+    "construct_points": 0.8193,
+    "years_in_sport": 0.8529,
+    "superlicense_points_before_incident": 0.916,
+    "investigation": 1.0,
+    "incident_classification": 1.0,
+    "driver_at_fault": 0.2479,
+    "penalty": 0.9034,
+    "superlicense_points_added": 0.0924,
+    "mentioned_article": 0.6891
+  },
+  "enrichment": {
+    "season": 2023,
+    "metrics": {
+      "lap_race_fill_rate": 0.0375,
+      "flag_race_fill_rate": 0.0,
+      "positions_with_drivers_fill_rate": 0.0091,
+      "sector_fill_rate": 0.1723,
+      "superlicense_before_fill_rate": 0.916,
+      "ergast_standings_provenance_rate": 0.8193,
+      "timestamp_audit": {
+        "rows": 238,
+        "parsed_rate": 1.0,
+        "offset_rate": 0.063,
+        "methods": {
+          "document_clock": 238
+        }
+      },
+      "provenance_summary": {
+        "incidents": 238,
+        "fields_recorded": 2092,
+        "by_source": {
+          "ergast": 1472,
+          "corpus_rolling": 218,
+          "text_fields": 298,
+          "openf1": 89,
+          "timestamp": 15
+        },
+        "by_field": {
+          "nationalities": 195,
+          "respective_teams": 195,
+          "driver_standings": 195,
+          "driver_points": 195,
+          "construct_standings": 195,
+          "construct_points": 195,
+          "current_top_4_drivers": 229,
+          "superlicense_points_before_incident": 218,
+          "severity": 238,
+          "driver_at_fault": 60,
+          "full_laps": 75,
+          "lap": 10,
+          "session_offset_seconds": 15,
+          "round": 49,
+          "country": 24,
+          "flag": 1,
+          "sector": 1,
+          "positions_of_involved parties": 2
+        }
+      },
+      "superlicense_before_given_prior_sl_rate": 1.0,
+      "rows_with_prior_superlicense": 77
+    },
+    "gates": [
+      {
+        "id": "lap_race",
+        "actual": 0.0375,
+        "target": 0.5,
+        "passed": false,
+        "detail": ""
+      },
+      {
+        "id": "flag_race",
+        "actual": 0.0,
+        "target": 0.5,
+        "passed": false,
+        "detail": ""
+      },
+      {
+        "id": "positions_with_drivers",
+        "actual": 0.0091,
+        "target": 0.4,
+        "passed": false,
+        "detail": ""
+      },
+      {
+        "id": "sector",
+        "actual": 0.1723,
+        "target": 0.5,
+        "passed": false,
+        "detail": ""
+      },
+      {
+        "id": "ergast_standings_round_n_minus_1",
+        "actual": 0.8193,
+        "target": 0.9,
+        "passed": false,
+        "detail": ""
+      },
+      {
+        "id": "superlicense_before_given_prior_sl",
+        "actual": 1.0,
+        "target": 0.8,
+        "passed": true,
+        "detail": ""
+      }
+    ],
+    "gates_passed": 1,
+    "gates_total": 6,
+    "all_passed": false,
+    "enrichment_report_path": "C:\\Users\\Acer\\Documents\\GitHub\\f1_penalty_predictor\\reports\\tables\\enrichment_report_2023.json",
+    "enrichment_markdown_path": "C:\\Users\\Acer\\Documents\\GitHub\\f1_penalty_predictor\\reports\\model_reports\\enrichment_improvement_2026-11-08.md"
+  }
+}
