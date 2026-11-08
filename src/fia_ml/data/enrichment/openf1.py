@@ -84,7 +84,16 @@ def load_sessions_for_year(cfg: PipelineConfig) -> list[dict[str, Any]]:
         if isinstance(cached, list):
             return cached
 
-    sessions = fetch_openf1("sessions", {"year": cfg.season}, cfg)
+    try:
+        sessions = fetch_openf1("sessions", {"year": cfg.season}, cfg)
+    except requests.HTTPError as exc:
+        # OpenF1 has no data before 2023 and answers 404; skip enrichment, don't crash.
+        if exc.response is not None and exc.response.status_code == 404:
+            print(
+                f"OpenF1 has no sessions for {cfg.season} (HTTP 404); skipping OpenF1 enrichment."
+            )
+            return []
+        raise
     sio.write_json(index_path, sessions)
     return sessions
 
