@@ -1,0 +1,96 @@
+{
+  "season": 2026,
+  "metrics": {
+    "lap_race_fill_rate": 0.0,
+    "flag_race_fill_rate": 0.0,
+    "positions_with_drivers_fill_rate": 0.0,
+    "sector_fill_rate": 0.1729,
+    "superlicense_before_fill_rate": 0.7384,
+    "ergast_standings_provenance_rate": 0.6899,
+    "timestamp_audit": {
+      "rows": 451,
+      "parsed_rate": 1.0,
+      "offset_rate": 0.0222,
+      "methods": {
+        "document_clock": 451
+      }
+    },
+    "provenance_summary": {
+      "incidents": 451,
+      "fields_recorded": 3652,
+      "by_source": {
+        "ergast": 2556,
+        "openf1": 216,
+        "corpus_rolling": 333,
+        "text_fields": 537,
+        "timestamp": 10
+      },
+      "by_field": {
+        "round": 416,
+        "full_laps": 215,
+        "superlicense_points_before_incident": 333,
+        "driver_at_fault": 86,
+        "severity": 451,
+        "nationalities": 287,
+        "respective_teams": 287,
+        "driver_standings": 287,
+        "driver_points": 287,
+        "construct_standings": 287,
+        "construct_points": 287,
+        "current_top_4_drivers": 390,
+        "session_offset_seconds": 10,
+        "country": 28,
+        "lap": 1
+      }
+    },
+    "superlicense_before_given_prior_sl_rate": 1.0,
+    "rows_with_prior_superlicense": 33
+  },
+  "gates": [
+    {
+      "id": "lap_race",
+      "actual": 0.0,
+      "target": 0.5,
+      "passed": false,
+      "detail": ""
+    },
+    {
+      "id": "flag_race",
+      "actual": 0.0,
+      "target": 0.5,
+      "passed": false,
+      "detail": ""
+    },
+    {
+      "id": "positions_with_drivers",
+      "actual": 0.0,
+      "target": 0.4,
+      "passed": false,
+      "detail": ""
+    },
+    {
+      "id": "sector",
+      "actual": 0.1729,
+      "target": 0.5,
+      "passed": false,
+      "detail": ""
+    },
+    {
+      "id": "ergast_standings_round_n_minus_1",
+      "actual": 0.6899,
+      "target": 0.9,
+      "passed": false,
+      "detail": ""
+    },
+    {
+      "id": "superlicense_before_given_prior_sl",
+      "actual": 1.0,
+      "target": 0.8,
+      "passed": true,
+      "detail": ""
+    }
+  ],
+  "gates_passed": 1,
+  "gates_total": 6,
+  "all_passed": false
+}

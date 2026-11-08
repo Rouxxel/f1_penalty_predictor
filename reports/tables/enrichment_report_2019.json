@@ -1,7 +1,7 @@
 {
   "season": 2019,
   "metrics": {
-    "lap_race_fill_rate": 0.04,
+    "lap_race_fill_rate": 0.0,
     "flag_race_fill_rate": 0.0,
     "positions_with_drivers_fill_rate": 0.0,
     "sector_fill_rate": 0.4828,
@@ -15,14 +15,37 @@
         "document_clock": 203
       }
     },
-    "provenance_summary": {},
+    "provenance_summary": {
+      "incidents": 203,
+      "fields_recorded": 1830,
+      "by_source": {
+        "ergast": 1372,
+        "corpus_rolling": 201,
+        "text_fields": 254,
+        "timestamp": 3
+      },
+      "by_field": {
+        "nationalities": 195,
+        "respective_teams": 195,
+        "driver_standings": 195,
+        "driver_points": 195,
+        "construct_standings": 195,
+        "construct_points": 195,
+        "current_top_4_drivers": 197,
+        "superlicense_points_before_incident": 201,
+        "driver_at_fault": 51,
+        "severity": 203,
+        "session_offset_seconds": 3,
+        "round": 5
+      }
+    },
     "superlicense_before_given_prior_sl_rate": 1.0,
     "rows_with_prior_superlicense": 98
   },
   "gates": [
     {
       "id": "lap_race",
-      "actual": 0.04,
+      "actual": 0.0,
       "target": 0.5,
       "passed": false,
       "detail": ""
