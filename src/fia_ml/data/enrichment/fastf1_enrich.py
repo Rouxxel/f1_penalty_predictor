@@ -216,6 +216,11 @@ def enrich_with_fastf1(
             fastf1.Cache.configure(cache_dir=str(cache_dir))
         else:
             fastf1.Cache.enable_cache(str(cache_dir))
+        # FastF1 re-requests cached HTTP responses after 12 h. Offline mode serves everything
+        # from the cache instead: no rate-limit errors, no F1 TV login, but sessions that
+        # were never cached load without data (those columns stay empty). Off by default.
+        if cfg.enrichment_settings.fastf1_offline_mode:
+            fastf1.Cache.offline_mode(True)
 
     out = df.copy()
     meta = load_meta(cfg)

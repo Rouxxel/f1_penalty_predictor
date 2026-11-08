@@ -73,6 +73,11 @@ class EnrichmentConfig:
         return bool(self.fastf1.get("enabled", True))
 
     @property
+    def fastf1_offline_mode(self) -> bool:
+        """Serve FastF1 data from the local cache only (no network requests)."""
+        return bool(self.fastf1.get("offline_mode", False))
+
+    @property
     def fastf1_validate_openf1_from_season(self) -> int:
         return int(self.fastf1.get("validate_openf1_from_season", 2023))
 

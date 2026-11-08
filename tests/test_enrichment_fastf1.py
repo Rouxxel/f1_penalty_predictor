@@ -136,3 +136,23 @@ def test_loaded_attr_returns_none_when_fastf1_data_not_loaded():
     assert _loaded_attr(session, "laps") is None
     assert _loaded_attr(session, "race_control_messages") is None
     assert _loaded_attr(session, "weather_data") == "loaded"
+
+
+def test_fastf1_offline_mode_is_opt_in():
+    """offline_mode is only switched on when configs/enrichment.yaml asks for it."""
+    from fia_ml.data.enrichment_config import EnrichmentConfig
+
+    assert EnrichmentConfig(fastf1={}).fastf1_offline_mode is False
+    assert EnrichmentConfig(fastf1={"offline_mode": True}).fastf1_offline_mode is True
+
+    cfg = PipelineConfig.from_yaml(ROOT / "configs" / "data.yaml").for_season(2019)
+    df = pd.DataFrame([{"incident_id": "x", "session": "race", "round": ""}])
+    with patch("fastf1.Cache.configure", create=True), patch("fastf1.Cache.enable_cache"), patch(
+        "fastf1.Cache.offline_mode"
+    ) as offline, patch("fia_ml.data.enrichment.fastf1_enrich.load_meta", return_value={}):
+        cfg.enrichment_settings.fastf1["offline_mode"] = True
+        try:
+            enrich_with_fastf1(df, cfg)
+        finally:
+            cfg.enrichment_settings.fastf1.pop("offline_mode", None)
+    offline.assert_called_once_with(True)
