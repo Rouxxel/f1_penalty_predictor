@@ -36,6 +36,7 @@ training:
   learning_rate: 2.0e-5
   weight_decay: 0.01
   epochs: 8
+  keep_checkpoints: false
   warmup_ratio: 0.1
   early_stopping_patience: 3
   class_weight: inverse_frequency
