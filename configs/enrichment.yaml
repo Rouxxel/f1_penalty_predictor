@@ -16,6 +16,9 @@ openf1:
 
 fastf1:
   enabled: true
+  # true = use only data/raw/race_data/fastf1_cache (no requests, no rate limits, no F1 TV
+  # login). Sessions that were never cached get no FastF1 data. Use after a full online run.
+  offline_mode: false
   validate_openf1_from_season: 2024
 
 text_fields:
