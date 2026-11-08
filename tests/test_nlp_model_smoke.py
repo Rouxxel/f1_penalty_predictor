@@ -1,3 +1,4 @@
+import shutil
 import sys
 from pathlib import Path
 
@@ -65,10 +66,15 @@ def test_train_nlp_smoke(fixture_cfg):
     )
     dataset = build_nlp_dataset(fast_cfg)
     out_dir = ROOT / "tests" / "fixtures" / "nlp" / "_out" / "train_smoke"
-    result = train_nlp(fast_cfg, dataset=dataset)
-    assert Path(result["metrics_path"]).exists()
-    assert (out_dir / "model").exists()
-    assert (out_dir / "tokenizer").exists()
+    try:
+        result = train_nlp(fast_cfg, dataset=dataset)
+        assert Path(result["metrics_path"]).exists()
+        assert (out_dir / "model").exists()
+        assert (out_dir / "tokenizer").exists()
+        assert not (out_dir / "checkpoints").exists()  # removed after a successful run
+    finally:
+        # A full DistilBERT save is ~1 GB with checkpoints; never leave it behind.
+        shutil.rmtree(out_dir, ignore_errors=True)
 
 
 def test_remove_checkpoints_only_deletes_checkpoints_dir(tmp_path):
