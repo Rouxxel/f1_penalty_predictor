@@ -236,6 +236,15 @@ def _confirm_rerun(
     return _confirm_rerun(phase, force=force, confirm_fn=confirm_fn)
 
 
+def _producing_phase(missing_path: str) -> PipelinePhase | None:
+    """Which phase writes a prerequisite artifact (paths as returned by _check_phase_prerequisites)."""
+    if missing_path.startswith(("dataset/csv/", "data/interim/")):
+        return PipelinePhase.DATASET
+    if missing_path.startswith("ml_models/xgboost/") or missing_path.endswith("incidents.parquet"):
+        return PipelinePhase.V1
+    return None
+
+
 def _validate_prerequisites(
     phases: list[PipelinePhase],
     *,
@@ -243,13 +252,23 @@ def _validate_prerequisites(
     nlp_fusion: bool,
     normative_config: Path,
 ) -> None:
-    for phase in phases:
-        missing = _check_phase_prerequisites(
-            phase,
-            seasons=seasons,
-            nlp_fusion=nlp_fusion,
-            normative_config=normative_config,
-        )
+    """Fail fast on prerequisites that no earlier phase of this run will produce.
+
+    E.g. after ``clean.py``, ``main.py --run`` must not reject V1 for missing
+    ``processed_{season}.csv``: the dataset phase in the same run creates them.
+    """
+    for index, phase in enumerate(phases):
+        earlier = set(phases[:index])
+        missing = [
+            path
+            for path in _check_phase_prerequisites(
+                phase,
+                seasons=seasons,
+                nlp_fusion=nlp_fusion,
+                normative_config=normative_config,
+            )
+            if _producing_phase(path) not in earlier
+        ]
         if missing:
             lines = "\n".join(f"  - {path}" for path in missing)
             raise PrerequisiteError(
@@ -371,6 +390,14 @@ def run_full_pipeline(
             results["skipped_phases"].append(phase.value)
             print(f"\n=== [{phase.value}] skipped (already ran) ===", flush=True)
             continue
+
+        # Re-check now that earlier phases have run (e.g. dataset produced fewer seasons).
+        _validate_prerequisites(
+            [phase],
+            seasons=resolved_seasons,
+            nlp_fusion=nlp_fusion,
+            normative_config=normative_config,
+        )
 
         started = time.perf_counter()
         print(f"\n=== [{phase.value}] starting ===", flush=True)
