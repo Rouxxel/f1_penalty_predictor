@@ -67,9 +67,10 @@ def test_flag_and_positions_helpers():
 
 
 @patch("fastf1.get_session")
+@patch("fastf1.Cache.configure", create=True)
 @patch("fastf1.Cache.enable_cache")
 @patch("fia_ml.data.enrichment.fastf1_enrich.load_meta")
-def test_enrich_with_fastf1_fills_race_state(mock_meta, _mock_cache, mock_get_session):
+def test_enrich_with_fastf1_fills_race_state(mock_meta, _mock_cache, _mock_configure, mock_get_session):
     cfg = PipelineConfig.from_yaml(ROOT / "configs" / "data.yaml").for_season(2019)
     mock_meta.return_value = {
         "inc_1": {

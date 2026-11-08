@@ -212,7 +212,10 @@ def enrich_with_fastf1(
 
     cache_dir = ensure_dir(cfg.path("fastf1_cache"))
     if cfg.enrichment.get("fastf1_cache_enabled", True):
-        fastf1.Cache.enable_cache(str(cache_dir))
+        if hasattr(fastf1.Cache, "configure"):  # FastF1 >= 3.9; enable_cache is deprecated
+            fastf1.Cache.configure(cache_dir=str(cache_dir))
+        else:
+            fastf1.Cache.enable_cache(str(cache_dir))
 
     out = df.copy()
     meta = load_meta(cfg)

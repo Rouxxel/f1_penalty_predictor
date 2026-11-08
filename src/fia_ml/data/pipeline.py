@@ -88,6 +88,10 @@ def run_pipeline(cfg: PipelineConfig, stage: Stage = Stage.ALL) -> dict:
 
     if stage in {Stage.ALL, Stage.ENRICH}:
         provenance = EnrichmentProvenance()
+        # Columns that are entirely empty load as float64 (all NaN); enrichment then writes
+        # strings into them, which pandas deprecates ("Setting an item of incompatible dtype").
+        # Object dtype holds both; values and the written CSV are unchanged.
+        df = df.astype(object)
         df = enrich_with_reference(df, cfg)
         df = enrich_with_ergast(df, cfg, fill_gaps_only=True, provenance=provenance)
         df, timestamp_stats = enrich_timestamps(df, cfg)
